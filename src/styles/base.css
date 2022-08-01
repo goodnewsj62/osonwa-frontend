@@ -1,0 +1,10 @@
+:root{
+    --netural-color:#fff;
+    --netural-opposite: #000;
+    --base-color:#fcda69;
+    --comp-one:#25dabc;
+    --comp-two:#bc25da;
+    --dark-mode-base: ;
+    --dark-mode-step-one: ; /* level one raise above base color*/
+    --dark-mode-step-two: ;
+}

@@ -1,0 +1,10 @@
+services:
+  react:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    container_name: osonwa-frontend
+    volumes:
+      - ./:/apps:ro
+    ports:
+      - 3000:3000
