@@ -8,3 +8,26 @@
     --dark-mode-step-one: ; /* level one raise above base color*/
     --dark-mode-step-two: ;
 }
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "haas grot";
+    src: url("../fonts/AlteHaasGroteskBold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "haas grot";
+    src: url("../fonts/AlteHaasGroteskRegular.ttf");
+    font-weight: normal;
+}
+
+html{
+    font-family: "haas grot";
+}

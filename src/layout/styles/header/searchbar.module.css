@@ -1,0 +1,47 @@
+
+
+.search__bar{
+    width: 100%;
+    height: 85%;
+}
+
+.search__bar form{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.search__bar input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 0.37rem 0.7rem;
+    border-radius:5px;
+}
+
+
+.search__bar button{
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+}
+
+
+.search__bar input:focus{
+    outline: none;
+    /* TODO: animation on focus 
+        when the search button is click
+    */
+    border: 2px solid var(--comp-one);
+}
+
+
+@media screen and (min-width:600px) {
+    
+}
