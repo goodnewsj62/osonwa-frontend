@@ -4,6 +4,8 @@
     --base-color:#fcda69;
     --comp-one:#25dabc;
     --comp-two:#bc25da;
+    --mode-write-color: #000;
+    --highlight-grey: #ececec;
     --dark-mode-base: ;
     --dark-mode-step-one: ; /* level one raise above base color*/
     --dark-mode-step-two: ;
@@ -30,4 +32,5 @@
 
 html{
     font-family: "haas grot";
+    font-size: 16px;
 }

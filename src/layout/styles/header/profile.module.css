@@ -1,0 +1,122 @@
+.profile__div img{
+    display: block;
+    width: 50px;
+    position: relative;
+}
+
+.profile__div h2{
+    background-color: var(--base-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    display: none;
+}
+
+.profile__options{
+    width: 250px;
+    position: absolute;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.07),
+                0 0 15px 3px rgba(0,0,0,0.05) ;
+
+}
+
+.profile__sec{
+    padding: 10px;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.greeting{
+    margin-left: 10px;
+}
+
+.greeting h4{
+    margin-bottom: 1px;
+}
+.greeting p span{
+    margin: 0 3px;
+}
+
+.demacation{
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+    margin: 0 10px;
+}
+
+
+.profile__options ul {
+    padding: 15px 10px;
+    margin-bottom: 10px;
+}
+
+.profile__options li {
+    list-style: none;
+    padding: 8px 5px;
+    border-radius: 5px;
+}
+
+.profile__options li:hover{
+    background-color: var(--highlight-grey);
+}
+
+.previous__actions li{
+    display: flex;
+    align-items: center;
+}
+
+.previous__actions li p{
+    margin-left: 10px ;
+}
+
+
+.appearance{
+    display: flex;
+    align-items: center;
+}
+
+.appearance input[type=checkbox]{
+    display: none;
+}
+
+.appearance span{
+    margin-right: auto;
+}
+
+.appearance label{
+    width: 55px;
+    height: 25px;
+    display: block;
+    border: 2px solid var(--mode-write-color);
+    border-radius: 30px;
+    padding: 2px 4px;
+    position: relative;
+    transition: all 0.4s;
+}
+
+.ball{
+    display: block;
+    background-color: var(--mode-write-color);
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    transition: all 0.4s;
+}
+
+.appearance input[type=checkbox]:checked +  label{
+    border: 2px solid var(--comp-one);
+}
+.appearance input[type=checkbox]:checked +  label .ball{
+    background-color:  var(--comp-one);
+    right: calc(0px + 4px);
+    transform: translateX(calc(200% - 6px));
+}
+
+
+.nav__last li:first-child:hover {
+    background-color: transparent;
+    background: transparent;
+}

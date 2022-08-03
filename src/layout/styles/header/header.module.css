@@ -1,0 +1,7 @@
+header{
+    padding: 0.5rem 1rem;
+}
+
+.mobile__toggle input[type=checkbox]{
+    display: none;
+}
