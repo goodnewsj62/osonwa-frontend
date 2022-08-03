@@ -4,6 +4,7 @@
     --base-color:#fcda69;
     --comp-one:#25dabc;
     --comp-two:#bc25da;
+    --current-mode: #fff;
     --mode-write-color: #000;
     --highlight-grey: #ececec;
     --dark-mode-base: ;
@@ -33,4 +34,11 @@
 html{
     font-family: "haas grot";
     font-size: 16px;
+}
+
+
+#root > .container{
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
 }

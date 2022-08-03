@@ -1,28 +1,31 @@
 import { BiSearch } from "react-icons/bi";
-import {FiBell, FiPlusSquare} from "react-icons/fi";
+import { FiBell, FiPlusSquare } from "react-icons/fi";
 import Profile from "./profile";
+import styles from "../styles/header/nav.module.css";
 // import {Link} from "react-router-dom";
 
 function Nav(props) {
     return (
-        <nav className="head__nav">
-            <ul>
-                <BiSearch className="nav__search" />
+        <nav className={`${styles.head__nav} header__nav`}>
+            <ul className={`${styles.head__ul}`}>
                 <li>
-                    <FiPlusSquare size={17} />
+                    <BiSearch size={20} className="nav__search" />
                 </li>
                 <li>
-                    <div className="bell">
+                    <FiPlusSquare size={20} />
+                </li>
+                <li>
+                    <div className={styles.bell}>
                         <span>10+</span>
-                        <FiBell size={17} />
+                        <FiBell size={20} />
                     </div>
                 </li>
-                <li className="auth">
-                    <button className="border__anime">
+                <li className={styles.auth}>
+                    <button className={`border__anime`}>
                         Login
                     </button>
                 </li>
-                <li className="profile__icon">
+                <li className={styles.profile__icon}>
                     <Profile />
                 </li>
             </ul>

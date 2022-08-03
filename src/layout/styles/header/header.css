@@ -1,0 +1,16 @@
+header{
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    height: 60px;
+    max-height: 60px ;
+    background-color: var(--curent-mode);
+    box-shadow: 0 3px 8px 4px rgba(0,0,0,0.03),
+                0 6px 15px 6px rgba(0,0,0,0.01);
+}
+
+
+.header__nav{
+    height: 100%;
+    margin-left: auto;
+}

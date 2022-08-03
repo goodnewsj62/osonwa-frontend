@@ -1,7 +1,31 @@
-header{
-    padding: 0.5rem 1rem;
+.mobile__toggle{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
 }
-
 .mobile__toggle input[type=checkbox]{
     display: none;
+}
+
+.logo__area h2{
+    display: none;
+}
+
+
+@media screen and (min-width: 800px) {
+    .mobile__toggle{
+        display: none;
+    }
+
+    .logo__area{
+        height: 100%;
+        display: grid;
+        place-items: center;
+        padding-left: 20px;
+    }
+    .logo__area h2{
+        display: block;
+    }
+    
 }
