@@ -1,11 +1,13 @@
-import { Header } from "./layout";
+import { Header, SideBar, IconBar } from "./layout";
 import "./styles/base.css";
 
 
-function App(props){
+function App(props) {
     return (
         <div className="container">
             <Header />
+            <IconBar />
+            <SideBar />
         </div>
     )
 }

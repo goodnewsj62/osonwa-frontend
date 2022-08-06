@@ -1,0 +1,69 @@
+.icon__bar{
+    display: none;
+}
+
+@media screen and (min-width:800px) {
+    .icon__bar{
+        display: block;
+        width: 50px;
+        height: 250px;
+        position: fixed;
+        top: calc(50% + 60px);
+        left: 0;
+        transform: translateY(calc(-50% - 60px));
+        background-color: #000;
+        border-radius:0 30px 30px 0 ;
+        color: var(--netural-color);
+        border-right: 4px solid var(--comp-one);
+    }
+
+    .curve__top, .curve__bottom{
+        width: 30px;
+        height: 70px;
+        position: absolute;
+        /* border: 1px solid blue; */
+        overflow: hidden;
+        left: -2px;
+    }
+
+    .curve__top{
+        top: -67px;
+    }
+
+    .curve__top div,.curve__bottom div{
+        content: "";
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        bottom: 2px;
+
+        /* background-color: red; */
+        box-shadow: 15px 15px 0 0 #000;
+        /* border-right: 40px; */
+        transform: rotate(50deg);
+        border-bottom: 2px solid var(--comp-one);
+
+    }
+
+
+    .curve__bottom{
+        bottom: -67px;
+        transform: rotateY(180deg) rotate(180deg);
+    }
+
+    .icon__bar ul{
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        /* border: 1px solid red; */
+        height: 100%;
+        align-items: center;
+        padding-top:32px ;
+    }
+
+    .icon__bar li{
+        margin: 0.43rem 0;
+    }
+
+}

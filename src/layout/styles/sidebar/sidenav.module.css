@@ -1,0 +1,25 @@
+.main__nav{
+    width: 100%;
+}
+
+.main__nav ul,.other__nav ul {
+    padding: 0 1.5rem;
+    list-style: none;
+}
+
+.main__nav li,.other__nav li{
+    padding: 10px 8px;
+    display: flex;
+    align-items: center;
+    transition: 0.4s all;
+}
+.main__nav li:hover,.other__nav li:hover{
+    background-color: var(--highlight-grey);
+    border-radius: 6px;
+}
+
+.main__nav li span,.other__nav  li span{
+    margin: 0 8px;
+}
+
+

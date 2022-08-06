@@ -1,0 +1,49 @@
+.side__bar{
+    width: 250px;
+    height: calc(100vh - 60px);
+    border-right: 1px solid rgba(0,0,0,0.1);
+    position: fixed;
+    top: 60px;
+    left: 0%;
+}
+
+
+.wrap__up{
+    margin-top: 2.5rem;
+    background-color: var(--netural-color);
+    height: calc(100% - 2.5rem);
+    overflow-y: auto;
+}
+
+.demacation{
+    margin: 25px 0;
+}
+
+.side__bar section > h4{
+    margin: 0 0 15px 2rem;
+}
+
+.close__bar{
+    display: none;
+}
+
+
+@media screen and (min-width:800px) {
+    
+    .close__bar{
+        width: 26px;
+        height: 100px;
+        background-color: rgba(0,0,0,0.9);
+        position: absolute;
+        border-radius: 30px 0 0 30px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--netural-color);
+        cursor: pointer;
+    }
+
+}
