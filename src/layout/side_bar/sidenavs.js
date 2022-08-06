@@ -8,8 +8,10 @@ import { TiContacts } from "react-icons/ti";
 
 import styles from "../styles/sidebar/sidenav.module.css";
 
+const iconSize = 20
+
 function MainNav(props) {
-    const iconSize = 20
+
     return (
         <nav aria-label="side nav bar" className={styles.main__nav}>
             <ul>
@@ -39,27 +41,27 @@ function NavOthers(props) {
         <nav aria-label="other relevant navigation" className={styles.other__nav}>
             <ul>
                 <li>
-                    <BsHeartFill />
+                    <BsHeartFill size={iconSize} />
                     <span></span>
                     Support
                 </li>
                 <li>
-                    <BsFillQuestionCircleFill />
+                    <BsFillQuestionCircleFill size={iconSize} />
                     <span></span>
                     About
                 </li>
                 <li>
-                    <TiContacts />
+                    <TiContacts size={iconSize} />
                     <span></span>
                     Contact
                 </li>
                 <li>
-                    <MdPrivacyTip />
+                    <MdPrivacyTip size={iconSize} />
                     <span></span>
                     Privacy Policy
                 </li>
                 <li>
-                    <FaHandshake />
+                    <FaHandshake size={iconSize} />
                     <span></span>
                     Terms Of Use
                 </li>
