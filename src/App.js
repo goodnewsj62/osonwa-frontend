@@ -1,4 +1,5 @@
 import { Header, SideBar, IconBar } from "./layout";
+import { NormalCard, PopUpCard, MessagePopup, CookiePopup, AuthCard } from "./others";
 import "./styles/base.css";
 
 
@@ -8,6 +9,8 @@ function App(props) {
             <Header />
             <IconBar />
             <SideBar />
+            <MessagePopup />
+            <AuthCard />
         </div>
     )
 }
