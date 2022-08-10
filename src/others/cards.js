@@ -7,6 +7,7 @@ import {MdCancel} from "react-icons/md";
 import {FcGoogle} from "react-icons/fc";
 
 import rocket from "static/images/Saly-43.png";
+import cookie from "static/images/cookie.png";
 import styles from "./styles/cards.module.css";
 import style from "./styles/cards_2.module.css";
 
@@ -98,11 +99,14 @@ function AuthCard(props){
 function CookiePopup(props){
     return (
         <div className={style.footer__pop}>
-            <div className="message">
-                <img src="/static/images/cookie.png" alt="cookie" />
+            <div className={style.message}>
+                <div>
+                    <img src={cookie} alt="cookie" />
+                    <img src={cookie} alt="cookie_2" />
+                </div>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, voluptatibus.</p>
             </div>
-            <div className="buttons">
+            <div className={style.buttons}>
                 <button type="button">
                     Accept
                 </button>

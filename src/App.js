@@ -11,6 +11,7 @@ function App(props) {
             <SideBar />
             <MessagePopup />
             <AuthCard />
+            <CookiePopup />
         </div>
     )
 }
