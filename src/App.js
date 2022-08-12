@@ -9,9 +9,12 @@ function App(props) {
             <Header />
             <IconBar />
             <SideBar />
-            <MessagePopup />
+            {/* <MessagePopup />
             <AuthCard />
-            <CookiePopup />
+            <CookiePopup /> */}
+            <main style={{paddingLeft:"400px",paddingTop:"70px", width:"100vw",minHeight:"100vh"}}>
+                <NormalCard />
+            </main>
         </div>
     )
 }

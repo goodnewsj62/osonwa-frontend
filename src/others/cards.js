@@ -8,6 +8,7 @@ import {FcGoogle} from "react-icons/fc";
 
 import rocket from "static/images/Saly-43.png";
 import cookie from "static/images/cookie.png";
+import miles from "static/images/test_img.jpg";
 import styles from "./styles/cards.module.css";
 import style from "./styles/cards_2.module.css";
 
@@ -17,7 +18,7 @@ function NormalCard(props){
     return (
         <div className= {style.normal__card}>
             <div  className={style.card__img}>
-                <img src="" alt="logo" />
+                <img src={miles} alt="logo" />
                 <div className={style.bookmark}>
                     <AiFillStar size={iconSize} />
                 </div>
@@ -27,7 +28,6 @@ function NormalCard(props){
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate id quaerat fuga cum voluptates animi.
                 </h4>
                 <p>Read more</p>
-                
                 <div>
                     <ul>
                         <li>
