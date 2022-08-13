@@ -68,15 +68,80 @@
 }
 
 .normal__card{
-    /* width: 300px; */
+    width: calc(100% - 2rem);
+    height: 150px;
     display: flex;
 }
 
 .card__img{
-    width: 200px;
+    width: 40%;
+    height: 100%;
+    position: relative;
 }
+.bookmark{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.bookmark *{
+    fill: #fff;
+}
+
 
 .card__img img{
     width: 100%;
+    height: 100%;
     object-fit: cover;
+}
+
+.card__detail{
+    width: 60%;
+    padding:  5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .card__detail h4{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+} */
+
+
+.card__detail h4 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+.card__detail p{
+    margin-top: 4px;
+}
+@supports (-webkit-line-clamp: 2) {
+    .card__detail h4{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+}.user__actions{
+    border: 1px solid red;
+    padding: 8px 10px;
+    margin-top: auto;
+}
+.user__actions ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    align-items: center;
+}
+.user__actions ul li{
+    display: flex;
+    align-items: center;
 }

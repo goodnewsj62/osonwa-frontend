@@ -4,6 +4,7 @@ import "./styles/base.css";
 
 
 function App(props) {
+    const main =  {paddingLeft:"400px"}
     return (
         <div className="container">
             <Header />
@@ -12,7 +13,7 @@ function App(props) {
             {/* <MessagePopup />
             <AuthCard />
             <CookiePopup /> */}
-            <main style={{paddingLeft:"400px",paddingTop:"70px", width:"100vw",minHeight:"100vh"}}>
+            <main style={{paddingTop:"70px", width:"100vw",minHeight:"100vh"}}>
                 <NormalCard />
             </main>
         </div>

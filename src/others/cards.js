@@ -28,7 +28,7 @@ function NormalCard(props){
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate id quaerat fuga cum voluptates animi.
                 </h4>
                 <p>Read more</p>
-                <div>
+                <div className={style.user__actions}>
                     <ul>
                         <li>
                             <div>
@@ -40,15 +40,15 @@ function NormalCard(props){
                         </li>
                         <li>
                             <div>
-                                <RiShareForwardFill size={iconSize} />
+                                <AiFillHeart size={iconSize} />
+                            </div>
+                            <div>
+                                3000
                             </div>
                         </li>
                         <li>
                             <div>
-                                <AiFillHeart size={iconSize} />
-                            </div>
-                            <div>
-                                30000
+                                <RiShareForwardFill size={iconSize} />
                             </div>
                         </li>
                     </ul>
