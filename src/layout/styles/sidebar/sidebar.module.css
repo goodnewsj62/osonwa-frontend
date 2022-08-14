@@ -5,8 +5,14 @@
     position: fixed;
     top: 60px;
     left: 0%;
+    z-index: 10;
 }
 
+@media screen and (max-width:700px) {
+    .side__bar{
+        background-color: #fff;
+    }
+}
 
 .wrap__up{
     margin-top: 2.5rem;

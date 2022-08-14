@@ -10,10 +10,13 @@ function App(props) {
             <Header />
             <IconBar />
             <SideBar />
-            {/* <MessagePopup />
+            <MessagePopup />
             <AuthCard />
-            <CookiePopup /> */}
+            <CookiePopup />
             <main style={{paddingTop:"70px", width:"100vw",minHeight:"100vh"}}>
+                <NormalCard />
+                <NormalCard />
+                <NormalCard />
                 <NormalCard />
             </main>
         </div>
