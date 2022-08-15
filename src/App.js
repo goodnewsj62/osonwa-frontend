@@ -13,7 +13,7 @@ function App(props) {
             <MessagePopup />
             <AuthCard />
             <CookiePopup />
-            <main style={{paddingTop:"70px", width:"100vw",minHeight:"100vh"}}>
+            <main style={{paddingTop:"70px",minHeight:"100vh"}}>
                 <NormalCard />
                 <NormalCard />
                 <NormalCard />

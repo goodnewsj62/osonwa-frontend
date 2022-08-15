@@ -1,7 +1,7 @@
 
 import {AiFillHeart, AiFillStar} from "react-icons/ai";
 import {RiShareForwardFill} from "react-icons/ri";
-import {BiMessageSquareDetail} from "react-icons/bi";
+import {BiMessageSquareDetail,BiDotsVerticalRounded} from "react-icons/bi";
 import {BsCheckCircleFill, BsDot} from "react-icons/bs";
 import {MdCancel} from "react-icons/md";
 import {FcGoogle} from "react-icons/fc";
@@ -17,6 +17,7 @@ const iconSize = 20
 
 function NormalCard(props){
     return (
+        // TODO: break this component up
         <div className= {style.normal__card}>
             <div  className={style.card__img}>
                 <div className={style.image__wrapper}>
@@ -31,6 +32,14 @@ function NormalCard(props){
                     <div>
                         <img src={myimage} alt="site logo" />
                     </div>
+                    <h5>One direction news</h5>
+                    <BiDotsVerticalRounded className={style.card__menu} id="card__menu" size={23} />
+                    <ul>
+                        <li>
+                            <RiShareForwardFill size={iconSize} />
+                            <span>Share</span>
+                        </li>
+                    </ul>
                 </div>
                 <div className={style.heading}>
                     <h4 aria-label="title">
