@@ -20,6 +20,7 @@ function Carousel(props){
             </span>
             <span className="arrow__left">
             </span>
+            <Slide />
         </section>
     )
 }
@@ -49,3 +50,6 @@ function Slide(props){
     )
 }
 
+
+
+export {Carousel};

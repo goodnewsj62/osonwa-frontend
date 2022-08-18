@@ -1,5 +1,5 @@
 import { Header, SideBar, IconBar } from "./layout";
-import { NormalCard, PopUpCard, MessagePopup, CookiePopup, AuthCard } from "./others";
+import { NormalCard, MessagePopup, CookiePopup, AuthCard, Carousel } from "./others";
 import "./styles/base.css";
 
 
@@ -8,7 +8,7 @@ function App(props) {
     return (
         <div className="container">
             <Header />
-            <IconBar />
+            {/* <IconBar />
             <SideBar />
             <MessagePopup />
             <AuthCard />
@@ -18,7 +18,8 @@ function App(props) {
                 <NormalCard />
                 <NormalCard />
                 <NormalCard />
-            </main>
+            </main> */}
+            <Carousel />
         </div>
     )
 }
