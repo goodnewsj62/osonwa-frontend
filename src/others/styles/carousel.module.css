@@ -2,9 +2,12 @@
     width: 100%;
     height: 230px;
     position: relative;
+    overflow: hidden;
 }
 
-
+.arrow__left, .arrow__right{
+    display: none;
+}
 
 @media screen and (min-width:760px) {
     .show__case{
@@ -18,8 +21,28 @@
         margin: 1rem;
         border-radius: 15px;
     }
+
+    .arrow__left, .arrow__right{
+        display: block;
+        position: absolute;
+        z-index: 4;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 2px;
+        left: 1rem;
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 50%;
+    }
+    
+    .arrow__right{
+        right: 1rem;
+        left: unset;
+    }
+    
+    
+    
+    .arrow__left svg, .arrow__right svg{
+        fill: var(--dark-mode-white);
+    }
 }
 
-.arrow__right, .arrow__left{
-    position: absolute;
-}

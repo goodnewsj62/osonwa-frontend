@@ -6,6 +6,7 @@ import "./styles/generals.css";
 import image from "static/images/test_img.jpg";
 
 function Carousel(props){
+    const size =  40
     return (
         <section aria-labelledby="headline" className={styles.show__case}>
             {/* <div className="interact__layer">
@@ -19,10 +20,10 @@ function Carousel(props){
                 </span>
             </div>
             <span className={`${styles.arrow__right}`}>
-                <FaAngleRight />
+                <FaAngleRight size={size} />
             </span>
             <span className={`${styles.arrow__left}`}>
-                <FaAngleLeft />
+                <FaAngleLeft size={size} />
             </span>
             <Slide />
         </section>
@@ -47,9 +48,9 @@ function Slide(props){
             <div className="position__button">
                 <span className={`button_shape`}>
                 </span>
-                <span className={`button_shape`}>
+                <span style={{backgroundColor:"#fff"}} className={`button_shape`}>
                 </span>
-                <span className={`button_shape`}>
+                <span  className={`button_shape`}>
                 </span>
             </div> 
         </div>

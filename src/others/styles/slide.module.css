@@ -26,7 +26,7 @@
     position: absolute;
     top: 0;
     z-index: 1;
-    color: rgb(235, 233, 233);
+    color: var(--dark-mode-white);
     background: linear-gradient(45deg,rgba(0,0,0,0.7) ,rgba(0,0,0, 0.3), rgba(0,0,0,0.2)) ;
     display: flex;
     justify-content: flex-start;

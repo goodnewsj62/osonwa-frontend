@@ -19,11 +19,16 @@
     height: 6px;
     display: block;
     border-radius: 30%;
-    background: rgba(255,255,255,0.4) ;
+    background: rgba(255,255,255,0.35) ;
     /* background-color: #fff; */
     margin: 0.3rem 0.2rem;
+    cursor: pointer;
 }
 
 @media screen and (min-width:700px) {
-    
+    .button_shape{
+        width: 15px;
+        height: 7px;
+        margin: 0.3rem 0.35rem;
+    }
 }

@@ -10,6 +10,7 @@
     --dark-mode-base: ;
     --dark-mode-step-one: ; /* level one raise above base color*/
     --dark-mode-step-two: ;
+    --dark-mode-white:#ebe9e9;
 }
 
 
