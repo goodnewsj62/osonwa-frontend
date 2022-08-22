@@ -19,7 +19,9 @@ function App(props) {
                 <NormalCard />
                 <NormalCard />
             </main> */}
-            <Carousel />
+            <div className="styles" style={{paddingTop:"70px",minHeight:"100vh"}}>
+                <Carousel />
+            </div>
         </div>
     )
 }

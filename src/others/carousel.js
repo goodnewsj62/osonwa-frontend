@@ -1,7 +1,9 @@
+import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import styles from "./styles/carousel.module.css";
 import style from "./styles/slide.module.css";
 import "./styles/generals.css";
 
+import image from "static/images/test_img.jpg";
 
 function Carousel(props){
     return (
@@ -16,9 +18,11 @@ function Carousel(props){
                 <span className={`button_shape`}>
                 </span>
             </div>
-            <span className="arrow__right">
+            <span className={`${styles.arrow__right}`}>
+                <FaAngleRight />
             </span>
-            <span className="arrow__left">
+            <span className={`${styles.arrow__left}`}>
+                <FaAngleLeft />
             </span>
             <Slide />
         </section>
@@ -30,13 +34,15 @@ function Slide(props){
     return(
         <div className={style.slide__container}>
             <div className={style.img__wrapper}>
-                <img src="" alt="" />
+                <img src={image} alt="caruosel image" />
             </div>
             <div className={style.text__div}>
-                <h1 id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
-                <span>
-                    See Details
-                </span>
+                <div>
+                    <h1 id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
+                    <span>
+                        See Details
+                    </span>
+                </div>
             </div>
             <div className="position__button">
                 <span className={`button_shape`}>
