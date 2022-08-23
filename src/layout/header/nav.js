@@ -1,10 +1,14 @@
+import { useState } from "react";
+
 import { BiSearch } from "react-icons/bi";
 import { FiBell, FiPlusSquare } from "react-icons/fi";
 import Profile from "./profile";
 import styles from "../styles/header/nav.module.css";
+
 // import {Link} from "react-router-dom";
 
 function Nav(props) {
+    const [showProfile, setShowProfile] = useState(false);
     return (
         <nav className={`${styles.head__nav} header__nav`}>
             <ul className={`${styles.head__ul}`}>
@@ -25,8 +29,8 @@ function Nav(props) {
                         Login
                     </button>
                 </li>
-                <li className={styles.profile__icon}>
-                    <Profile />
+                <li className={styles.profile__icon} onClick={(e) => { setShowProfile(!showProfile) }}>
+                    <Profile show={showProfile} />
                 </li>
             </ul>
         </nav>

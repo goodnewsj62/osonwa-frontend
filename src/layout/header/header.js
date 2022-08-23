@@ -1,11 +1,14 @@
+
 import { IoReorderTwoOutline } from "react-icons/io5"
 import Nav from "./nav";
 import SearchBar from "./search_bar";
+
 import styles from "../styles/header/header.module.css";
 import "../styles/header/header.css";
 // import icon from "../styles/osonwapp.svg";
 
 function Header() {
+
     return (
         <header>
             <div className={styles.mobile__toggle} id="mobile__toggle">
@@ -18,7 +21,7 @@ function Header() {
                 {/* <img src={icon} alt="logo" /> */}
                 <h2>Osonwa.</h2>
             </div>
-            <SearchBar />
+            <SearchBar show={{}} />
             <Nav className="nav" />
         </header>
     )

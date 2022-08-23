@@ -4,9 +4,9 @@ import { FcLike, FcFolder } from "react-icons/fc";
 import image from "static/images/test_image.png";
 import styles from "../styles/header/profile.module.css";
 
-function ProfileNav(props) {
+function ProfileNav({ show, ...others }) {
     return (
-        <nav aria-label="profile navigation" className={styles.profile__options}>
+        <nav style={show ? {} : { display: "none" }} aria-label="profile navigation" className={styles.profile__options}>
             <div className={styles.profile__sec}>
                 <div className={styles.img__wrapper}>
                     <img src={image} alt="profile" />
@@ -62,12 +62,12 @@ function ProfileNav(props) {
 
 
 
-function Profile(props) {
+function Profile({ show, ...others }) {
     return (
         <div className={styles.profile__div}>
-                <img src={image} alt="profile" />
-                <h2>O</h2>
-            <ProfileNav />
+            <img src={image} alt="profile" />
+            <h2>O</h2>
+            <ProfileNav show={show} />
         </div>
     )
 }
