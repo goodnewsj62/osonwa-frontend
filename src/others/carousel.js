@@ -25,7 +25,11 @@ function Carousel(props){
             <span className={`${styles.arrow__left}`}>
                 <FaAngleLeft size={size} />
             </span>
-            <Slide />
+            <div className={styles.slider}>
+                <Slide />
+                <Slide />
+                <Slide />
+            </div>
         </section>
     )
 }
@@ -45,14 +49,6 @@ function Slide(props){
                     </span>
                 </div>
             </div>
-            <div className="position__button">
-                <span className={`button_shape`}>
-                </span>
-                <span style={{backgroundColor:"#fff"}} className={`button_shape`}>
-                </span>
-                <span  className={`button_shape`}>
-                </span>
-            </div> 
         </div>
     )
 }

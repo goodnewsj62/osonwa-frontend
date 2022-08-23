@@ -2,8 +2,11 @@
     width: 100%;
     height: 100%;
     position: relative;
-
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    align-self: stretch;
 }
+
 
 .img__wrapper{
     width: 100%;
@@ -11,7 +14,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .img__wrapper img{
@@ -44,17 +46,7 @@
         z-index: 1;
         color: rgb(235, 233, 233);
         background: linear-gradient(135deg,transparent 0% 5%,rgba(0,0,0,0.2) 10% 50%,rgba(0,0,0, 0.3)50%, rgba(0,0,0,0.7) 65%) ;
-        border-radius: 15px;
         justify-content: flex-end;
-    }
-    
-
-    .img__wrapper{
-        border-radius: 15px;
-    }
-
-    .img__wrapper img{
-        border-radius: 15px;
     }
 }
 
