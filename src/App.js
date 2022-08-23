@@ -1,28 +1,19 @@
-import { Header, SideBar, IconBar } from "./layout";
-import { NormalCard, MessagePopup, CookiePopup, AuthCard, Carousel } from "./others";
+import {Home, Layout } from "./pages";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+
 import "./styles/base.css";
 
 
 function App(props) {
     const main =  {paddingLeft:"400px"}
     return (
-        <div className="container">
-            <Header />
-            {/* <IconBar />
-            <SideBar />
-            <MessagePopup />
-            <AuthCard />
-            <CookiePopup />
-            <main style={{paddingTop:"70px",minHeight:"100vh"}}>
-                <NormalCard />
-                <NormalCard />
-                <NormalCard />
-                <NormalCard />
-            </main> */}
-            <div className="styles" style={{paddingTop:"70px",minHeight:"100vh"}}>
-                <Carousel />
-            </div>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element= {<Home />} />
+                </Route>
+            </Routes>
+        </Router>
     )
 }
 
