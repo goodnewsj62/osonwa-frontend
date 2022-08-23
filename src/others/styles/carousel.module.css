@@ -22,11 +22,6 @@
     display: none;
 }
 
-@media screen and (min-width:760px) {
-    .show__case{
-        height: 300px;
-    }
-}
 
 @media screen and (min-width:800px) {
     .show__case{

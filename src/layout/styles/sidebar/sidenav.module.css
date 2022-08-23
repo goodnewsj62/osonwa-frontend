@@ -11,7 +11,8 @@
     padding: 10px 8px;
     display: flex;
     align-items: center;
-    transition: 0.35s all;
+    transition: 0.3s all;
+    cursor: default;
 }
 .main__nav li:hover,.other__nav li:hover{
     background-color: var(--highlight-grey);

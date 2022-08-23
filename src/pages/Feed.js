@@ -1,13 +1,13 @@
-import { Carousel, NormalCard,  Tags} from "../others";
+import { Carousel, NormalCard, Tags } from "../others";
 import styles from "../styles/news.module.css";
 
-function Feed(props){
-    return(
+function Feed(props) {
+    return (
         <main styles={`main ${styles.fee__main}`}>
             <section aria-label="carousel" className={styles.slider} >
                 <Carousel />
             </section>
-            <section aria-label="tags">
+            <section aria-label="tags" className={`${styles.main__tags}`}>
                 <Tags />
             </section>
             <MainCards />
@@ -15,7 +15,7 @@ function Feed(props){
     )
 }
 
-function MainCards(props){
+function MainCards(props) {
     return (
         <section aria-label="news" className={`news ${styles.main__content}`}>
             <h4>News feed</h4>

@@ -1,0 +1,20 @@
+.tags__wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 35px;
+    grid-auto-flow: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.tags__wrapper li{
+    min-width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    padding: 5px 15px;
+    background-color:  var(--highlight-grey);
+    border-radius: 8px;
+}
+
