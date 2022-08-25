@@ -4,8 +4,8 @@ import { Header, IconBar, SideBar } from "../layout";
 import { MessagePopup, CookiePopup, AuthCard } from "../others";
 
 function DefaultLayout(props) {
-    const [maskStatus, setMaskStatus] = useState(true)
-    const Mask = ({status}) => <div style={status? null : {display:"none"}} className="mask"></div>
+    const [maskStatus, setMaskStatus] = useState(true);
+    const Mask = ({status}) => <div style={status? null : {display:"none"}} className="mask"></div>;
 
     return (
         <div className="container">
@@ -16,6 +16,7 @@ function DefaultLayout(props) {
             <Mask mask={maskStatus} />
             <AuthCard />
             <CookiePopup />
+            
             <Outlet />
         </div>
     )
