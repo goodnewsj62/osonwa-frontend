@@ -1,4 +1,4 @@
-import styles from "./styles/loader.css";
+import styles from "./styles/loader.module.css";
 
 function SpreadLoader(props) {
     return (
