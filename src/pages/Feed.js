@@ -1,4 +1,4 @@
-import { Carousel, NormalCard, Tags } from "../others";
+import { Carousel, NormalCard, Tags, AuthCard, MessagePopup } from "../others";
 import styles from "../styles/news.module.css";
 
 function Feed(props) {

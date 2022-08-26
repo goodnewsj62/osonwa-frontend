@@ -5,20 +5,18 @@ import { isExpired, parseJwt, setAuthBasedOnRefreshToken } from "./utils/helpers
 import { Home, Layout } from "./pages";
 import "./styles/base.css";
 import { useAxios } from "utils/requests";
+import { LoginRequired } from "others/protected";
+import { Comments } from "pages/Comments";
 
 
 function App(props) {
     const [auth, setAuth] = useState(false);
-    const [cookieState, setCookieState] = useState(false);
 
-    // Note: only one function should be ablue to mutate each item in storage
-    const cStatus = localStorage.getItem("cookieStatus");
+    // Note: only one function should be able to mutate each item in storage
     const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
 
     useEffect(() => {
-        setCookieState(cStatus ? true : false)// this is here as the other might perform some net calls
-
         if (accessToken) {
             const [tokenHasExpired, tokenSoonExpire] = isExpired(parseJwt(accessToken));
             const [refreshHasExpired, refreshSoonExpired] = isExpired(parseJwt(refreshToken));
@@ -32,10 +30,15 @@ function App(props) {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path="/post/:id/comments/" element={<Comments />} />
+                    <Route element={<LoginRequired />}>
+                        {/*  profile, create post */}
+                    </Route>
                 </Route>
             </Routes>
         </Router>
     )
 }
+
 
 export default App;

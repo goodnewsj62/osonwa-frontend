@@ -1,21 +1,24 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom"
 import { Header, IconBar, SideBar } from "../layout";
-import { MessagePopup, CookiePopup, AuthCard } from "../others";
+import { CookiePopup } from "../others";
 
 function DefaultLayout(props) {
-    const [maskStatus, setMaskStatus] = useState(true);
-    const Mask = ({status}) => <div style={status? null : {display:"none"}} className="mask"></div>;
+    const [cookieState, setCookieState] = useState(false);
+    
+    // TODO: multiple state :-> memo 
+    useEffect(()=> {
+        const cStatus = localStorage.getItem("cookieStatus");
+        setCookieState(cStatus == "true" ? true : false);
+    },[]);
 
     return (
         <div className="container">
             <Header />
             <IconBar />
             <SideBar />
-            <MessagePopup />
-            <Mask mask={maskStatus} />
-            <AuthCard />
-            <CookiePopup />
+            <CookiePopup setState={setCookieState} state={cookieState}  />
             
             <Outlet />
         </div>
