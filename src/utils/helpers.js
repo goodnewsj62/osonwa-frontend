@@ -1,4 +1,4 @@
-
+import { baseAxiosInstance } from "./requests";
 
 function parseJwt(token = "") {
     var base64Url = token.split('.')[1];
@@ -30,9 +30,44 @@ function isExpiredLoic(js_object) {
     const next_two_days = new Date();
     next_two_days.setDate(today.getDay + 2);
 
-
     const has_expired = exp - today < 1 ? true : false;
     const soon_expire = exp - next_two_days < 1 ? true : false;
-
     return [has_expired, soon_expire]
 }
+
+
+function setAuthBasedOnRefreshToken({ setAuth, tokenHasExpired, tokenSoonExpire, refreshHasExpired }) {
+    if (!tokenHasExpired && !tokenSoonExpire) {
+        setAuth(true)
+    }
+    else if (!tokenHasExpired && tokenSoonExpire) {
+        setAuth(true)
+        requestNewTokens(setAuthAndStorage()) // setAuth is not passed so a rerender do not happen
+    } else if (tokenHasExpired && !refreshHasExpired) {
+        requestNewTokens(setAuthAndStorage(setAuth))
+    }
+}
+
+
+async function requestNewTokens(callback) {
+    const response = await baseAxiosInstance.post("/auth/refresh", { refresh: localStorage.getItem("refreshToken") });
+    if (response.status < 300) {
+        callback(response.data.data["access"], response.data.data["refresh"])
+    }
+}
+
+
+const setAuthAndStorage = (setAuth) => {
+    return (accessToken, refreshToken) => {
+        if (accessToken && refreshToken) {
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+            if (setAuth) setAuth(true);
+        }
+    }
+}
+
+
+
+
+export { isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage };
