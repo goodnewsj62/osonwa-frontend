@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 import { isExpired, parseJwt, setAuthBasedOnRefreshToken } from "./utils/helpers"
-import { Home, Layout } from "./pages";
+import { Articles, Home, Layout } from "./pages";
 import "./styles/base.css";
 import { useAxios } from "utils/requests";
 import { LoginRequired } from "others/protected";
@@ -30,6 +30,7 @@ function App(props) {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path="/articles" element={<Articles />} />
                     <Route path="/post/:id/comments/" element={<Comments />} />
                     <Route element={<LoginRequired />}>
                         {/*  profile, create post */}

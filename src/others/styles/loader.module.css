@@ -1,3 +1,72 @@
+main{
+    height: calc(100vh - 60px);
+    display: grid;
+    place-items: center;
+}
+
 .base__spread{
+    /* width: 100%;
+    height: 100%; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner__spread{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: relative;
+    background-color: transparent;
+    animation: small 5s linear 0s infinite none;
+}
+
+
+@keyframes small {
+    20%{
+        box-shadow: 0px 0px 4px 4px rgba(37, 218, 188,0.3),
+                0px 0px 5px 6px rgba(37, 218, 188,0.4);
+    }
+    90%{
+        box-shadow: 0px 0px 4px 4px rgba(37, 218, 188,0.3),
+                0px 0px 5px 6px rgba(37, 218, 188,0.4);
+    }
+
+}
+.after__spread, .before__spread{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: large 5s linear 0s infinite normal;
+    transform: translate(-50%,-50%);
+}
+
+
+@keyframes large {
+    0%{
+        box-shadow: 0px 0px 0px 6px rgba(37, 218, 188,0.15),
+        0px 0px 20px 8px rgba(37, 218, 188,0.1);
+    }
     
+}
+
+
+.after__spread{
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* animation: larger 5s linear 0s infinite normal; */
+}
+
+
+@keyframes larger {
+    80%{
+        box-shadow: 0px 0px 5px 8px rgba(37, 218, 188,0.1),
+        0px 0px 15px 20px rgba(37, 218, 188,0.08);
+    }
 }
