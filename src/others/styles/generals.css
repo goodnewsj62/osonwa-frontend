@@ -20,7 +20,6 @@
     display: block;
     border-radius: 30%;
     background: rgba(255,255,255,0.35) ;
-    /* background-color: #fff; */
     margin: 0.3rem 0.2rem;
     cursor: pointer;
 }

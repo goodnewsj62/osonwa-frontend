@@ -1,31 +1,42 @@
-import { useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom"
 import { Header, IconBar, SideBar } from "../layout";
 import { CookiePopup } from "../others";
 
+
+const ToggleMode = createContext();
+const storedMode = () => {
+    return localStorage.getItem("mode") === "dark" ? "dark" : "light";
+}
+
+
 function DefaultLayout(props) {
-    const [cookieState, setCookieState] = useState(false);
-    
-    // TODO: multiple state :-> memo 
-    useEffect(()=> {
+    const [cookieState, setCookieState] = useState(storedMode);
+    const [mode, setMode] = useState(storedMode);
+
+    // TODO: multiple state :-> memo
+    useEffect(() => {
         const cStatus = localStorage.getItem("cookieStatus");
-        setCookieState(cStatus == "true" ? true : false);
-    },[]);
+        setCookieState(cStatus === "true" ? true : false);
+    }, []);
+
+
 
     return (
-        <div className="container">
-            <Header />
-            <IconBar />
-            <SideBar />
-            <CookiePopup setState={setCookieState} state={cookieState}  />
-            
-            <Outlet />
-        </div>
+        <ToggleMode.Provider value={[mode, setMode]}>
+            <div className="container" data-theme={mode}>
+                <Header />
+                <IconBar />
+                <SideBar />
+                <CookiePopup setState={setCookieState} state={cookieState} />
+
+                <Outlet />
+            </div>
+        </ToggleMode.Provider>
     )
 }
 
 
 
-
-export {DefaultLayout};
+export { DefaultLayout, ToggleMode };

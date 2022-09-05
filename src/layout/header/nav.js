@@ -29,8 +29,8 @@ function Nav(props) {
                         Login
                     </button>
                 </li>
-                <li className={styles.profile__icon} onClick={(e) => { setShowProfile(!showProfile) }}>
-                    <Profile show={showProfile} />
+                <li className={styles.profile__icon}>
+                    <Profile show={showProfile} setShow={setShowProfile} />
                 </li>
             </ul>
         </nav>

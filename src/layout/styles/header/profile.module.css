@@ -21,7 +21,7 @@
     top: 99%;
     right: 0px;
     border-radius: 8px;
-    z-index: 10;
+    z-index: 999;
     box-shadow: 0 0 10px 2px rgba(0,0,0,0.07),
                 0 0 15px 3px rgba(0,0,0,0.05) ;
     background-color: var(--netural-color);
@@ -32,6 +32,7 @@
     display: flex;
     margin-bottom: 20px;
     align-items: center;
+    cursor: default;
 }
 
 .greeting{
@@ -76,50 +77,54 @@
 }
 
 
-.appearance{
-    display: flex;
-    align-items: center;
-}
 
-.appearance input[type=checkbox]{
-    display: none;
+.nav__last li:first-child {
+    padding: 0;
+    margin-bottom: 2px;
 }
-
-.appearance span{
-    margin-right: auto;
-}
-
-.appearance label{
-    width: 55px;
-    height: 25px;
-    display: block;
-    border: 2px solid var(--mode-write-color);
-    border-radius: 30px;
-    padding: 2px 4px;
-    position: relative;
-    transition: all 0.4s;
-}
-
-.ball{
-    display: block;
-    background-color: var(--mode-write-color);
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    transition: all 0.4s;
-}
-
-.appearance input[type=checkbox]:checked +  label{
-    border: 2px solid var(--comp-one);
-}
-.appearance input[type=checkbox]:checked +  label .ball{
-    background-color:  var(--comp-one);
-    right: calc(0px + 4px);
-    transform: translateX(calc(200% - 6px));
-}
-
-
 .nav__last li:first-child:hover {
     background-color: transparent;
     background: transparent;
+}
+
+
+.appearance{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 5px;
+}
+
+
+.appearance button{
+    width: 45px;
+    height: 23px;
+    border-radius: 50px;
+    border: 2px solid #000;
+    padding: 4px;
+    background: transparent;
+    position: relative;
+    transition: all 0.5s;
+}
+
+.ball {
+    width: 15px;
+    height: 15px;
+    background-color: #000;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-52%);
+    transition: all 0.5s;
+}
+
+.appearance .border__highlight{
+    border: 2px solid var(--comp-one);
+}
+
+.ball__shift{
+    left: 22px;
+    background-color: var(--comp-one);
 }

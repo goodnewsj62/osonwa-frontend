@@ -3,6 +3,10 @@
     z-index: 5;
 }
 
+.icon__bar svg{
+    fill: #fff;
+}
+
 @media screen and (min-width:800px) {
     .icon__bar{
         display: block;
@@ -43,7 +47,7 @@
         box-shadow: 15px 15px 0 0 #000;
         /* border-right: 40px; */
         transform: rotate(50deg);
-        border-bottom: 2px solid var(--comp-one);
+        /* border-bottom: 2px solid var(--comp-one); */
 
     }
 

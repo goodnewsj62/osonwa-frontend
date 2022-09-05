@@ -1,7 +1,7 @@
 .footer__pop{
     /* max-width: 310px; */
     width: 300px;
-    z-index: 1000;
+    z-index: 90;
     position: fixed;
     padding: 1rem;
     bottom: 1rem;
@@ -10,6 +10,7 @@
     border-radius: 0.8rem;
     background-color: var(--current-mode);
     box-shadow: 0 0px 10px 1px rgba(0,0,0,0.24);
+    color: var(--mode-write-color);
 }
 
 
@@ -26,6 +27,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
+    color: var(--mode-write-color);
 }
 
 
@@ -79,6 +81,7 @@
     grid-template-rows: repeat(4,40px);
     position: relative;
     margin-top: 1rem;
+    color: var(--mode-write-color);
 }
 
 .normal__card::before{
