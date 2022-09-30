@@ -1,0 +1,23 @@
+.pub__date{
+    display: flex;
+    align-items: center;
+}
+
+.bs__dot{
+    fill: var(--base-color);
+}
+
+
+
+@media screen and (min-width:760px) {
+    .user__actions{
+        grid-column: unset;
+        grid-row: unset;
+        grid-area: foot;
+        padding: 0 0.2rem;
+    }
+
+    .user__actions li:last-child{
+        display: none;
+    }
+}

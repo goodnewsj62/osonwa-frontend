@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { BiSearch } from "react-icons/bi";
 import { FiBell, FiPlusSquare } from "react-icons/fi";
-import Profile from "./profile";
-import styles from "../styles/header/nav.module.css";
+import Profile from "./ProfileNav/Profile";
+import styles from "./styles/nav.module.css";
 
 // import {Link} from "react-router-dom";
 

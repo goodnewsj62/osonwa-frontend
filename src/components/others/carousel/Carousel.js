@@ -1,12 +1,10 @@
-import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import Slide from "./Slide";
 import styles from "./styles/carousel.module.css";
-import style from "./styles/slide.module.css";
-import "./styles/generals.css";
+import "../styles/generals.css";
 
-import image from "static/images/test_img.jpg";
-
-function Carousel(props){
-    const size =  40
+function Carousel(props) {
+    const size = 40
     return (
         <section aria-labelledby="headline" className={styles.show__case}>
             {/* <div className="interact__layer">
@@ -35,24 +33,5 @@ function Carousel(props){
 }
 
 
-function Slide(props){
-    return(
-        <div className={style.slide__container}>
-            <div className={style.img__wrapper}>
-                <img src={image} alt="caruosel image" />
-            </div>
-            <div className={style.text__div}>
-                <div>
-                    <h1 id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
-                    <span>
-                        See Details
-                    </span>
-                </div>
-            </div>
-        </div>
-    )
-}
 
-
-
-export {Carousel};
+export default Carousel;

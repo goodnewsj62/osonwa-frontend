@@ -1,0 +1,38 @@
+.message{
+    padding: 0.7rem 0.7rem;
+    border-radius: 4px;
+    border-left:5px solid var(--base-color);
+    z-index: 99;
+    position: fixed;
+    display: flex;
+    left: 2%;
+    bottom: 15px;
+    background-color: var(--netural-color);
+    align-items: center;
+    box-shadow: 0 2px 12px 1px rgba(0,0,0,0.2);
+    color: var(--mode-write-color);
+}
+
+
+.message >  span{
+    margin: 0 5px;
+}
+
+.message .link{
+    font-weight: bold;
+    color: #1e90ff;
+    cursor: default;
+}
+
+
+
+.icon__success{
+    color: rgb(110,192,95);
+    display: none;
+}
+
+
+
+.icon__failure{
+    color: rgb(250, 79, 79);
+}

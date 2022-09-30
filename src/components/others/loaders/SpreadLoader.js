@@ -2,7 +2,7 @@ import styles from "./styles/loader.module.css";
 
 function SpreadLoader(props) {
     return (
-        
+
         <div className={styles.base__spread}>
             <div className={styles.after__spread}></div>
             <div className={styles.inner__spread}>
@@ -14,4 +14,4 @@ function SpreadLoader(props) {
 }
 
 
-export { SpreadLoader };
+export default SpreadLoader;

@@ -1,5 +1,6 @@
-import Header from "./header/header";
-import SideBar, { IconBar } from "./side_bar/side_bar";
+import Header from "./header/Header";
+import SideBar from "./side_bar/Side_bar";
+import IconBar from "./side_bar/IconBar";
 
 
 

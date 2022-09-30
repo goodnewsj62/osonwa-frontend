@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Articles, Home, Layout } from "./pages";
 import "./styles/base.css";
 
-import { LoginRequired } from "components/others/protected";
+import LoginRequired from "components/others/Protected";
 import { Comments } from "pages/Comments";
+import IconSize from "components/wrappers/IconSize";
 
 
 function App(props) {
-    const [auth, setAuth] = useState(false);
+    // const [auth, setAuth] = useState(false);
 
     // Note: only one function should be able to mutate each item in storage
     // const accessToken = localStorage.getItem("accessToken");
@@ -24,16 +25,18 @@ function App(props) {
     // }, [])
 
     //TODO: two useState protect with memo
+    const WrappedLayout = <IconSize element={<Layout />} />
+
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="/articles" element={<Articles />} />
-                    <Route path="/post/:id/comments/" element={<Comments />} />
-                    <Route element={<LoginRequired />}>
-                        {/*  profile, create post */}
-                    </Route>
+                <Route path="/" element={WrappedLayout}>
+                    {/* <Route index element={<Home />} /> */}
+                    {/* <Route path="/articles" element={<Articles />} /> */}
+                    {/* <Route path="/post/:id/comments/" element={<Comments />} /> */}
+                    {/* <Route element={<LoginRequired />}> */}
+                    {/*  profile, create post */}
+                    {/* </Route> */}
                 </Route>
             </Routes>
         </Router>

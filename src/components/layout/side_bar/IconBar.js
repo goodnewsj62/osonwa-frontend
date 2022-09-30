@@ -1,37 +1,10 @@
-import { MainNav, NavOthers } from "./sidenavs";
-import { VscTriangleLeft, VscTriangleRight } from "react-icons/vsc";
+import { VscTriangleRight } from "react-icons/vsc";
 import { ImNewspaper } from "react-icons/im";
 import { BsBroadcast } from "react-icons/bs";
 import { FaBoxOpen } from "react-icons/fa";
 import { GiNotebook } from "react-icons/gi";
 
-
-import styles from "../styles/sidebar/sidebar.module.css";
-import style from "../styles/sidebar/iconbar.module.css";
-import { useContext } from "react";
-import { ToggleMode } from "pages/Layout";
-
-
-function SideBar(props) {
-    const [mode, _] = useContext(ToggleMode);
-    return (
-        <aside aria-label="side bar" className={`${styles.side__bar} ${mode === "dark" ? styles.dark__bar : ''}`}>
-            <div className={styles.wrap__up}>
-                <MainNav />
-                <div className={styles.demacation}></div>
-                <div className={styles.close__bar}>
-                    <VscTriangleLeft size={20} />
-                </div>
-                <section aria-labelledby="#others">
-                    <h4 id="others">Others</h4>
-                    <NavOthers />
-                </section>
-            </div>
-        </aside>
-    )
-}
-
-
+import style from "./styles/iconbar.module.css";
 
 
 function IconBar() {
@@ -65,5 +38,6 @@ function IconBar() {
     )
 }
 
-export { IconBar };
-export default SideBar;
+
+
+export default IconBar;

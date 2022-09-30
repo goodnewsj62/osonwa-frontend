@@ -12,4 +12,4 @@ function LoginRequired({ auth }) {
 }
 
 
-export { LoginRequired };
+export default LoginRequired;

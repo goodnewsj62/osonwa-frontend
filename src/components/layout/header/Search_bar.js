@@ -1,6 +1,6 @@
 import { BiSearch } from "react-icons/bi";
 import { IoIosArrowBack } from "react-icons/io";
-import styles from "../styles/header/searchbar.module.css";
+import styles from "./styles/searchbar.module.css";
 
 function SearchBar(props) {
     return (

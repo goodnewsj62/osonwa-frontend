@@ -1,10 +1,10 @@
 
 import { IoReorderTwoOutline } from "react-icons/io5"
-import Nav from "./nav";
-import SearchBar from "./search_bar";
+import Nav from "./Nav";
+import SearchBar from "./Search_bar";
 
-import styles from "../styles/header/header.module.css";
-import "../styles/header/header.css";
+import styles from "./styles/header.module.css";
+import "./styles/header.css";
 // import icon from "../styles/osonwapp.svg";
 
 function Header() {
