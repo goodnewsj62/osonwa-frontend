@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useEffect } from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom"
-import { Header, IconBar, SideBar } from "../layout";
-import { CookiePopup } from "../others";
+import { Header, IconBar, SideBar } from "components/layout";
+import { CookiePopup } from "components/others";
 
 
 const ToggleMode = createContext();
