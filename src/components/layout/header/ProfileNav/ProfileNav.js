@@ -1,20 +1,26 @@
-import PNav from "./PNav";
+import ApperanceAndLogout from "./ApperanceAndLogout";
+import OtherNavOptions from "./OtherOptions";
+import ProfileNavOptions from "./ProfileNavOptions";
+import UserProfile from "./UserProfile";
+import styles from "./styles/PNav.module.css";
 
+function ProfileNav({ showNav }) {
 
-function ProfileNav({ show, setShow, ...others }) {
+    const showNavHandler =  (event)=>{
+        setTimeout(()=>{ showNav(false)},530);
+    };
 
-    // const showHandler = (e) => {
-    //     const timeout = setTimeout(() => { setShow(!show) }, 300);
-    //     return timeout;
-    // }
+    return (<nav aria-label="profile navigation" className={styles.profile__options}>
+        <UserProfile showNav={showNavHandler} />
+        <div className={styles.demacation}></div>
+        <ProfileNavOptions showNav={showNavHandler} />
+        <div className={styles.demacation}></div>
+        <OtherNavOptions showNav={showNavHandler} />
+        <div className={styles.demacation}></div>
+        <ApperanceAndLogout showNav={showNavHandler} />
+    </nav>);
 
-    return (
-        <>
-            {show && <PNav />}
-        </>
-    );
-
-}
+};
 
 
 

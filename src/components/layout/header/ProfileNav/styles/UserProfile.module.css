@@ -1,0 +1,19 @@
+.profile__sec{
+    padding: 10px;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    cursor: default;
+}
+
+
+.greeting{
+    margin-left: 10px;
+}
+
+.greeting h4{
+    margin-bottom: 1px;
+}
+.greeting p span{
+    margin: 0 3px;
+}

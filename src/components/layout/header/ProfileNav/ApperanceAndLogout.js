@@ -4,15 +4,14 @@ import styles from "./styles/ApperanceAndLogout.module.css";
 
 
 
-const ApperanceAndLogout = (props) => {
+const ApperanceAndLogout = ({showNav}) => {
 
-    const toggleShow = (e) => { };
     return (
         <ul className={styles.nav__last}>
             <li>
                 <ChangeApperance />
             </li>
-            <li onClick={(e) => { toggleShow(e) }}>Logout</li>
+            <li onClick={showNav}>Logout</li>
         </ul>
     );
 };

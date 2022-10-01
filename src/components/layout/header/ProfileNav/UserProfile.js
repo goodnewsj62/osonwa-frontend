@@ -3,10 +3,10 @@ import { IoCloudyNightOutline } from "react-icons/io5";
 import styles from "./styles/UserProfile.module.css";
 import image from "static/images/test_image.png";
 
-const UserProfile = ({ toggleShow }) => {
+const UserProfile = ({ showNav }) => {
     return (
         <div className={styles.profile__sec}>
-            <div onClick={(e) => { toggleShow(e) }} className={styles.img__wrapper}>
+            <div onClick={showNav} className={styles.img__wrapper}>
                 <img src={image} alt="profile" />
                 <h2 className="first__letter">O</h2>
             </div>

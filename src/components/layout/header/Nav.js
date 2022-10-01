@@ -8,7 +8,8 @@ import styles from "./styles/nav.module.css";
 // import {Link} from "react-router-dom";
 
 function Nav(props) {
-    const [showProfile, setShowProfile] = useState(false);
+    const [showProfileBar, setShowProfileBar] = useState(false);
+
     return (
         <nav className={`${styles.head__nav} header__nav`}>
             <ul className={`${styles.head__ul}`}>
@@ -30,7 +31,7 @@ function Nav(props) {
                     </button>
                 </li>
                 <li className={styles.profile__icon}>
-                    <Profile show={showProfile} setShow={setShowProfile} />
+                    <Profile />
                 </li>
             </ul>
         </nav>

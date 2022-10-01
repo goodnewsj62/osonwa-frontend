@@ -2,11 +2,9 @@
 
 
 
-const ProfileNavOptions = (props) => {
-
-    const toggleShow = (e) => { };
+const ProfileNavOptions = ({ showNav }) => {
     return (
-        <ul onClick={(e) => { toggleShow(e) }}>
+        <ul onClick={showNav}>
             <li>Profile</li>
             <li>Edit Profile</li>
             <li>Posts</li>

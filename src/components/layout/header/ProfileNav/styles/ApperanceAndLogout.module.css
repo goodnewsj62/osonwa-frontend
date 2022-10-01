@@ -1,0 +1,8 @@
+.nav__last li:first-child {
+    padding: 0;
+    margin-bottom: 2px;
+}
+.nav__last li:first-child:hover {
+    background-color: transparent;
+    background: transparent;
+}
