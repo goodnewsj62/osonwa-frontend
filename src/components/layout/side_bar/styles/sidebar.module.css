@@ -5,8 +5,9 @@
     position: fixed;
     top: 60px;
     left: 0%;
-    z-index: 20;
+    z-index: 900;
     color: var(--mode-write-color);
+    transition: all 0.5s;
 }
 
 .dark__bar{
@@ -16,7 +17,6 @@
 @media screen and (max-width:750px) {
     .side__bar{
         background-color: var(--dark-mode-step-one);
-        z-index: 10;
     }
 }
 
@@ -37,6 +37,14 @@
 
 .close__bar{
     display: none;
+}
+
+.hide__bar{
+    left: calc(255px - 100vw);
+}
+
+.show__bar{
+    left: 0%;
 }
 
 

@@ -1,18 +1,29 @@
-import MainNav from "./Sidenavs";
+import MainNav from "./Sidenav";
 import { VscTriangleLeft } from "react-icons/vsc";
 
 
 import styles from "./styles/sidebar.module.css";
 import NavOthers from "./NavOptions";
+import { useDispatch } from "react-redux";
+import sideBarActions from "store/SideBarSlice";
 
-function SideBar(props) {
+function SideBar({ sideBarState }) {
+    const dispatch = useDispatch();
+
+    const showBarHandler = (event) => {
+        dispatch(sideBarActions.hide());
+    };
+
     const modeClass = "";
+    const barAnimeClasses = sideBarState ? `${styles.show__bar}` : `${styles.hide__bar}`;
+    const classes = `${styles.side__bar} ${barAnimeClasses} ${modeClass}`;
+
     return (
-        <aside aria-label="side bar" className={`${styles.side__bar} ${modeClass}`}>
+        <aside aria-label="side bar" className={classes}>
             <div className={styles.wrap__up}>
                 <MainNav />
                 <div className={styles.demacation}></div>
-                <div className={styles.close__bar}>
+                <div onClick={showBarHandler} className={styles.close__bar}>
                     <VscTriangleLeft size={20} />
                 </div>
                 <section aria-labelledby="#others">

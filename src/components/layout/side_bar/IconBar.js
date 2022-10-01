@@ -5,10 +5,21 @@ import { FaBoxOpen } from "react-icons/fa";
 import { GiNotebook } from "react-icons/gi";
 
 import style from "./styles/iconbar.module.css";
+import { useDispatch } from "react-redux";
+import sideBarActions from "store/SideBarSlice";
+import { useContext } from "react";
+import { DefaultIconSize } from "components/wrappers/IconSize";
 
 
-function IconBar() {
-    const iconSize = 20;
+function IconBar({ sideBarState }) {
+    const dispatch = useDispatch();
+    const iconSize = useContext(DefaultIconSize);
+
+
+    const hideBarHandler = (event) => {
+        dispatch(sideBarActions.show());
+    };
+
     return (
         <div aria-label="icon nav" className={style.icon__bar}>
             <div className={style.curve__top}>
@@ -21,7 +32,7 @@ function IconBar() {
                 <li>
                     <BsBroadcast size={iconSize * 0.9} />
                 </li>
-                <li>
+                <li onClick={hideBarHandler}>
                     <VscTriangleRight size={iconSize * 1.3} />
                 </li>
                 <li>

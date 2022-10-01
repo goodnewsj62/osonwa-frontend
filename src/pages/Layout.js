@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
-import { Header, IconBar, SideBar } from "components/layout";
-import { CookiePopup } from "components/others";
+import { Header, SideNavBar } from "components/layout";
+import { CookiePopup, MessagePopup } from "components/others";
 import { useEffect, useState } from "react";
 
 
@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 
 function DefaultLayout(props) {
     const [hasAcceptedCookie, setHasAcceptedCookie] = useState(true);
+
+
 
     useEffect(() => {
         const cookieStatus = localStorage.getItem("cookieStatus");
@@ -24,9 +26,9 @@ function DefaultLayout(props) {
     return (
         <div className="container">
             <Header />
-            <IconBar />
-            <SideBar />
+            <SideNavBar />
             {!hasAcceptedCookie && <CookiePopup cookieState={{ ...cookieState }} />}
+            <MessagePopup />
 
             <Outlet />
         </div>
