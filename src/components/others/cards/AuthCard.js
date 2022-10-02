@@ -8,12 +8,12 @@ import rocket from "static/images/Saly-43.png";
 import { useContext } from "react";
 import { DefaultIconSize } from "components/wrappers/IconSize";
 
-function AuthCard(props) {
+function AuthCard({ hideHandler }) {
 
     const iconSize = useContext(DefaultIconSize);
     return (
         <div className={styles.auth__card} >
-            <i className={styles.cancel}>
+            <i onClick={hideHandler} className={styles.cancel}>
                 <MdCancel size={28} />
             </i>
             <div className={styles.auth__image} >

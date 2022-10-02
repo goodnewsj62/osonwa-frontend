@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 import { Header, SideNavBar } from "components/layout";
 import { CookiePopup, MessagePopup } from "components/others";
 import { useEffect, useState } from "react";
+import AuthPopupModal from "components/others/AuthPopupModal";
 
 
 // const storedMode = () => {
@@ -22,7 +23,6 @@ function DefaultLayout(props) {
     }, []);
 
     const cookieState = { hasAcceptedCookie, setHasAcceptedCookie };
-
     return (
         <div className="container">
             <Header />

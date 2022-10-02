@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
@@ -8,15 +9,22 @@ import styles from "./styles/MessagePopup.module.css";
 
 
 
-function MessagePopup(props) {
+function MessagePopup({ message, link, category }) {
     const iconSize = useContext(DefaultIconSize);
+    let icon = <MdCancel className={styles.icon__failure} size={iconSize} />;
+    if (category === "success") {
+        icon = <BsCheckCircleFill className={styles.icon__success} size={iconSize} />;
+    }
+
     return (
         <div className={styles.message}>
-            <BsCheckCircleFill className={styles.icon__success} size={iconSize} />
-            <MdCancel className={styles.icon__failure} size={iconSize} />
+            {icon}
             <span></span>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing</p>
+            <p>{message}</p>
             <span className={styles.link}>
+                {/* <Link to="" >
+                    link
+                </Link> */}
                 link
             </span>
         </div>

@@ -1,5 +1,5 @@
-export default function Cover() {
+export default function Cover({ hideHandler }) {
     return (
-        <div className="page__cover"></div>
+        <div onClick={hideHandler} className="page__cover"></div>
     )
 } 

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { BiSearch } from "react-icons/bi";
 import { FiBell, FiPlusSquare } from "react-icons/fi";
 import Profile from "./ProfileNav/Profile";
@@ -8,7 +6,6 @@ import styles from "./styles/nav.module.css";
 // import {Link} from "react-router-dom";
 
 function Nav(props) {
-    const [showProfileBar, setShowProfileBar] = useState(false);
 
     return (
         <nav className={`${styles.head__nav} header__nav`}>
