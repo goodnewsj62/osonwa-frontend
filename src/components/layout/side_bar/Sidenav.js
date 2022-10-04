@@ -5,28 +5,31 @@ import { GiNotebook } from "react-icons/gi";
 import { TbJumpRope } from "react-icons/tb";
 
 import styles from "./styles/sidenav.module.css";
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { DefaultIconSize } from "components/wrappers/IconSize";
 
-const iconSize = 20
 
 function MainNav(props) {
-
+    const iconSize = useContext(DefaultIconSize);
+    const classes = (navState) => navState.isActive ? styles.active : "";
     return (
         <nav aria-label="side nav bar" className={styles.main__nav}>
             <ul>
                 <li>
-                    <ImNewspaper size={iconSize} /><span></span> News
+                    <NavLink className={classes} to="/"><ImNewspaper size={iconSize} /><span></span> News</NavLink>
                 </li>
                 <li>
-                    <BsBroadcast size={iconSize} /> <span></span> Trending
+                    <NavLink className={classes} to="/trending" ><BsBroadcast size={iconSize} /> <span></span> Trending</NavLink>
                 </li>
                 <li>
-                    <FaBoxOpen size={iconSize} /><span></span> Fresh
+                    <NavLink className={classes} to="/fresh"> <FaBoxOpen size={iconSize} /><span></span> Fresh</NavLink>
                 </li>
                 <li>
-                    <GiNotebook size={iconSize} /> <span></span> Articles
+                    <NavLink className={classes} to="/articles"><GiNotebook size={iconSize} /> <span></span> Articles</NavLink>
                 </li>
                 <li>
-                    <TbJumpRope size={iconSize} /> <span></span> Threads
+                    <NavLink className={classes} to="/threads"><TbJumpRope size={iconSize} /> <span></span> Threads</NavLink>
                 </li>
             </ul>
         </nav>

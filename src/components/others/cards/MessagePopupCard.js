@@ -22,10 +22,7 @@ function MessagePopup({ message, link, category }) {
             <span></span>
             <p>{message}</p>
             <span className={styles.link}>
-                {/* <Link to="" >
-                    link
-                </Link> */}
-                link
+                <Link to="">link</Link>
             </span>
         </div>
     );

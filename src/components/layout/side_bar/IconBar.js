@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import sideBarActions from "store/SideBarSlice";
 import { useContext } from "react";
 import { DefaultIconSize } from "components/wrappers/IconSize";
+import { NavLink } from "react-router-dom";
 
 
 function IconBar({ sideBarState }) {
@@ -20,6 +21,8 @@ function IconBar({ sideBarState }) {
         dispatch(sideBarActions.show());
     };
 
+    const classes = (navState) => navState.isActive ? style.active : "";
+
     return (
         <div aria-label="icon nav" className={style.icon__bar}>
             <div className={style.curve__top}>
@@ -27,19 +30,29 @@ function IconBar({ sideBarState }) {
             </div>
             <ul>
                 <li>
-                    <ImNewspaper size={iconSize * 0.9} />
+                    <NavLink className={classes} to="/">
+                        <ImNewspaper size={iconSize * 0.9} />
+                    </NavLink>
+                    <span> feed</span>
                 </li>
                 <li>
-                    <BsBroadcast size={iconSize * 0.9} />
+                    <NavLink className={classes} to="/trending"> <BsBroadcast size={iconSize * 0.9} /></NavLink>
+                    <span>trending</span>
                 </li>
-                <li onClick={hideBarHandler}>
+                <li style={{ cursor: "pointer" }} onClick={hideBarHandler}>
                     <VscTriangleRight size={iconSize * 1.3} />
                 </li>
                 <li>
-                    <GiNotebook size={iconSize * 0.99} />
+                    <NavLink className={classes} to="/articles" >
+                        <GiNotebook size={iconSize * 0.99} />
+                    </NavLink>
+                    <span>articles</span>
                 </li>
                 <li>
-                    <FaBoxOpen size={iconSize * 0.98} />
+                    <NavLink className={classes} to="/fresh" >
+                        <FaBoxOpen size={iconSize * 0.98} />
+                    </NavLink>
+                    <span>fresh</span>
                 </li>
             </ul>
             <div className={style.curve__bottom}>

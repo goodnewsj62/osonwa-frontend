@@ -40,7 +40,7 @@
 }
 
 .hide__bar{
-    left: calc(255px - 100vw);
+    left: -255px;
 }
 
 .show__bar{

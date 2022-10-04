@@ -5,15 +5,22 @@ import SearchBar from "./Search_bar";
 
 import styles from "./styles/header.module.css";
 import "./styles/header.css";
+import { useDispatch } from "react-redux";
+import sideBarActions from "store/SideBarSlice";
 // import icon from "../styles/osonwapp.svg";
 
 function Header() {
+    const dispatch = useDispatch();
+
+    const toggleSideBarHandler = (event) => {
+        dispatch(sideBarActions.toggleState());
+    };
 
     return (
         <header>
             <div className={styles.mobile__toggle} id="mobile__toggle">
                 <input type="checkbox" name="" id="mob__toggle" />
-                <label htmlFor="mob__toggle">
+                <label onClick={toggleSideBarHandler} htmlFor="mob__toggle">
                     <IoReorderTwoOutline size={35} />
                 </label>
             </div>
