@@ -1,4 +1,4 @@
-
+import {Link} from "react-router-dom";
 import { IoReorderTwoOutline } from "react-icons/io5"
 import Nav from "./Nav";
 import SearchBar from "./Search_bar";
@@ -19,7 +19,6 @@ function Header() {
     };
 
     const toggleMobileSearch = (state) => {
-        console.log(state)
         setToggleMobSearch(state);
     };
 
@@ -34,8 +33,10 @@ function Header() {
                 </label>
             </div>
             <div className={styles.logo__area}>
-                {/* <img src={icon} alt="logo" /> */}
-                <h2>Osonwa.</h2>
+                <Link to="/">
+                    {/* <img src={icon} alt="logo" /> */}
+                    <h2>Osonwa.</h2>
+                </Link >
             </div>
             <SearchBar visibilityState={visibilityState} />
             <Nav showSearch={setToggleMobSearch} />
