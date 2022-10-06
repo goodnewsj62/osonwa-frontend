@@ -1,3 +1,5 @@
+import { DefaultIconSize } from "components/wrappers/IconSize";
+import { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiBell, FiPlusSquare } from "react-icons/fi";
 import Profile from "./ProfileNav/Profile";
@@ -5,21 +7,22 @@ import styles from "./styles/nav.module.css";
 
 // import {Link} from "react-router-dom";
 
-function Nav(props) {
+function Nav({ showSearch }) {
+    const iconSize = useContext(DefaultIconSize);
 
     return (
         <nav className={`${styles.head__nav} header__nav`}>
             <ul className={`${styles.head__ul}`}>
-                <li>
-                    <BiSearch size={20} className="nav__search" />
+                <li onClick={(e) => { showSearch(true) }}>
+                    <BiSearch size={iconSize} className="nav__search" />
                 </li>
                 <li>
-                    <FiPlusSquare size={20} />
+                    <FiPlusSquare size={iconSize} />
                 </li>
                 <li>
                     <div className={styles.bell}>
                         <span>10+</span>
-                        <FiBell size={20} />
+                        <FiBell size={iconSize} />
                     </div>
                 </li>
                 <li className={styles.auth}>

@@ -7,14 +7,23 @@ import styles from "./styles/header.module.css";
 import "./styles/header.css";
 import { useDispatch } from "react-redux";
 import sideBarActions from "store/SideBarSlice";
+import { useState } from "react";
 // import icon from "../styles/osonwapp.svg";
 
 function Header() {
+    const [toggleMobSearch, setToggleMobSearch] = useState(false);
     const dispatch = useDispatch();
 
     const toggleSideBarHandler = (event) => {
         dispatch(sideBarActions.toggleState());
     };
+
+    const toggleMobileSearch = (state) => {
+        console.log(state)
+        setToggleMobSearch(state);
+    };
+
+    const visibilityState = { toggleMobileSearch, toggleMobSearch }
 
     return (
         <header>
@@ -28,8 +37,8 @@ function Header() {
                 {/* <img src={icon} alt="logo" /> */}
                 <h2>Osonwa.</h2>
             </div>
-            <SearchBar show={{}} />
-            <Nav className="nav" />
+            <SearchBar visibilityState={visibilityState} />
+            <Nav showSearch={setToggleMobSearch} />
         </header>
     )
 }

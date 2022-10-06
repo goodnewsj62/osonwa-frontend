@@ -17,35 +17,35 @@ function NavOthers(props) {
         <nav aria-label="other relevant navigation" className={styles.other__nav}>
             <ul>
                 <li>
-                    <NavLink ClassName={classes} to="/support">
+                    <NavLink className={classes} to="/support">
                         <BsHeartFill size={iconSize} />
                         <span></span>
                         Support
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink ClassName={classes} to="/about">
+                    <NavLink className={classes} to="/about">
                         <BsFillQuestionCircleFill size={iconSize} />
                         <span></span>
                         About
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink ClassName={classes} to="/contact">
+                    <NavLink className={classes} to="/contact">
                         <TiContacts size={iconSize} />
                         <span></span>
                         Contact
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink ClassName={classes} to="/privacy-policy">
+                    <NavLink className={classes} to="/privacy-policy">
                         <MdPrivacyTip size={iconSize} />
                         <span></span>
                         Privacy Policy
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink ClassName={classes} to="/terms">
+                    <NavLink className={classes} to="/terms">
                         <FaHandshake size={iconSize} />
                         <span></span>
                         Terms Of Use

@@ -7,9 +7,10 @@
     fill: #fff;
 }
 
-.icon__bar a{
-    color: var(--comp-one);
+.icon__bar a:hover svg{
+    fill: var(--comp-one);
 }
+
 
 .icon__bar li{
     position: relative;
