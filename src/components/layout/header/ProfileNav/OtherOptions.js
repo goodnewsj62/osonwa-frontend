@@ -7,6 +7,7 @@ import styles from "./styles/OtherNavOptions.module.css";
 
 const OtherNavOptions = ({showNav}) => {
     const iconSize = useContext(DefaultIconSize);
+    
     return (
         <ul onClick={showNav} className={styles.previous__actions}>
             <li>

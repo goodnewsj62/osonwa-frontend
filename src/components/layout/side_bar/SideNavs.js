@@ -6,7 +6,6 @@ import SideBar from "./Side_bar";
 function SideNavBar() {
     const sideBarState = useSelector((state) => state.sideBarState);
 
-
     return (
         <>
             <IconBar sideBarState={sideBarState} />

@@ -23,7 +23,7 @@
     color: initial;
 }
 
-.main__nav a:hover, .main__nav .active, .other__nav .active,.other__nav a:hover{
+.main__nav a:hover, .main__nav a.active, .other__nav a.active,.other__nav a:hover{
     background-color: var(--highlight-grey);
     color: #000;
     border-radius: 6px;
