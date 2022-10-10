@@ -7,7 +7,9 @@ const authSlice = createSlice({
     name: "authSlice",
     initialState: initialState,
     reducers: {
-        setAuthStatus(state, payload) { }
+        setAuthState(state, payload) {
+            return payload.state;
+        }
     }
 });
 

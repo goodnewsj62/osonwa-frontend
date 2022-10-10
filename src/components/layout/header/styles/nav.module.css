@@ -34,10 +34,6 @@
 }
 
 
-.head__nav .auth{
-    display: none;
-}
-
 .auth button{
     background-color: transparent;
     /* border: 2px solid var(--comp-one); */

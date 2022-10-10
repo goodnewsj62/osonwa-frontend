@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoReorderTwoOutline } from "react-icons/io5"
 import Nav from "./Nav";
 import SearchBar from "./Search_bar";

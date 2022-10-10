@@ -23,7 +23,7 @@ function SearchBar({ visibilityState }) {
                 <IoIosArrowBack size={20} />
             </button>
             <form onSubmit={(e) => { }}>
-                <input type="text" name="" id="" />
+                <input placeholder="search" type="text" name="search" id="search" />
                 <button type="submit" onClick={(e) => { }}>
                     <BiSearch className="search__icon" size={16} />
                 </button>
