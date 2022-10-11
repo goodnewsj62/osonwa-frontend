@@ -1,7 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "utils/RtkOveride";
 import Header from "../Header";
-import TestWrapper from "utils/TestWrapper";
-import { useSelector } from "react-redux";
 
 
 
@@ -9,9 +7,7 @@ import { useSelector } from "react-redux";
 describe("Header Components", () => {
     test("logo with link", () => {
         render(
-            <TestWrapper >
-                <Header />
-            </TestWrapper>
+            <Header />
         );
 
         const link = screen.getByRole("link", { name: "Osonwa.", exact: false })
@@ -20,9 +16,7 @@ describe("Header Components", () => {
 
     test("search bar in dom", () => {
         render(
-            <TestWrapper >
-                <Header />
-            </TestWrapper>
+            <Header />
         );
 
         const inputBar = screen.getByPlaceholderText("search");
@@ -30,26 +24,35 @@ describe("Header Components", () => {
     });
     test("render login button for unauthenticated users", () => {
         render(
-            <TestWrapper >
-                <Header />
-            </TestWrapper>
+            <Header />
         );
 
 
         const inputBar = screen.getByText("Login", { exact: false });
         expect(inputBar).toBeInTheDocument();
     });
+
     test("login button not rendered  if authenticated", () => {
 
         render(
-            <TestWrapper >
-                <Header />
-            </TestWrapper>
+            <Header />
+            , { preloadedState: { authState: { state: true, refresh: "", access: "" } } }
         );
 
 
         const inputBar = screen.queryByText("Login", { exact: false });
-        expect(inputBar).toBeInTheDocument();
+        expect(inputBar).toBeNull();
+    });
+
+
+    test("profile image/representation when authenticated", () => {
+        render(
+            <Header />
+            , { preloadedState: { authState: { state: true, refresh: "", access: "" } } }
+        );
+
+        const profileDiv = screen.getByTestId("profileImage");
+        expect(profileDiv).toBeInTheDocument();
     });
 });
 

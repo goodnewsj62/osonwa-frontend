@@ -20,7 +20,6 @@ function Nav({ showSearch }) {
         </li>
     );
 
-    console.log(authState)
 
     const ProfileLink = (<li className={styles.profile__icon}><Profile /></li>);
 

@@ -15,8 +15,8 @@ function Profile({ show, setShow, ...others }) {
     };
     
     return (
-        <div className={styles.profile__div}>
-            <img onClick={showProfileNavHandler} src={image} alt="profile" />
+        <div data-testid="profileImage" className={styles.profile__div}>
+            <img onClick={showProfileNavHandler} src={image} alt="profile img" />
             <h2 onClick={showProfileNavHandler} >O</h2>
             {showProfileBar  && <ProfileNav showNav = {setShowProfileBar} />}
         </div>

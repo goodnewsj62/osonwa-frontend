@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import IconBar from "./IconBar";
-import SideBar from "./Side_bar";
+import SideBar from "./SideBar";
 
 
 function SideNavBar() {
