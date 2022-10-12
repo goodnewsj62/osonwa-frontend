@@ -23,9 +23,9 @@ function SideBar({ sideBarState }) {
             <div className={styles.wrap__up}>
                 <MainNav />
                 <div className={styles.demacation}></div>
-                <div onClick={showBarHandler} className={styles.close__bar}>
+                <button onClick={showBarHandler} className={styles.close__bar}>
                     <VscTriangleLeft size={20} />
-                </div>
+                </button>
                 <section aria-labelledby="#others">
                     <h4 id="others">Others</h4>
                     <NavOthers />

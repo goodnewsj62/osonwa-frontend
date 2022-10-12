@@ -39,7 +39,7 @@ function IconBar({ sideBarState }) {
                     <NavLink className={classes} to="/trending"> <BsBroadcast size={iconSize * 0.9} /></NavLink>
                     <span>trending</span>
                 </li>
-                <li style={{ cursor: "pointer" }} onClick={hideBarHandler}>
+                <li data-testid="show__sidebar" style={{ cursor: "pointer" }} onClick={hideBarHandler}>
                     <VscTriangleRight size={iconSize * 1.3} />
                 </li>
                 <li>
