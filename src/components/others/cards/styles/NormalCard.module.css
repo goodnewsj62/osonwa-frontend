@@ -28,7 +28,7 @@
 }
 
 
-@media screen and (min-width:760px) {
+@media screen and (min-width:770px) {
     .normal__card{
         grid-template-columns: unset;
         grid-template-rows: unset;
@@ -46,6 +46,7 @@
         transition: box-shadow 0.4s, border 0.1s;
     }
 
+    
     .normal__card::before{
         display: none;
     }

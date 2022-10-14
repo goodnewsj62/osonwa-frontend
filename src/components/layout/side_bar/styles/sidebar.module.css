@@ -14,7 +14,7 @@
     background-color: var(--dark-mode-step-one);
 }
 
-@media screen and (max-width:750px) {
+@media screen and (max-width:770px) {
     .side__bar{
         background-color: var(--dark-mode-step-one);
     }

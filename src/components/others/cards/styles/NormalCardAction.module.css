@@ -7,9 +7,40 @@
     fill: var(--base-color);
 }
 
+.user__actions{
+    grid-column: 1 / span 3;
+    grid-row: 4 / span 1;
+    display: flex;
+    align-items: center;
+}
 
 
-@media screen and (min-width:760px) {
+
+.user__actions span{
+    color: #6c757d;
+}
+
+
+.user__actions ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin-left: auto;
+}
+
+.user__actions li{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.user__actions li > div{
+    margin-left: 0.2rem;
+}
+
+
+
+@media screen and (min-width:770px) {
     .user__actions{
         grid-column: unset;
         grid-row: unset;

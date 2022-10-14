@@ -31,7 +31,7 @@ function App(props) {
         <Router>
             <Routes>
                 <Route path="/" element={WrappedLayout}>
-                    {/* <Route index element={<Home />} /> */}
+                    <Route index element={<Home />} />
                     {/* <Route path="/articles" element={<Articles />} /> */}
                     {/* <Route path="/post/:id/comments/" element={<Comments />} /> */}
                     {/* <Route element={<LoginRequired />}> */}

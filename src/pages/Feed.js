@@ -1,9 +1,13 @@
 import { Carousel, NormalCard, Tags } from "components/others";
-import styles from "../styles/news.module.css";
+import { useSelector } from "react-redux";
+import styles from "./styles/news.module.css";
 
 function Feed(props) {
+    const barState = useSelector((state) => state.sideBarState);
+
+    const main_classes = barState ? `main ${styles.futher__left}` : `main`;
     return (
-        <main styles={`main ${styles.fee__main}`}>
+        <main className={main_classes}>
             <section aria-label="carousel" className={styles.slider} >
                 <Carousel />
             </section>
@@ -12,8 +16,8 @@ function Feed(props) {
             </section>
             <MainCards />
         </main>
-    )
-}
+    );
+};
 
 function MainCards(props) {
     return (
