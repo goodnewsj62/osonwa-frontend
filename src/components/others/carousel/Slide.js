@@ -3,7 +3,7 @@ import image from "static/images/test_img.jpg";
 
 function Slide(props) {
     return (
-        <div className={style.slide__container}>
+        <div style={props.styles} className={style.slide__container}>
             <div className={style.img__wrapper}>
                 <img src={image} alt="caruosel" />
             </div>
@@ -11,7 +11,7 @@ function Slide(props) {
                 <div>
                     <h1 id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
                     <span>
-                        See Details
+                        {props.test}
                     </span>
                 </div>
             </div>
