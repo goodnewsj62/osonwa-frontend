@@ -69,5 +69,20 @@ const setAuthAndStorage = (setAuth) => {
 
 
 
+function forwardDebounce(callback, timeout = 300) {
+    // after first call timer is set to a value so callback is not called again until timeout
+    //then it is undefined
+    let timer;
+    return (...args) => {
+        if (!timer) {
+            callback(args);
+        }
+        clearTimeout(timer);
+        timer = setTimeout(() => { timer = undefined }, timeout);
+    }
+}
 
-export { isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage };
+
+
+
+export { isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce };
