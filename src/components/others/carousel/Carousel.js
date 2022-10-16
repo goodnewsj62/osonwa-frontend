@@ -1,10 +1,9 @@
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-
 import styles from "./styles/carousel.module.css";
 import "../styles/generals.css";
-import { useRef } from "react";
 import { forwardDebounce } from "utils/helpers";
 import { setSlides, shifLeft, shiftRight } from "./helpers";
+import { useEffect, useMemo, useRef } from "react";
 
 
 
@@ -15,8 +14,47 @@ import { setSlides, shifLeft, shiftRight } from "./helpers";
 function Carousel(props) {
     const size = 40;
     const sliderRef = useRef();
-
     const slides = ["one", "two","three"].map(setSlides());
+    const intersectionOptions = useMemo(() => { return { root: sliderRef.current, threshold: 0, rootMargin: "0% 5% 0% 0%"} }, []);
+
+    useEffect(()=>{
+        // const animateCarousel =  setInterval(() => {moveOneStep("right")}, 7000);
+        // return ()=> clearInterval(animateCarousel);
+        
+        function animateSlider(checkPointTime){
+            return (time)=>{
+
+                if((time - checkPointTime)>= 10000){
+                    moveOneStep("right");
+                    checkPointTime = time;
+                }
+                requestAnimationFrame(animateSlider(checkPointTime));
+            }
+        }
+        const animeFrame = requestAnimationFrame(animateSlider(0));
+        return ()=>cancelAnimationFrame(animeFrame);
+    },[]);
+
+    useEffect(()=>{
+        const observer =  new IntersectionObserver(textDivSlideIn,  intersectionOptions);
+        Array.from(sliderRef.current.children).forEach(
+            (element)=>{
+                const watchElement = element.lastElementChild.firstElementChild;
+                observer.observe(watchElement);
+            }
+        );
+    }, [intersectionOptions]);
+
+
+    const  textDivSlideIn =(entries, observer)=>{
+        entries.forEach((entry)=>{
+            // if(entry.isIntersecting){
+            //     entry.classList.add("pull__up");
+            // }else{
+            //     entry.classList.remove("pull__up");
+            // }
+        });
+    }
 
     const moveOneStep =  (direction)=>{
         const elements =  Array.from(sliderRef.current.children);

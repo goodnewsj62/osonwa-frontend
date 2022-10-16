@@ -24,10 +24,19 @@
     cursor: pointer;
 }
 
+.show__heading{
+    opacity: 1 !important;
+}
 @media screen and (min-width:700px) {
     .button_shape{
         width: 15px;
         height: 7px;
         margin: 0.3rem 0.35rem;
     }
+}
+
+
+.info__area{
+    transition: all 3.5s;
+    transform: translateY(150px);
 }
