@@ -18,13 +18,10 @@ function Carousel(props) {
     const intersectionOptions = useMemo(() => { return { root: sliderRef.current, threshold: 0, rootMargin: "0% 5% 0% 0%"} }, []);
 
     useEffect(()=>{
-        // const animateCarousel =  setInterval(() => {moveOneStep("right")}, 7000);
-        // return ()=> clearInterval(animateCarousel);
-        
         function animateSlider(checkPointTime){
             return (time)=>{
 
-                if((time - checkPointTime)>= 10000){
+                if((time - checkPointTime)>= 11000){
                     moveOneStep("right");
                     checkPointTime = time;
                 }
@@ -39,7 +36,7 @@ function Carousel(props) {
         const observer =  new IntersectionObserver(textDivSlideIn,  intersectionOptions);
         Array.from(sliderRef.current.children).forEach(
             (element)=>{
-                const watchElement = element.lastElementChild.firstElementChild;
+                const watchElement = element.lastElementChild.firstElementChild.firstElementChild;
                 observer.observe(watchElement);
             }
         );
@@ -48,11 +45,11 @@ function Carousel(props) {
 
     const  textDivSlideIn =(entries, observer)=>{
         entries.forEach((entry)=>{
-            // if(entry.isIntersecting){
-            //     entry.classList.add("pull__up");
-            // }else{
-            //     entry.classList.remove("pull__up");
-            // }
+            if(entry.isIntersecting){
+                entry.target.classList.add("pull__up");
+            }else{
+                entry.target.classList.remove("pull__up");
+            }
         });
     }
 

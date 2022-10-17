@@ -20,6 +20,12 @@
 
 .arrow__left, .arrow__right{
     display: none;
+    border: unset;
+    transition: border 0.1s;
+}
+.arrow__left:hover, .arrow__right:hover{
+    /* background: #000; */
+    border: 2px solid var(--comp-one);
 }
 
 

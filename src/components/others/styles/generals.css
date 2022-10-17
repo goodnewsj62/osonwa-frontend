@@ -36,7 +36,13 @@
 }
 
 
-.info__area{
-    transition: all 3.5s;
-    transform: translateY(150px);
+.info__area__wrapper{
+    min-width: inherit;
+    max-width: inherit;
+    transform: translateY(50%);
+    transition: transform 3s;
+}
+
+.pull__up{
+    transform: translateY(0%);
 }

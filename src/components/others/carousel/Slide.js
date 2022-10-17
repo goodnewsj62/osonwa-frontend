@@ -6,7 +6,7 @@ function Slide(props) {
     const textAreaRef = useRef();
     const healineRef = useRef();
 
-    const textAreaOptions = useMemo(() => { return { root: textAreaRef.current, threshold: 0.25, rootMargin: "0px" } }, []);
+    const textAreaOptions = useMemo(() => { return { root: textAreaRef.current, threshold: 0.7, rootMargin: "0px" } }, []);
 
     useEffect(() => {
         const textArea = new IntersectionObserver(textFadeIn, textAreaOptions);
@@ -30,11 +30,13 @@ function Slide(props) {
                 <img src={image} alt="caruosel" />
             </div>
             <div className={style.text__div}>
-                <div className="info__area" ref={textAreaRef}>
-                    <h1 ref={healineRef} id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
-                    <span>
-                        {props.test}
-                    </span>
+                <div className={`${style.info__area}`} ref={textAreaRef}>
+                    <div className={`info__area__wrapper`}>
+                        <h1 ref={healineRef} id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
+                        <span>
+                            {props.test}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

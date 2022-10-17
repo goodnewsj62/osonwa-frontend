@@ -35,7 +35,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 1rem;
+    padding: 0.3rem;
 }
 
 
@@ -52,31 +52,46 @@
     }
 }
 
-.text__div > div{
-    max-width: 50ch;
+
+.info__area{
+    min-width: 35ch;
+    max-width: 35ch;
+    overflow: hidden;
 }
+
+
+
 
 
 .text__div  h1{
     margin-bottom:10px;
     font-size: 1.1rem;
     opacity: 0;
-    transition: opacity 5s;
+    transition: opacity 3s;
+    padding: 0 0.5rem;
 }
+
 
 
 @media screen and (min-width: 760px) {
     .text__div h1{
         font-size: 1.5rem;
     }
+    .info__area{
+        min-width: 45ch;
+        max-width: 50ch;
+    }
+    
 }
 
 .text__div span{
     text-decoration: underline;
     cursor: pointer;
     transition: 0.2s all;
+    padding: 0 0.5rem;
 }
 
 .text__div span:hover{
     font-weight: bold;
 }
+
