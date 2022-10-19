@@ -20,14 +20,51 @@
 
 .arrow__left, .arrow__right{
     display: none;
-    border: unset;
-    transition: border 0.1s;
+    border: 0;
 }
 .arrow__left:hover, .arrow__right:hover{
-    /* background: #000; */
-    border: 2px solid var(--comp-one);
+    background: #000;
 }
 
+.arrow__left::before, .arrow__left::after, .arrow__right::before, .arrow__right::after{
+    content: "";
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+}
+
+.arrow__left::before, .arrow__right::before{
+    border: 2px solid transparent;
+    transition: border-top-color 0.15s ease-in 0s,
+        border-right-color 0.15s ease-in 0.1s,
+        border-bottom-color 0.15s ease-in 0.2s
+        ;
+}
+.arrow__left:hover::before, .arrow__right:hover::before{
+    border-top-color: var(--comp-one);
+    border-right-color: var(--comp-one);
+    border-bottom-color: var(--comp-one);
+}
+
+
+.arrow__left::after, .arrow__right::after{
+    top: 0;
+    left: -2px;
+    border: 0 solid transparent;
+    transition:
+        transform 0.4s linear 0s,
+        border-left-width 0s linear 0.35s;
+}
+
+.arrow__left:hover::after, .arrow__right:hover::after{
+        border-top: 2px solid var(--comp-one);
+        border-left-width: 2px;
+        border-right-width:2px ;
+        transform: rotate(270deg);
+}
 
 @media screen and (min-width:800px) {
     .show__case{
@@ -37,6 +74,8 @@
     }
 
     .arrow__left, .arrow__right{
+        width: 52px;
+        height: 52px;
         display: block;
         position: absolute;
         z-index: 30;
@@ -45,7 +84,7 @@
         padding: 2px;
         left: 1rem;
         background-color: rgba(0,0,0,0.6);
-        border-radius: 50%;
+        border-radius: 100%;
     }
     
     .arrow__right{

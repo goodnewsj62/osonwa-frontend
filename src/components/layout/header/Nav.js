@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiBell, FiPlusSquare } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import LoginLink from "./buttons/LoginButton";
 import Profile from "./ProfileNav/Profile";
 import styles from "./styles/nav.module.css";
 
@@ -12,13 +13,7 @@ function Nav({ showSearch }) {
     const iconSize = useContext(DefaultIconSize);
     const authState = useSelector((state) => state.authState.state);
 
-    const LoginLink = (
-        <li className={styles.auth}>
-            <button className={`border__anime`}>
-                Login
-            </button>
-        </li>
-    );
+
 
 
     const ProfileLink = (<li className={styles.profile__icon}><Profile /></li>);
@@ -38,7 +33,7 @@ function Nav({ showSearch }) {
                         <FiBell size={iconSize} />
                     </div>
                 </li>
-                {!authState && LoginLink}
+                {!authState && <LoginLink />}
                 {authState && ProfileLink}
             </ul>
         </nav>
