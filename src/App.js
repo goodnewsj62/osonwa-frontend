@@ -7,6 +7,7 @@ import "./styles/base.css";
 import LoginRequired from "components/others/Protected";
 import { Comments } from "pages/Comments";
 import IconSize from "components/wrappers/IconSize";
+import Login from "pages/Login";
 
 
 function App(props) {
@@ -38,6 +39,7 @@ function App(props) {
                     {/*  profile, create post */}
                     {/* </Route> */}
                 </Route>
+                <Route path="/login" element={<Login />} />
             </Routes>
         </Router>
     )

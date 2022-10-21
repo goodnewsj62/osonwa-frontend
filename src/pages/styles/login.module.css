@@ -1,0 +1,14 @@
+
+
+.container{
+    width:100vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+
+.container aside{
+    grid-column: 1/8;
+    background-color: #000;
+}
