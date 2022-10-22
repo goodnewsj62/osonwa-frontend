@@ -1,32 +1,37 @@
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
+import styles from "./styles/loginform.module.css";
 
 export default function LoginForm(props) {
+
+    const iconSize = 20;
     return (
-        <form >
-            <div className="form__div">
+        <form className={styles.form}>
+            <div className={`${styles.form__div}`}>
                 <label htmlFor="">
                     Username/Email
                 </label>
                 <input type="text" name="username" id="username" />
             </div>
-            <div className="form__div password__div">
+            <div className={`${styles.form__div} ${styles.password__div}`}>
                 <label htmlFor="">
                     Password
                 </label>
                 <input type="password" name="password" id="password" />
                 <div>
-                    <span className="open__eye">
-                        <AiOutlineEye />
+                    <span className={`${styles.open__eye}`}>
+                        <AiOutlineEye size={iconSize} />
                     </span>
-                    <span className="close__eye">
-                        <AiFillEyeInvisible />
+                    <span className={`${styles.close__eye}`}>
+                        <AiFillEyeInvisible size={iconSize} />
                     </span>
                 </div>
             </div>
-            <button type="submit">
-                Login
-            </button>
-            <div className="other__links">
+            <div className={styles.submit}>
+                <button type="submit">
+                    Login
+                </button>
+            </div>
+            <div className={`${styles.other__links}`}>
                 <button type="button">
                     first time? sign up instead
                 </button>

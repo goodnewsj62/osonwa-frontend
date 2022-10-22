@@ -1,10 +1,10 @@
 import { FcGoogle } from "react-icons/fc";
 
 
-const GoogleHandler = ({ setErrorInfo }) => {
+const GoogleHandler = ({ setErrorInfo, size }) => {
     return (
         <div className="goggle">
-            <FcGoogle />
+            <FcGoogle size={size} />
         </div>
     );
 };

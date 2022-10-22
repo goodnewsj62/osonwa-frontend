@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import LoginForm from "components/auth/LoginForm";
 import { useState } from "react";
@@ -10,42 +10,42 @@ import styles from "./styles/login.module.css";
 
 
 
-export default function Login(props){
+export default function Login(props) {
     const [signupForm, setSignupForm] = useState(false);
-    const [errorInfo,  setErrorInfo] = useState({state:false, message:""});
+    const [errorInfo, setErrorInfo] = useState({ state: false, message: "" });
 
-    const switchForms =  ()=> setSignupForm((state)=> !state);
+    const switchForms = () => setSignupForm((state) => !state);
 
-    const SignupText =  "SignUp";
-    const LoginText =  "Login";
+    const SignupText = "SignUp";
+    const LoginText = "Login";
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <Link to ="/">
+                <Link to="/">
                     <h2>Osonwa.</h2>
                 </Link>
             </div>
-            <aside>
-                <Decoration />
-            </aside>
-            <main>
-                {errorInfo.state && <ErrorContainer errorInterphase={{errorInfo, setErrorInfo}} />}
+
+            <main className={styles.main}>
+                {errorInfo.state && <ErrorContainer errorInterphase={{ errorInfo, setErrorInfo }} />}
                 <section className={styles.login__text} aria-label="top text">
                     <h1>
-                        {signupForm? SignupText: LoginText}
+                        {signupForm ? SignupText : LoginText}
                     </h1>
                 </section>
                 <section className={styles.main__form}>
                     {!signupForm && <LoginForm switchForm={switchForms} />}
                     {signupForm && <SignUpForm switchForm={switchForms} />}
                 </section>
-                <span> Or, login via</span>
+                <span className={styles.demacation}> Or, login via</span>
                 <SocialWrapper setErrorInfo={setErrorInfo} />
                 <span className={styles.copyright}>
                     &copy; 2023 Osonwa. All rights reserved.
                 </span>
             </main>
-
+            <aside>
+                <Decoration />
+            </aside>
         </div>
     )
 };

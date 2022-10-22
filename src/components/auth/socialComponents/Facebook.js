@@ -1,9 +1,9 @@
 import { FaFacebookF } from "react-icons/fa";
 
-const FacebookHandler = ({ setErrorInfo }) => {
+const FacebookHandler = ({ setErrorInfo, size }) => {
     return (
         <div className="facebook">
-            <FaFacebookF />
+            <FaFacebookF fill={"#008AF3"} size={size} />
         </div>
     );
 };

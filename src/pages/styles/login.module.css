@@ -1,14 +1,71 @@
 
 
 .container{
-    width:100vw;
+    width: 100%;
     min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    overflow-x: hidden;
 }
 
 
+
+
 .container aside{
-    grid-column: 1/8;
-    background-color: #000;
+    grid-column: 5 / span 8;
+    grid-row: 1;
+    /* background-color: rgba(0,0,0,0.8); */
+    /* border-radius: 55px 0  0  50px; */
+}
+
+.logo{
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    padding:  1rem 2rem;
+    z-index: 100;
+
+}
+
+
+.logo a{
+    color: initial;
+    cursor: pointer;
+}
+
+
+.main{
+    margin: 0;
+    padding: 7.5rem 2rem;
+    grid-column: 1 / 5;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.main > *{
+    width: 90%;
+}
+
+.login__text{
+
+    padding: 1rem 0;
+}
+
+.demacation{
+    color: #6c757d;
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.copyright{
+    width: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 1rem;
+    font-size: 0.9rem;
 }
