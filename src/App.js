@@ -8,6 +8,7 @@ import LoginRequired from "components/others/Protected";
 import { Comments } from "pages/Comments";
 import IconSize from "components/wrappers/IconSize";
 import Login from "pages/Login";
+import SignUp from "pages/SignUp";
 
 
 function App(props) {
@@ -40,6 +41,7 @@ function App(props) {
                     {/* </Route> */}
                 </Route>
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
             </Routes>
         </Router>
     )
