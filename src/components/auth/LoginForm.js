@@ -22,13 +22,13 @@ export default function LoginForm(props) {
                 <label htmlFor="username">
                     Username/Email
                 </label>
-                <Input type={"text"} />
+                <Input params={{ type: "text" }} />
             </div>
             <div className={`${styles.form__div} ${styles.password__div}`}>
                 <label htmlFor="password">
                     Password
                 </label>
-                {passShow ? <Input type={"text"} /> : <Input type={"password"} /> }
+                {passShow ? <Input params={{ type: "text" }} /> : <Input params={{ type: "password" }} /> }
                 <div>
                     {
                         passShow ?

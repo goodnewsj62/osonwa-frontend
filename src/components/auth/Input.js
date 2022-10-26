@@ -4,13 +4,26 @@ import styles from "./styles/loginform.module.css";
 
 
 
-const Input = ({ type }) => {
+const Input = ({ params }) => {
     const inputRef = useRef();
+    const dummyFunc =   (e)=>null;
+    const {
+            blurFunc = dummyFunc, 
+            type,  
+            focusFunc =dummyFunc, 
+            changeFunc=  dummyFunc,
+            value,
+            name= "",
+            classNames="",
+        }= params ;
+
+
 
 
     const moveLabelUpAndMakeWritable = (e) => {
         e.target.readOnly = false;
         e.target.previousSibling.classList.add(`${styles.move__up}`);
+        focusFunc(e);
     };
 
     const moveLabelUpOrDown = (e) => {
@@ -19,11 +32,35 @@ const Input = ({ type }) => {
         } else {
             e.target.previousSibling.classList.add(`${styles.move__up}`);
         }
+        blurFunc(e);
     };
 
-    return (
-        <input readOnly={true}  ref={inputRef} type={type}  onFocus={moveLabelUpAndMakeWritable} onBlur={moveLabelUpOrDown} />
-    );
+    if(value){
+        return (
+            <input readOnly={true}  
+                ref={inputRef} 
+                type={type}  
+                name= {name} 
+                value= {value}
+                onFocus={moveLabelUpAndMakeWritable} 
+                onBlur={moveLabelUpOrDown} 
+                onChange= {changeFunc}
+                className= {classNames}
+            />
+        );
+    }else{
+        return (
+            <input readOnly={true}  
+                ref={inputRef} 
+                type={type}  
+                name= {name} 
+                onFocus={moveLabelUpAndMakeWritable} 
+                onBlur={moveLabelUpOrDown} 
+                onChange= {changeFunc}
+                className= {classNames}
+            />
+        )
+    }
 }
 
 export default Input;

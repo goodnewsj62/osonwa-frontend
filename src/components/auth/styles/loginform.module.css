@@ -97,3 +97,18 @@
 .move__up{
     transform: translateY(0%) !important;
 }
+
+.error__info{
+    display: none;
+    color: rgb(249, 94, 94);
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+}
+
+.show__error{
+    display: block;
+}
+
+.error__highlight{
+    border-bottom: 2px solid rgb(249, 94, 94) !important;
+}
