@@ -75,7 +75,14 @@
     background-color: var(--base-color);
     font-weight: bold;
 }
+.form button[type="submit"]:hover , .form button[type="submit"]:active{
+    background-color: #f8cd3f;
+}
 
+
+.form button[type="submit"]:disabled{
+    background-color: #ddd;
+}
 
 .other__links{
     display: flex;
@@ -111,4 +118,67 @@
 
 .error__highlight{
     border-bottom: 2px solid rgb(249, 94, 94) !important;
+}
+
+
+.strength{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.3rem 0  0.1rem 0;
+}
+
+.groove{
+    width: 60%;
+    height: 4px;
+    flex-basis: 60%;
+    flex-shrink: 0;
+    border-radius: 8px;
+}
+
+.bar{
+    width: 0%;
+    height: 100%;
+    background-color: transparent;
+    transition: width 0.3s;
+    border-radius: 8px;
+}
+
+
+.strong{
+    background-color: rgb(16, 165, 16);
+    width: 100%;
+}
+
+.fair{
+    background-color: rgb(203, 162, 48);
+    width: 70%;
+}
+
+.poor {
+    background-color: rgb(246, 144, 144);
+    width: 40%;
+}
+
+
+.password__div .message{
+    display: block;
+    margin: 0.2rem 0  0.3rem 0;
+}
+
+
+.highlight__poor{
+    color:rgb(249, 94, 94);
+}
+.highlight__fair{
+    color:rgb(203, 162, 48);
+}
+.highlight__strong{
+    color:rgb(16, 165, 16);
+}
+
+
+.move_up{
+    top: 37% !important;
 }

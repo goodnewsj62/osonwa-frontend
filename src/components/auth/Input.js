@@ -1,4 +1,4 @@
-import {  useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "./styles/loginform.module.css";
 
 
@@ -6,16 +6,20 @@ import styles from "./styles/loginform.module.css";
 
 const Input = ({ params }) => {
     const inputRef = useRef();
-    const dummyFunc =   (e)=>null;
+    const [val, setVal] = useState("");
+
+
+    const dummyFunc = (e) => null;
+    const changeHandler = (e) => setVal(e.target.value);
     const {
-            blurFunc = dummyFunc, 
-            type,  
-            focusFunc =dummyFunc, 
-            changeFunc=  dummyFunc,
-            value,
-            name= "",
-            classNames="",
-        }= params ;
+        blurFunc = dummyFunc,
+        type,
+        focusFunc = dummyFunc,
+        changeFunc = changeHandler,
+        value = val,
+        name = "",
+        classNames = "",
+    } = params;
 
 
 
@@ -35,32 +39,19 @@ const Input = ({ params }) => {
         blurFunc(e);
     };
 
-    if(value){
-        return (
-            <input readOnly={true}  
-                ref={inputRef} 
-                type={type}  
-                name= {name} 
-                value= {value}
-                onFocus={moveLabelUpAndMakeWritable} 
-                onBlur={moveLabelUpOrDown} 
-                onChange= {changeFunc}
-                className= {classNames}
-            />
-        );
-    }else{
-        return (
-            <input readOnly={true}  
-                ref={inputRef} 
-                type={type}  
-                name= {name} 
-                onFocus={moveLabelUpAndMakeWritable} 
-                onBlur={moveLabelUpOrDown} 
-                onChange= {changeFunc}
-                className= {classNames}
-            />
-        )
-    }
+
+    return (
+        <input readOnly={true}
+            ref={inputRef}
+            type={type}
+            name={name}
+            value={value}
+            onFocus={moveLabelUpAndMakeWritable}
+            onBlur={moveLabelUpOrDown}
+            onChange={changeFunc}
+            className={classNames}
+        />
+    )
 }
 
 export default Input;

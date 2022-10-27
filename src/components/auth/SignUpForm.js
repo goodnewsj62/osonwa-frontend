@@ -1,12 +1,14 @@
-import { useEffect, useReducer, useState } from "react";
-import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
+import ComfirmPasswordField from "./authUtils/ComfirmPassword";
+import EmailField from "./authUtils/EmailField";
+import NamedField from "./authUtils/NameField";
+import PasswordField from "./authUtils/PasswordField";
 import UserNameField from "./authUtils/UsernameInput";
-import Input from "./Input";
 import styles from "./styles/loginform.module.css";
 
 const dS = () => { return { content: "", isValid: false, error: "" } };
-const initialState = { username: dS(), email: dS(), password: dS(), firstName: dS(), lastName: dS() }
+const initialState = { username: dS(), email: dS(), password: dS(), comfirmPass: dS(), firstName: dS(), lastName: dS() }
 
 const signupReducer = (state, action) => {
     const keys = Object.keys(state);
@@ -22,77 +24,39 @@ const signupReducer = (state, action) => {
 
 
 export default function SignUpForm({ switchForm }) {
-    const [passShow, setPassShow] = useState(false);
     const [formIsValid, setFormValidState] = useState(false);
-    const [userInputs, dispatch] = useReducer(signupReducer, initialState)
+    const [userInputs, dispatch] = useReducer(signupReducer, initialState);
 
-    const togglePasswordVisibility = (event, value) => {
-        if (value === "show") {
-            // input.type =  "text";
-            setPassShow(true);
-        } else {
-            setPassShow(false);
-        }
-    };
 
+    const isValid = useCallback(() => Object.values(userInputs).every((value) => value.isValid === true), [userInputs])
 
     useEffect(() => {
-
-    }, []);
+        if (isValid()) {
+            setFormValidState(true);
+        } else {
+            setFormValidState(false);
+        }
+    }, [userInputs, isValid]);
 
 
     const submitHandler = (event) => {
         event.preventDefault();
+        if (isValid()) {
+
+        }
     };
 
-    const iconSize = 20;
     return (
-        <form className={styles.form}>
+        <form onSubmit={submitHandler} className={styles.form}>
             <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
+            <EmailField dispatch={dispatch} fieldVal={userInputs.email} />
+            <NamedField dispatch={dispatch} fieldVal={userInputs.firstName} label={"Firstname"} type={"firstName"} />
+            <NamedField dispatch={dispatch} fieldVal={userInputs.lastName} label={"Lastname"} type={"lastName"} />
+            <PasswordField dispatch={dispatch} fieldVal={userInputs.password} />
 
-            <div className={`${styles.form__div}`}>
-                <label htmlFor="email">
-                    Email
-                </label>
-                <Input params={{ type: "email" }} />
-            </div>
-            <div className={`${styles.form__div}`}>
-                <label htmlFor="first__name">
-                    Firstname
-                </label>
-                <Input params={{ type: "text" }} />
-            </div>
-            <div className={`${styles.form__div}`}>
-                <label htmlFor="last__name">
-                    Lastname
-                </label>
-                <Input params={{ type: "text" }} />
-            </div>
-            <div className={`${styles.form__div} ${styles.password__div}`}>
-                <label htmlFor="password">
-                    Password
-                </label>
-                {passShow ? <Input params={{ type: "text" }} /> : <Input params={{ type: "password" }} />}
-                <div>
-                    {
-                        passShow ?
-                            <span onClick={(e) => togglePasswordVisibility(e, "hide")} className={`${styles.open__eye}`}>
-                                <AiOutlineEye size={iconSize} />
-                            </span> :
-                            <span onClick={(e) => togglePasswordVisibility(e, "show")} className={`${styles.close__eye}`}>
-                                <AiFillEyeInvisible size={iconSize} />
-                            </span>
-                    }
-                </div>
-            </div>
-            <div className={`${styles.form__div} ${styles.password__div}`}>
-                <label htmlFor="confirm__password">
-                    Comfirm Password
-                </label>
-                <Input params={{ type: "password" }} />
-            </div>
+            <ComfirmPasswordField dispatch={dispatch} fieldVal={userInputs.comfirmPass} passwordVal={userInputs.password} />
             <div className={styles.submit}>
-                <button type="submit">
+                <button disabled={!formIsValid} type="submit">
                     Sign Up
                 </button>
             </div>

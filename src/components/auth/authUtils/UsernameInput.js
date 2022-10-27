@@ -1,70 +1,71 @@
-import Input from "../Input";
+import { deBounce } from "utils/helpers";
 import styles from "../styles/loginform.module.css";
+import DefaultField from "./DefaultField";
 
 
 
 
-const UserNameField = ({dispatch, fieldVal})=>{
-    const userNameExists = (value)=> false; // remote call
+const UserNameField = ({ dispatch, fieldVal }) => {
+    const userNameExists = (value) => false; // remote call
 
-    const changeHandler =  (event)=>{
-        //TODO: debounce
-        userNameValidation(event);
+
+
+
+    const performErrorChecks = (trimmedValue, hasWhiteSpace, value, alreadyTaken) => {
+        if (trimmedValue === "" || trimmedValue === " ") {
+            const payload = { isValid: false, error: "this field is required" };
+            dispatch({ type: "username", payload: payload });
+        } else if (trimmedValue.length < 3) {
+            const payload = { isValid: false, error: "username must be greater than two characters" };
+            dispatch({ type: "username", payload: payload });
+        } else if (hasWhiteSpace) {
+            const payload = { isValid: false, error: "username cant contain spaces" };
+            dispatch({ type: "username", payload: payload });
+        }
+        else if (alreadyTaken) {
+            const payload = { isValid: false, error: "username has already been taken" };
+            dispatch({ type: "username", payload: payload });
+        } else {
+            const payload = { isValid: true, error: "" };
+            dispatch({ type: "username", payload: payload });
+        }
     };
 
-    const userNameValidation= (event) =>{
-        const trimmedValue =  event.target.value.trim();
-        const value =  event.target.value;
+    const debounceErrorChecks = deBounce(performErrorChecks, 1000);
+
+    const userNameValidation = (event) => {
+        const trimmedValue = event.target.value.trim();
+        const value = event.target.value;
         const alreadyTaken = userNameExists(value);
-        const hasWhiteSpace = null;
+        const hasWhiteSpace = value.includes(" ");
 
-        if (  trimmedValue === "" || trimmedValue  === " "){
-            const payload =  {content:value, isValid:false, error:"this field is required"};
-            dispatch({type:"username", payload: payload});
-            return 
-        }else if (trimmedValue.length <  3){   
-            const payload =  {content:value, isValid:false, error:"username must be greater than two characters"};
-            dispatch({type:"username", payload:payload });
-            return
-        }else if (hasWhiteSpace){
-            const payload =  {content:value, isValid:false, error:"username cant contain spaces"};
-            dispatch({type:"username", payload:payload });
-            return
+        const payload = { content: value };
+        dispatch({ type: "username", payload: payload });
+
+        if (event.type === "blur") {
+            performErrorChecks(trimmedValue, hasWhiteSpace, value, alreadyTaken);
+        } else {
+            debounceErrorChecks(trimmedValue, hasWhiteSpace, value, alreadyTaken);
         }
-        else if(alreadyTaken){
-            const payload =  {content:value, isValid:false, error:"username has already been taken"};
-            dispatch({type:"username", payload:payload });
-            return
-        }else{
-            const payload =  {content:value, isValid:true, error:""};
-            dispatch({type:"username", payload:payload });
-        }
-        return 
+
+        return
     };
 
-    const spanClasses = fieldVal.error?  `${styles.error__info} ${styles.show__error}` : `${styles.error__info}`;
-    const inputErrorStyle = fieldVal.error?  `${styles.error__highlight}` : "";
-    const inputCompParams =  {
+    const inputErrorStyle = fieldVal.error ? `${styles.error__highlight}` : "";
+    const inputCompParams = {
         classNames: inputErrorStyle,
-        value:fieldVal.content,
-        type:"text",
+        value: fieldVal.content,
+        type: "text",
         name: "username",
-        blurFunc:userNameValidation,
-        changeFunc:changeHandler
+        blurFunc: userNameValidation,
+        changeFunc: userNameValidation
     }
-    
-    
+
+
     return (
-        <div className={`${styles.form__div}`}>
-                <label htmlFor="username">
-                    Username
-                </label>
-                <Input params={inputCompParams} />
-                <span className={spanClasses}>{fieldVal.error}</span>
-        </div>
-        
+        <DefaultField fieldVal={fieldVal} label={"Username"} params={inputCompParams} />
     );
 }
 
 
-export default  UserNameField;
+export default UserNameField;

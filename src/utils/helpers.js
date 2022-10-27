@@ -83,6 +83,14 @@ function forwardDebounce(callback, timeout = 300) {
 }
 
 
+function deBounce(callback, timeout = 500) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { callback(...args) }, timeout);
+    }
+}
 
 
-export { isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce };
+
+export { isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };
