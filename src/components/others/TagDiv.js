@@ -1,16 +1,29 @@
+import { Link } from "react-router-dom";
+import styles from "./styles/cardTag.module.css";
 
-
-const TagDiv =  (props)=>{
+const TagDiv = (props) => {
     const fetchedTags = (
         <>
-            <div className="tag">Python</div>
-            <div className="tag">Javascript</div>
-            <div className="tag">Beginner stuff</div>
+            <div className={styles.tag}>
+                <Link to="#" >
+                    Python
+                </Link>
+            </div>
+            <div className={styles.tag}>
+                <Link to="#">
+                    Javascript
+                </Link>
+            </div>
+            <div className={styles.tag}>
+                <Link to="#">
+                    Beginner stuff
+                </Link>
+            </div>
         </>
     );
-    return(
-        <div className="label">
-            <div className="tags">
+    return (
+        <div className={styles.label}>
+            <div className={styles.tags}>
                 {fetchedTags}
             </div>
         </div>

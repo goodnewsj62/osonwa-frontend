@@ -1,6 +1,154 @@
 
 
 .card__container{
+    /* height: 250px; */
+    border: 1px solid #ddd;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    grid-template-areas: 
+        "head head head head head head head head head head head head"
+        "body body body body body body body body img img img img"
+        "body body body body body body body body img img img img"
+        ". . . . . . . . img img img img"
+        "footer footer footer footer footer footer footer footer footer footer footer footer"
+    ;
+
+    grid-auto-rows: minmax(45px, 54px);
+    border-radius: 8px;
+}
+
+
+.header, .body, .footer{
+    padding:  0.5rem 1rem;
+}
+
+
+.header{
+    grid-area: head;
+    
+}
+
+
+.body a, .header a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.header a{
+    display: flex;
+    /* width: 30%; */
+    align-items: center;
+}
+
+
+.header a * {
+    margin-right: 8px;
+}
+
+
+.header p:last-child{
+    color: var(--fade-text);
+}
+
+.header img {
+    display: block;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.body{
+    grid-area: body;
+}
+
+.body h2{
+    margin-bottom: 0.7rem;
+    font-size: 22px;
+    line-height: 28px;
+}
+
+.body p {
+    line-height: 1.35rem;
+}
+
+.body p,.body h2 {
+    max-width: 80ch;
+    color: var(--white-mode-card-text);
+}
+
+
+.featured__image{
+    grid-area: img;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.featured__image img{
+    height: 100%;
+    width: 80% !important;
+    flex-grow: 0;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+}
+
+.footer{
+    grid-area: footer;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+@media screen and (max-width:700px) {
+    .header img {
+        width: 30px;
+        height: 30px;
+    }
+    .body p, .header *{
+        font-size: 14px;
+    }
+    
+    .body h2{
+        font-size: 16px;
+    }
+}
+@media screen and (max-width:700px) {
+    .card__container{
+        grid-template-areas: 
+        "head head head head head head head head head head head head"
+        "body body body body body body body body body body body body"
+        "body body body body body body body body body body body body"
+        "footer footer footer footer footer footer footer footer footer footer footer footer"
+    ;
+    grid-auto-rows: auto;
+    }
+    .header img {
+        width: 30px;
+        height: 30px;
+    }
+    .body p, .header *{
+        font-size: 14px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    
+    .body h2{
+        font-size: 16px;
+    }
+
+    .footer{
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+
+    .featured__image{
+        display: none;
+    }
+    
 }

@@ -11,6 +11,8 @@
     --dark-mode-step-one: #fff ; /* level one raise above base color*/
     --dark-mode-step-two: #fff ;
     --dark-mode-white:#ebe9e9;
+    --white-mode-write-text:#292929;
+    --fade-text: #6c757d;
 }
 
 [data-theme="dark"]{
@@ -41,6 +43,11 @@
 html{
     font-family: "haas grot";
     font-size: 16px;
+}
+
+body{
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 

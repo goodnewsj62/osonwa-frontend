@@ -1,11 +1,6 @@
 
 .card__img{
-    grid-column: 3 / span 1;
-    grid-row: 1 / span 3;
-    position: relative;
-    display: grid;
-    place-items: center;
-    padding-right: 1rem;
+    display: none;
 }
 
 .image__wrapper{
@@ -41,6 +36,18 @@
         padding: 0;
     }
 }
+@media screen and (min-width: 700px) {
+    .card__img{
+        grid-column: 3 / span 1;
+        grid-row: 1 / span 3;
+        position: relative;
+        display: grid;
+        place-items: center;
+        padding-right: 1rem;
+    }
+    
+}
+
 
 
 @media screen and (min-width:770px) {

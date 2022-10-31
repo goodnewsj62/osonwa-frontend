@@ -1,0 +1,26 @@
+label{
+    border: 0;
+}
+
+.tags{
+    display: flex;
+}
+
+
+.tag{
+    background-color: rgb(230, 228, 228);
+    border-radius: 5px;
+    margin: 0 8px 0 0;
+}
+
+.tag a {
+    display: block;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100px;
+}
