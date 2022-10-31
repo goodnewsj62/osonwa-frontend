@@ -55,6 +55,7 @@
         grid-column: unset;
         grid-row: unset;
         grid-area: img;
+        padding-left: 0rem;
     }
     .image__wrapper{
         width: 100%;
