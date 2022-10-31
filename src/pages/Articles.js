@@ -1,5 +1,13 @@
+import ListCard from "components/others/cards/ListCard";
+
 function Articles(props) {
-    return 
+    return (
+        <div style={{
+
+        }}>
+            <ListCard />
+        </div>
+    )
 }
 
 
