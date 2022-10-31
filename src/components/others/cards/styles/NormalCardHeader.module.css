@@ -43,7 +43,7 @@
         position: relative;
         display: grid;
         place-items: center;
-        padding-right: 1rem;
+        padding-left: 1rem;
     }
     
 }

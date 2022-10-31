@@ -1,3 +1,4 @@
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { RiShareForwardFill } from "react-icons/ri";
 
@@ -13,6 +14,9 @@ const NormalCardDetails = ({ iconSize, ...others }) => {
                     <img src={myimage} alt="site logo" />
                 </div>
                 <h5>One direction news</h5>
+                <div className={style.small__mobstar}>
+                    <AiOutlineStar size={iconSize} />
+                </div>
                 <BiDotsVerticalRounded className={style.card__menu} id="card__menu" size={23} />
                 <ul>
                     <li>
