@@ -17,7 +17,7 @@ function MainNav(props) {
         <nav aria-label="side nav bar" className={styles.main__nav}>
             <ul>
                 <li>
-                    <NavLink className={classes} to="/"><ImNewspaper size={iconSize} /><span></span> News</NavLink>
+                    <NavLink className={classes} to="/" end><ImNewspaper size={iconSize} /><span></span> News</NavLink>
                 </li>
                 <li>
                     <NavLink className={classes} to="/trending" ><BsBroadcast size={iconSize} /> <span></span> Trending</NavLink>
