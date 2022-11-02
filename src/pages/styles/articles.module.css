@@ -1,0 +1,5 @@
+.articles{
+    display: grid;
+    row-gap: 1rem;
+    padding: 1rem;
+}
