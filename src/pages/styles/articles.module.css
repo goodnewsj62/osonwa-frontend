@@ -3,3 +3,33 @@
     row-gap: 1rem;
     padding: 1rem;
 }
+
+
+.article__head{
+    padding: 0.7rem 2rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sort__panel{
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width:768px) {
+.article__head{
+    padding: 1.5rem 2rem 1rem 2rem;
+}
+}
+@media screen and (max-width:700px) {
+
+    .article__head{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    .sort__panel{
+        align-self: flex-end;
+    }
+}
