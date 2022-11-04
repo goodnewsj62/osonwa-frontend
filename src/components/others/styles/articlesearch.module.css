@@ -5,6 +5,7 @@
 
 
 .style__search form{
+    display: none;
     position: absolute;
     left:  -820%;
     top: 50%;
@@ -46,6 +47,9 @@
     transform: translateY(-50%);
 }
 
+.show__search{
+    display: block !important;
+}
 
 @media screen and (max-width:700px) {
     .style__search{

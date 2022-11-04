@@ -43,6 +43,10 @@
     padding-left: 1rem;
     color: var(--mode-write-color);
 }
+.panel nav li > *{
+    /*this line is important as i dont want javascript to capture children as target*/
+    pointer-events: none;
+}
 
 
 .panel input[type="radio"]{
