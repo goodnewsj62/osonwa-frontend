@@ -1,12 +1,14 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import img from "static/images/test_img.jpg";
+import styles from "./styles/articlehead.module.css";
 
-const DetailHeader = (props)=>{
+const DetailHeader = (props) => {
     return (
-        <header className="">
+        <div className={styles.article__header}>
             <Link to="" >
-                <img src="" alt="" />
+                <img src={img} alt="creator" />
             </Link>
-            <div className="title">
+            <div className={styles.title}>
                 <Link to="">
                     <strong>
                         Lorem ipsum dolor sit.
@@ -16,7 +18,7 @@ const DetailHeader = (props)=>{
                     sep 5 . 2022
                 </div>
             </div>
-        </header>
+        </div>
     );
 };
 

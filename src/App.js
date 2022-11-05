@@ -5,10 +5,11 @@ import { Articles, Home, Layout } from "./pages";
 import "./styles/base.css";
 
 import LoginRequired from "components/others/Protected";
-import { Comments } from "pages/Comments";
+import { Comments } from "pages/Treads";
 import IconSize from "components/wrappers/IconSize";
 import Login from "pages/Login";
 import SignUp from "pages/SignUp";
+import ArticleDetail from "pages/ArticleDetail";
 
 
 function App(props) {
@@ -38,7 +39,7 @@ function App(props) {
                     {/* <Route path="/post/:id/comments/" element={<Comments />} /> */}
                     {/* <Route element={<LoginRequired />}> */}
                     {/*  profile, create post */}
-                    {/* </Route> */}
+                    <Route path="/article/:slug" element={<ArticleDetail />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />

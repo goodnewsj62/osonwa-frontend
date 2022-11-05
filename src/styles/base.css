@@ -13,6 +13,7 @@
     --dark-mode-white:#ebe9e9;
     --white-mode-write-text:#292929;
     --fade-text: #6c757d;
+    --border-line: rgba(0,0,0,0.2);
 }
 
 [data-theme="dark"]{

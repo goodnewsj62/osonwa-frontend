@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import dummy from "static/images/test_img.jpg";
 import TagDiv from "../TagDiv";

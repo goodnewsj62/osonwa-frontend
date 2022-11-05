@@ -1,0 +1,25 @@
+.realed__articles{
+    width: 100%;
+    list-style: none;
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 1rem;
+}
+
+.nav__highlight{
+    background-color: var(--highlight-grey);
+}
+
+.realed__articles li:first-child{
+    border-top: 1px solid var(--border-line) ;
+}
+.realed__articles li {
+    border-bottom: 1px solid var(--border-line) ;
+}
+
+.realed__articles li a{
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    text-transform: capitalize;
+}

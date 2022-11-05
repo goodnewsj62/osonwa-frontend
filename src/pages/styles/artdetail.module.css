@@ -1,0 +1,55 @@
+
+
+.aside{
+    position: fixed;
+    width: 250px;
+    top: 60px;
+    right: -400px;
+    height: calc(100% -  60px);
+    background: var(--netural-color);
+    border-left: 2px solid var(--border-line);
+    transition: all 0.5s;
+}
+
+
+.show__aside{
+    right: 0;
+}
+
+.aside > span{
+    position: absolute;
+    top: 15px;
+    right: 1.4rem;
+}
+
+.aside > span svg{
+    fill: var(--mode-write-color);
+}
+
+.aside__toggle{
+    position: fixed;
+    width: 33px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px 0 0 20px;
+    top: 50%;
+    right: 0;
+    background:var(--base-color);
+}
+
+
+@media screen and (min-width: 1200px) {
+    .aside{
+        width: 100%;
+        position: static;
+        border: 0;
+    }
+
+    .aside > svg{
+        display: none;
+    }
+    .aside__toggle{
+        display: none;
+    }
+}

@@ -1,0 +1,35 @@
+
+.article__header{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    color: var(--mode-write-color);
+}
+
+.article__header a{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.article__header > a img{
+    width: 45px;
+    height: 45px;
+    border-radius:100% ;
+    object-fit: cover;
+}
+
+
+.title{
+    margin-left: 1rem;
+}
+
+.title > *{
+    color: var(--fade-text);
+}
+
+.title > a{
+    margin-bottom: 0.3rem;
+    
+}
