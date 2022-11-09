@@ -1,5 +1,11 @@
 
 
+.wrapper__div{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    line-height: 1.5;
+}
 .aside{
     position: fixed;
     width: 250px;
@@ -9,6 +15,13 @@
     background: var(--netural-color);
     border-left: 2px solid var(--border-line);
     transition: all 0.5s;
+}
+
+.like__comment{
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
@@ -39,14 +52,46 @@
 }
 
 
+.main__content{
+    padding: 0rem 0.7rem;
+}
+
+@media screen and (min-width: 400px) {
+    .main__content{
+        padding: 0rem 1rem;
+    }
+}
+
 @media screen and (min-width: 1200px) {
-    .aside{
+
+    .wrapper__div{
         width: 100%;
-        position: static;
-        border: 0;
+        height: 100%;
+        position: relative;
+        display: flex;
     }
 
-    .aside > svg{
+    .main__content{
+        flex-shrink: 0;
+        flex-basis: 70%;
+        flex-grow: 0;
+    }
+    .aside{
+        min-height: calc(100vh - 100px);
+        max-height: calc(100vh - 100px);
+        overflow: hidden;
+        position: relative;
+        top: initial;
+        right: initial;
+        border: 0;
+        flex-shrink: 0;
+        flex-basis: 30%;
+        flex-grow: 0;
+        border-radius: 8px;
+        box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.098);
+    }
+
+    .aside > span{
         display: none;
     }
     .aside__toggle{

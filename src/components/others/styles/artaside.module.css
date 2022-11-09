@@ -1,5 +1,8 @@
 .aside__content{
     padding: 2rem 1rem;
+    position: static;
+    top: 0px;
+    margin-top: 0px;
 }
 
 

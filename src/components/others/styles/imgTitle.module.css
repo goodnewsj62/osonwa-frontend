@@ -1,0 +1,36 @@
+.img__div{
+    width: 100%;
+}
+
+
+.img__div img{
+    width: 100%;
+    height: 260px;
+    display: block;
+    object-fit: cover;
+}
+
+
+.title__div{
+    padding: 2.2rem 0;
+}
+
+
+.title__div p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+.title__div h1{
+    line-height: 1.28;
+}
+@media screen and (min-width: 1000px) {
+    .img__div img{
+        height: 360px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .title__div p {
+        display: none;
+    }
+}
