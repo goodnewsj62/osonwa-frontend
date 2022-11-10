@@ -1,7 +1,6 @@
 .aside__content{
     padding: 2rem 1rem;
     position: static;
-    top: 0px;
     margin-top: 0px;
 }
 
@@ -51,8 +50,13 @@
 
 @media screen and (min-width: 1200px) {
     .aside__content{
+        top: 70px;
         position: sticky;
+        height: calc(100vh - 90px);
         padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid rgba(0,0,0,0.1);
+        box-shadow: -2px 4px 15px 2px var(--aside-shadow);
     }
 
     .profile__info{
