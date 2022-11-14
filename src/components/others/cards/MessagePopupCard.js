@@ -16,14 +16,21 @@ function MessagePopup({ message, link, category }) {
         icon = <BsCheckCircleFill className={styles.icon__success} size={iconSize} />;
     }
 
+    let linkElement = <></>;
+    if (link) {
+        linkElement = (
+            <span className={styles.link}>
+                <Link to={link}>link</Link>
+            </span>
+        );
+    }
+
     return (
         <div className={styles.message}>
             {icon}
             <span></span>
             <p>{message}</p>
-            <span className={styles.link}>
-                <Link to="">link</Link>
-            </span>
+            {linkElement}
         </div>
     );
 };

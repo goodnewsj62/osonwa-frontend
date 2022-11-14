@@ -28,7 +28,6 @@ function DefaultLayout(props) {
             <Header />
             <SideNavBar />
             {!hasAcceptedCookie && <CookiePopup cookieState={{ ...cookieState }} />}
-            <MessagePopup />
 
             <Outlet />
         </div>
