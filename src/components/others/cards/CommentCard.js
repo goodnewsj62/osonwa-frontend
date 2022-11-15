@@ -25,7 +25,7 @@ const CommentCard =  ({params})=>{
                 <div className={styles.main__block}>
                     <div className={styles.header}>
                         <Link to={profileUrl}>
-                            <h6>{username}</h6>
+                            <strong>{username}</strong>
                         </Link>
                         <span>{date}</span>
                     </div>
@@ -34,7 +34,9 @@ const CommentCard =  ({params})=>{
                     </p>
                     <div className={styles.reactions}>
                         <Likes />
-                        <CommentComp />
+                        <span>
+                            <CommentComp />
+                        </span>
                     </div>
                 </div>
             </Link>

@@ -1,11 +1,12 @@
-.enclosement,.likes,.comment{
+.enclosement,.likes,.comment, .icon,.count{
     display: flex;
     align-items: center;
 }
 
-.likes * , .comment *{
+/* .likes * , .comment *{
     margin-left: 0.5rem;
-}
+} */
+
 
 
 .enclosement > div{
