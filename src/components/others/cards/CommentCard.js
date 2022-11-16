@@ -16,7 +16,7 @@ const CommentCard =  ({params})=>{
 
     return (
         <div className={styles.container}>
-            <Link to={link}>
+            <div >
                 <div className={styles.img__block}>
                     <Link to={profileUrl}>
                         <img src={imageSrc} alt="profile" />
@@ -30,7 +30,9 @@ const CommentCard =  ({params})=>{
                         <span>{date}</span>
                     </div>
                     <p>
-                        {text}
+                        <Link to={link}>
+                            {text}
+                        </Link>
                     </p>
                     <div className={styles.reactions}>
                         <Likes />
@@ -39,7 +41,7 @@ const CommentCard =  ({params})=>{
                         </span>
                     </div>
                 </div>
-            </Link>
+            </div>
         </div>
     )
 }

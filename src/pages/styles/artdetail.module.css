@@ -34,6 +34,11 @@
     box-shadow: -2px 4px 10px 2px var(--aside-shadow);
 }
 
+.like__comment a {
+    color: inherit;
+    text-decoration: none;
+}
+
 
 
 

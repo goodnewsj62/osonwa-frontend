@@ -9,7 +9,7 @@
 
 
 
-.container > a{
+.container > div{
     display: flex;
     border-bottom: 1px solid var(--border-line);
 }
