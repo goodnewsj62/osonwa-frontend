@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom";
 import { GoTriangleLeft } from "react-icons/go";
+import { AiOutlineClose } from "react-icons/ai";
+import { useState,useRef,useContext, useMemo} from "react";
 
 import ArticleAside from "components/others/ArticleAside";
 import DetailHeader from "components/others/DetailHeader";
@@ -8,18 +10,13 @@ import Main from "components/others/MainWrapper";
 import CommentComp from "components/others/CommentComp";
 import Likes from "components/others/Likes";
 import Comments from "components/others/Comments";
-
-import  styles from "./styles/artdetail.module.css";
-import { AiOutlineClose } from "react-icons/ai";
-import { useContext } from "react";
-import { DefaultIconSize } from "components/wrappers/IconSize";
-import { useState } from "react";
 import Share from "components/others/Share";
 import Star from "components/others/Star";
-import { useRef } from "react";
-import { useMemo } from "react";
+
+import { DefaultIconSize } from "components/wrappers/IconSize";
 import useObserver from "./hooks/posObserver";
 import { hideLikeCommentBar } from "./helpers/articleHelpers";
+import  styles from "./styles/artdetail.module.css";
 
 
 
