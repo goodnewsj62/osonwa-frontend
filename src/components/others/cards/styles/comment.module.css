@@ -1,17 +1,29 @@
 .container{
     margin-bottom: 1rem;
     max-width: 90ch;
+    position: relative;
+    padding: 1rem 0;
 }
+
 .container a{
     text-decoration: none;
     color: initial;
+}
+
+.container::before{
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    background-color:  var(--border-line);
 }
 
 
 
 .container > div{
     display: flex;
-    border-bottom: 1px solid var(--border-line);
+    /* border-bottom: 1px solid var(--border-line); */
 }
 
 .container p{

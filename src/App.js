@@ -10,6 +10,7 @@ import IconSize from "components/wrappers/IconSize";
 import Login from "pages/Login";
 import SignUp from "pages/SignUp";
 import ArticleDetail from "pages/ArticleDetail";
+import FeedDetail from "pages/Detail";
 
 
 function App(props) {
@@ -40,6 +41,7 @@ function App(props) {
                     {/* <Route element={<LoginRequired />}> */}
                     {/*  profile, create post */}
                     <Route path="/article/:slug" element={<ArticleDetail />} />
+                    <Route path="/detail/:slug" element={<FeedDetail />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />

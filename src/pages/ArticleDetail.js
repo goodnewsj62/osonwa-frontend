@@ -16,9 +16,10 @@ import { DefaultIconSize } from "components/wrappers/IconSize";
 import { useState } from "react";
 import Share from "components/others/Share";
 import Star from "components/others/Star";
-import { useEffect } from "react";
 import { useRef } from "react";
 import { useMemo } from "react";
+import useObserver from "./hooks/posObserver";
+import { hideLikeCommentBar } from "./helpers/articleHelpers";
 
 
 
@@ -30,25 +31,10 @@ const ArticleDetail =  (props)=>{
     const watchElement =  useRef();
 
     const observerOptions = useMemo(()=>{return {root:sectionElement.current, threshold:0}},[]);
+    const observerLogic =  useMemo(()=>hideLikeCommentBar(watchElement), []);
     const content =  {src:"", creator: "", pubDate:"", profLink:""}
 
-    useEffect(()=>{
-        const observer =  new IntersectionObserver(hideLikeCommentBar,observerOptions);
-        observer.observe(contentRef.current);
-    },[observerOptions]);
-
-    const hideLikeCommentBar = (entries, observer)=>{
-        for(let entry of entries){
-            
-            if(entry.isIntersecting){
-                console.log("isinterSecting")
-                watchElement.current.style.display =  "None";
-            }else{
-                console.log("not interesecting")
-                watchElement.current.style.display =  "flex";
-            }
-        }
-    }
+    useObserver(observerOptions,observerLogic,contentRef)
 
     const toggleAside = (event)=>{
         setBarVisible((state)=>!state);
