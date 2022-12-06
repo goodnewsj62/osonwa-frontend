@@ -1,0 +1,43 @@
+.toggle__header{
+    width: 100%;
+    padding: 0.5rem;
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.toggle__header button{
+    width: 150px;
+    height: 36px;
+    background-color: transparent;
+    color:var(--mode-write-color);
+    cursor:pointer;
+    position: relative; 
+    text-transform: capitalize;
+}
+
+
+.isActive{
+    box-shadow: inset 1px 1px 5px 0px var(--select-shadow);
+    border-radius: 5px;
+    border: 0;
+    font-weight: bold;
+    font-size: 0.89rem;
+}
+
+.inActive{
+    border: 0;
+}
+
+.isActive::before{
+    content: "";
+    height: 4px;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    background-color: var(--netural-color);
+    /* background-color: red; */
+    position: absolute;
+}

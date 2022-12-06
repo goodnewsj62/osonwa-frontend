@@ -15,10 +15,11 @@
     --fade-text: #6c757d;
     --border-line: rgba(0,0,0,0.2);
     --aside-shadow:rgba(0,0,0,0.088);
+    --select-shadow:#979393b3;
 }
 
 [data-theme="dark"]{
-    --netural-color :"#000";
+    --netural-color :#000;
     --netural-opposite:#ebe9e9;
     --current-mode:#000;
     --mode-write-color: #ebe9e9;
