@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+.page__header{
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
 @media screen and (max-width:768px) {
 .article__head{
     padding: 1.5rem 2rem 1rem 2rem;
