@@ -1,17 +1,17 @@
 
 import styles from "./styles/notification.module.css";
-import img from "static/images/test_image.jpg"
-
-const NoticationCard = ({data}) => {
-    const {title, date, username,imgSrc, readStatus} =  data;
+import img from "static/images/test_image.png"
+const NoticationCard = ({ data }) => {
+    const { title, date, username, imgSrc, readStatus } = data;
 
     // onClick mark as read if unread and then redirect
     // image src or first letter from username
 
-    const bodyClasses =  readStatus ? `${styles.card__body}` : `${styles.card__body} ${styles.highlight}`;
-    
+    const bodyClasses = readStatus ? `${styles.card__body}` : `${styles.card__body} ${styles.highlight}`;
+    const redirectHandler = () => { }
+
     return (
-        <div className={bodyClasses}>
+        <div onClick={redirectHandler} className={bodyClasses}>
             <div className={styles.img__box}>
                 {img && <img src={img} alt="dp" />} {/* imgSrc */}
                 {!img && <h2> {username.slice(0, 1)}</h2>}

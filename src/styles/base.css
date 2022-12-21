@@ -16,6 +16,7 @@
     --border-line: rgba(0,0,0,0.2);
     --aside-shadow:rgba(0,0,0,0.088);
     --select-shadow:#979393b3;
+    --noti-elevation: 0px 2px 20px 0px var(--border-line);
 }
 
 [data-theme="dark"]{

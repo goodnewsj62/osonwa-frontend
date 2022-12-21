@@ -1,4 +1,5 @@
 
+import NotificationBoard from "components/others/modal/Notification";
 import { useState } from "react";
 import { FiBell } from "react-icons/fi";
 import styles from "./styles/nav.module.css";
@@ -13,6 +14,7 @@ export default function NotificationComp({ iconSize }) {
         <div className={styles.bell}>
             <span>10+</span>
             <FiBell size={iconSize} />
+            <NotificationBoard />
         </div>
     );
 };
