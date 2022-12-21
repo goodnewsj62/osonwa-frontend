@@ -1,4 +1,5 @@
 import NoticationCard from "../cards/NotificationCard";
+import styles from "./styles/notification.module.css";
 
 const NotificationBoard=  ()=>{
 
@@ -14,9 +15,9 @@ const NotificationBoard=  ()=>{
     });
 
     return (
-        <section className={``}>
+        <section className={styles.modal}>
             <span>Notification</span>
-            <div className={``}>
+            <div className={styles.modal__content}>
                 {notifications}
             </div>
         </section>

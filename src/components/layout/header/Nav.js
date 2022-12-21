@@ -1,9 +1,10 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
-import { FiBell, FiPlusSquare } from "react-icons/fi";
+import { FiPlusSquare } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import LoginLink from "./buttons/LoginButton";
+import NotificationComp from "./NotificationComp";
 import Profile from "./ProfileNav/Profile";
 import styles from "./styles/nav.module.css";
 
@@ -28,14 +29,10 @@ function Nav({ showSearch }) {
                     <FiPlusSquare size={iconSize} />
                 </li>
                 <li>
-                    <div className={styles.bell}>
-                        <span>10+</span>
-                        <FiBell size={iconSize} />
-                    </div>
+                    <NotificationComp iconSize={iconSize} />
                 </li>
-                {/* {!authState && <LoginLink />} */}
-                {/* {authState && ProfileLink} */}
-                {ProfileLink}
+                {!authState && <LoginLink />}
+                {authState && ProfileLink}
             </ul>
         </nav>
     )

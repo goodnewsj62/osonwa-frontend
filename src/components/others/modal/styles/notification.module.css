@@ -1,0 +1,17 @@
+.modal{
+    width:300px;
+    height: 500px ;
+    position: absolute;
+    background-color: var(--current-mode);
+    border-radius: 10px;
+}
+
+.modal span{
+    color: var(--mode-write-color);
+    padding: 1rem 1rem 0.2rem 1rem;
+    font-size: 1.1rem;
+}
+
+.modal__content{
+    /* border-top: 1px solid ; */
+}
