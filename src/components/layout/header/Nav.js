@@ -33,8 +33,9 @@ function Nav({ showSearch }) {
                         <FiBell size={iconSize} />
                     </div>
                 </li>
-                {!authState && <LoginLink />}
-                {authState && ProfileLink}
+                {/* {!authState && <LoginLink />} */}
+                {/* {authState && ProfileLink} */}
+                {ProfileLink}
             </ul>
         </nav>
     )
