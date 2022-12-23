@@ -75,5 +75,5 @@ body{
     left: 0;
     background-color: var(--mask-bg);
     position: fixed;
-    z-index: 100;
+    z-index: 400;
 }

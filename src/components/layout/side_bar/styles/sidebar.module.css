@@ -48,6 +48,12 @@
 }
 
 
+
+@media screen and (min-width:771px) {
+    .side__bar{
+        z-index: 100;
+    }
+}
 @media screen and (min-width:800px) {
     
     .close__bar{
