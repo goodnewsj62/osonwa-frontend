@@ -4,6 +4,7 @@ import img from "static/images/Umrella_Flatline.svg";
 
 const NotificationBoard = () => {
 
+    
     let displayData =  (
             <div className={styles.empty__notification}>
                 <div className={styles.img__div}>

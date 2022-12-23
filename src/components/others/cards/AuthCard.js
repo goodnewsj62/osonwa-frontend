@@ -9,11 +9,11 @@ import { useContext } from "react";
 import { DefaultIconSize } from "components/wrappers/IconSize";
 
 function AuthCard({ hideHandler }) {
-
     const iconSize = useContext(DefaultIconSize);
+
     return (
         <div className={styles.auth__card} >
-            <i onClick={hideHandler} className={styles.cancel}>
+            <i onMouseDown={hideHandler} className={styles.cancel}>
                 <MdCancel size={28} />
             </i>
             <div className={styles.auth__image} >

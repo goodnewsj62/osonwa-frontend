@@ -31,8 +31,9 @@ function Nav({ showSearch }) {
                 <li>
                     <NotificationComp iconSize={iconSize} />
                 </li>
-                {!authState && <LoginLink />}
-                {authState && ProfileLink}
+                {/* {!authState && <LoginLink />}
+                {authState && ProfileLink} */}
+                {ProfileLink}
             </ul>
         </nav>
     )
