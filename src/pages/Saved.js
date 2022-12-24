@@ -1,47 +1,44 @@
+import ListCard from "components/others/cards/ListCard";
 import Main from "components/others/MainWrapper";
+import SearchForm from "components/others/SearchForm";
 import ToggleContents from "components/others/ToggleContent";
-import { DefaultIconSize } from "components/wrappers/IconSize";
-import { useContext } from "react";
-import { BiSearch } from "react-icons/bi";
+import { useMemo } from "react";
+
+
+import cardStyles from "./styles/articles.module.css";
+import styles from "./styles/fav.module.css";
 
 
 
 
 
-const Saved =  ()=>{
-    const iconSize =  useContext(DefaultIconSize);
+const Saved = () => {
 
-    
+    const fetchedArticles = [1, 2, 3].map((item) => {
+        return <ListCard />
+    });
+
+    const savedArticles = <section aria-label="saved article" className={cardStyles}>{fetchedArticles}</section>;
+    const savedNews = <section aria-label="saved article" className={cardStyles}>{[fetchedArticles[0]]}</section>;
+
+    const contentNames = useMemo(() => ["news", "articles"], []);
+    const components = useMemo(() => [savedNews, savedArticles], []);
+
+    const onScreen = () => { };
+
+
     return (
         <Main>
-            <div className={``}>
-                <section className={``}>
+            <div className={styles.container}>
+                <section className={styles.main__content}>
                     <h1>Saved</h1>
-                    <div className={``}>
+                    <div className={styles.list__container}>
                         <ToggleContents stateNames={contentNames} components={components} callback={onScreen} />
                     </div>
                 </section>
-                <section className={``}>
-                    <form onSubmit={()=>{}} action="">
-                        <span>
-                            <button type="submit">
-                                <BiSearch size={iconSize}/>
-                            </button>
-                        </span>
-                        <div className={``}>
-                            <label id="gensearch__label"
-                                htmlFor="general__search">
-                                    Search Saved
-                            </label>
-                        </div>
-                        <input type="text" 
-                            autoComplete="off" 
-                            autoCorrect="off" 
-                            id="general__search"
-                            aria-labelledby="gensearch__label"
-                            value={""}
-                        />
-                    </form>
+
+                <section className={styles.aside}>
+                    <SearchForm />
                 </section>
             </div>
         </Main>

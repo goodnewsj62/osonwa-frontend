@@ -12,6 +12,7 @@ import SignUp from "pages/SignUp";
 import ArticleDetail from "pages/ArticleDetail";
 import FeedDetail from "pages/Detail";
 import Trending from "pages/Trending";
+import Saved from "pages/Saved";
 
 
 function App(props) {
@@ -45,6 +46,7 @@ function App(props) {
                     <Route path="/detail/:slug" element={<FeedDetail />} />
                     <Route path="/trending" element={<Trending />} />
                     <Route path="/fresh" element={<Trending />} />
+                    <Route path="/saved" element={<Saved />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
