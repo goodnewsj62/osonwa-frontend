@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiPlusSquare } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import LoginLink from "./buttons/LoginButton";
 import NotificationComp from "./NotificationComp";
 import Profile from "./ProfileNav/Profile";
 import styles from "./styles/nav.module.css";

@@ -19,7 +19,7 @@ const Saved = () => {
     });
 
     const savedArticles = <section aria-label="saved article" className={cardStyles.articles}>{fetchedArticles}</section>;
-    const savedNews = <section aria-label="saved article" className={cardStyles.articles}>{[fetchedArticles[0]]}</section>;
+    const savedNews = <section aria-label="saved news" className={cardStyles.articles}>{[fetchedArticles[0]]}</section>;
 
     const contentNames = useMemo(() => ["news", "articles"], []);
     const components = useMemo(() => [savedNews, savedArticles], []);

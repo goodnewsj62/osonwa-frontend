@@ -1,6 +1,7 @@
-.previous__actions li{
+.previous__actions li a{
     display: flex;
     align-items: center;
+    color: inherit;
 }
 
 .previous__actions li p{
