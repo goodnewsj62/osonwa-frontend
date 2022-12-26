@@ -47,9 +47,9 @@
         width: 50px;
         height: 250px;
         position: fixed;
-        top: calc(50% + 60px);
+        top: calc(50% + var(--header-height));
         left: 0;
-        transform: translateY(calc(-50% - 60px));
+        transform: translateY(calc(-50% - var(--header-height)));
         background-color: #000;
         border-radius:0 30px 30px 0 ;
         color: var(--netural-color);

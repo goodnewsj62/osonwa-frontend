@@ -17,6 +17,8 @@
     --aside-shadow:rgba(0,0,0,0.088);
     --select-shadow:#979393b3;
     --noti-elevation: 0px 2px 20px 0px var(--border-line);
+    --header-height:60px;
+    --hist-background:#e6e4e4;
 }
 
 [data-theme="dark"]{
@@ -70,8 +72,8 @@ body{
 
 .page__cover{
     width: 100vw;
-    height: calc(100vh - 60px);
-    top: 60px;
+    height: calc(100vh - var(--header-height));
+    top: var(--header-height);
     left: 0;
     background-color: var(--mask-bg);
     position: fixed;

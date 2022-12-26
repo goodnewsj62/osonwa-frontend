@@ -1,9 +1,9 @@
 .side__bar{
     width: 250px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--header-height));
     border-right: 1px solid rgba(0,0,0,0.1);
     position: fixed;
-    top: 60px;
+    top: var(--header-height);
     left: 0%;
     z-index: 900;
     color: var(--mode-write-color);

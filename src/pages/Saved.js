@@ -1,6 +1,6 @@
 import ListCard from "components/others/cards/ListCard";
 import Main from "components/others/MainWrapper";
-import SearchForm from "components/others/SearchForm";
+import SearchSaved from "components/others/SavedSearch";
 import ToggleContents from "components/others/ToggleContent";
 import { useMemo } from "react";
 
@@ -18,8 +18,8 @@ const Saved = () => {
         return <ListCard />
     });
 
-    const savedArticles = <section aria-label="saved article" className={cardStyles}>{fetchedArticles}</section>;
-    const savedNews = <section aria-label="saved article" className={cardStyles}>{[fetchedArticles[0]]}</section>;
+    const savedArticles = <section aria-label="saved article" className={cardStyles.articles}>{fetchedArticles}</section>;
+    const savedNews = <section aria-label="saved article" className={cardStyles.articles}>{[fetchedArticles[0]]}</section>;
 
     const contentNames = useMemo(() => ["news", "articles"], []);
     const components = useMemo(() => [savedNews, savedArticles], []);
@@ -38,7 +38,10 @@ const Saved = () => {
                 </section>
 
                 <section className={styles.aside}>
-                    <SearchForm />
+                    <h1>Saved</h1>
+                    <div className={styles.search__div}>
+                        <SearchSaved />
+                    </div>
                 </section>
             </div>
         </Main>

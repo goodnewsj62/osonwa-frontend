@@ -1,6 +1,6 @@
 .modal{
     width:350px;
-    height: calc(95vh -  60px) ;
+    height: calc(95vh -  var(--header-height)) ;
     max-height: 642px;
     top: 48px;
     left: -280px;
