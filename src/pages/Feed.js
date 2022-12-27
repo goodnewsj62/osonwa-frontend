@@ -1,8 +1,17 @@
 import { Carousel, NormalCard, Tags } from "components/others";
+import AuthPopupModal from "components/others/AuthPopupModal";
 import Main from "components/others/MainWrapper";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./styles/news.module.css";
 
 function Feed(props) {
+    const location = useLocation();
+    const authCardInitialState = location.state && "loginPopStatus" in location.state && location.state.loginPopStatus ? true : false; // incase undefined
+    const [authCardState, setAuthCardState] = useState(authCardInitialState);
+
+
+    const hideAuthPopup = () => setAuthCardState((state) => !state);
 
     return (
         <Main >
@@ -13,6 +22,7 @@ function Feed(props) {
                 <Tags />
             </section>
             <MainCards />
+            {authCardState && <AuthPopupModal hideHandler={hideAuthPopup} />}
         </Main>
     );
 };

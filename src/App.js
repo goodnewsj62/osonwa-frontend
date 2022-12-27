@@ -47,8 +47,8 @@ function App(props) {
                     <Route path="/detail/:slug" element={<FeedDetail />} />
                     <Route path="/trending" element={<Trending />} />
                     <Route path="/fresh" element={<Trending />} />
-                    <Route path="/saved" element={<Saved />} />
-                    <Route path="/liked" element={<Liked />} />
+                    <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
+                    <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />

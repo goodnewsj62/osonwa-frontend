@@ -1,14 +1,17 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation, Navigate } from "react-router-dom";
 
 
-function LoginRequired({ auth }) {
+function LoginRequired(props) {
     const from = useLocation();
-    if (!auth) {
-        <Navigate to="/" state={{ from, loginPopStatus: true }} />
+    const isAuthenticated = useSelector((state) => state.authState.state);
+
+    if (!isAuthenticated) {
+        return <Navigate to="/" state={{ from, loginPopStatus: true }} />
     }
-    else {
-        <Outlet />
-    }
+
+    return props.children
+
 }
 
 
