@@ -1,6 +1,5 @@
-import Main from "components/others/MainWrapper";
-
-
+import  Main from "components/others/MainWrapper";
+import ProfileHeader from "components/profile/HeaderCard";
 
 
 
@@ -9,33 +8,10 @@ const Profile =  ()=>{
         <Main>
             <div className="container">
                 <section className={``}>
-                    <section>
-                        <div className="header">
-                            <div className="profile__img">
-                                <img src={``} alt="profile" />
-                            </div>
-                            <div className="edit__button">
-                                <button>
-                                    <span>
-                                        Edit Profile
-                                    </span>
-                                    <i>
-                                        {/* <HiPencil /> */}
-                                    </i>
-                                </button>
-                            </div>  
-                        </div>
-                        <div className="bio">
+                        <ProfileHeader />
+                        <div>
 
                         </div>
-                        <div className="social__acc"></div>
-                        <div className="tags">
-
-                        </div>
-                    </section>
-                    <div>
-
-                    </div>
                     <section>
 
                     </section>
