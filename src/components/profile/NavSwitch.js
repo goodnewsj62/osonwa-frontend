@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import styles from "./styles/switch.module.css";
 
 
 const NavSwitch  =  ({handler, subjects})=>{
@@ -12,17 +12,17 @@ const NavSwitch  =  ({handler, subjects})=>{
     };
 
     const items =  subjects.map((item)=>{
-        const classNames = active === item?  ``: ``;
+        const classNames = active === item?  `${styles.box} ${styles.selected}`: `${styles.box}`;
         return (
             <div onClick={clickHandler} className={classNames}>
                 <span>{item}</span>
-                <div className={``}></div>
+                <div className={styles.bar}></div>
             </div>
         );
     });
 
     return (
-        <nav>
+        <nav className={styles.container}>
             {items}
         </nav>
     )

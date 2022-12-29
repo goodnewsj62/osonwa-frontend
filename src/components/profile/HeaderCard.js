@@ -1,18 +1,22 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import { useContext } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
+
 import { HiPencil } from "react-icons/hi";
+import SocialAccounts from "./SocialAccounts";
+import TagSlide from "./TagsSlide";
+import styles from "./styles/profile.module.css";
 
 const ProfileHeader = (props) => {
     const iconSize = useContext(DefaultIconSize);
 
     return (
-        <section>
-            <div className="header">
-                <div className="profile__img">
+        <section className={styles.container}>
+            <div className={styles.header}>
+                <div className={styles.profile__img}>
                     <img src={``} alt="profile" />
                 </div>
-                <div className="edit__button">
+                <div className={`${styles.edit__button}`}>
                     <button onClick={() => { }}>
                         <span>
                             Edit Profile
@@ -23,22 +27,20 @@ const ProfileHeader = (props) => {
                     </button>
                 </div>
             </div>
-            <div className="bio">
+            <div className={styles.bio}>
                 <p>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, suscipit perspiciatis aliquid nam ad aliquam dolores tempore magni, laboriosam amet vitae minus sunt praesentium quod? Fugit cupiditate consequuntur accusantium ad?
                 </p>
             </div>
-            <div className="social__acc">
-                <a href="" target="_blank"></a>
-                <a href="" target="_blank"></a>
-                <a href="" target="_blank"></a>
+            <div className={styles.social__acc}>
+                <SocialAccounts />
             </div>
-            <div className="tags">
+            <div className={styles.tags}>
                 <h5>Interests</h5>
                 <button className="add__tag" type="button">
                     <BsPlusCircleFill size={iconSize} />
                 </button>
-                {/* <TagSlide /> */}
+                <TagSlide />
             </div>
         </section>
     )
