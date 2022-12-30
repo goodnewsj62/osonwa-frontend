@@ -14,6 +14,7 @@ import FeedDetail from "pages/Detail";
 import Trending from "pages/Trending";
 import Saved from "pages/Saved";
 import Liked from "pages/Liked";
+import Profile from "pages/Profile";
 
 
 function App(props) {
@@ -49,6 +50,7 @@ function App(props) {
                     <Route path="/fresh" element={<Trending />} />
                     <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
                     <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
+                    <Route path="/:username" element={<Profile />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />

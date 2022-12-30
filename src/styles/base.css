@@ -19,6 +19,10 @@
     --noti-elevation: 0px 2px 20px 0px var(--border-line);
     --header-height:60px;
     --hist-background:#e6e4e4;
+    --bread-width-max: 1126px;
+    --bread-width-mid: 930px;
+    --bread-width-sm: 720px;
+    --radius-10:10px;
 }
 
 [data-theme="dark"]{

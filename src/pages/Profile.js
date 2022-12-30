@@ -1,13 +1,14 @@
 import  Main from "components/others/MainWrapper";
 import ProfileHeader from "components/profile/HeaderCard";
+import styles from "./styles/profile.module.css";
 
 
 
 const Profile =  ()=>{
     return (
         <Main>
-            <div className="container">
-                <section className={``}>
+            <div className={styles.conatiner}>
+                <section className={styles.main__section}>
                         <ProfileHeader />
                         <div>
 
@@ -16,7 +17,7 @@ const Profile =  ()=>{
 
                     </section>
                 </section>
-                <section className={``}>
+                <section className={styles.secondary__section}>
                 </section>
             </div>
         </Main>

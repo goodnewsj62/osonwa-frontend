@@ -1,0 +1,32 @@
+.conatiner{
+    margin-left: auto;
+    margin-right:auto;
+    display: grid;
+    grid-template-columns: 68% 28%;
+    gap: 1rem 2rem;
+}
+
+
+
+@media screen and (min-width: 768px) {
+    .conatiner{
+        width: var(--bread-width-sm);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .conatiner{
+        width: var(--bread-width-mid);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .conatiner{
+        width: var(--bread-width-max);
+    }
+}
+
+
+.secondary__section{
+    border: 1px solid red;
+}

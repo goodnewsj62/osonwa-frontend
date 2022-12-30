@@ -6,6 +6,7 @@ import { HiPencil } from "react-icons/hi";
 import SocialAccounts from "./SocialAccounts";
 import TagSlide from "./TagsSlide";
 import styles from "./styles/profile.module.css";
+import img from "static/images/test_img.jpg";
 
 const ProfileHeader = (props) => {
     const iconSize = useContext(DefaultIconSize);
@@ -13,8 +14,9 @@ const ProfileHeader = (props) => {
     return (
         <section className={styles.container}>
             <div className={styles.header}>
+                <span></span>
                 <div className={styles.profile__img}>
-                    <img src={``} alt="profile" />
+                    <img src={img} alt="profile" />
                 </div>
                 <div className={`${styles.edit__button}`}>
                     <button onClick={() => { }}>
