@@ -24,6 +24,9 @@
     .conatiner{
         width: var(--bread-width-max);
     }
+    .hunderedPercent{
+        width: 100%;
+    }
 }
 
 

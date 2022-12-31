@@ -1,5 +1,8 @@
 .container{
     width: 100%;
+    padding-bottom: 1rem;
+    border: 1px solid red;
+    border-radius: var(--radius-10);
 }
 
 .header{
@@ -8,7 +11,6 @@
     display: grid;
     place-items: center;
     position: relative;
-    border: 1px solid red;
 }
 
 .header > span{
@@ -49,6 +51,64 @@
 
 .edit__button i{
     margin-left: 1px;
+}
+
+.bio p, .tags, .socials{
+    padding: 0 1rem;
+}
+
+.bio{
+    padding: 10px 0;
+    color:var(--mode-write-color); 
+}
+
+.social__acc{
+    padding: 8px 0;
+}
+
+
+.socials {
+    display: flex;
+    align-items: center;
+}
+
+.socials a{
+    color: inherit;
+    margin-right: 2rem;
+}
+
+.socials a:first-child{
+    color: #007EEE;
+}
+
+.socials a:nth-child(2){
+    color: #1E9BF0;
+}
+
+.socials a:nth-child(4){
+    color: #0966C2;
+}
+
+.tags{
+    width: 100%;
+    position: relative;
+
+}
+
+.tags h4{
+    margin-bottom: 2rem;
+}
+
+.add__tag{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background-color: transparent;
+}
+
+.add__tag svg{
+    fill: #1E9BF0;
 }
 
 @media screen and (min-width:1024px) {

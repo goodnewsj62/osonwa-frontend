@@ -16,15 +16,19 @@ const TagSlide = (props) => {
 
     return (
         <div className={styles.container}>
-            <button className={`${styles.left}`} type="button">
-                <FaAngleLeft size={iconSize} />
-            </button>
+            <div className={`${styles.left}`}>
+                <button  type="button">
+                    <FaAngleLeft size={iconSize} />
+                </button>
+            </div>
             <div className={styles.slides}>
                 {tags}
             </div>
-            <button className={`${styles.right}`} type="button">
-                <FaAngleRight size={iconSize} />
-            </button>
+            <div className={`${styles.right}`} >
+                <button type="button">
+                    <FaAngleRight size={iconSize} />
+                </button>
+            </div>
         </div>
     )
 };

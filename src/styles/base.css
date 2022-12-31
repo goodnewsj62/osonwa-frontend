@@ -23,6 +23,9 @@
     --bread-width-mid: 930px;
     --bread-width-sm: 720px;
     --radius-10:10px;
+    --tag-bg:rgba(0,0,0,0.1);
+    --bg-tag-move:rgba(0, 0, 0, 0.6);
+    --bg-tag-move-highlight:rgba(0, 0, 0, 0.7);
 }
 
 [data-theme="dark"]{
@@ -30,6 +33,8 @@
     --netural-opposite:#ebe9e9;
     --current-mode:#000;
     --mode-write-color: #ebe9e9;
+    --bg-tag-move:rgba(188, 189, 190, 0.4);
+    --bg-tag-move-highlight:rgba(188, 189, 190, 0.4);
 }
 
 *{

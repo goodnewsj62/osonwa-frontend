@@ -24,7 +24,7 @@ const ProfileHeader = (props) => {
                             Edit Profile
                         </span>
                         <i>
-                            <HiPencil size={20} />
+                            <HiPencil size={iconSize} />
                         </i>
                     </button>
                 </div>
@@ -38,9 +38,9 @@ const ProfileHeader = (props) => {
                 <SocialAccounts />
             </div>
             <div className={styles.tags}>
-                <h5>Interests</h5>
-                <button className="add__tag" type="button">
-                    <BsPlusCircleFill size={iconSize} />
+                <h4>Interests</h4>
+                <button className={styles.add__tag} type="button">
+                    <BsPlusCircleFill size={iconSize + 4} />
                 </button>
                 <TagSlide />
             </div>
