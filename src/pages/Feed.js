@@ -1,5 +1,6 @@
-import { Carousel, NormalCard, Tags } from "components/others";
+import { Carousel, NormalCard } from "components/others";
 import AuthPopupModal from "components/others/AuthPopupModal";
+import TagSlide from "components/others/carousel/TagsSlide";
 import Main from "components/others/MainWrapper";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -19,7 +20,10 @@ function Feed(props) {
                 <Carousel />
             </section>
             <section aria-label="tags" className={`${styles.main__tags}`}>
-                <Tags />
+                <TagSlide
+                    tagArray={["python", "javascript", "backend", "frontend", "machine learning", "data science", "alorithm and data structure", "3d printing", "UI/UX", "Gaming", "Blockchain"]}
+                    small={true}
+                />
             </section>
             <MainCards />
             {authCardState && <AuthPopupModal hideHandler={hideAuthPopup} />}

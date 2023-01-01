@@ -44,7 +44,6 @@
 .slides >  div{
     display:flex;
     transition: transform 0.4s;
-
 }
 
 .tag{
@@ -56,6 +55,10 @@
     display: grid;
     place-items: center;
     flex: 0 0 auto;
+}
+
+.small{
+    height: 35px;
 }
 
 .tag a{

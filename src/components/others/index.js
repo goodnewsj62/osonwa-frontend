@@ -1,6 +1,5 @@
 import { PopUpCard } from "./cards/Popup";
 import Carousel from "./carousel/Carousel";
-import Tags from "./Tags";
 import LoginRequired from "./Protected";
 import Cover from "./Mask";
 import SpreadLoader from "./loaders/SpreadLoader";
@@ -13,7 +12,7 @@ import CookiePopup from "./cards/CookieCard";
 
 export {
     NormalCard, PopUpCard, MessagePopup,
-    CookiePopup, AuthCard, Carousel, Tags,
+    CookiePopup, AuthCard, Carousel,
     LoginRequired, SpreadLoader
 };
 

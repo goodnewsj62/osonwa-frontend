@@ -2,6 +2,7 @@
     overflow-x: auto;
     width: calc(100% - 2rem);
     margin: 1rem;
+    padding: 0 1rem;
 }
 
 .main__tags::-webkit-scrollbar{

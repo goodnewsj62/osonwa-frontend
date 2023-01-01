@@ -4,7 +4,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 
 import { HiPencil } from "react-icons/hi";
 import SocialAccounts from "./SocialAccounts";
-import TagSlide from "./TagsSlide";
+import TagSlide from "../others/carousel/TagsSlide";
 import styles from "./styles/profile.module.css";
 import img from "static/images/test_img.jpg";
 
@@ -42,7 +42,7 @@ const ProfileHeader = (props) => {
                 <button className={styles.add__tag} type="button">
                     <BsPlusCircleFill size={iconSize + 4} />
                 </button>
-                <TagSlide />
+                <TagSlide  tagArray={["python", "3d printing", "UI/UX", "Gaming","Blockchain"]} />
             </div>
         </section>
     )
