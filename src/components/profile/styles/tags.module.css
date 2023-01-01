@@ -38,12 +38,17 @@
 }
 
 .slides{
-    display:flex;
     overflow: hidden;
 }
 
+.slides >  div{
+    display:flex;
+    transition: transform 0.4s;
+
+}
+
 .tag{
-    width: 200px;
+    min-width: 200px;
     height: 50px;
     border-radius: 5px;
     background-color: var(--tag-bg);
@@ -54,6 +59,7 @@
 }
 
 .tag a{
+    padding: 5px;
     color: inherit;
     font-weight: bold;
     font-size: 0.85rem;
