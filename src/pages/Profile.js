@@ -1,25 +1,21 @@
-import  Main from "components/others/MainWrapper";
+import Main from "components/others/MainWrapper";
 import ProfileHeader from "components/profile/HeaderCard";
+import NavSwitch from "components/profile/NavSwitch";
 import { useSelector } from "react-redux";
 import styles from "./styles/profile.module.css";
 
 
 
-const Profile =  ()=>{
-    const sideBarState =  useSelector((state)=> state.sideBarState);
+const Profile = () => {
+    const sideBarState = useSelector((state) => state.sideBarState);
 
-    const containerClasses =  sideBarState? `${styles.conatiner} ${styles.hunderedPercent}` : `${styles.conatiner}`;
+    const containerClasses = sideBarState ? `${styles.conatiner} ${styles.hunderedPercent}` : `${styles.conatiner}`;
     return (
         <Main>
             <div className={containerClasses}>
                 <section className={styles.main__section}>
-                        <ProfileHeader />
-                        <div>
-
-                        </div>
-                    <section>
-
-                    </section>
+                    <ProfileHeader />
+                    <NavSwitch subjects={["posts", "comments"]} />
                 </section>
                 <section className={styles.secondary__section}>
                 </section>

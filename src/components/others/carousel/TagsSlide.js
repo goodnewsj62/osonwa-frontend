@@ -17,7 +17,7 @@ const TagSlide = ({ tagArray, small = false }) => {
 
     const tagClass = small ? `${styles.tag} ${styles.small}` : `${styles.tag}`;
     const tags = tagArray.map((item) => {
-        return <div className={tagClass}><Link to="/" >{item}</Link></div>
+        return <div key={item} className={tagClass}><Link to="/" >{item}</Link></div>
     });
 
     const scrollHandler = (e, direction) => {

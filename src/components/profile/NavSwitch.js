@@ -14,7 +14,7 @@ const NavSwitch  =  ({handler, subjects})=>{
     const items =  subjects.map((item)=>{
         const classNames = active === item?  `${styles.box} ${styles.selected}`: `${styles.box}`;
         return (
-            <div onClick={clickHandler} className={classNames}>
+            <div key={item} onClick={clickHandler} className={classNames}>
                 <span>{item}</span>
                 <div className={styles.bar}></div>
             </div>

@@ -1,0 +1,43 @@
+.container{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    border-radius: var(--radius-10);
+    box-shadow: var(--profile-content-shadow);
+    background-color: var(--profile-content-bg-raise);
+    margin: 2rem 0;
+    padding: 0  1rem;
+}
+
+
+.box{
+    min-width: 100px;
+    padding: 1rem 1rem 0 1rem ;
+    display: grid;
+}
+
+.box:hover{
+    background-color: var( --switch-hover-highlight);
+}
+
+.box > span{
+    font-weight: bold;
+    color: var(--not-selected-switch-text);
+    place-self: center;
+}
+
+.box .bar{
+    height: 4px;
+    width: 100%;
+    align-self: end;
+    border-radius: 5px;
+}
+
+.selected .bar{
+    background-color: var(--comp-one);
+}
+
+.selected > span{
+    color: var(--mode-write-color);
+
+}

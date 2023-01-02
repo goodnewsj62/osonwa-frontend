@@ -26,6 +26,11 @@
     --tag-bg:rgba(0,0,0,0.1);
     --bg-tag-move:rgba(0, 0, 0, 0.6);
     --bg-tag-move-highlight:rgba(0, 0, 0, 0.7);
+    --profile-content-raise:#dad8d8;
+    --profile-content-shadow: 0px 0px 10px 3px var(--profile-content-raise);
+    --not-selected-switch-text:#838E97;
+    --switch-hover-highlight:#E7E7E8;
+    --profile-content-bg-raise:var(--netural-color);
 }
 
 [data-theme="dark"]{

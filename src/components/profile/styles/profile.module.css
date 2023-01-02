@@ -1,8 +1,9 @@
 .container{
     width: 100%;
     padding-bottom: 1rem;
-    border: 1px solid red;
     border-radius: var(--radius-10);
+    box-shadow: var(--profile-content-shadow);
+    background-color: var(--profile-content-bg-raise);
 }
 
 .header{
@@ -108,7 +109,7 @@
 }
 
 .add__tag svg{
-    fill: #1E9BF0;
+    fill: var(--netural-opposite);
 }
 
 @media screen and (min-width:1024px) {
