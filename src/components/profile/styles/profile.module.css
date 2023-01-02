@@ -4,6 +4,7 @@
     border-radius: var(--radius-10);
     box-shadow: var(--profile-content-shadow);
     background-color: var(--profile-content-bg-raise);
+    border: var(--profile-content-border);
 }
 
 .header{

@@ -7,7 +7,7 @@ const NavSwitch  =  ({handler, subjects})=>{
     
     const clickHandler =  (event)=>{
         const content =  event.target.innerText.trim();
-        handler(content);
+        handler(content)
         setActive(content);
     };
 

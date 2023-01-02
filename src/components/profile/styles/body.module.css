@@ -1,0 +1,23 @@
+.container{
+    padding-bottom: 0;
+}
+
+.message{
+    width: 100%;
+    min-height: 200px;
+    padding:  2rem 1rem ;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.message span{
+    color: var(--mode-write-color);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.message img{
+    width: 250px;
+}
