@@ -2,6 +2,7 @@ import Main from "components/others/MainWrapper";
 import ProfileBody from "components/profile/Body";
 import ProfileHeader from "components/profile/HeaderCard";
 import NavSwitch from "components/profile/NavSwitch";
+import Suggested from "components/profile/Suggested";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./styles/profile.module.css";
@@ -27,6 +28,7 @@ const Profile = () => {
                     <ProfileBody state={switchState} />
                 </section>
                 <section className={styles.secondary__section}>
+                    <Suggested />
                 </section>
             </div>
         </Main>
