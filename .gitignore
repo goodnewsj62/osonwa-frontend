@@ -26,4 +26,4 @@ yarn-error.log*
 test_*
 Saly*
 
-.env
+*.env
