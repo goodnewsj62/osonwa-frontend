@@ -59,7 +59,7 @@ function setErrors(error, setRespInfo) {
 }
 
 const baseAxiosInstance = axios.create({
-    baseURL: "",
+    baseURL: process.env.REACT_APP_BACKED_URL
 });
 
 
