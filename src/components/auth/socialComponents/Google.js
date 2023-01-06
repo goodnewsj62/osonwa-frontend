@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { baseAxiosInstance } from "utils/requests";
@@ -18,7 +19,6 @@ const GoogleHandler = ({ setErrorInfo, size }) => {
     }, []);
 
     const handleGoogleAuth =  async (resp)=>{
-        console.log(resp.credential);
 
         /*
             send credentials to backend 
@@ -28,11 +28,12 @@ const GoogleHandler = ({ setErrorInfo, size }) => {
             negative pop up a message
         */
         try{
-            const response =  await baseAxiosInstance.post("/auth/google", {token: resp.credential});
-            console.log(response.data);
-            return resp.data
+            const response =  await baseAxiosInstance.post(`/auth/google/`, {token: resp.credential},{
+                validateStatus: (status )=> status < 400
+            });
+            console.log(response.data, response.status)
         }catch(err){
-
+            console.log("**************",err.response.data)
         }
     };
 
