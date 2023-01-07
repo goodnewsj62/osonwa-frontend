@@ -31,9 +31,13 @@ const GoogleHandler = ({ setErrorInfo, size }) => {
             const response =  await baseAxiosInstance.post(`/auth/google/`, {token: resp.credential},{
                 validateStatus: (status )=> status < 400
             });
-            console.log(response.data, response.status)
+    
         }catch(err){
-            console.log("**************",err.response.data)
+            if(err.response.status >= 500){
+
+            }else{
+                
+            }
         }
     };
 
