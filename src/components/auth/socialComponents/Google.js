@@ -5,41 +5,20 @@ import { baseAxiosInstance } from "utils/requests";
 import styles from "../styles/socials.module.css";
 
 
-const GoogleHandler = ({ setErrorInfo, size }) => {
+const GoogleHandler = ({ setErrorInfo, size, callbackHandler }) => {
     const buttonRef = useRef();
     useEffect(() => {
         window.onload = function () {
             window.google.accounts.id.initialize({
                 client_id: process.env.REACT_APP_G_CLIENT_ID,
-                callback: handleGoogleAuth
+                callback: callbackHandler
             });
             window.google.accounts.id.renderButton(
                 buttonRef.current, { theme: "outline", size: "large", type:"icon" })
         };
     }, []);
 
-    const handleGoogleAuth =  async (resp)=>{
-
-        /*
-            send credentials to backend 
-            positive-response:
-                save jwt token, change login status
-                redirect to home or navigate to next
-            negative pop up a message
-        */
-        try{
-            const response =  await baseAxiosInstance.post(`/auth/google/`, {token: resp.credential},{
-                validateStatus: (status )=> status < 400
-            });
     
-        }catch(err){
-            if(err.response.status >= 500){
-
-            }else{
-                
-            }
-        }
-    };
 
     return (
         <div  className={styles.google}>
