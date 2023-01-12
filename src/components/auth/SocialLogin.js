@@ -1,9 +1,10 @@
+import { memo } from "react";
 import FacebookHandler from "./socialComponents/Facebook";
 import GoogleHandler from "./socialComponents/Google";
 import TwitterHandler from "./socialComponents/Twitter";
 import styles from "./styles/socials.module.css";
 
-export default function SocialWrapper({ setErrorInfo, callbacks }) {
+export default memo(function SocialWrapper({ setErrorInfo, callbacks }) {
     const size = 20;
     const { gCallback } = callbacks;
     return (
@@ -13,4 +14,4 @@ export default function SocialWrapper({ setErrorInfo, callbacks }) {
             <TwitterHandler setErrorInfo={setErrorInfo} size={size} />
         </section>
     );
-};
+});

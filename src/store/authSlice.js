@@ -3,6 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { state: false, refresh: "", access: "" };
 
+const saveAuthToken = (jwtToken) => {
+    return dispatch => {
+        const token = JSON.stringify(jwtToken);
+        localStorage.setItem("token", token);
+        dispatch({ state: true, refresh: jwtToken.refresh, access: jwtToken.access });
+    }
+}
+
 const authSlice = createSlice({
     name: "authSlice",
     initialState: initialState,
@@ -23,4 +31,4 @@ const authStateReducers = authSlice.reducer;
 const authStateActions = authSlice.actions;
 
 export default authStateActions;
-export { authStateReducers };
+export { authStateReducers, saveAuthToken };

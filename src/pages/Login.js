@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import LoginForm from "components/auth/LoginForm";
 import { useState } from "react";
@@ -7,11 +7,19 @@ import SocialWrapper from "components/auth/SocialLogin";
 import Decoration from "components/others/SideDecoration";
 import styles from "./styles/login.module.css";
 import { baseAxiosInstance } from "utils/requests";
-
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveAuthToken } from "store/authSlice";
 
 
 export default function Login(props) {
     const [errorInfo, setErrorInfo] = useState({ state: false, message: "" });
+    const [register, setRegister] = useState({ state: false, email: "", cred: "" });
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleGoogleAuth = async (resp) => {
 
         /*
@@ -27,26 +35,32 @@ export default function Login(props) {
             });
 
             if (response.status === 308) {
-                // pop up sign up form
+                setRegister({ state: true, email: response.data.message, cred: resp.credential });
             } else {
-                // save jwt token
-                // mark user as logged in 
-                // redirect to next or home page  
+                const data = response.data.data
+                const locData = location.state
+                dispatch(saveAuthToken(data))
+                if (locData && "next" in locData) {
+                    navigate(`/${locData.next}`);
+                } else {
+                    navigate("/")
+                }
             }
 
         } catch (err) {
             if (err.response.status >= 500) { //TODO: create standard error variables
-                // display an error message
+                setErrorInfo({ state: true, message: "oops an error occurred in our system" });
             } else if (err.response.status >= 400 && err.response.status < 500) {
-                // display error message
+                setErrorInfo({ state: true, message: err.response.data.message });
             }
 
             if (err.request) {
-                // 
+                setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
             }
         }
     };
 
+    const callbacks = { gCallback: handleGoogleAuth };
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
@@ -66,7 +80,7 @@ export default function Login(props) {
                     <LoginForm />
                 </section>
                 <span className={styles.demacation}> Or, login via</span>
-                <SocialWrapper setErrorInfo={setErrorInfo} />
+                <SocialWrapper callbacks={callbacks} setErrorInfo={setErrorInfo} />
                 <span className={styles.copyright}>
                     &copy; 2023 Osonwa. All rights reserved.
                 </span>
@@ -74,6 +88,7 @@ export default function Login(props) {
             <aside>
                 <Decoration />
             </aside>
+            {/* signup popup */}
         </div>
     )
 };
