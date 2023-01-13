@@ -1,0 +1,6 @@
+.select{
+    width: 250px;
+    height: 80%;
+    border-radius: var(--radius-10);
+    z-index: 1000;
+}

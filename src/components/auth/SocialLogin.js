@@ -4,12 +4,11 @@ import GoogleHandler from "./socialComponents/Google";
 import TwitterHandler from "./socialComponents/Twitter";
 import styles from "./styles/socials.module.css";
 
-export default memo(function SocialWrapper({ setErrorInfo, callbacks }) {
+export default memo(function SocialWrapper({ setErrorInfo, setRegisterInfo }) {
     const size = 20;
-    const { gCallback } = callbacks;
     return (
         <section className={styles.socials} aria-label="social login">
-            <GoogleHandler callbackHandler={gCallback} setErrorInfo={setErrorInfo} size={size} />
+            <GoogleHandler setRegister={setRegisterInfo} setErrorInfo={setErrorInfo} size={size} />
             <FacebookHandler setErrorInfo={setErrorInfo} size={size} />
             <TwitterHandler setErrorInfo={setErrorInfo} size={size} />
         </section>
