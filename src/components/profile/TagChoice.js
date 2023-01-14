@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
 import styles from "./styles/tagchoice.module.css";
 
 
 
-const TagChoice = ({ setHasPickedTags }) => {
+const TagChoice = ({ setHasPickedTags, hideHandler }) => {
     // already picked tags id should be set in state below after
     // first render
     const [pickedTags, setPickedTags] = useState([]);
@@ -14,18 +15,18 @@ const TagChoice = ({ setHasPickedTags }) => {
     for (let i = 1; i <= 20; i++) {
         numarr.push(i);
     }
-    const index = Math.max(0, (Math.round(((Math.random() * 20) / 4))) - 1);
 
     const tags = numarr.map((item) => {
+        const index = Math.max(0, (Math.round(((Math.random() * 20) / 4))) - 1);
         return (
             // data-id should be item.id
-            <div key={item} data-id={item} onClick={pickHandler}>
+            <button type="button" key={item} data-id={item} onClick={pickHandler}>
                 {tags_[index]}
-            </div>
+            </button>
         )
     });
 
-    const pickHandler = (event) => {
+    function pickHandler(event) {
         const dataID = event.target.getAttribute("data-id");
         const index = pickedTags.indexOf(+dataID);
 
@@ -40,19 +41,19 @@ const TagChoice = ({ setHasPickedTags }) => {
         }
     };
 
-
     const handleSubmit = () => {
         //setHasPickedTags();
     };
 
     return (
         <div className={styles.select}>
-            <span>Lets know your interest's</span>
+            <div className={styles.close} onClick={hideHandler}> <AiFillCloseCircle size={40} /></div>
+            <span className={styles.heading}>Lets know your interest's</span>
             <div className={styles.tags}>
                 {tags}
             </div>
             <div className={styles.submit}>
-                <button onClick={handleSubmit}>
+                <button type="button" onClick={handleSubmit}>
                     save
                 </button>
             </div>

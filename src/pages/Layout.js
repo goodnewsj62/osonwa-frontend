@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom"
 import { Header, SideNavBar } from "components/layout";
-import { CookiePopup, MessagePopup } from "components/others";
+import { CookiePopup } from "components/others";
 import { useEffect, useState } from "react";
-import AuthPopupModal from "components/others/AuthPopupModal";
+import TagPopup from "components/profile/TagPopup";
 
 
 // const storedMode = () => {
@@ -14,12 +14,11 @@ function DefaultLayout(props) {
     const [hasAcceptedCookie, setHasAcceptedCookie] = useState(true);
 
 
-
     useEffect(() => {
         const cookieStatus = localStorage.getItem("cookieStatus");
-        if (cookieStatus !== "true") {
-            setHasAcceptedCookie(false);
-        }
+
+        if (cookieStatus !== "true") setHasAcceptedCookie(false);
+
     }, []);
 
     const cookieState = { hasAcceptedCookie, setHasAcceptedCookie };
@@ -28,6 +27,7 @@ function DefaultLayout(props) {
             <Header />
             <SideNavBar />
             {!hasAcceptedCookie && <CookiePopup cookieState={{ ...cookieState }} />}
+            <TagPopup />
 
             <Outlet />
         </div>

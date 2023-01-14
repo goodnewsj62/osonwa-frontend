@@ -32,6 +32,11 @@
     --switch-hover-highlight:#E7E7E8;
     --profile-content-bg-raise:var(--netural-color);
     --profile-content-border:1px solid rgba(0,0,0,0.3);
+    --tag-select-bg:var(--netural-color);
+    --tag-select-btn-bg:#EFEFEF;
+    --tag-select-btn-hover:#ddd;
+    --tag-select-btn-highlight:#000;
+    --tag-select-btn-highlight-text:#fff;
 }
 
 [data-theme="dark"]{
@@ -41,6 +46,11 @@
     --mode-write-color: #ebe9e9;
     --bg-tag-move:rgba(188, 189, 190, 0.4);
     --bg-tag-move-highlight:rgba(188, 189, 190, 0.4);
+    --tag-select-bg: ;
+    --tag-select-btn-bg:#EFEFEF;
+    --tag-select-btn-hover:#ddd;
+    --tag-select-btn-highlight:#000;
+    --tag-select-btn-highlight-text:#fff;
 }
 
 *{
