@@ -1,4 +1,8 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { authenticateUserAndRedirect } from "utils/helpers";
+import { baseAxiosInstance } from "utils/requests";
 // import ComfirmPasswordField from "./authUtils/ComfirmPassword";
 import EmailField from "./authUtils/EmailField";
 import NamedField from "./authUtils/NameField";
@@ -22,9 +26,13 @@ const signupReducer = (state, action) => {
 };
 
 
-export default function SignUpForm({ email, cred, setErrorInfo }) {
+export default function SignUpForm({ email, cred, url, setErrorInfo }) {
     const [formIsValid, setFormValidState] = useState(false);
     const [userInputs, dispatch] = useReducer(signupReducer, initialState);
+    const dispatch_ = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+
 
     useEffect(() => {
         // the email needs to be filled up automatically on first render
@@ -43,10 +51,21 @@ export default function SignUpForm({ email, cred, setErrorInfo }) {
     }, [userInputs, isValid]);
 
 
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
         if (isValid()) {
-
+            try {
+                const resp = await baseAxiosInstance.post(url, userInputs);
+                authenticateUserAndRedirect(resp.data.data, dispatch_, navigate, location.state);
+            }
+            catch (error) {
+                const dataInfo = error.response.data;
+                if (dataInfo) {
+                    setErrorInfo({ state: true, message: dataInfo.message });
+                } else if (error.request) {
+                    setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
+                }
+            }
         }
     };
 

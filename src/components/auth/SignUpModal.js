@@ -5,14 +5,14 @@ import styles from "./styles/loginform.module.css";
 
 
 
-const SignUpModal = ({ extraInfo: { email, cred } }) => {
+const SignUpModal = ({ extraInfo: { email, cred, url } }) => {
     const [errorInfo, setErrorInfo] = useState({ state: false, message: "" });
 
     return (
         <section className={styles.signup__modal}>
             <h3>Just remaining few steps to take</h3>
             {errorInfo.state && <ErrorContainer errorInterphase={{ errorInfo, setErrorInfo }} />}
-            <SignUpForm email={email} cred={cred} setErrorInfo={setErrorInfo} />
+            <SignUpForm email={email} url={url} cred={cred} setErrorInfo={setErrorInfo} />
         </section>
     )
 };

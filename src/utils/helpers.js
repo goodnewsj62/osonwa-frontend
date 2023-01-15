@@ -1,3 +1,4 @@
+import { saveAuthToken } from "store/authSlice";
 import { baseAxiosInstance } from "./requests";
 
 function parseJwt(token = "") {
@@ -92,5 +93,14 @@ function deBounce(callback, timeout = 500) {
 }
 
 
+function authenticateUserAndRedirect(data, dispatch, navigate, locationInfo) {
+    dispatch(saveAuthToken(data));
+    if (locationInfo && "next" in locationInfo) {
+        navigate(`/${locationInfo.next}`);
+    } else {
+        navigate("/");
+    }
+}
 
-export { isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };
+
+export { authenticateUserAndRedirect, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

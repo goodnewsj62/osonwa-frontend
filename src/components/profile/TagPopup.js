@@ -6,9 +6,9 @@ import TagChoice from './TagChoice';
 
 
 
-export default function TagPopup(props){
-    const authState =  useSelector((state)=>state.authState.state);
-    const [closeTagModal, setCloseTagModal] =  useState(false);
+export default function TagPopup(props) {
+    const authState = useSelector((state) => state.authState.state);
+    const [closeTagModal, setCloseTagModal] = useState(false);
     const [hasChoosenTags, setHasChoosenTags] = useState(true);
 
 
@@ -19,24 +19,22 @@ export default function TagPopup(props){
 
     }, []);
 
-    const setHasPickedTags =  ()=>{
+    const setHasPickedTags = () => {
         setCloseTagModal(true);
         setHasChoosenTags(true);
         localStorage.setItem("tagStatus", "true");
     };
 
-    const hideHandler =  (e)=>{
+    const hideHandler = (e) => {
         setCloseTagModal(true);
     }
 
-    console.log(hasChoosenTags, authState, closeTagModal)
 
-    // if(!hasChoosenTags && authState && !closeTagModal){
-    if(true){
-        return(
+    if (!hasChoosenTags && authState && !closeTagModal) {
+        return (
             <>
-                {ReactDOM.createPortal(<TagChoice setHasPickedTags={setHasPickedTags} hideHandler={hideHandler} />,document.getElementById("auth__div"))}
-                {ReactDOM.createPortal(<Cover hideHandler={hideHandler} />,document.getElementById("mask"))}
+                {ReactDOM.createPortal(<TagChoice setHasPickedTags={setHasPickedTags} hideHandler={hideHandler} />, document.getElementById("auth__div"))}
+                {ReactDOM.createPortal(<Cover hideHandler={hideHandler} />, document.getElementById("mask"))}
             </>
         );
     }

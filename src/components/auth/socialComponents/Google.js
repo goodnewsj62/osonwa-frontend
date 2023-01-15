@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { saveAuthToken } from "store/authSlice";
+import { authenticateUserAndRedirect } from "utils/helpers";
 import { baseAxiosInstance } from "utils/requests";
 import styles from "../styles/socials.module.css";
 
@@ -42,16 +42,10 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister }) => {
             });
 
             if (response.status === 308) {
-                setRegister({ state: true, email: response.data.message, cred: resp.credential });
+                const message = response.data.message;
+                setRegister({ state: true, email: message.email, cred: resp.credential, url: message.url });
             } else {
-                const data = response.data.data;
-                const locData = location.state;
-                dispatch(saveAuthToken(data));
-                if (locData && "next" in locData) {
-                    navigate(`/${locData.next}`);
-                } else {
-                    navigate("/");
-                }
+                authenticateUserAndRedirect(response.data.data, dispatch, navigate, location.state);
             }
 
         } catch (err) {
@@ -59,9 +53,7 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister }) => {
                 setErrorInfo({ state: true, message: "oops an error occurred in our system" });
             } else if (err.response.status >= 400 && err.response.status < 500) {
                 setErrorInfo({ state: true, message: err.response.data.message });
-            }
-
-            if (err.request) {
+            } else if (err.request) {
                 setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
             }
         }

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import styles from "./styles/loginform.module.css";
 
 
@@ -54,4 +54,4 @@ const Input = ({ params }) => {
     )
 }
 
-export default Input;
+export default memo(Input);

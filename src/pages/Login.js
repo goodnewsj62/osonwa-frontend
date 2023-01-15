@@ -10,7 +10,7 @@ import SignUpModal from "components/auth/SignUpModal";
 
 export default function Login(props) {
     const [errorInfo, setErrorInfo] = useState({ state: false, message: "" });
-    const [register, setRegister] = useState({ state: false, email: "", cred: "" });
+    const [register, setRegister] = useState({ state: false, email: "", cred: "", url: "" });
 
 
     return (
@@ -29,7 +29,7 @@ export default function Login(props) {
                     </h1>
                 </section>
                 <section className={styles.main__form}>
-                    <LoginForm />
+                    <LoginForm setErrorInfo={setErrorInfo} />
                 </section>
                 <span className={styles.demacation}> Or, login via</span>
                 <SocialWrapper setRegisterInfo={setRegister} setErrorInfo={setErrorInfo} />

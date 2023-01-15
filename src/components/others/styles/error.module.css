@@ -1,0 +1,21 @@
+.error__div{
+    position: relative;
+    border-radius: var(--radius-10);
+    background-color: rgba(250, 176, 176,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.error__div > button{
+    position: absolute;
+    top: 0;
+    right: 2px;
+    background-color: transparent;
+    border: 0;
+}
+
+.error__div >button svg{
+    fill: #fff;
+}
