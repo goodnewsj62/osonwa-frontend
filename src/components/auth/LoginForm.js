@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 import Input from "./Input";
 import styles from "./styles/loginform.module.css";
-import { authenticateUserAndRedirect } from "utils/helpers";
+import { authenticateUserAndRedirect, axiosFormErrorHandler } from "utils/helpers";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -28,21 +28,19 @@ export default function LoginForm({ setErrorInfo }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const resp = await axios.post(process.env.REACT_APP_BACKEND_URL + "/authenticate", {
-                username: username, password: passValue
+            const resp = await axios({
+                method: "post", url: "/authenticate/", baseURL: process.env.REACT_APP_BACKEND_URL, headers: { "Content-Type": "application/json" }, data: {
+                    email: username, password: passValue
+                }
             });
-
             authenticateUserAndRedirect(resp.data.data, dispatch, navigate, location.state);
         } catch (error) {
-            const data = error.response.data;
-            console.log(error)
-            if (data) {
-                setErrorInfo({ state: true, message: data.message.error });
-            } else if (error.request) {
-                setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
-            }
+            axiosFormErrorHandler(error, ["email", "password"], handleFieldError, handleGenError);
         }
     }
+
+    function handleGenError(error) { setErrorInfo({ state: true, message: error }) };
+    function handleFieldError(type, error) { };
 
     const passwordChange = (event) => setPassValue(event.target.value);
     const usernameChange = (event) => setUsername(event.target.value);
@@ -51,7 +49,7 @@ export default function LoginForm({ setErrorInfo }) {
         <form autoComplete="off" onSubmit={handleSubmit} className={styles.form}>
             <div className={`${styles.form__div}`}>
                 <label htmlFor="username">
-                    Username/Email
+                    Email
                 </label>
                 <Input params={{ type: "text", changeFunc: usernameChange, value: username }} />
             </div>

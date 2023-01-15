@@ -102,5 +102,25 @@ function authenticateUserAndRedirect(data, dispatch, navigate, locationInfo) {
     }
 }
 
+function extractErrorMessages(message, fields, setFieldError, genError) {
+    for (let key in message) {
+        const err = message[key];
+        if (key in fields) {
+            setFieldError(key, err);
+        } else {
+            genError(err);
+        }
+    }
+}
 
-export { authenticateUserAndRedirect, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };
+export function axiosFormErrorHandler(error, fields, handleFieldError, handleGeneralError) {
+    const dataInfo = error.response.data;
+    if (dataInfo) {
+        extractErrorMessages(dataInfo.message, fields, handleFieldError, handleGeneralError);
+    } else if (error.request) {
+        handleGeneralError("request not sent. tip: check if you're connected to the internet");
+    }
+}
+
+
+export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

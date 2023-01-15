@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { authenticateUserAndRedirect } from "utils/helpers";
+import { authenticateUserAndRedirect, axiosFormErrorHandler, extractErrorMessages } from "utils/helpers";
 import { baseAxiosInstance } from "utils/requests";
 // import ComfirmPasswordField from "./authUtils/ComfirmPassword";
 import EmailField from "./authUtils/EmailField";
@@ -59,15 +59,17 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
                 authenticateUserAndRedirect(resp.data.data, dispatch_, navigate, location.state);
             }
             catch (error) {
-                const dataInfo = error.response.data;
-                if (dataInfo) {
-                    setErrorInfo({ state: true, message: dataInfo.message });
-                } else if (error.request) {
-                    setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
-                }
+                axiosFormErrorHandler(error, Object.keys(userInputs), handleFieldError, handleGenError);
             }
         }
     };
+
+
+    function handleFieldError(type, error) { dispatch({ type: type, payload: { isValid: false, error: error } }) };
+    function handleGenError(error) { setErrorInfo({ state: true, message: error }) };
+
+
+
 
     return (
         <form onSubmit={submitHandler} className={`${styles.form} ${styles.grid__form}`}>
