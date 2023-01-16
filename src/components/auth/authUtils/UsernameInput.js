@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { deBounce } from "utils/helpers";
+import { baseAxiosInstance } from "utils/requests";
 import styles from "../styles/loginform.module.css";
 import DefaultField from "./DefaultField";
 
@@ -6,10 +8,18 @@ import DefaultField from "./DefaultField";
 
 
 const UserNameField = ({ dispatch, fieldVal }) => {
-    const userNameExists = (value) => false; // remote call
+    const [usernameExists, setUsernameExists] = useState(false);
 
+    useEffect(() => {
+        const checkUsername = deBounce(() => {
+            baseAxiosInstance("auth/verify/username/", { params: { username: fieldVal.content } })
+                .then((resp) => {
+                    setUsernameExists(resp.data.data.status);
+                });
+        });
 
-
+        checkUsername();
+    }, [fieldVal.content, dispatch]);
 
     const performErrorChecks = (trimmedValue, hasWhiteSpace, value, alreadyTaken) => {
         if (trimmedValue === "" || trimmedValue === " ") {
@@ -36,7 +46,7 @@ const UserNameField = ({ dispatch, fieldVal }) => {
     const userNameValidation = (event) => {
         const trimmedValue = event.target.value.trim();
         const value = event.target.value;
-        const alreadyTaken = userNameExists(value);
+        const alreadyTaken = usernameExists;
         const hasWhiteSpace = value.includes(" ");
 
         const payload = { content: value };

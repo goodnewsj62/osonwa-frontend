@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { authenticateUserAndRedirect, axiosFormErrorHandler, extractErrorMessages } from "utils/helpers";
+import { authenticateUserAndRedirect, axiosFormErrorHandler } from "utils/helpers";
 import { baseAxiosInstance } from "utils/requests";
 // import ComfirmPasswordField from "./authUtils/ComfirmPassword";
 import EmailField from "./authUtils/EmailField";
@@ -33,14 +33,7 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
     const navigate = useNavigate();
     const location = useLocation();
 
-
-    useEffect(() => {
-        // the email needs to be filled up automatically on first render
-        dispatch({ type: "email", payload: { content: email, isValid: true } });
-    }, [email]);
-
-
-    const isValid = useCallback(() => Object.values(userInputs).every((value) => value.isValid === true), [userInputs])
+    const isValid = useCallback(() => Object.values(userInputs).every((value) => value.isValid === true), [userInputs]);
 
     useEffect(() => {
         if (isValid()) {
@@ -49,6 +42,11 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
             setFormValidState(false);
         }
     }, [userInputs, isValid]);
+
+    useEffect(() => {
+        // the email needs to be filled up automatically on first render
+        dispatch({ type: "email", payload: { content: email, isValid: true } });
+    }, [email]);
 
 
     const submitHandler = async (event) => {
