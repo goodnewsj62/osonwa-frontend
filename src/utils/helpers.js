@@ -105,7 +105,7 @@ function authenticateUserAndRedirect(data, dispatch, navigate, locationInfo) {
 function extractErrorMessages(message, fields, setFieldError, genError) {
     for (let key in message) {
         const err = message[key];
-        if (key in fields) {
+        if (fields.indexOf(key) !== -1) {
             setFieldError(key, err);
         } else {
             genError(err);

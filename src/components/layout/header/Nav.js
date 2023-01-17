@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiPlusSquare } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import LoginLink from "./buttons/LoginButton";
 import NotificationComp from "./NotificationComp";
 import Profile from "./ProfileNav/Profile";
 import styles from "./styles/nav.module.css";
@@ -12,6 +13,8 @@ import styles from "./styles/nav.module.css";
 function Nav({ showSearch }) {
     const iconSize = useContext(DefaultIconSize);
     const authState = useSelector((state) => state.authState.state);
+
+    console.log(authState)
 
 
 
@@ -30,9 +33,8 @@ function Nav({ showSearch }) {
                 <li>
                     <NotificationComp iconSize={iconSize} />
                 </li>
-                {/* {!authState && <LoginLink />}
-                {authState && ProfileLink} */}
-                {ProfileLink}
+                {!authState && <LoginLink />}
+                {authState && ProfileLink}
             </ul>
         </nav>
     )

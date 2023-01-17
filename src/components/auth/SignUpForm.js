@@ -49,14 +49,21 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
     }, [email]);
 
 
+    const getContent = (field) => {
+        return userInputs[field].content;
+    }
+
+
     const submitHandler = async (event) => {
         event.preventDefault();
         if (isValid()) {
             try {
-                const resp = await baseAxiosInstance.post(url, userInputs);
+                const data = { username: getContent("username"), email: getContent("email"), firstname: getContent("firstName"), lastname: getContent("lastName"), token: cred };
+                const resp = await baseAxiosInstance.post(url, data);
                 authenticateUserAndRedirect(resp.data.data, dispatch_, navigate, location.state);
             }
             catch (error) {
+                console.log(error.response)
                 axiosFormErrorHandler(error, Object.keys(userInputs), handleFieldError, handleGenError);
             }
         }

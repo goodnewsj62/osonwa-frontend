@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 import { Articles, Home, Layout } from "./pages";
 import "./styles/base.css";
 
 import LoginRequired from "components/others/Protected";
-import { Comments } from "pages/Treads";
+// import { Comments } from "pages/Treads";
 import IconSize from "components/wrappers/IconSize";
 import Login from "pages/Login";
 import SignUp from "pages/SignUp";
@@ -15,22 +15,20 @@ import Trending from "pages/Trending";
 import Saved from "pages/Saved";
 import Liked from "pages/Liked";
 import Profile from "pages/Profile";
+import { useDispatch } from "react-redux";
+import { refreshToken } from "store/authSlice";
 
 
 function App(props) {
-    // const [auth, setAuth] = useState(false);
+    const dispatch = useDispatch();
 
-    // Note: only one function should be able to mutate each item in storage
-    // const accessToken = localStorage.getItem("accessToken");
-    // const refreshToken = localStorage.getItem("refreshToken");
-
-    // useEffect(() => {
-    //     if (accessToken) {
-    //         const [tokenHasExpired, tokenSoonExpire] = isExpired(parseJwt(accessToken));
-    //         const [refreshHasExpired, refreshSoonExpired] = isExpired(parseJwt(refreshToken));
-    //         setAuthBasedOnRefreshToken({ setAuth, tokenHasExpired, tokenSoonExpire, refreshHasExpired });
-    //     }
-    // }, [])
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const jwtToken = JSON.parse(token);
+            dispatch(refreshToken(jwtToken.refresh));
+        }
+    }, [dispatch]);
 
     //TODO: two useState protect with memo
     const WrappedLayout = <IconSize element={<Layout />} />
