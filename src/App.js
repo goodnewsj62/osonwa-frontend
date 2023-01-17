@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 import { Articles, Home, Layout } from "./pages";
@@ -17,44 +17,60 @@ import Liked from "pages/Liked";
 import Profile from "pages/Profile";
 import { useDispatch } from "react-redux";
 import { refreshToken } from "store/authSlice";
+import { SpreadLoader } from "components/others";
+import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
 
 
 function App(props) {
     const dispatch = useDispatch();
+    const [loaderStatus, setLoaderStatus] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
             const jwtToken = JSON.parse(token);
-            dispatch(refreshToken(jwtToken.refresh));
+            dispatch(refreshToken(jwtToken.refresh))
+                .unwrap()
+                .then((resp) => {
+                    setLoaderStatus(false);
+                }).catch((err) => {
+                    setLoaderStatus(false);
+                })
+        } else {
+            setLoaderStatus(false);
         }
     }, [dispatch]);
 
     //TODO: two useState protect with memo
     const WrappedLayout = <IconSize element={<Layout />} />
 
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={WrappedLayout}>
-                    <Route index element={<Home />} />
-                    <Route path="/articles" element={<Articles />} />
-                    {/* <Route path="/post/:id/comments/" element={<Comments />} /> */}
-                    {/* <Route element={<LoginRequired />}> */}
-                    {/*  profile, create post */}
-                    <Route path="/article/:slug" element={<ArticleDetail />} />
-                    <Route path="/detail/:slug" element={<FeedDetail />} />
-                    <Route path="/trending" element={<Trending />} />
-                    <Route path="/fresh" element={<Trending />} />
-                    <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
-                    <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
-                    <Route path="/:username" element={<Profile />} />
-                </Route>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-            </Routes>
-        </Router>
-    )
+
+    if (!loaderStatus) {
+        return (
+            <Router>
+                <Routes>
+                    <Route path="/" element={WrappedLayout}>
+                        <Route index element={<Home />} />
+                        <Route path="/articles" element={<Articles />} />
+                        {/* <Route path="/post/:id/comments/" element={<Comments />} /> */}
+                        {/* <Route element={<LoginRequired />}> */}
+                        {/*  profile, create post */}
+                        <Route path="/article/:slug" element={<ArticleDetail />} />
+                        <Route path="/detail/:slug" element={<FeedDetail />} />
+                        <Route path="/trending" element={<Trending />} />
+                        <Route path="/fresh" element={<Trending />} />
+                        <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
+                        <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
+                        <Route path="/:username" element={<Profile />} />
+                    </Route>
+                    <Route path="/login" element={<UnAuthenticatedOnly ><Login /></UnAuthenticatedOnly>} />
+                    <Route path="/signup" element={<UnAuthenticatedOnly ><SignUp /></UnAuthenticatedOnly>} />
+                </Routes>
+            </Router>
+        )
+    } else {
+        return <SpreadLoader fullHeight={true} />
+    }
 }
 
 

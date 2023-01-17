@@ -14,8 +14,6 @@ function Nav({ showSearch }) {
     const iconSize = useContext(DefaultIconSize);
     const authState = useSelector((state) => state.authState.state);
 
-    console.log(authState)
-
 
 
 
