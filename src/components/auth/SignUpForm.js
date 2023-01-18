@@ -65,7 +65,7 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
                 authenticateUserAndRedirect(resp.data.data, dispatch_, navigate, location.state);
             }
             catch (error) {
-                console.log(error.response)
+                console.log(error)
                 axiosFormErrorHandler(error, Object.keys(userInputs), handleFieldError, handleGenError);
             }
         }

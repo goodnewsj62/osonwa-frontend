@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { authenticateUserAndRedirect } from "utils/helpers";
+import { authenticateUserAndRedirect, setStandardError } from "utils/helpers";
 import { baseAxiosInstance } from "utils/requests";
 import styles from "../styles/socials.module.css";
 
 
-const GoogleHandler = ({ setErrorInfo, size, setRegister }) => {
+const GoogleHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
     const buttonRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -36,6 +36,8 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister }) => {
                 redirect to home or navigate to next
             negative pop up a message
         */
+        setLoader(true);
+
         try {
             const response = await baseAxiosInstance.post(`/auth/google/`, { token: resp.credential }, {
                 validateStatus: (status) => status < 400
@@ -49,14 +51,10 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister }) => {
             }
 
         } catch (err) {
-            if (err.response.status >= 500) { //TODO: create standard error variables
-                setErrorInfo({ state: true, message: "oops an error occurred in our system" });
-            } else if (err.response.status >= 400 && err.response.status < 500) {
-                setErrorInfo({ state: true, message: err.response.data.message.error });
-            } else if (err.request) {
-                setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
-            }
+            setStandardError(setErrorInfo, err);
         }
+
+        setLoader(false);
     };
 
 

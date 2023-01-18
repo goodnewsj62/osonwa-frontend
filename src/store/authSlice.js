@@ -42,7 +42,6 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(refreshToken.rejected, (state, action) => {
-            console.log("xxxxxx")
             state.refresh = "";
             state.access = "";
             state.state = false;

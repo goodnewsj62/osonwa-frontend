@@ -122,5 +122,17 @@ export function axiosFormErrorHandler(error, fields, handleFieldError, handleGen
     }
 }
 
+export function setStandardError(setErrorInfo, err) {
+    if (err.response) {
+        if (err.response.status >= 500) { //TODO: create standard error variables
+            setErrorInfo({ state: true, message: "oops an error occurred in our system" });
+        } else if (err.response.status >= 400 && err.response.status < 500) {
+            setErrorInfo({ state: true, message: err.response.data.message.error });
+        }
+    } else if (err.request) {
+        setErrorInfo({ state: true, message: "request not sent. tip: check if you're connected to the internet" });
+    }
+};
+
 
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

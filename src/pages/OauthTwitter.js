@@ -21,21 +21,25 @@ const OauthTwitter =  (props)=>{
     },[])
 
     async function authenticate(params){
-        const oauth_data =  {oauth_token:params.oauth_token, oauth_verifier: params.oauth_verifier};
         try{
-            const resp =  await baseAxiosInstance.post(oauth_data,{ValidityState: (status)=> status < 400});
-            const data =  resp.data.data
+            const oauth_data =  {oauth_token:params.get("oauth_token"), oauth_verifier: params.get("oauth_verifier")};
+            const resp =  await baseAxiosInstance.post("/auth/twitter/",oauth_data,{validateStatus: (status)=> status < 400});
+            
             if(resp.status !== 308){
+                const data =  resp.data.data;
                 authenticateUserAndRedirect(data, dispatch, navigate, location_.state);
             }else{
-                setRegister({state:false,email:data.email,url:data.url, cred:{...oauth_data}});
+                const data =  resp.data.message;
+                setRegister({state:true,email:data.email,url:data.url,cred:{social_id:data.social_id}});
             }
         }catch(err){
-            if (err.response.status >= 500) { 
-                navigate("/", {state:{message: "oops an error occurred in our system"}});
-            } else if (err.response.status >= 400 && err.response.status < 500) {
-                navigate("/", {state:{message: err.response.data.message.error}});
-            } else if (err.request) {
+            if(err.response){
+                    if (err.response.status >= 500) { 
+                        navigate("/", {state:{message: "oops an error occurred in our system"}});
+                    } else if (err.response.status >= 400 && err.response.status < 500) {
+                        navigate("/", {state:{message: err.response.data.message.error}});
+                    } 
+            }else if (err.request) {
                 navigate("/", {state:{message: "authentication failed."}});
             }
         }

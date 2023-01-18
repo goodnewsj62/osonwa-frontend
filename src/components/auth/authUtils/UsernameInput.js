@@ -11,17 +11,28 @@ const UserNameField = ({ dispatch, fieldVal }) => {
     const [usernameExists, setUsernameExists] = useState(false);
 
     useEffect(() => {
-        const checkUsername = deBounce(() => {
+        const validateUsername = deBounce(() => {
             baseAxiosInstance("auth/verify/username/", { params: { username: fieldVal.content } })
                 .then((resp) => {
                     setUsernameExists(resp.data.data.status);
                 });
         });
 
-        checkUsername();
+        validateUsername();
+
     }, [fieldVal.content, dispatch]);
 
-    const performErrorChecks = (trimmedValue, hasWhiteSpace, value, alreadyTaken) => {
+    useEffect(() => {
+        //set error if username does not exists
+        if (usernameExists) {
+            const payload = { isValid: false, error: "username has already been taken" };
+            dispatch({ type: "username", payload: payload });
+        }
+    }, [usernameExists, dispatch]);
+
+
+
+    const performErrorChecks = (trimmedValue, hasWhiteSpace, value) => {
         if (trimmedValue === "" || trimmedValue === " ") {
             const payload = { isValid: false, error: "this field is required" };
             dispatch({ type: "username", payload: payload });
@@ -31,34 +42,26 @@ const UserNameField = ({ dispatch, fieldVal }) => {
         } else if (hasWhiteSpace) {
             const payload = { isValid: false, error: "username cant contain spaces" };
             dispatch({ type: "username", payload: payload });
-        }
-        else if (alreadyTaken) {
-            const payload = { isValid: false, error: "username has already been taken" };
-            dispatch({ type: "username", payload: payload });
         } else {
             const payload = { isValid: true, error: "" };
             dispatch({ type: "username", payload: payload });
         }
     };
 
-    const debounceErrorChecks = deBounce(performErrorChecks, 1000);
+
+    const debounceErrorChecks = deBounce(performErrorChecks, 400);
 
     const userNameValidation = (event) => {
         const trimmedValue = event.target.value.trim();
         const value = event.target.value;
-        const alreadyTaken = usernameExists;
         const hasWhiteSpace = value.includes(" ");
 
         const payload = { content: value };
         dispatch({ type: "username", payload: payload });
 
-        if (event.type === "blur") {
-            performErrorChecks(trimmedValue, hasWhiteSpace, value, alreadyTaken);
-        } else {
-            debounceErrorChecks(trimmedValue, hasWhiteSpace, value, alreadyTaken);
-        }
+        debounceErrorChecks(trimmedValue, hasWhiteSpace, value);
 
-        return
+
     };
 
     const inputErrorStyle = fieldVal.error ? `${styles.error__highlight}` : "";
@@ -67,7 +70,6 @@ const UserNameField = ({ dispatch, fieldVal }) => {
         value: fieldVal.content,
         type: "text",
         name: "username",
-        blurFunc: userNameValidation,
         changeFunc: userNameValidation
     }
 

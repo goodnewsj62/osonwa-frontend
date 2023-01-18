@@ -7,7 +7,7 @@ import { authenticateUserAndRedirect, axiosFormErrorHandler } from "utils/helper
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
-export default function LoginForm({ setErrorInfo }) {
+export default function LoginForm({ setErrorInfo, setLoader }) {
     const [passShow, setPassShow] = useState(false);
     const [passValue, setPassValue] = useState("");
     const [username, setUsername] = useState("");
@@ -27,14 +27,18 @@ export default function LoginForm({ setErrorInfo }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoader(true);
+
         try {
             const resp = await axios({
                 method: "post", url: "/authenticate/", baseURL: process.env.REACT_APP_BACKEND_URL, headers: { "Content-Type": "application/json" }, data: {
                     email: username, password: passValue
                 }
             });
+            setLoader(false);
             authenticateUserAndRedirect(resp.data.data, dispatch, navigate, location.state);
         } catch (error) {
+            setLoader(false);
             axiosFormErrorHandler(error, ["email", "password"], handleFieldError, handleGenError);
         }
     }
