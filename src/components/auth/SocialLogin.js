@@ -9,7 +9,7 @@ export default memo(function SocialWrapper({ setErrorInfo, setRegisterInfo }) {
     return (
         <section className={styles.socials} aria-label="social login">
             <GoogleHandler setRegister={setRegisterInfo} setErrorInfo={setErrorInfo} size={size} />
-            <FacebookHandler setErrorInfo={setErrorInfo} size={size} />
+            <FacebookHandler setErrorInfo={setErrorInfo} size={size} setRegister={setRegisterInfo} />
             <TwitterHandler setErrorInfo={setErrorInfo} size={size} />
         </section>
     );

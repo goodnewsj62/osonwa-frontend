@@ -10,7 +10,7 @@ import SignUpModal from "components/auth/SignUpModal";
 
 export default function Login(props) {
     const [errorInfo, setErrorInfo] = useState({ state: false, message: "" });
-    const [register, setRegister] = useState({ state: false, email: "", cred: "", url: "" });
+    const [register, setRegister] = useState({ state: false, email: "", cred: {}, url: "" });
 
 
     return (

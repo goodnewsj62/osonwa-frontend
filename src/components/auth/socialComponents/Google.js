@@ -43,7 +43,7 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister }) => {
 
             if (response.status === 308) {
                 const message = response.data.message;
-                setRegister({ state: true, email: message.email, cred: resp.credential, url: message.url });
+                setRegister({ state: true, email: message.email, cred: { token: resp.credential }, url: message.url });
             } else {
                 authenticateUserAndRedirect(response.data.data, dispatch, navigate, location.state);
             }

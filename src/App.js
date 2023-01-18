@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { refreshToken } from "store/authSlice";
 import { SpreadLoader } from "components/others";
 import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
+import OauthTwitter from "pages/OauthTwitter";
 
 
 function App(props) {
@@ -65,6 +66,7 @@ function App(props) {
                     </Route>
                     <Route path="/login" element={<UnAuthenticatedOnly ><Login /></UnAuthenticatedOnly>} />
                     <Route path="/signup" element={<UnAuthenticatedOnly ><SignUp /></UnAuthenticatedOnly>} />
+                    <Route path="/callback/twitter" element={<OauthTwitter />} />
                 </Routes>
             </Router>
         )

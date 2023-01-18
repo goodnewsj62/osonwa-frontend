@@ -45,7 +45,9 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
 
     useEffect(() => {
         // the email needs to be filled up automatically on first render
-        dispatch({ type: "email", payload: { content: email, isValid: true } });
+        if (email) {
+            dispatch({ type: "email", payload: { content: email, isValid: true } });
+        }
     }, [email]);
 
 
@@ -58,7 +60,7 @@ export default function SignUpForm({ email, cred, url, setErrorInfo }) {
         event.preventDefault();
         if (isValid()) {
             try {
-                const data = { username: getContent("username"), email: getContent("email"), firstname: getContent("firstName"), lastname: getContent("lastName"), token: cred };
+                const data = { username: getContent("username"), email: getContent("email"), firstname: getContent("firstName"), lastname: getContent("lastName"), ...cred };
                 const resp = await baseAxiosInstance.post(url, data);
                 authenticateUserAndRedirect(resp.data.data, dispatch_, navigate, location.state);
             }
