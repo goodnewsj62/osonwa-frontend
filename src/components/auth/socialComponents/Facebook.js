@@ -1,5 +1,4 @@
 import { FaFacebookF } from "react-icons/fa";
-import { useEffect } from "react";
 import { baseAxiosInstance } from "utils/requests";
 import { authenticateUserAndRedirect, setStandardError } from "utils/helpers";
 import { useDispatch } from "react-redux";
@@ -10,24 +9,13 @@ const FacebookHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    useEffect(()=>{
-        window.fbAsyncInit = function() {
-            window.FB.init({
-            appId      : process.env.REACT_APP_FACEBOOK_ID,
-              cookie     : true,                     // Enable cookies to allow the server to access the session.
-              xfbml      : true,                     // Parse social plugins on this webpage.
-              version    : 'v15.0'           // Use this Graph API version for this call.
-            });
-        };
-    },[]);
-
     
     const authenticate =  async (data)=>{
         try{
-            const response = await baseAxiosInstance.post("/auth/facebook/", {token:data.accessToken}, {validateStatus: (status)=> status< 400});
+            const response = await baseAxiosInstance.post("/auth/facebook/", {token:data.accessToken, user_id:data.userID}, {validateStatus: (status)=> status< 400});
             if (response.status === 308) {
                 const message = response.data.message;
-                setRegister({ state: true, email: message.email, cred: { token: data.accessToken }, url: message.url });
+                setRegister({ state: true, email: message.email, cred: { token: data.accessToken, user_id: data.userID }, url: message.url });
             } else {
                 authenticateUserAndRedirect(response.data.data, dispatch, navigate, location.state);
             }
@@ -43,7 +31,7 @@ const FacebookHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
         window.FB.login((response)=>{
             const data =  response.authResponse;
             authenticate(data);
-        });
+        },{scope:"email"});
     };
 
     const loginHandler = (event)=>{      
