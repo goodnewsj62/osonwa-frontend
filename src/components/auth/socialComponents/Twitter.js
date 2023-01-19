@@ -1,8 +1,10 @@
 import { BsTwitter } from "react-icons/bs";
 import { baseAxiosInstance } from "utils/requests";
+import styles from "../styles/socials.module.css";
 
 
-const TwitterHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
+
+const TwitterHandler = ({ setErrorInfo, size, setRegister, setLoader, type }) => {
     const clickHandler = (event) => {
         setLoader(true);
 
@@ -16,9 +18,17 @@ const TwitterHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
 
         setLoader(false);
     };
+
+    const styleClasses = type === "rect" ? `${styles.twitter__rect}` : "";
+    const rectComp = (<div>
+        <BsTwitter fill={"#fff"} size={size} />
+        <span>Continue with Twitter</span>
+    </div>);
+
     return (
-        <div onClick={clickHandler} className="twitter">
-            <BsTwitter fill={"#1E9BF0"} size={size} />
+        <div onClick={clickHandler} className={styleClasses}>
+            {type !== "rect" && <BsTwitter fill={"#1E9BF0"} size={size} />}
+            {type === "rect" && rectComp}
         </div>
     );
 }

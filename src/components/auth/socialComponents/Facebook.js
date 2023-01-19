@@ -1,31 +1,10 @@
 import { FaFacebookF } from "react-icons/fa";
-import { baseAxiosInstance } from "utils/requests";
-import { authenticateUserAndRedirect, setStandardError } from "utils/helpers";
-import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import styles from "../styles/socials.module.css";
+import { BsFacebook } from "react-icons/bs";
+import useFbAuthenticate from "./helpers/fbhelper";
 
-const FacebookHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    
-    const authenticate =  async (data)=>{
-        try{
-            const response = await baseAxiosInstance.post("/auth/facebook/", {token:data.accessToken, user_id:data.userID}, {validateStatus: (status)=> status< 400});
-            if (response.status === 308) {
-                const message = response.data.message;
-                setRegister({ state: true, email: message.email, cred: { token: data.accessToken, user_id: data.userID }, url: message.url });
-            } else {
-                authenticateUserAndRedirect(response.data.data, dispatch, navigate, location.state);
-            }
-        }catch(err){
-            setStandardError(setErrorInfo, err);
-        }
-
-        setLoader(false);
-    };
-
+const FacebookHandler = ({ setErrorInfo, size, setRegister, setLoader, type}) => {
+    const authenticate =  useFbAuthenticate(setLoader,setRegister,setErrorInfo);
 
     const authHandler =  (event)=>{
         window.FB.login((response)=>{
@@ -46,9 +25,16 @@ const FacebookHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
         });
     };
 
+    const styleClasses = type === "rect"? `${styles.facebook__rect}`: ""; 
+    const rectComp =  (<div>
+                        <BsFacebook fill={"#fff"} size={size}/>
+                        <span>Continue with Facebook</span>
+                    </div>);
+
     return (
-        <div onClick={loginHandler} className="facebook">
-            <FaFacebookF fill={"#008AF3"} size={size} />
+        <div onClick={loginHandler} className={styleClasses}>
+            {type !== "rect" && <FaFacebookF fill={"#008AF3"} size={size} />}
+            {type === "rect" && rectComp}
         </div>
     );
 };

@@ -7,23 +7,30 @@ import { baseAxiosInstance } from "utils/requests";
 import styles from "../styles/socials.module.css";
 
 
-const GoogleHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
+const GoogleHandler = ({ setErrorInfo, size, setRegister, setLoader, type }) => {
     const buttonRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
 
+
     useEffect(() => {
-        window.onload = function () {
-            window.google.accounts.id.initialize({
-                client_id: process.env.REACT_APP_G_CLIENT_ID,
-                callback: handleGoogleAuth
-            });
-            window.google.accounts.id.renderButton(
-                buttonRef.current, { theme: "outline", size: "large", type: "icon" })
-        };
+        const theme = type === "rect" ? "filled_blue" : "outline";
+        const type_ = type === "rect" ? "standard" : "icon";
+        googleInit(theme, type_);
     }, []);
+
+
+    function googleInit(theme, type_) {
+        window.google.accounts.id.initialize({
+            client_id: process.env.REACT_APP_G_CLIENT_ID,
+            callback: handleGoogleAuth
+        });
+
+        window.google.accounts.id.renderButton(
+            buttonRef.current, { theme: theme, size: "large", type: type_ })
+    };
 
 
 
@@ -58,12 +65,14 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister, setLoader }) => {
     };
 
 
+    const containerStyle = type === "rect" ? styles.google__rect : styles.google;
+    const holderStyle = type === "rect" ? styles.holder : styles.mask;
 
     return (
-        <div className={styles.google}>
-            <div ref={buttonRef} className={styles.mask}>
+        <div className={containerStyle}>
+            <div ref={buttonRef} className={holderStyle}>
             </div>
-            <FcGoogle size={size} />
+            {type !== "rect" && <FcGoogle size={size} />}
         </div>
     );
 };

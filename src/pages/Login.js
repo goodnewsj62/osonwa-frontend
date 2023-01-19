@@ -38,7 +38,7 @@ export default function Login(props) {
                     <LoginForm setErrorInfo={setErrorInfo} setLoader={setLoader} />
                 </section>
                 <span className={styles.demacation}> Or, login via</span>
-                <SocialWrapper setRegisterInfo={setRegister} setErrorInfo={setErrorInfo} setLoader={setLoader} />
+                <SocialWrapper type={"normal"} setRegisterInfo={setRegister} setErrorInfo={setErrorInfo} setLoader={setLoader} />
                 <span className={styles.copyright}>
                     &copy; 2023 Osonwa. All rights reserved.
                 </span>
