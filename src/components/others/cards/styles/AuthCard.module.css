@@ -106,7 +106,7 @@
     justify-content: center;
 }
 .auth__footer div:last-child span{
-    color: var(--comp-one);
+    color: #1e90ff;
     font-weight: bold;
     margin-left: 5px;
     cursor:default;
@@ -114,3 +114,7 @@
 .auth__footer div:last-child span:hover{
     text-decoration: underline;
 } 
+
+.auth__footer a{
+    color: inherit;
+}

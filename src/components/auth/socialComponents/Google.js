@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { authenticateUserAndRedirect, setStandardError } from "utils/helpers";
 import { baseAxiosInstance } from "utils/requests";
 import styles from "../styles/socials.module.css";
+import { googleInit } from "./helpers/googlehelper";
 
 
 const GoogleHandler = ({ setErrorInfo, size, setRegister, setLoader, type }) => {
@@ -18,19 +19,8 @@ const GoogleHandler = ({ setErrorInfo, size, setRegister, setLoader, type }) => 
     useEffect(() => {
         const theme = type === "rect" ? "filled_blue" : "outline";
         const type_ = type === "rect" ? "standard" : "icon";
-        googleInit(theme, type_);
+        googleInit(theme, type_, handleGoogleAuth, buttonRef);
     }, []);
-
-
-    function googleInit(theme, type_) {
-        window.google.accounts.id.initialize({
-            client_id: process.env.REACT_APP_G_CLIENT_ID,
-            callback: handleGoogleAuth
-        });
-
-        window.google.accounts.id.renderButton(
-            buttonRef.current, { theme: theme, size: "large", type: type_ })
-    };
 
 
 

@@ -1,15 +1,45 @@
-
-import { FcGoogle } from "react-icons/fc";
-
 import { MdCancel } from "react-icons/md";
 
 import styles from "./styles/AuthCard.module.css";
 import rocket from "static/images/Saly-43.png";
-import { useContext } from "react";
-import { DefaultIconSize } from "components/wrappers/IconSize";
+import { useEffect, useRef } from "react";
+import { googleInit } from "components/auth/socialComponents/helpers/googlehelper";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { baseAxiosInstance } from "utils/requests";
+import { authenticateUserAndRedirect } from "utils/helpers";
 
-function AuthCard({ hideHandler }) {
-    const iconSize = useContext(DefaultIconSize);
+function AuthCard({ hideHandler, next }) {
+    const buttonRef = useRef();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        googleInit("filled_blue", "standard", handleGoogleAuth, buttonRef);
+    }, []);
+
+
+    const handleGoogleAuth = async (resp) => {
+        try {
+            const response = await baseAxiosInstance.post(`/auth/google/`, { token: resp.credential }, {
+                validateStatus: (status) => status < 400
+            });
+
+            if (response.status === 308) {
+                const message = response.data.message;
+                const state = { popStat: true, popEmail: message.email, popUrl: message.url, popCred: { token: resp.credential }, next: next };
+                navigate("/signup", { state: state })
+            } else {
+                const next_location = next ? { "next": next } : {};
+                authenticateUserAndRedirect(response.data.data, dispatch, navigate, next_location);
+            }
+
+        } catch (err) {
+            navigate("/", { state: { message: "authentication failed." } });
+        }
+    };
+
 
     return (
         <div className={styles.auth__card} >
@@ -22,13 +52,13 @@ function AuthCard({ hideHandler }) {
             </div>
             <div className={styles.auth__footer} >
                 <div className={styles.action}>
-                    <button type="button">
-                        <span><FcGoogle size={iconSize} /></span> Sign up with google
-                    </button>
-                    <span>Or sign up via other methods</span>
+                    <div ref={buttonRef}>
+
+                    </div>
+                    <span><Link to="/login"> Or sign up via other methods </Link></span>
                 </div>
                 <div>
-                    Already have an account? <span>Login </span>
+                    Already have an account? <span><Link to="/login">Login</Link> </span>
                 </div>
             </div>
         </div>

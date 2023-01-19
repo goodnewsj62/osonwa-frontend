@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SocialWrapper from "components/auth/SocialLogin";
 import SignUpModal from "components/auth/SignUpModal";
 import Decoration from "components/others/SideDecoration";
 import styles from "./styles/login.module.css";
 import ErrorContainer from "components/others/ErrorDisplay";
 import InfinteToFroBar from "components/others/loaders/ToFroBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -13,6 +13,19 @@ export default function SignUp(props) {
     const [errorInfo, setErrorInfo] = useState({ state: false, message: "" });
     const [register, setRegister] = useState({ state: false, email: "", cred: {}, url: "" });
     const [loader, setLoader] = useState(false);
+    const location = useLocation();
+
+
+    useEffect(() => {
+        const locState = location.state;
+        if ("popStat" in locState && locState.popStat) {
+            setRegister({ state: true, email: locState.popEmail, ur: locState.popUrl, cred: locState.popCred });
+        }
+
+        if ("next" in locState && locState.next) location.state = { next: locState.next }
+        else location.state = {}
+
+    }, [location]);
 
     return (
         <div className={styles.container}>
