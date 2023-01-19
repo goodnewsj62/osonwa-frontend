@@ -59,4 +59,4 @@ const authStateReducers = authSlice.reducer;
 const authStateActions = authSlice.actions;
 
 export default authStateActions;
-export { authStateReducers, saveAuthToken, refreshToken };
+export { authStateReducers, saveAuthToken, refreshToken, clearToken };
