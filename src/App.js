@@ -20,6 +20,7 @@ import { refreshToken } from "store/authSlice";
 import { SpreadLoader } from "components/others";
 import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
 import OauthTwitter from "pages/OauthTwitter";
+import { fetchAllInterest } from "store/interestsSlice";
 
 
 function App(props) {
@@ -31,15 +32,17 @@ function App(props) {
         if (token) {
             const jwtToken = JSON.parse(token);
             dispatch(refreshToken(jwtToken.refresh))
-                .unwrap()
-                .then((resp) => {
-                    setLoaderStatus(false);
-                }).catch((err) => {
-                    setLoaderStatus(false);
-                })
-        } else {
-            setLoaderStatus(false);
+            // .unwrap()
+            // .then((resp) => {
+            //     setLoaderStatus(false);
+            // }).catch((err) => {
+            //     setLoaderStatus(false);
+            // })
         }
+
+        dispatch(fetchAllInterest())
+
+        setLoaderStatus(false);
     }, [dispatch]);
 
     //TODO: two useState protect with memo

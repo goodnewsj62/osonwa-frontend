@@ -18,11 +18,11 @@ export default function SignUp(props) {
 
     useEffect(() => {
         const locState = location.state;
-        if ("popStat" in locState && locState.popStat) {
+        if (locState && "popStat" in locState && locState.popStat) {
             setRegister({ state: true, email: locState.popEmail, ur: locState.popUrl, cred: locState.popCred });
         }
 
-        if ("next" in locState && locState.next) location.state = { next: locState.next }
+        if (locState && "next" in locState && locState.next) location.state = { next: locState.next }
         else location.state = {}
 
     }, [location]);
