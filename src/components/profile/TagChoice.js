@@ -1,34 +1,40 @@
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { updateInterests } from "store/interestsSlice";
 import styles from "./styles/tagchoice.module.css";
 
 
 
-const TagChoice = ({ setHasPickedTags, hideHandler }) => {
+const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
     // already picked tags id should be set in state below after
     // first render
-    const [pickedTags, setPickedTags] = useState([]);
+    const userInterests = useSelector((states) => states.profileState.interests);
+    const [pickedTags, setPickedTags] = useState([...userInterests]);
+    const interests = useSelector((states) => states.interestState.allInterests);
+    const username = useSelector((states) => states.profileState.userInfo.username);
+    const dispatch = useDispatch();
 
-    //dummy fill
-    const numarr = [];
-    const tags_ = ["python", "js", "3d printing", "gaming", "data science"];
-    for (let i = 1; i <= 20; i++) {
-        numarr.push(i);
-    }
 
-    const tags = numarr.map((item) => {
-        const index = Math.max(0, (Math.round(((Math.random() * 20) / 4))) - 1);
-        return (
-            // data-id should be item.id
-            <button type="button" key={item} data-id={item} onClick={pickHandler}>
-                {tags_[index]}
-            </button>
-        )
+    const tags = interests.map(({ id, name }) => {
+        if (pickedTags.indexOf(name) !== -1) {
+            return (
+                <button className={styles.highlight} type="button" key={id} onClick={pickHandler}>
+                    {name}
+                </button>
+            )
+        } else {
+            return (
+                <button type="button" key={id} onClick={pickHandler}>
+                    {name}
+                </button>
+            )
+        }
     });
 
     function pickHandler(event) {
-        const dataID = event.target.getAttribute("data-id");
-        const index = pickedTags.indexOf(+dataID);
+        const name = event.target.innerText.trim();
+        const index = pickedTags.indexOf(name);
 
         if (index !== -1) {
             const newTags = pickedTags.splice(0);
@@ -36,13 +42,20 @@ const TagChoice = ({ setHasPickedTags, hideHandler }) => {
             setPickedTags(newTags);
             event.target.classList.remove(`${styles.highlight}`);
         } else {
-            setPickedTags((arr) => [...arr, +dataID]);
+            setPickedTags((arr) => [...arr, name]);
             event.target.classList.add(`${styles.highlight}`);
         }
     };
 
     const handleSubmit = () => {
-        //setHasPickedTags();
+        dispatch(updateInterests({ arr: pickedTags, username }))
+            .unwrap()
+            .then((resp) => {
+                if (!hasChoosenTags) {
+                    setHasPickedTags();
+                }
+            })
+            .catch((resp) => { });
     };
 
     return (

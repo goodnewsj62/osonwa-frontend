@@ -33,7 +33,7 @@ export default function TagPopup(props) {
     if (!hasChoosenTags && authState && !closeTagModal) {
         return (
             <>
-                {ReactDOM.createPortal(<TagChoice setHasPickedTags={setHasPickedTags} hideHandler={hideHandler} />, document.getElementById("auth__div"))}
+                {ReactDOM.createPortal(<TagChoice setHasPickedTags={setHasPickedTags} hasChoosenTags={hasChoosenTags} hideHandler={hideHandler} />, document.getElementById("auth__div"))}
                 {ReactDOM.createPortal(<Cover hideHandler={hideHandler} />, document.getElementById("mask"))}
             </>
         );

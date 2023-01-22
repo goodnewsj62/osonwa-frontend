@@ -7,7 +7,6 @@ const fetchAllInterest =  createAsyncThunk("interests/fetchAllInterest", async (
     try{
         const response =  await baseAxiosInstance({method:"get", url: "auth/interests"});
         const data =  response.data.data
-        console.log(data)
         ThunkApi.dispatch(interestAction.populateInterests(data))
         return data 
 
@@ -17,6 +16,18 @@ const fetchAllInterest =  createAsyncThunk("interests/fetchAllInterest", async (
     }
 });
 
+
+const updateInterests =  createAsyncThunk("interests/updateInterests", async ({arr,username}, ThunkApi)=>{
+    try{
+        const data =  {"interest":arr};
+        const response =  await baseAxiosInstance.patch(`auth/interests/${username}/`,data);
+        //ThunkApi.dispatch() //call to refetch users profile
+        return response.data.message
+    }catch(err){
+        const message = err.response.data.message
+        return ThunkApi.rejectWithValue({message:message, status:err.response.status})
+    }
+});
 
 const initialState = { state: "empty", allInterests: [] };
 
@@ -36,4 +47,4 @@ const interestReducers = interestSlice.reducer;
 const interestAction =  interestSlice.actions;
 
 export default interestAction;
-export {interestReducers, fetchAllInterest};
+export {interestReducers, fetchAllInterest, updateInterests};
