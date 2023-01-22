@@ -1,18 +1,23 @@
 import { BsCloudSun } from "react-icons/bs";
 import { IoCloudyNightOutline } from "react-icons/io5";
 import styles from "./styles/UserProfile.module.css";
-import image from "static/images/test_image.png";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const UserProfile = ({ showNav }) => {
+    const [profileImageError, setProfileImageError] = useState(false);
+    const profileInfo = useSelector((states) => states.profileState.userInfo);
+
+
     return (
         <div className={styles.profile__sec}>
             <div onClick={showNav} className={styles.img__wrapper}>
-                <img src={image} alt="profile" />
-                <h2 className="first__letter">O</h2>
+                {!profileImageError && <img src={profileInfo.image} onError={(e) => setProfileImageError(true)} alt="profile" />}
+                {profileImageError && <h2 className="first__letter" >{profileInfo.username.toUpperCase()[0]}</h2>}
             </div>
 
             <div className={styles.greeting}>
-                <h4>Hi Osonwa</h4>
+                <h4>Hi {profileInfo.first_name}</h4>
                 <p>
                     Good Morning!
                     <span></span>

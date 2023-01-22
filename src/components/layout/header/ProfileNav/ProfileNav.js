@@ -7,7 +7,7 @@ import styles from "./styles/PNav.module.css";
 function ProfileNav({ showNav }) {
 
     const showNavHandler = (event) => {
-        setTimeout(() => { showNav(false) }, 530);
+        setTimeout(() => { showNav(false) }, 300);
     };
 
     return (
