@@ -15,16 +15,19 @@ import Trending from "pages/Trending";
 import Saved from "pages/Saved";
 import Liked from "pages/Liked";
 import Profile from "pages/Profile";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "store/authSlice";
 import { SpreadLoader } from "components/others";
 import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
 import OauthTwitter from "pages/OauthTwitter";
 import { fetchAllInterest } from "store/interestsSlice";
+import { fetchProfileInfo } from "store/profileSlice";
 
 
 function App(props) {
     const dispatch = useDispatch();
+    const authStatus = useSelector((states) => states.authState.state);
+    const authState = useSelector((states) => states.authState);
     const [loaderStatus, setLoaderStatus] = useState(true);
 
     useEffect(() => {
@@ -40,10 +43,18 @@ function App(props) {
             // })
         }
 
-        dispatch(fetchAllInterest())
-
+        dispatch(fetchAllInterest());
         setLoaderStatus(false);
     }, [dispatch]);
+
+
+    useEffect(() => {
+
+        if (authStatus) {
+            const accessToken = authState.access;
+            dispatch(fetchProfileInfo({ accessToken: accessToken }));
+        }
+    }, [authStatus, authState, dispatch,]);
 
     //TODO: two useState protect with memo
     const WrappedLayout = <IconSize element={<Layout />} />

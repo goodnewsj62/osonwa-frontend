@@ -17,9 +17,10 @@ const fetchAllInterest =  createAsyncThunk("interests/fetchAllInterest", async (
 });
 
 
-const updateInterests =  createAsyncThunk("interests/updateInterests", async ({arr,username}, ThunkApi)=>{
+const updateInterests =  createAsyncThunk("interests/updateInterests", async ({arr,username,accessToken}, ThunkApi)=>{
     try{
         const data =  {"interest":arr};
+        baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + accessToken
         const response =  await baseAxiosInstance.patch(`auth/interests/${username}/`,data);
         //ThunkApi.dispatch() //call to refetch users profile
         return response.data.message

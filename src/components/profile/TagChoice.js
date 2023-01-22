@@ -14,6 +14,8 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
     const interests = useSelector((states) => states.interestState.allInterests);
     const username = useSelector((states) => states.profileState.userInfo.username);
     const dispatch = useDispatch();
+    const authState = useSelector((state) => state.authState);
+
 
 
     const tags = interests.map(({ id, name }) => {
@@ -48,7 +50,8 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
     };
 
     const handleSubmit = () => {
-        dispatch(updateInterests({ arr: pickedTags, username }))
+        const accessToken = authState.access;
+        dispatch(updateInterests({ arr: pickedTags, username, accessToken: accessToken }))
             .unwrap()
             .then((resp) => {
                 if (!hasChoosenTags) {
@@ -71,7 +74,7 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
                 </button>
             </div>
         </div>
-    )
+    );
 };
 
 
