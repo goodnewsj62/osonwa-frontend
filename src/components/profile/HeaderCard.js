@@ -1,5 +1,6 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
-import { useContext, useState } from "react";
+import MessagePopupModal from "components/others/MessagePopupModal";
+import { useContext, useEffect, useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 
 import { HiPencil } from "react-icons/hi";
@@ -9,8 +10,15 @@ import styles from "./styles/profile.module.css";
 import ProfileEditPopup from "./ProfileEditPopup";
 
 const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
+    const [message, setMessage] = useState({ state: false, type: "", message: "" });
     const [showProfileEdit, setShowProfileEdit] = useState(false);
     const iconSize = useContext(DefaultIconSize);
+
+
+    useEffect(() => {
+        const timeout = setTimeout(() => { setMessage({ state: false, message: "", type: "" }) }, 5000);
+        return () => clearTimeout(timeout);
+    }, []);
 
 
     return (
@@ -57,7 +65,8 @@ const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
                 </button>
                 <TagSlide tagArray={interests} />
             </div>
-            {showProfileEdit && <ProfileEditPopup setShowState={setShowProfileEdit} />}
+            {showProfileEdit && <ProfileEditPopup setShowState={setShowProfileEdit} setMessage={setMessage} />}
+            {message.state && <MessagePopupModal message={message.message} />}
         </section>
     )
 };

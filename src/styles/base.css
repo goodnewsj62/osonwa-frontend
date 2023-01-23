@@ -37,6 +37,7 @@
     --tag-select-btn-hover:#ddd;
     --tag-select-btn-highlight:#000;
     --tag-select-btn-highlight-text:#fff;
+    --edit-profile-raise:#fff;
 }
 
 [data-theme="dark"]{

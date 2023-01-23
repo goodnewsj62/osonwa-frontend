@@ -13,6 +13,7 @@ import styles from "./styles/profile.module.css";
 
 
 const Profile = () => {
+    //TODO: REFACTOR 
     const switchStates = useMemo(() => ["posts", "comments"], []);
     const [switchState, setSwitchState] = useState(switchStates[0]);
     const sideBarState = useSelector((state) => state.sideBarState);
@@ -50,8 +51,8 @@ const Profile = () => {
                         setErrorMessage({ state: true, message: "Request failed. Please check your internet connection." });
                     }
                 });
-            setIsLoading(false);
         }
+        setIsLoading(false);
     }, [profileStore, usernameOnUrl, isMyAccount]);
 
 
