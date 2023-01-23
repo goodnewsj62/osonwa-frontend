@@ -76,74 +76,76 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
 
     return(
         <form onSubmit={submitHandler} className={styles.container}>
-            <button type="button" onClick={closeHandler}>
-                <IoMdCloseCircle size={30} />
-            </button>
-            <div className={styles.photo__area}>
-                <div className={styles.design}></div>
-                <div className={styles.empty}></div>
-                <div className={styles.img}>
-                    <input type="file" accept=".png,.jpg" />
-                    <img src={profileInfo.image} alt="profile" />
-                    <span>
-                        <TbCameraPlus size={20} />
-                    </span>
-                    <div className={styles.mask}></div>
-                </div>
-            </div>
-            <div className={styles.form__area}>
-                <NamedField  dispatch={dispatch}
-                    fieldVal={userInputs.first_name} 
-                    label={"Firstname"} 
-                    type={"first_name"} 
-                    validator={textFieldValidator} 
-                />
-                <NamedField dispatch={dispatch} 
-                    fieldVal={userInputs.last_name} 
-                    label={"Lastname"} 
-                    type={"last_name"}
-                    validator={textFieldValidator}
-                />
-                <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
-                <AreaField  dispatch={dispatch} 
-                    fieldVal={userInputs.bio} 
-                    label={"bio"} type={"text"} 
-                    maxChar={165}
-                />
-                <NamedField dispatch={dispatch} 
-                    fieldVal={userInputs.twitter_url} 
-                    label={"twitter_url"} 
-                    type={"twitter_url"}  
-                    validator={urlFieldValidator}
-                />
-                <NamedField dispatch={dispatch} 
-                    fieldVal={userInputs.facebook_url} 
-                    label={"facebook_url"} 
-                    type={"facebook_url"} 
-                    validator={urlFieldValidator}
-                />
-                <NamedField dispatch={dispatch} 
-                    fieldVal={userInputs.git_url} 
-                    label={"git_url"} 
-                    type={"git_url"}  
-                    validator={urlFieldValidator}
-                />
-                <NamedField dispatch={dispatch} 
-                    fieldVal={userInputs.gmail_url} 
-                    label={"gmail_url"} 
-                    type={"gmail_url"} 
-                    validator={urlFieldValidator}
-                />
-                <NamedField dispatch={dispatch} 
-                    fieldVal={userInputs.linkedin_url} 
-                    label={"linkedin_url"} 
-                    type={"linkedin_url"} 
-                    validator={urlFieldValidator}
-                />
-
-                <button type="submit">
-                    Save
+            <div className={styles.wrapper}>
+                <button type="button" onClick={closeHandler}>
+                    <IoMdCloseCircle size={30} />
                 </button>
+                <div className={styles.photo__area}>
+                    <div className={styles.design}></div>
+                    <div className={styles.empty}></div>
+                    <div className={styles.img}>
+                        <input type="file" accept=".png,.jpg" />
+                        <img src={profileInfo.image} alt="profile" />
+                        <span>
+                            <TbCameraPlus size={20} />
+                        </span>
+                        <div className={styles.mask}></div>
+                    </div>
+                </div>
+                <div className={styles.form__area}>
+                    <NamedField  dispatch={dispatch}
+                        fieldVal={userInputs.first_name} 
+                        label={"Firstname"} 
+                        type={"first_name"} 
+                        validator={textFieldValidator} 
+                    />
+                    <NamedField dispatch={dispatch} 
+                        fieldVal={userInputs.last_name} 
+                        label={"Lastname"} 
+                        type={"last_name"}
+                        validator={textFieldValidator}
+                    />
+                    <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
+                    <AreaField  dispatch={dispatch} 
+                        fieldVal={userInputs.bio} 
+                        label={"bio"} type={"text"} 
+                        maxChar={165}
+                    />
+                    <NamedField dispatch={dispatch} 
+                        fieldVal={userInputs.twitter_url} 
+                        label={"twitter_url"} 
+                        type={"twitter_url"}  
+                        validator={urlFieldValidator}
+                    />
+                    <NamedField dispatch={dispatch} 
+                        fieldVal={userInputs.facebook_url} 
+                        label={"facebook_url"} 
+                        type={"facebook_url"} 
+                        validator={urlFieldValidator}
+                    />
+                    <NamedField dispatch={dispatch} 
+                        fieldVal={userInputs.git_url} 
+                        label={"git_url"} 
+                        type={"git_url"}  
+                        validator={urlFieldValidator}
+                    />
+                    <NamedField dispatch={dispatch} 
+                        fieldVal={userInputs.gmail_url} 
+                        label={"gmail_url"} 
+                        type={"gmail_url"} 
+                        validator={urlFieldValidator}
+                    />
+                    <NamedField dispatch={dispatch} 
+                        fieldVal={userInputs.linkedin_url} 
+                        label={"linkedin_url"} 
+                        type={"linkedin_url"} 
+                        validator={urlFieldValidator}
+                    />
+
+                    <button type="submit">
+                        Save
+                    </button>
+                </div>
             </div>
         </form>
     )

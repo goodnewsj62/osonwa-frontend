@@ -1,0 +1,28 @@
+.error__info{
+    display: none;
+    color: rgb(249, 94, 94);
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+}
+
+.show__error{
+    display: block;
+}
+
+
+.error__highlight{
+    border: 2px solid rgb(249, 94, 94) !important;
+}
+.form__div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.form__div label{
+    display: block;
+    font-weight: bold;
+}
+.char__count{
+    position: absolute;
+}

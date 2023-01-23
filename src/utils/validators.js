@@ -20,6 +20,8 @@ export const urlFieldValidator = (trimmedValue, hasSpaces, dispatch, type, label
 
     if (trimmedValue) {
         performUrlChecks(trimmedValue, hasSpaces, dispatch, type, label)
+    } else {
+        dispatch({ type: type, payload: { isValid: true, error: "" } });
     }
 };
 
