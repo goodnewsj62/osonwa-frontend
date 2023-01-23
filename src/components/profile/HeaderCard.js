@@ -23,7 +23,7 @@ const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
                 {
                     isMyAccount &&
                     <div className={`${styles.edit__button}`}>
-                        <button onClick={() => { }}>
+                        <button onClick={(e) => setShowProfileEdit(true)}>
                             <span>
                                 Edit Profile
                             </span>

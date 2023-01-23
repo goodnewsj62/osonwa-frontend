@@ -5,11 +5,11 @@ import extstyles from "./styles/profile.module.css";
 import styles from "./styles/body.module.css";
 
 
-const ProfileBody = ({state})=>{
+const ProfileBody = ({ state }) => {
     return (
-        <section className={`${extstyles.container} ${styles.container}`}>
-            {state === "posts" && <Posts /> }
-            {state === "comments" &&  <MyComments />}
+        <section id="posts" className={`${extstyles.container} ${styles.container}`}>
+            {state === "posts" && <Posts />}
+            {state === "comments" && <MyComments />}
         </section>
     );
 };
