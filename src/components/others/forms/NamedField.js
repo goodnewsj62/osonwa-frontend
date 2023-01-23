@@ -19,9 +19,9 @@ export default function NamedField({ dispatch, fieldVal, label, type, validator 
         dispatch({ type: type, payload: payload });
 
         if (event.type === "blur") {
-            checks(trimmedValue, hasSpaces);
+            checks(trimmedValue, hasSpaces, dispatch, type, label);
         } else {
-            debounceChecks(trimmedValue, hasSpaces);
+            debounceChecks(trimmedValue, hasSpaces, dispatch, type, label);
         }
     };
 

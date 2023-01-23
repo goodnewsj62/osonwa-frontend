@@ -5,6 +5,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { TbCameraPlus } from "react-icons/tb";
 import {  useSelector } from "react-redux";
 import { baseAxiosInstance } from "utils/requests";
+import { textFieldValidator, urlFieldValidator } from "utils/validators";
 import UserNameField from "./profileForm/UserNameField";
 
 import styles from "./styles/edit.module.css";
@@ -69,6 +70,7 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                 setMessage({state:true,type:"error", message:"profile update failed"});
             }
         }
+        closeHandler(null);
     };
 
 
@@ -90,15 +92,54 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                 </div>
             </div>
             <div className={styles.form__area}>
-                <NamedField  dispatch={dispatch} fieldVal={userInputs.first_name} label={"Firstname"} type={"first_name"}  />
-                <NamedField dispatch={dispatch} fieldVal={userInputs.last_name} label={"Lastname"} type={"last_name"} />
+                <NamedField  dispatch={dispatch}
+                    fieldVal={userInputs.first_name} 
+                    label={"Firstname"} 
+                    type={"first_name"} 
+                    validator={textFieldValidator} 
+                />
+                <NamedField dispatch={dispatch} 
+                    fieldVal={userInputs.last_name} 
+                    label={"Lastname"} 
+                    type={"last_name"}
+                    validator={textFieldValidator}
+                />
                 <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
-                <AreaField  dispatch={dispatch} fieldVal={userInputs.bio} label={"bio"} type={"text"} maxChar={165}/>
-                <NamedField dispatch={dispatch} fieldVal={userInputs.twitter_url} label={"twitter_url"} type={"twitter_url"} />
-                <NamedField dispatch={dispatch} fieldVal={userInputs.facebook_url} label={"facebook_url"} type={"facebook_url"}/>
-                <NamedField dispatch={dispatch} fieldVal={userInputs.git_url} label={"git_url"} type={"git_url"} />
-                <NamedField dispatch={dispatch} fieldVal={userInputs.gmail_url} label={"gmail_url"} type={"gmail_url"}/>
-                <NamedField dispatch={dispatch} fieldVal={userInputs.linkedin_url} label={"linkedin_url"} type={"linkedin_url"}/>
+                <AreaField  dispatch={dispatch} 
+                    fieldVal={userInputs.bio} 
+                    label={"bio"} type={"text"} 
+                    maxChar={165}
+                />
+                <NamedField dispatch={dispatch} 
+                    fieldVal={userInputs.twitter_url} 
+                    label={"twitter_url"} 
+                    type={"twitter_url"}  
+                    validator={urlFieldValidator}
+                />
+                <NamedField dispatch={dispatch} 
+                    fieldVal={userInputs.facebook_url} 
+                    label={"facebook_url"} 
+                    type={"facebook_url"} 
+                    validator={urlFieldValidator}
+                />
+                <NamedField dispatch={dispatch} 
+                    fieldVal={userInputs.git_url} 
+                    label={"git_url"} 
+                    type={"git_url"}  
+                    validator={urlFieldValidator}
+                />
+                <NamedField dispatch={dispatch} 
+                    fieldVal={userInputs.gmail_url} 
+                    label={"gmail_url"} 
+                    type={"gmail_url"} 
+                    validator={urlFieldValidator}
+                />
+                <NamedField dispatch={dispatch} 
+                    fieldVal={userInputs.linkedin_url} 
+                    label={"linkedin_url"} 
+                    type={"linkedin_url"} 
+                    validator={urlFieldValidator}
+                />
 
                 <button type="submit">
                     Save
