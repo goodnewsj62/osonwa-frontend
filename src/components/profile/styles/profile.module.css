@@ -119,3 +119,22 @@
         height: 133px;
     }
 }
+
+
+.user__info{
+    padding: 0.2rem 1rem;
+}
+
+.user__info > span{
+    display: block;
+    line-height: 1.4;
+    text-transform: capitalize;
+}
+
+.name{
+    font-size: 1.25rem;
+}
+
+.username{
+    color: var(--fade-text);
+}

@@ -1,17 +1,16 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 
 import { HiPencil } from "react-icons/hi";
 import SocialAccounts from "./SocialAccounts";
 import TagSlide from "../others/carousel/TagsSlide";
 import styles from "./styles/profile.module.css";
-import { useSelector } from "react-redux";
+import ProfileEditPopup from "./ProfileEditPopup";
 
-const ProfileHeader = (props) => {
+const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
+    const [showProfileEdit, setShowProfileEdit] = useState(false);
     const iconSize = useContext(DefaultIconSize);
-    const profileState = useSelector((states) => states.profileState);
-    const profileInfo = profileState.userInfo;
 
 
     return (
@@ -21,18 +20,29 @@ const ProfileHeader = (props) => {
                 <div className={styles.profile__img}>
                     <img src={profileInfo.image} alt="profile" />
                 </div>
-                <div className={`${styles.edit__button}`}>
-                    <button onClick={() => { }}>
-                        <span>
-                            Edit Profile
-                        </span>
-                        <i>
-                            <HiPencil size={iconSize} />
-                        </i>
-                    </button>
-                </div>
+                {
+                    isMyAccount &&
+                    <div className={`${styles.edit__button}`}>
+                        <button onClick={() => { }}>
+                            <span>
+                                Edit Profile
+                            </span>
+                            <i>
+                                <HiPencil size={iconSize} />
+                            </i>
+                        </button>
+                    </div>
+                }
             </div>
-            <div className={styles.bio}>
+            <div className={styles.user__info}>
+                <span className={styles.name}>
+                    <strong>
+                        {profileInfo.first_name} {profileInfo.last_name}
+                    </strong>
+                </span>
+                <span className={styles.username}>@{profileInfo.username}</span>
+            </div>
+            <div className={styles.bio} style={{ display: profileInfo.bio ? "initial" : "none" }}>
                 <p>
                     {profileInfo.bio}
                 </p>
@@ -45,8 +55,9 @@ const ProfileHeader = (props) => {
                 <button className={styles.add__tag} type="button">
                     <BsPlusCircleFill size={iconSize + 4} />
                 </button>
-                <TagSlide tagArray={profileState.interests} />
+                <TagSlide tagArray={interests} />
             </div>
+            {showProfileEdit && <ProfileEditPopup setShowState={setShowProfileEdit} />}
         </section>
     )
 };
