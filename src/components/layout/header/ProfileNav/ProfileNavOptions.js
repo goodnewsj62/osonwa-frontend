@@ -13,7 +13,6 @@ const ProfileNavOptions = ({ showNav }) => {
         <ul onClick={showNav} className={styles.ul_opt}>
             <li><Link to={`/${profileInfo.username}`}>Profile</Link></li>
             <li>Posts</li>
-            <li>Update Username</li>
             <li>Change Password</li>
         </ul>
     );

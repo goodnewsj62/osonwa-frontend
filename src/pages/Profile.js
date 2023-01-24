@@ -6,7 +6,7 @@ import NavSwitch from "components/profile/NavSwitch";
 import Suggested from "components/profile/Suggested";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { baseAxiosInstance } from "utils/requests";
 import styles from "./styles/profile.module.css";
 
@@ -23,6 +23,7 @@ const Profile = () => {
     const profileStore = useSelector((states) => states.profileState);
     const [profileState, setProfileSate] = useState({ interests: [], userInfo: {} });
     const profileInfo = profileState.userInfo;
+    const navigate = useNavigate();
 
     const usernameOnUrl = location.pathname.replace("/", "");
 
@@ -42,17 +43,22 @@ const Profile = () => {
                     setProfileSate({ userInfo: data, interests: data.interests, state: true });
                 }).catch((err) => {
                     const errorResp = err.response;
-                    if (errorResp.status >= 500) {
-                        setErrorMessage({ state: true, message: "Oops an error occured at our end" });
-                    } else if (errorResp.status === 404) {
-                        setErrorMessage({ state: true, message: "This account does not exists" });
-                    } else if (err.request) {
-                        setErrorMessage({ state: true, message: "Request failed. Please check your internet connection." });
+                    if (profileStore.status) {
+                        navigate(`/${profileStore.userInfo.username}`);
+                    } else {
+                        if (errorResp.status >= 500) {
+                            setErrorMessage({ state: true, message: "Oops an error occured at our end" });
+                        } else if (errorResp.status === 404) {
+                            setErrorMessage({ state: true, message: "This account does not exists" });
+                        } else if (err.request) {
+                            setErrorMessage({ state: true, message: "Request failed. Please check your internet connection." });
+                        }
                     }
+
                 });
         }
         setIsLoading(false);
-    }, [profileStore, usernameOnUrl, isMyAccount]);
+    }, [profileStore, usernameOnUrl, isMyAccount, navigate]);
 
 
     const mainSectionComponents = (

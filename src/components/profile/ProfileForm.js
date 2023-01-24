@@ -9,6 +9,7 @@ import { textFieldValidator, urlFieldValidator } from "utils/validators";
 import profileSliceActions from "store/profileSlice";
 
 import styles from "./styles/edit.module.css";
+import UserNameField from "./profileForm/UserNameField";
 
 
 const dS = () => ({ content: "", isValid: true, error: "" } );
@@ -33,6 +34,7 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
     const dispatch_ = useDispatch();
 
     const initialState = {
+        username:  {...dS(), content:profileInfo.username},
         first_name: {...dS(),  content:profileInfo.first_name}, 
         last_name: {...dS(), content:profileInfo.last_name}, 
         bio: {...dS(),  content:profileInfo.bio }, 
@@ -49,9 +51,17 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
     const isValid = useCallback(() => Object.values(userInputs).every((value) => value.isValid === true), [userInputs]);
 
     const transformData = ()=>{
-        const data =  {}
-        for(let field in userInputs){
-            data[field]=  userInputs[field].content
+        let inputRaw;
+        if (profileInfo.username === userInputs.username.content){
+            const {username, ...otherInp}=  userInputs;
+            inputRaw = otherInp;
+        }else{
+            inputRaw =  userInputs;
+        }
+
+        let data =  {}
+        for(let field in inputRaw){
+            data[field]=  inputRaw[field].content
         }
         return data
     };
@@ -109,6 +119,7 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                         type={"last_name"}
                         validator={textFieldValidator}
                     />
+                    <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
                     <AreaField  dispatch={dispatch} 
                         fieldVal={userInputs.bio} 
                         label={"bio"} 
