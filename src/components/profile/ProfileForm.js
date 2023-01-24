@@ -1,6 +1,6 @@
 import AreaField from "components/others/forms/AreaField";
 import NamedField from "components/others/forms/NamedField";
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { TbCameraPlus } from "react-icons/tb";
 import {  useDispatch, useSelector } from "react-redux";

@@ -15,6 +15,8 @@ import Trending from "pages/Trending";
 import Saved from "pages/Saved";
 import Liked from "pages/Liked";
 import Profile from "pages/Profile";
+import EmailSent from "pages/EmailSent";
+import ForgotPassword from "pages/ForgotPassword";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "store/authSlice";
 import { SpreadLoader } from "components/others";
@@ -22,6 +24,7 @@ import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
 import OauthTwitter from "pages/OauthTwitter";
 import { fetchAllInterest } from "store/interestsSlice";
 import { fetchProfileInfo } from "store/profileSlice";
+import ChangePassword from "pages/PasswordChange";
 
 
 function App(props) {
@@ -77,6 +80,9 @@ function App(props) {
                         <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
                         <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
                         <Route path="/:username" element={<Profile />} />
+                        <Route path="/email/request" element={<EmailSent />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/change-password/:token" element={<ChangePassword />} />
                     </Route>
                     <Route path="/login" element={<UnAuthenticatedOnly ><Login /></UnAuthenticatedOnly>} />
                     <Route path="/signup" element={<UnAuthenticatedOnly ><SignUp /></UnAuthenticatedOnly>} />
