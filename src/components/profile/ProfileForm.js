@@ -1,6 +1,6 @@
 import AreaField from "components/others/forms/AreaField";
 import NamedField from "components/others/forms/NamedField";
-import { useCallback, useReducer } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { TbCameraPlus } from "react-icons/tb";
 import {  useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import profileSliceActions from "store/profileSlice";
 
 import styles from "./styles/edit.module.css";
 import UserNameField from "./profileForm/UserNameField";
+import { useRef } from "react";
 
 
 const dS = () => ({ content: "", isValid: true, error: "" } );
@@ -30,8 +31,11 @@ const formReducer = (state, action) => {
 
 
 const ProfileForm =  ({closeHandler, setMessage})=>{
+    //TODO: REFACTOR
     const profileInfo =  useSelector((states)=>states.profileState.userInfo);
     const dispatch_ = useDispatch();
+    const imgRef = useRef();
+    const fileRef = useRef();
 
     const initialState = {
         username:  {...dS(), content:profileInfo.username},
@@ -59,11 +63,12 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
             inputRaw =  userInputs;
         }
 
-        let data =  {}
+
+        let formData =  new FormData();
         for(let field in inputRaw){
-            data[field]=  inputRaw[field].content
+            formData.append(field, inputRaw[field].content)
         }
-        return data
+        return formData;
     };
 
 
@@ -75,6 +80,9 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                 const data =  transformData();
                 const url = `auth/profile/${profileInfo.username}/`;
                 baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + authState.access;
+                baseAxiosInstance.defaults.headers.common["Content-Type"] = "'multipart/form-data'";
+                
+                if(fileRef.current.files.length)data.append("image", fileRef.current.files[0]);
                 const resp = await baseAxiosInstance.patch(url, data);
                 
                 dispatch_(profileSliceActions.updateUserinfo(resp.data.data));
@@ -87,6 +95,10 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
         closeHandler(null);
     };
 
+    function showChosenImg(event) {
+        const src = URL.createObjectURL(event.target.files[0])
+        imgRef.current.src = src
+    }
 
     return(
         <form onSubmit={submitHandler} className={styles.container}>
@@ -98,8 +110,8 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                     <div className={styles.design}></div>
                     <div className={styles.empty}></div>
                     <div className={styles.img}>
-                        <input type="file" accept=".png,.jpg" />
-                        <img src={profileInfo.image} alt="profile" />
+                        <input ref={fileRef} type="file" onChange={showChosenImg} accept=".png,.jpg" />
+                        <img ref={imgRef} src={profileInfo.image} alt="profile" />
                         <span>
                             <TbCameraPlus size={20} />
                         </span>
