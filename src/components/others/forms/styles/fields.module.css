@@ -18,11 +18,32 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    margin-bottom: 1rem;
 }
 .form__div label{
     display: block;
     font-weight: bold;
+    margin-bottom: 0.38rem;
+}
+
+.form__div > input, .form__div > textarea{
+    padding: 0.7rem 0.5rem;
+    border: 1px solid var(--border-line) ;
+    border-radius: 5px;
+    outline: none;
+}
+.form__div > input:focus, .form__div > textarea:focus{
+    border: 2px solid var(--comp-one);
+}
+
+
+.form__div> textarea{
+    padding: 1.5rem  0.5rem 0.5rem 0.5rem;
+    resize: none;
 }
 .char__count{
     position: absolute;
+    right: 15px;
+    top: calc(0.38rem + 25px);
+    font-size: 0.88rem;
 }

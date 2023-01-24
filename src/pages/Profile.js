@@ -32,7 +32,6 @@ const Profile = () => {
     const isMyAccount = useMemo(() => usernameOnUrl === profileStore.userInfo.username, [profileStore, usernameOnUrl]);
 
 
-
     useEffect(() => {
         if (isMyAccount) {
             setProfileSate(profileStore);

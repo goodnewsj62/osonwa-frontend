@@ -16,6 +16,8 @@ export const textFieldValidator = (trimmedValue, hasSpaces, dispatch, type, labe
         dispatch({ type: type, payload: payload });
     }
 };
+
+
 export const urlFieldValidator = (trimmedValue, hasSpaces, dispatch, type, label) => {
 
     if (trimmedValue) {

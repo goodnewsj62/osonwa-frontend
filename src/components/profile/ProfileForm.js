@@ -3,10 +3,10 @@ import NamedField from "components/others/forms/NamedField";
 import { useCallback, useReducer } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { TbCameraPlus } from "react-icons/tb";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { baseAxiosInstance } from "utils/requests";
 import { textFieldValidator, urlFieldValidator } from "utils/validators";
-import UserNameField from "./profileForm/UserNameField";
+import profileSliceActions from "store/profileSlice";
 
 import styles from "./styles/edit.module.css";
 
@@ -30,9 +30,9 @@ const formReducer = (state, action) => {
 
 const ProfileForm =  ({closeHandler, setMessage})=>{
     const profileInfo =  useSelector((states)=>states.profileState.userInfo);
+    const dispatch_ = useDispatch();
 
     const initialState = {
-        username: {...dS(),  content:profileInfo.username}, 
         first_name: {...dS(),  content:profileInfo.first_name}, 
         last_name: {...dS(), content:profileInfo.last_name}, 
         bio: {...dS(),  content:profileInfo.bio }, 
@@ -44,15 +44,16 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
     }
 
     const [userInputs, dispatch]  =  useReducer(formReducer,initialState);
+    const authState =  useSelector((states)=>states.authState);
 
     const isValid = useCallback(() => Object.values(userInputs).every((value) => value.isValid === true), [userInputs]);
 
     const transformData = ()=>{
-        if(profileInfo.username === userInputs.username){
-            const {_, ...data } = userInputs;
-            return data
+        const data =  {}
+        for(let field in userInputs){
+            data[field]=  userInputs[field].content
         }
-        return userInputs
+        return data
     };
 
 
@@ -63,8 +64,11 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
             try {
                 const data =  transformData();
                 const url = `auth/profile/${profileInfo.username}/`;
+                baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + authState.access;
                 const resp = await baseAxiosInstance.patch(url, data);
-                if(resp.status >= 200)setMessage({state:true,type:"success", message:"profile updated"});
+                
+                dispatch_(profileSliceActions.updateUserinfo(resp.data.data));
+                setMessage({state:true,type:"success", message:"profile updated"});
             }
             catch (error) {
                 setMessage({state:true,type:"error", message:"profile update failed"});
@@ -105,10 +109,10 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                         type={"last_name"}
                         validator={textFieldValidator}
                     />
-                    <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
                     <AreaField  dispatch={dispatch} 
                         fieldVal={userInputs.bio} 
-                        label={"bio"} type={"text"} 
+                        label={"bio"} 
+                        type={"bio"} 
                         maxChar={165}
                     />
                     <NamedField dispatch={dispatch} 

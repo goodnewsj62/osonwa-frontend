@@ -18,7 +18,7 @@ const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
     useEffect(() => {
         const timeout = setTimeout(() => { setMessage({ state: false, message: "", type: "" }) }, 5000);
         return () => clearTimeout(timeout);
-    }, []);
+    }, [message.state]);
 
 
     return (
@@ -66,7 +66,7 @@ const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
                 <TagSlide tagArray={interests} />
             </div>
             {showProfileEdit && <ProfileEditPopup setShowState={setShowProfileEdit} setMessage={setMessage} />}
-            {message.state && <MessagePopupModal message={message.message} />}
+            {message.state && <MessagePopupModal message={message.message} category={message.type} />}
         </section>
     )
 };

@@ -13,8 +13,8 @@ export default function AreaField({ dispatch, fieldVal, label, type, maxChar, cu
             const payload = { isValid: false, error: "this field is required" };
             dispatch({ type: type, payload: payload });
         }
-        else if (trimmedValue.length > 3) {
-            const payload = { isValid: false, error: `${label} must be greater than three characters` };
+        else if (trimmedValue.length > maxChar) {
+            const payload = { isValid: false, error: `${label} must be less than ${maxChar} characters` };
             dispatch({ type: type, payload: payload });
         } else {
             const payload = { isValid: true, error: "" };
@@ -30,7 +30,7 @@ export default function AreaField({ dispatch, fieldVal, label, type, maxChar, cu
         const trimmedValue = event.target.value.trim();
 
         if (trimmedValue.length < maxChar) {
-            const payload = { content: trimmedValue };
+            const payload = { content: event.target.value };
             dispatch({ type: type, payload: payload });
 
             if (event.type === "blur") {
