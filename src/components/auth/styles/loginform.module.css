@@ -67,23 +67,37 @@
     position: relative;
 }
 
+.password__div input{
+    padding: 1.6rem 0.5rem 0.3rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--form-border-color);
+}
+
+.password__div label {
+    position: absolute;
+    left: 10px;
+    top: -4px;
+    font-size: 0.9rem;
+    color: var(--fade-text);
+}
+
+
 .password__div > div{
     position: absolute;
-    top: 55%;
-    right: 5px;
-    transform: translateY(-50%);
-    display: grid;
-    place-items: center;
+    top: 25%;
+    right: 8px;
+    transform: translateY(-75%);
+    /* display: grid;
+    place-items: center; */
 }
-/* .password__div > div span{
-    color: #6c757d;
-} */
-/* .password__div  > div span:first-child{
-    position: absolute;
-    margin: auto;
-    inset: 0;
-    display: none;
-} */
+
+.password__div input:focus{
+    border: 2px solid var(--comp-one);
+}
+
+.move_up{
+    transform: translateY(-50%) !important;
+}
 
 
 .submit{
@@ -130,10 +144,6 @@
     font-size: 0.9rem;
 }
 
-.move__up{
-    transform: translateY(0%) !important;
-}
-
 .error__info{
     display: none;
     color: rgb(249, 94, 94);
@@ -147,6 +157,9 @@
 
 .error__highlight{
     border-bottom: 2px solid rgb(249, 94, 94) !important;
+}
+.fullerror__highlight{
+    border: 2px solid rgb(249, 94, 94) !important;
 }
 
 
@@ -208,9 +221,7 @@
 }
 
 
-.move_up{
-    top: 37% !important;
-}
+
 
 
 .signup__modal{
@@ -243,4 +254,3 @@
         padding: 2rem 4rem;
     }
 }
-

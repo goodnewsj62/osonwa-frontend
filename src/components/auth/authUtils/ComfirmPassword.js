@@ -1,10 +1,10 @@
-import DefaultField from "./DefaultField";
 import styles from "../styles/loginform.module.css";
+import TextField from "components/others/forms/TextField";
 
 
 
 
-const ComfirmPasswordField = ({ fieldVal, dispatch, passwordVal }) => {
+const ComfirmPasswordField = ({ fieldVal, dispatch, passwordVal, customClasses }) => {
 
     const performValidation = (event) => {
         const trimmedValue = event.target.value.trim();
@@ -25,7 +25,7 @@ const ComfirmPasswordField = ({ fieldVal, dispatch, passwordVal }) => {
     };
 
 
-    const inputErrorStyle = fieldVal.error ? `${styles.error__highlight}` : "";
+    const inputErrorStyle = fieldVal.error ? `${styles.fullerror__highlight}` : "";
     const inputCompParams = {
         classNames: inputErrorStyle,
         value: fieldVal.content,
@@ -37,7 +37,7 @@ const ComfirmPasswordField = ({ fieldVal, dispatch, passwordVal }) => {
 
 
     return (
-        <DefaultField fieldVal={fieldVal} label={"Comfirm Password"} params={inputCompParams} />
+        <TextField fieldVal={fieldVal} label={"Comfirm Password"} params={inputCompParams} customClasses={customClasses} />
     )
 };
 

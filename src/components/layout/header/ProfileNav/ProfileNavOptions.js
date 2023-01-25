@@ -13,7 +13,7 @@ const ProfileNavOptions = ({ showNav }) => {
     const handlePassChange = (event) => {
         const payload = { email: profileInfo.email };
         const action = "continue with your password change";
-        const url = "/change-password/"
+        const url = "auth/change-password/"
         navigate("/email/request", { state: { payload: payload, action: action, url: url } });
     };
 
