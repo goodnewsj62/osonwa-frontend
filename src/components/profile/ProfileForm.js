@@ -3,7 +3,7 @@ import NamedField from "components/others/forms/NamedField";
 import { useCallback, useReducer } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { TbCameraPlus } from "react-icons/tb";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { baseAxiosInstance } from "utils/requests";
 import { textFieldValidator, urlFieldValidator } from "utils/validators";
 import profileSliceActions from "store/profileSlice";
@@ -13,7 +13,7 @@ import UserNameField from "./profileForm/UserNameField";
 import { useRef } from "react";
 
 
-const dS = () => ({ content: "", isValid: true, error: "" } );
+const dS = () => ({ content: "", isValid: true, error: "" });
 
 
 const formReducer = (state, action) => {
@@ -30,43 +30,43 @@ const formReducer = (state, action) => {
 
 
 
-const ProfileForm =  ({closeHandler, setMessage})=>{
+const ProfileForm = ({ closeHandler, setMessage }) => {
     //TODO: REFACTOR
-    const profileInfo =  useSelector((states)=>states.profileState.userInfo);
+    const profileInfo = useSelector((states) => states.profileState.userInfo);
     const dispatch_ = useDispatch();
     const imgRef = useRef();
     const fileRef = useRef();
 
     const initialState = {
-        username:  {...dS(), content:profileInfo.username},
-        first_name: {...dS(),  content:profileInfo.first_name}, 
-        last_name: {...dS(), content:profileInfo.last_name}, 
-        bio: {...dS(),  content:profileInfo.bio }, 
-        twitter_url:{...dS(), content:profileInfo.twitter_url},
-        facebook_url: {...dS(), content: profileInfo.facebook_url},
-        git_url:{...dS(),content: profileInfo.git_url},
-        linkedin_url: {...dS(), content:profileInfo.linkedin_url},
-        gmail_url:{...dS(),content:profileInfo.gmail_url }
+        username: { ...dS(), content: profileInfo.username },
+        first_name: { ...dS(), content: profileInfo.first_name },
+        last_name: { ...dS(), content: profileInfo.last_name },
+        bio: { ...dS(), content: profileInfo.bio },
+        twitter_url: { ...dS(), content: profileInfo.twitter_url },
+        facebook_url: { ...dS(), content: profileInfo.facebook_url },
+        git_url: { ...dS(), content: profileInfo.git_url },
+        linkedin_url: { ...dS(), content: profileInfo.linkedin_url },
+        gmail_url: { ...dS(), content: profileInfo.gmail_url }
     }
 
-    const [userInputs, dispatch]  =  useReducer(formReducer,initialState);
-    const authState =  useSelector((states)=>states.authState);
+    const [userInputs, dispatch] = useReducer(formReducer, initialState);
+    const authState = useSelector((states) => states.authState);
 
     const isValid = useCallback(() => Object.values(userInputs).every((value) => value.isValid === true), [userInputs]);
 
-    const transformData = ()=>{
+    const transformData = () => {
         let inputRaw;
-        if (profileInfo.username === userInputs.username.content){
-            const {username, ...otherInp}=  userInputs;
+        if (profileInfo.username === userInputs.username.content) {
+            const { username, ...otherInp } = userInputs;
             inputRaw = otherInp;
-        }else{
-            inputRaw =  userInputs;
+        } else {
+            inputRaw = userInputs;
         }
 
 
-        let formData =  new FormData();
-        for(let field in inputRaw){
-            formData.append(field, inputRaw[field].content)
+        let formData = new FormData();
+        for (let field in inputRaw) {
+            if (inputRaw[field].content) formData.append(field, inputRaw[field].content)
         }
         return formData;
     };
@@ -77,19 +77,19 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
         event.preventDefault();
         if (isValid()) {
             try {
-                const data =  transformData();
+                const data = transformData();
                 const url = `auth/profile/${profileInfo.username}/`;
                 baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + authState.access;
                 baseAxiosInstance.defaults.headers.common["Content-Type"] = "'multipart/form-data'";
-                
-                if(fileRef.current.files.length)data.append("image", fileRef.current.files[0]);
+
+                if (fileRef.current.files.length) data.append("image", fileRef.current.files[0]);
                 const resp = await baseAxiosInstance.patch(url, data);
-                
+
                 dispatch_(profileSliceActions.updateUserinfo(resp.data.data));
-                setMessage({state:true,type:"success", message:"profile updated"});
+                setMessage({ state: true, type: "success", message: "profile updated" });
             }
             catch (error) {
-                setMessage({state:true,type:"error", message:"profile update failed"});
+                setMessage({ state: true, type: "error", message: "profile update failed" });
             }
         }
         closeHandler(null);
@@ -100,7 +100,7 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
         imgRef.current.src = src
     }
 
-    return(
+    return (
         <form onSubmit={submitHandler} className={styles.container}>
             <div className={styles.wrapper}>
                 <button type="button" onClick={closeHandler}>
@@ -119,53 +119,53 @@ const ProfileForm =  ({closeHandler, setMessage})=>{
                     </div>
                 </div>
                 <div className={styles.form__area}>
-                    <NamedField  dispatch={dispatch}
-                        fieldVal={userInputs.first_name} 
-                        label={"Firstname"} 
-                        type={"first_name"} 
-                        validator={textFieldValidator} 
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.first_name}
+                        label={"Firstname"}
+                        type={"first_name"}
+                        validator={textFieldValidator}
                     />
-                    <NamedField dispatch={dispatch} 
-                        fieldVal={userInputs.last_name} 
-                        label={"Lastname"} 
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.last_name}
+                        label={"Lastname"}
                         type={"last_name"}
                         validator={textFieldValidator}
                     />
                     <UserNameField dispatch={dispatch} fieldVal={userInputs.username} />
-                    <AreaField  dispatch={dispatch} 
-                        fieldVal={userInputs.bio} 
-                        label={"bio"} 
-                        type={"bio"} 
+                    <AreaField dispatch={dispatch}
+                        fieldVal={userInputs.bio}
+                        label={"bio"}
+                        type={"bio"}
                         maxChar={165}
                     />
-                    <NamedField dispatch={dispatch} 
-                        fieldVal={userInputs.twitter_url} 
-                        label={"twitter_url"} 
-                        type={"twitter_url"}  
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.twitter_url}
+                        label={"twitter_url"}
+                        type={"twitter_url"}
                         validator={urlFieldValidator}
                     />
-                    <NamedField dispatch={dispatch} 
-                        fieldVal={userInputs.facebook_url} 
-                        label={"facebook_url"} 
-                        type={"facebook_url"} 
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.facebook_url}
+                        label={"facebook_url"}
+                        type={"facebook_url"}
                         validator={urlFieldValidator}
                     />
-                    <NamedField dispatch={dispatch} 
-                        fieldVal={userInputs.git_url} 
-                        label={"git_url"} 
-                        type={"git_url"}  
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.git_url}
+                        label={"git_url"}
+                        type={"git_url"}
                         validator={urlFieldValidator}
                     />
-                    <NamedField dispatch={dispatch} 
-                        fieldVal={userInputs.gmail_url} 
-                        label={"gmail_url"} 
-                        type={"gmail_url"} 
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.gmail_url}
+                        label={"gmail_url"}
+                        type={"gmail_url"}
                         validator={urlFieldValidator}
                     />
-                    <NamedField dispatch={dispatch} 
-                        fieldVal={userInputs.linkedin_url} 
-                        label={"linkedin_url"} 
-                        type={"linkedin_url"} 
+                    <NamedField dispatch={dispatch}
+                        fieldVal={userInputs.linkedin_url}
+                        label={"linkedin_url"}
+                        type={"linkedin_url"}
                         validator={urlFieldValidator}
                     />
 
