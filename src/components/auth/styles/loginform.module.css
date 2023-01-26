@@ -91,12 +91,39 @@
     place-items: center; */
 }
 
+
+
+.pass__div{
+    position: relative;
+}
+
+.pass__div > div{
+    position: absolute;
+    top: 55%;
+    right: 5px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+}
+
+
 .password__div input:focus{
     border: 2px solid var(--comp-one);
 }
 
 .move_up{
     transform: translateY(-50%) !important;
+}
+
+.accend__up{
+    transform: translateY(0%) !important;
+}
+.move__up{
+    transform: translateY(0%) !important;
+}
+
+.accend_up{
+    top: 37% !important;
 }
 
 
@@ -205,6 +232,11 @@
 
 
 .password__div .message{
+    display: block;
+    margin: 0.2rem 0  0.3rem 0;
+}
+
+.pass__div .message{
     display: block;
     margin: 0.2rem 0  0.3rem 0;
 }

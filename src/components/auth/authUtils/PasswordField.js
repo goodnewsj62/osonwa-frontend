@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 import styles from "../styles/loginform.module.css";
-import Input from "../Input";
+import Input from "components/others/forms/Input";
 
 
 export default function PasswordField({ dispatch, fieldVal }) {
@@ -125,5 +125,4 @@ const passwordValidator = (event, dispatch, setMessage) => {
         setMessage({ strenght: "poor", message: "add special charaters and numbers" });
         dispatch({ type: "password", payload: { isValid: true } });
     }
-
 }

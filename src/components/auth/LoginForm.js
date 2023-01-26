@@ -57,7 +57,7 @@ export default function LoginForm({ setErrorInfo, setLoader }) {
                 </label>
                 <Input params={{ type: "text", changeFunc: usernameChange, value: username }} />
             </div>
-            <div className={`${styles.form__div} ${styles.password__div}`}>
+            <div className={`${styles.form__div} ${styles.pass__div}`}>
                 <label htmlFor="password">
                     Password
                 </label>
