@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { DefaultIconSize } from "components/wrappers/IconSize";
 
 import styles from "./styles/tags.module.css";
@@ -19,6 +19,13 @@ const TagSlide = ({ tagArray, small = false }) => {
     const tags = tagArray.map((item) => {
         return <div key={item} className={tagClass}><Link to="/" >{item}</Link></div>
     });
+
+
+    useEffect(() => {
+        if (slideCRef.current.offsetWidth === slideRef.current.scrollWidth) {
+            setButtonState({ left: false, right: false }); //when element is not scrollable
+        }
+    }, []);
 
     const scrollHandler = (e, direction) => {
         calculatePos(direction);

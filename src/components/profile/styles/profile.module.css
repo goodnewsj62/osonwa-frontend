@@ -103,10 +103,11 @@
 
 .add__tag{
     position: absolute;
-    top: 1rem;
+    top: 0.8rem;
     right: 1rem;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .add__tag svg{
