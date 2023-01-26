@@ -1,32 +1,18 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAxiosInstance } from "utils/requests";
 
 
 
-const fetchAllInterest =  createAsyncThunk("interests/fetchAllInterest", async (options={},ThunkApi)=>{
-    try{
-        const response =  await baseAxiosInstance({method:"get", url: "auth/interests"});
-        const data =  response.data.data
+const fetchAllInterest = createAsyncThunk("interests/fetchAllInterest", async (options = {}, ThunkApi) => {
+    try {
+        const response = await baseAxiosInstance({ method: "get", url: "auth/interests" });
+        const data = response.data.data
         ThunkApi.dispatch(interestAction.populateInterests(data))
-        return data 
+        return data
 
-    }catch(err){
+    } catch (err) {
         const message = err.response.data.message
-        return ThunkApi.rejectWithValue({message:message, status:err.response.status})
-    }
-});
-
-
-const updateInterests =  createAsyncThunk("interests/updateInterests", async ({arr,username,accessToken}, ThunkApi)=>{
-    try{
-        const data =  {"interest":arr};
-        baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + accessToken
-        const response =  await baseAxiosInstance.patch(`auth/interests/${username}/`,data);
-        //ThunkApi.dispatch() //call to refetch users profile
-        return response.data.message
-    }catch(err){
-        const message = err.response.data.message
-        return ThunkApi.rejectWithValue({message:message, status:err.response.status})
+        return ThunkApi.rejectWithValue({ message: message, status: err.response.status })
     }
 });
 
@@ -45,7 +31,7 @@ const interestSlice = createSlice({
 
 
 const interestReducers = interestSlice.reducer;
-const interestAction =  interestSlice.actions;
+const interestAction = interestSlice.actions;
 
 export default interestAction;
-export {interestReducers, fetchAllInterest, updateInterests};
+export { interestReducers, fetchAllInterest };

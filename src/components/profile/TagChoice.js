@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { updateInterests } from "store/interestsSlice";
+import { updateInterests } from "store/profileSlice";
 import styles from "./styles/tagchoice.module.css";
 
 
@@ -11,6 +11,7 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
     // first render
     const userInterests = useSelector((states) => states.profileState.interests);
     const [pickedTags, setPickedTags] = useState([...userInterests]);
+    const [deletedTags, setDeletedTags] = useState([]);
     const interests = useSelector((states) => states.interestState.allInterests);
     const username = useSelector((states) => states.profileState.userInfo.username);
     const dispatch = useDispatch();
@@ -41,24 +42,43 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
         if (index !== -1) {
             const newTags = pickedTags.splice(0);
             newTags.splice(index, 1);
+            mark_if_is_interest(name)
             setPickedTags(newTags);
             event.target.classList.remove(`${styles.highlight}`);
         } else {
             setPickedTags((arr) => [...arr, name]);
+            removeFromDeleted(name);
             event.target.classList.add(`${styles.highlight}`);
         }
     };
 
+    function mark_if_is_interest(removed) {
+        if (userInterests.indexOf(removed !== -1)) {
+            setDeletedTags((state) => [...state, removed]);
+        }
+    }
+
+    function removeFromDeleted(name) {
+        const index = deletedTags.indexOf(name);
+        if (index !== -1) {
+            const deletedArray = deletedTags.splice(0);
+            deletedArray.splice(index, 1);
+            setDeletedTags(deletedArray);
+        }
+    }
+
     const handleSubmit = () => {
         const accessToken = authState.access;
-        dispatch(updateInterests({ arr: pickedTags, username, accessToken: accessToken }))
+        dispatch(updateInterests({ arr: pickedTags, toDelete: deletedTags, username: username, accessToken: accessToken }))
             .unwrap()
             .then((resp) => {
                 if (!hasChoosenTags) {
                     setHasPickedTags();
                 }
             })
-            .catch((resp) => { });
+            .catch((resp) => {
+                hideHandler(HTMLElement);
+            });
     };
 
     return (

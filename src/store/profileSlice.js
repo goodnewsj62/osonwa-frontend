@@ -17,6 +17,24 @@ const fetchProfileInfo = createAsyncThunk("profileSlice/fetchProfileInfo", async
 });
 
 
+const updateInterests = createAsyncThunk("interests/updateInterests", async ({ arr, toDelete, username, accessToken }, ThunkApi) => {
+    try {
+        const data = { "interest": arr };
+        const url = `auth/interests/${username}/`
+        baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + accessToken
+        const response = await Promise.all([
+            baseAxiosInstance.patch(url, data),
+            baseAxiosInstance({ url: url, data: { "interest": toDelete }, method: "delete" }),
+        ]);
+
+        ThunkApi.dispatch(fetchProfileInfo({ username: username, accessToken: accessToken }));
+
+        return response[2].data.data
+    } catch (err) {
+        const message = err.response.data.message
+        return ThunkApi.rejectWithValue({ message: message, status: err.response.status })
+    }
+});
 
 
 const initialState = { status: false, userInfo: {}, interests: [] };
@@ -52,4 +70,4 @@ const profileSliceActions = profileSlice.actions;
 const profileSliceReducers = profileSlice.reducer;
 
 export default profileSliceActions;
-export { profileSliceReducers, fetchProfileInfo };
+export { profileSliceReducers, fetchProfileInfo, updateInterests };

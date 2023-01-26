@@ -66,7 +66,8 @@ const ProfileForm = ({ closeHandler, setMessage }) => {
 
         let formData = new FormData();
         for (let field in inputRaw) {
-            if (inputRaw[field].content) formData.append(field, inputRaw[field].content)
+            const val = inputRaw[field].content ? inputRaw[field].content : "";
+            formData.append(field, val)
         }
         return formData;
     };

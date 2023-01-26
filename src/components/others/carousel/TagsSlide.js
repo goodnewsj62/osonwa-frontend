@@ -22,9 +22,13 @@ const TagSlide = ({ tagArray, small = false }) => {
 
 
     useEffect(() => {
-        if (slideCRef.current.offsetWidth === slideRef.current.scrollWidth) {
-            setButtonState({ left: false, right: false }); //when element is not scrollable
-        }
+        const delayCheck = setTimeout(() => {
+            if (slideCRef.current.offsetWidth === slideRef.current.scrollWidth) {
+                setButtonState({ left: false, right: false }); //when element is not scrollable
+            }
+        }, 500);
+
+        return () => clearTimeout(delayCheck);
     }, []);
 
     const scrollHandler = (e, direction) => {
