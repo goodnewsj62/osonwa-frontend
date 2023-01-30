@@ -1,8 +1,8 @@
-.editor {
+.editor__container {
+    width: 100%;
     height: 350px;
-  }
-  
-  .container__container {
-    margin-bottom: 10px;
-    text-align: right;
-  }
+}
+
+.editor {
+  height: 100%;
+}
