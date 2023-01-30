@@ -1,0 +1,12 @@
+.container{
+    width: 100%;
+    padding: 2rem 4rem;
+}
+.container > h1{
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.form{
+    padding: 1rem 1.5rem;
+}

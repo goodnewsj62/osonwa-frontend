@@ -39,6 +39,7 @@
     --tag-select-btn-highlight-text:#fff;
     --edit-profile-raise:#fff;
     --form-border-color:rgba(0,0,0,0.38);
+    --cover-img-bg:#dfdcdc;
 }
 
 [data-theme="dark"]{
