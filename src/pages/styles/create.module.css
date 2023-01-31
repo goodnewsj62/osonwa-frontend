@@ -10,3 +10,18 @@
 .form{
     padding: 1rem 1.5rem;
 }
+
+.submit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.submit button{
+    width: 500px;
+    padding: 0.5rem;
+    background-color: var(--base-color);
+    font-weight: bold;
+    border-radius: var(--radius-10);
+    border: 0;
+}

@@ -1,0 +1,52 @@
+.container{
+    margin-bottom: 2.5rem;
+}
+
+.toggle{
+    height: 36px;
+    width: 100%;
+    border: 1px solid  var(--border-line);
+    border-radius: 2px;
+    padding: 0.2rem 1.2rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--advanced-option-bg);
+}
+
+.toggle h3{
+    display: flex;
+    align-items: center;
+    color: #399bfd;
+    cursor: pointer;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0;
+    position: relative;
+}
+
+.info >span svg {
+    fill: #1e90ff;
+}
+
+.message{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 10px;
+}
+
+.message p{
+    background-color: var(--advanced-option-message-bg);
+    color: #fff;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    border-radius: 0  5px 5px 0;
+}
+
+
+.message span{
+    transform: translateX(7px);
+}

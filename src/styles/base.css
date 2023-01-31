@@ -40,6 +40,10 @@
     --edit-profile-raise:#fff;
     --form-border-color:rgba(0,0,0,0.38);
     --cover-img-bg:#dfdcdc;
+    --code-block-bg:#eff4f9;
+    --tag-select-bg: #eef6f5;
+    --advanced-option-bg:rgb(238, 237, 237);
+    --advanced-option-message-bg:#000;
 }
 
 [data-theme="dark"]{
@@ -106,4 +110,12 @@ body{
     background-color: var(--mask-bg);
     position: fixed;
     z-index: 400;
+}
+
+
+
+.ql-snow .ql-editor pre.ql-syntax {
+    background-color: var(--code-block-bg) !important;
+    color:#2B2C2F !important;
+    overflow: visible;
 }

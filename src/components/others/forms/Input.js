@@ -19,6 +19,7 @@ const Input = ({ params }) => {
         value = val,
         name = "",
         classNames = "",
+        ...others
     } = params;
 
 
@@ -46,6 +47,7 @@ const Input = ({ params }) => {
             onBlur={unHighlightArea}
             onChange={changeFunc}
             className={classNames}
+            {...others}
         />
     )
 }
