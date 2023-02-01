@@ -44,6 +44,7 @@
     --tag-select-bg: #eef6f5;
     --advanced-option-bg:rgb(238, 237, 237);
     --advanced-option-message-bg:#000;
+    --message-central-bg:#fff;
 }
 
 [data-theme="dark"]{

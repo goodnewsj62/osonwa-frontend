@@ -3,6 +3,7 @@ import Editor from "components/createPost/Editor";
 import HeadSection from "components/createPost/HeadSection";
 import OtherInp from "components/createPost/OtherInputs";
 import Main from "components/others/MainWrapper";
+import CenterMessagePopup from "components/others/MessageCentral";
 import styles from "./styles/create.module.css";
 
 
@@ -25,6 +26,7 @@ const CreateArticle = (props) => {
                     </div>
                 </form>
             </div>
+            {/* <CenterMessagePopup message={"You may have unsaved changes will you like to still leave"} /> */}
         </Main>
     )
 };

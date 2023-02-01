@@ -11,10 +11,10 @@ const Container = ({ message, affirmHandler, hideHandler }) => {
     return (
         <div className={styles.cover}>
             <div className={styles.body}>
-                <span onClick={hideHandler}><AiOutlineClose /></span>
+                <span onClick={hideHandler}><AiOutlineClose size={17} /></span>
                 <p>{message}</p>
                 <button onClick={affirmHandler} type="button">
-                    Ok
+                    Continue
                 </button>
             </div>
         </div>
