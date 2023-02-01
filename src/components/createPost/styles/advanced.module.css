@@ -20,6 +20,11 @@
     cursor: pointer;
 }
 
+.rotate__svg{
+    margin-top: 3px;
+    transform: rotate(90deg);
+}
+
 .info{
     display: flex;
     align-items: center;
@@ -74,11 +79,27 @@
         width: 50%;
     }
     .select__bundle > input{
-        width: 50%;
+        width: 50%git;
     }
 }
 
 
 .select__bundle >  input:focus{
     border: 1px solid var(--comp-one);
+}
+
+.main__content{
+    width: 100%;
+    overflow: hidden;
+}
+
+.wrapper{
+    transform: translateY(-101%);
+    opacity: 0;
+    transition: transform 0.2s ease-in,  opacity 0.3s ease-in;
+}
+
+.show__wrapper{
+    transform: translateY(0%);
+    opacity: 1;
 }

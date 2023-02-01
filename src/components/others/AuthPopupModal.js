@@ -9,8 +9,8 @@ import Cover from "./Mask";
 function AuthPopupModal(props) {
     return (
         <>
-            {ReactDOM.createPortal(<Cover {...props} />, document.getElementById("auth__div"))}
-            {ReactDOM.createPortal(<AuthCard {...props} />, document.getElementById("mask"))}
+            {ReactDOM.createPortal(<Cover {...props} />, document.getElementById("mask"))}
+            {ReactDOM.createPortal(<AuthCard {...props} />, document.getElementById("auth__div"))}
         </>
     )
 }

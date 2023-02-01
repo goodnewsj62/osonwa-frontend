@@ -1,17 +1,14 @@
 
-import { useRef } from "react";
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styles from "./styles/form.module.css";
 
 
-export default function Editor(props){
-    const container =  useRef();
-    const quillArea =  useRef();
+export default function Editor({ dispatch, value }) {
 
-    const modules= {
-        toolbar:[
+    const modules = {
+        toolbar: [
             [{ header: '1' }, { header: '2' }, { font: [] }],
             [{ size: [] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
@@ -22,35 +19,42 @@ export default function Editor(props){
                 { indent: '+1' },
             ],
             ['link', 'image', 'code-block'],
-            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'script': 'sub' }, { 'script': 'super' }],
 
             ['clean'],
         ],
-        syntax:true,
+        syntax: true,
         clipboard: {
-          // toggle to add extra line breaks when pasting HTML:
-                matchVisual: false,
+            // toggle to add extra line breaks when pasting HTML:
+            matchVisual: false,
         },
     }
 
+    const changeHandler = (content, delta, source, editor) => {
+        const values = { html: content, delta: editor.getContents() }
+        dispatch({ type: "content", payload: { content: values } });
+    };
+
     return (
-        <section ref={container} id="quill__container" className={styles.editor__container}>
-            <div ref={quillArea} className={styles.editor}  id="quill__editor">
+        <section id="quill__container" className={styles.editor__container}>
+            <div className={styles.editor} id="quill__editor">
                 <script>
                     {
-                         window.hljs.configure({   // optionally configure hljs
+                        window.hljs.configure({   // optionally configure hljs
                             languages: ['javascript', 'ruby', 'python', "java", 'sql',
-                                            'yml','php','json', 'bash', 'css', 
-                                            'html', 'c#', 'c++']
+                                'yml', 'php', 'json', 'bash', 'css',
+                                'html', 'c#', 'c++']
                         })
                     }
                 </script>
-                <ReactQuill 
-                    placeholder="post content..." 
-                    theme="snow" 
+                <ReactQuill
+                    placeholder="post content..."
+                    theme="snow"
                     modules={modules}
                     scrollingContainer="#quill__container"
-                    style={{width:"100%", height:"100%"}}
+                    onChange={changeHandler}
+                    value={{}}
+                    style={{ width: "100%", height: "100%" }}
                 />
             </div>
         </section>
