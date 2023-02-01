@@ -32,7 +32,7 @@
 }
 
 .message{
-    display: flex;
+    display: none;
     align-items: center;
     position: absolute;
     left: 10px;
@@ -49,4 +49,36 @@
 
 .message span{
     transform: translateX(7px);
+}
+
+
+
+.select__bundles{
+    width: 40%;
+}
+
+.info > span:hover ~ .message{
+    display: flex;
+}
+
+.select__bundle > input{
+    width: 40%;
+    padding: 0.55rem 1rem;
+    border-radius: 5px;
+    outline: 0;
+    border: 1px solid var(--form-border-color);
+}
+
+@media screen and (max-width: 900px ) {
+    .select__bundles{
+        width: 50%;
+    }
+    .select__bundle > input{
+        width: 50%;
+    }
+}
+
+
+.select__bundle >  input:focus{
+    border: 1px solid var(--comp-one);
 }

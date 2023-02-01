@@ -24,4 +24,5 @@
     font-weight: bold;
     border-radius: var(--radius-10);
     border: 0;
+    cursor: pointer;
 }
