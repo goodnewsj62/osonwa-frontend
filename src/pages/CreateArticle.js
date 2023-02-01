@@ -3,12 +3,19 @@ import Editor from "components/createPost/Editor";
 import HeadSection from "components/createPost/HeadSection";
 import OtherInp from "components/createPost/OtherInputs";
 import Main from "components/others/MainWrapper";
-import CenterMessagePopup from "components/others/MessageCentral";
+import { useReducer } from "react";
+// import CenterMessagePopup from "components/others/MessageCentral";
 import styles from "./styles/create.module.css";
 
+const ds = () => ({ isValid: true, content: "", error: "" });
+const initialState = { title: ds(), content: { ...ds(), content: {} }, bundle: { ...ds() } }
 
+const reducer = (state, action) => {
+
+};
 
 const CreateArticle = (props) => {
+    const [fieldsVal, dispatch] = useReducer(reducer, initialState);
 
     return (
         <Main>
