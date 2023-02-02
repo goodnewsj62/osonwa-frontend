@@ -1,10 +1,37 @@
 import DropDownInput from "components/others/forms/DropDownInput";
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { baseAxiosInstance } from "utils/requests";
+import useFetchTags from "./hooks/fetchtags";
 
 
 
 const TagsFetchWrapper = ({ setSelectedTags }) => {
-    const [fetchedTags, setFetchedTags] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [showhints, setShowhints] = useState(false);
+    const authState = useSelector((states) => states.authState);
+
+
+    const [fetchedTags, isLoading] = useFetchTags(inputValue);
+    useEffect(() => {
+        const handler = (event) => {
+            if (!event.target.closest("#dropWrapper")) setShowhints(false);
+        }
+        document.onclick = handler
+
+        return () => document.removeEventListener("click", handler);
+    }, []);
+
+    function changeHandler(event) {
+        const value = event.target.value;
+        setInputValue(value);
+    };
+
+    function add(event) {
+        const selected = fetchedTags.filter((item) => item.id === +event.target.getAttribute("data-id"));
+        setSelectedTags((tags) => [...tags, ...selected]);
+        setShowhints(false);
+    }
 
     const tags = fetchedTags.map((item) => {
         return (
@@ -14,22 +41,37 @@ const TagsFetchWrapper = ({ setSelectedTags }) => {
         )
     });
 
-    const params = useMemo(() => ({
-        placeholder: "find or create tag"
-    }), [])
 
-    function add(event) {
-        const selected = fetchedTags.filter((item) => item.id === event.target.getAttribute("data-id"));
-        setSelectedTags((tags) => [...tags, ...selected])
-    }
     const createAndAdd = async (event) => {
+        if (!inputValue || inputValue.length < 2) return
 
+        try {
+            const url = "/blog/tag/"
+            baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + authState.access;
+            const resp = await baseAxiosInstance.post(url, { tag_name: inputValue })
+            setSelectedTags((tags) => [...tags, resp.data.data])
+        } catch (err) { }
     };
 
+
+
+    const params = {
+        focusFunc: () => setShowhints(true),
+        // blurFunc: () => setShowhints(false),
+        changeFunc: changeHandler,
+        value: inputValue,
+        placeholder: "find or create tag"
+    }
+
     return (
-        <>
-            <DropDownInput params={params} createAndAdd={createAndAdd} suggestions={tags} />
-        </>
+        <div id="dropWrapper">
+            <DropDownInput params={params}
+                show={showhints}
+                createAndAdd={createAndAdd}
+                isLoading={isLoading}
+                suggestions={tags}
+            />
+        </div>
     )
 };
 

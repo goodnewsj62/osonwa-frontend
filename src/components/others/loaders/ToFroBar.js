@@ -1,9 +1,9 @@
 import styles from "./styles/tofro.module.css";
 
 
-const InfinteToFroBar =  (prosp)=>{
-    return(
-        <div className={styles.bar}>
+const InfinteToFroBar = ({ style = {} }) => {
+    return (
+        <div className={styles.bar} style={style}>
             <div>
                 <span></span>
             </div>

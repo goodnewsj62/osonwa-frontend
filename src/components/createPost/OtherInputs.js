@@ -1,23 +1,16 @@
-import DropDownInput from "components/others/forms/DropDownInput";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "./styles/other.module.css";
+import TagsFetchWrapper from "./TagsFetchWrapper";
 
 const OtherInp = ({ fieldsVal }) => {
-    const [fetchedTags, setFetchedTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
 
-    const tags = fetchedTags.map((item) => {
-        return (
-            <div key={item.id}>
-                {item.tag_name}
-            </div>
-        )
-    });
+
 
     const removeTag = (event) => {
-        const tag_id = event.target.getAttribute("data-id");
-        setSelectedTags(selectedTags.filter((item) => item.id !== +tag_id));
+        const tag_id = event.target.closest("div").getAttribute("data-id");
+        setSelectedTags((tags) => tags.filter((item) => item.id !== +tag_id));
     }
 
     const selected = selectedTags.map((item) => {
@@ -39,7 +32,7 @@ const OtherInp = ({ fieldsVal }) => {
                         Add Tags
                     </label>
                     <div className={styles.suggested__field}>
-                        <DropDownInput params={{}} suggestions={tags} />
+                        <TagsFetchWrapper setSelectedTags={setSelectedTags} />
                     </div>
                 </div>
                 <div className={styles.selected__tags}>
