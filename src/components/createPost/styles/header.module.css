@@ -10,16 +10,18 @@
 
 .title input{
     width: 65%;
+    height: 3.3rem;
     font-size: 1.8rem;
     font-weight: bold;
     padding: 0.5rem 1rem;
     border: 0;
     outline: none;
+
 }
 
 .slide__bar{
     position: absolute;
-    bottom: -2px;
+    top: 3.3rem ;
     left: 0;
     width: 65%;
     height: 2px;

@@ -1,11 +1,12 @@
 
 
+import { memo } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styles from "./styles/form.module.css";
 
 
-export default function Editor({ dispatch, value }) {
+const Editor = ({ dispatch, value }) => {
 
     const modules = {
         toolbar: [
@@ -31,7 +32,7 @@ export default function Editor({ dispatch, value }) {
     }
 
     const changeHandler = (content, delta, source, editor) => {
-        const values = { html: content, delta: editor.getContents() }
+        const values = { html: content, delta: editor.getContents(), text: editor.getText() };
         dispatch({ type: "content", payload: { content: values } });
     };
 
@@ -53,10 +54,12 @@ export default function Editor({ dispatch, value }) {
                     modules={modules}
                     scrollingContainer="#quill__container"
                     onChange={changeHandler}
-                    value={{}}
+                    value={value}
                     style={{ width: "100%", height: "100%" }}
                 />
             </div>
         </section>
     )
 };
+
+export default memo(Editor);

@@ -1,22 +1,30 @@
 import DropDownInput from "components/others/forms/DropDownInput";
+import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "./styles/other.module.css";
 
-const OtherInp = () => {
+const OtherInp = ({ fieldsVal }) => {
+    const [fetchedTags, setFetchedTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
 
-    const tags = ["python", "docker", "jenkins"].map((item) => {
+    const tags = fetchedTags.map((item) => {
         return (
-            <div key={item}>
-                {item}
+            <div key={item.id}>
+                {item.tag_name}
             </div>
         )
     });
 
-    const selected = ["python", "docker", "embedded systems"].map((item) => {
+    const removeTag = (event) => {
+        const tag_id = event.target.getAttribute("data-id");
+        setSelectedTags(selectedTags.filter((item) => item.id !== +tag_id));
+    }
+
+    const selected = selectedTags.map((item) => {
         return (
-            <div key={item}>
-                <span className={styles.tag__nm}>#{item}</span>
-                <span className={styles.rm__tag}>
+            <div key={item.id} data-id={item.id} >
+                <span className={styles.tag__nm}>#{item.tag_name}</span>
+                <span onClick={removeTag} className={styles.rm__tag}>
                     <AiOutlineClose size={17} />
                 </span>
             </div>
