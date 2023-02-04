@@ -17,7 +17,7 @@ const Advanced = () => {
             <div className={styles.toggle}>
                 <h3 onClick={showContentHandler}>Advanced options <GoTriangleRight className={show? styles.rotate__svg : ""} /></h3>
             </div>
-            <div className={styles.main__content}>
+            <div className={styles.main__content} >
                 <div className={wrapperStyles}>
                     <BundleOptions />
                 </div>

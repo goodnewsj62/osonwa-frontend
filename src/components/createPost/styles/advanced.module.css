@@ -90,7 +90,9 @@
 
 .main__content{
     width: 100%;
-    overflow: hidden;
+    min-height: 220px;
+    overflow-y: hidden;
+    padding: 0  0.5rem;
 }
 
 .wrapper{
@@ -102,4 +104,15 @@
 .show__wrapper{
     transform: translateY(0%);
     opacity: 1;
+}
+
+
+.chosen_bun{
+    display: flex;
+    align-items: center;
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
 }

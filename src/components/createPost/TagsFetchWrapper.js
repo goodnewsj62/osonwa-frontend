@@ -1,8 +1,9 @@
 import DropDownInput from "components/others/forms/DropDownInput";
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { baseAxiosInstance } from "utils/requests";
 import useFetchTags from "./hooks/fetchtags";
+import useHideDropdownOnClickOustside from "./hooks/hideDropDown";
 
 
 
@@ -10,17 +11,11 @@ const TagsFetchWrapper = ({ setSelectedTags }) => {
     const [inputValue, setInputValue] = useState("");
     const [showhints, setShowhints] = useState(false);
     const authState = useSelector((states) => states.authState);
+    const url = useMemo(() => "/blog/tag/search/?keyword=", [])
 
 
-    const [fetchedTags, isLoading] = useFetchTags(inputValue);
-    useEffect(() => {
-        const handler = (event) => {
-            if (!event.target.closest("#dropWrapper")) setShowhints(false);
-        }
-        document.onclick = handler
-
-        return () => document.removeEventListener("click", handler);
-    }, []);
+    const [fetchedTags, isLoading] = useFetchTags(inputValue, url);
+    useHideDropdownOnClickOustside("#dropWrapper", setShowhints);
 
     function changeHandler(event) {
         const value = event.target.value;

@@ -24,9 +24,11 @@ const reducer = (state, action) => {
     }
 };
 
+
 const CreateArticle = (props) => {
     const [fieldsVal, dispatch] = useReducer(reducer, initialState);
     const [imgHolder, setImgHolder] = useState({});
+    const [selectedTags, setSelectedTags] = useState([]);
 
 
     return (
@@ -40,8 +42,11 @@ const CreateArticle = (props) => {
                         fieldVal={fieldsVal.title}
                     />
                     <Editor dispatch={dispatch} value={fieldsVal.content.delta} />
-                    <OtherInp />
-                    <Advanced />
+                    <OtherInp selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
+                    <Advanced
+                        dispatch={dispatch}
+                        fieldVal={fieldsVal.bundle}
+                    />
                     <div className={styles.submit}>
                         <button type="submit">
                             Create

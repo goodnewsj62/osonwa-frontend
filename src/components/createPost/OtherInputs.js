@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "./styles/other.module.css";
 import TagsFetchWrapper from "./TagsFetchWrapper";
 
-const OtherInp = ({ fieldsVal }) => {
-    const [selectedTags, setSelectedTags] = useState([]);
-
+const OtherInp = ({ selectedTags, setSelectedTags }) => {
 
 
     const removeTag = (event) => {
