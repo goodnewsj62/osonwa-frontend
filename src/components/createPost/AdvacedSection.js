@@ -5,7 +5,7 @@ import BundleOptions from "./BundleOptions";
 import styles from "./styles/advanced.module.css";
 
 
-const Advanced = () => {
+const Advanced = ({dispatch, fieldVals}) => {
     const [show, setShow] = useState(false);
     const showContentHandler =  (event)=>{
         setShow((state)=>!state);
@@ -19,7 +19,7 @@ const Advanced = () => {
             </div>
             <div className={styles.main__content} >
                 <div className={wrapperStyles}>
-                    <BundleOptions />
+                    <BundleOptions dispatch={dispatch} fieldVals={fieldVals} />
                 </div>
             </div>
         </section>

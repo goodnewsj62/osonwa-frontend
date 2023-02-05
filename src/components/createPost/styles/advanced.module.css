@@ -66,7 +66,7 @@
     display: flex;
 }
 
-.select__bundle > input{
+.num__input > input{
     width: 40%;
     padding: 0.55rem 1rem;
     border-radius: 5px;
@@ -78,13 +78,13 @@
     .select__bundles{
         width: 50%;
     }
-    .select__bundle > input{
-        width: 50%git;
+    .num__input > input{
+        width: 50%;
     }
 }
 
 
-.select__bundle >  input:focus{
+.num__input >  input:focus{
     border: 1px solid var(--comp-one);
 }
 
@@ -115,4 +115,11 @@
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     font-weight: bold;
+}
+
+
+.error{
+    margin-top: 0.4rem;
+    font-size: 0.95;
+    color: rgb(249, 94, 94);
 }

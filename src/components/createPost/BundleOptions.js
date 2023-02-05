@@ -3,12 +3,13 @@ import useAuthAxios from "hooks/authAxios";
 import { useState } from "react";
 import { AiFillInfoCircle, AiOutlineClose } from "react-icons/ai";
 import { GoTriangleLeft } from "react-icons/go";
+import BundleOrder from "./BundleOrder";
 import useFetchTags from "./hooks/fetchtags";
 import useHideDropdownOnClickOustside from "./hooks/hideDropDown";
 
 import styles from "./styles/advanced.module.css";
 
-const BundleOptions = ({ dispatch, fieldVal }) => {
+const BundleOptions = ({ dispatch, fieldVals }) => {
     const [showhints, setShowhints] = useState(false);
     const [selectedBundle, setSelectedBundle] = useState({});
     const [inputValue, setInputValue] = useState("");
@@ -57,6 +58,7 @@ const BundleOptions = ({ dispatch, fieldVal }) => {
         placeholder: "find or create bundle",
         disabled: selectedBundle.id? true : false
     }
+    
 
     return (
         <div className={styles.bundles}>
@@ -90,11 +92,13 @@ const BundleOptions = ({ dispatch, fieldVal }) => {
                                 <span onClick={removeBundle} className={styles.rm__bun}>
                                     <AiOutlineClose size={17} />
                                 </span>
-                            </div>
+                            </div> 
                         </div>
                     }
                 </div>
-                <input type="text" placeholder="enter order number " id="" />
+                <>
+                    <BundleOrder dispatch={dispatch} orderVal={fieldVals.orderVal} />
+                </>
             </div>
         </div>
     )

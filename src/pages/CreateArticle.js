@@ -11,7 +11,7 @@ const ds = () => ({ isValid: true, content: "", error: "" });
 const initialState = {
     title: ds(),
     content: { ...ds(), content: { html: "", delta: {}, text: "" } },
-    bundle: { ...ds() }
+    bundle: ds(), order: { ...ds(), content: 0 }
 };
 
 const reducer = (state, action) => {
@@ -45,7 +45,7 @@ const CreateArticle = (props) => {
                     <OtherInp selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
                     <Advanced
                         dispatch={dispatch}
-                        fieldVal={fieldsVal.bundle}
+                        fieldVals={{ orderVal: fieldsVal.order }}
                     />
                     <div className={styles.submit}>
                         <button type="submit">
