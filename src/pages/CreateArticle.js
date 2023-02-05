@@ -59,9 +59,12 @@ const CreateArticle = (props) => {
             if (key === "content") {
                 const writeupFormats = { delta: fieldsVal[key].content.delta, html: fieldsVal[key].content.html };
                 const writeupText = fieldsVal[key].content.text;
-                const content = {}
+                fData.append("content", JSON.stringify(writeupText));
+                fData.append("text_content", writeupText);
                 continue;
             }
+
+            fData.append(key, fieldsVal[key]);
         }
 
     }
