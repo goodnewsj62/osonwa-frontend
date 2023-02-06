@@ -13,7 +13,7 @@ const HeadSection = ({ dispatch, fieldVal, setImgHolder }) => {
         imgRef.current.src = image;
 
         setShowImg(image ? true : false);
-        setImgHolder(event.target.files[0])
+        setImgHolder({file:event.target.files[0]})
     };
 
 
