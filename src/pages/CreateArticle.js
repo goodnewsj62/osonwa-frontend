@@ -27,9 +27,9 @@ const reducer = (state, action) => {
 };
 
 
-const CreateArticle = ({ initState = initialState, initTags = [] }) => {
+const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {} }) => {
     const [fieldsVal, dispatch] = useReducer(reducer, initState);
-    const [imgHolder, setImgHolder] = useState({});
+    const [imgHolder, setImgHolder] = useState(defaultImg);
     const [selectedTags, setSelectedTags] = useState(initTags);
     const [errormessage, setErrormessage] = useState({ message: "", status: false });
     const [savestatus, setSavestatus] = useState("clear");
@@ -65,13 +65,14 @@ const CreateArticle = ({ initState = initialState, initTags = [] }) => {
     }, [errormessage.status]);
 
     useEffect(() => {
+
         const interval = setInterval(() => {
             if (isValid()) {
                 postOrPatch().then((resp) => {
                     tagPostWrapper(resp);
                 });
             };
-        }, 120 * 1000);
+        }, (120 * 1000));
 
 
         return () => clearInterval(interval);
@@ -107,10 +108,13 @@ const CreateArticle = ({ initState = initialState, initTags = [] }) => {
                 fData.append("content", JSON.stringify(writeupFormats));
                 fData.append("text_content", writeupText);
                 continue;
-            } else if (key === "bundle") {
-                fData.append(key, fieldsVal[key].content.id);
+            }
+
+            if (key === "bundle") {
+                if (fieldsVal[key].content.id) fData.append(key, fieldsVal[key].content.id);
                 continue;
             }
+
 
             if (fieldsVal[key].content) fData.append(key, fieldsVal[key].content);
         }
@@ -207,7 +211,6 @@ const CreateArticle = ({ initState = initialState, initTags = [] }) => {
             setErrormessage({ message: "oops an error occured", status: true });
         }
     };
-    console.log(fieldsVal.content)
 
     return (
         <Main>
@@ -215,11 +218,12 @@ const CreateArticle = ({ initState = initialState, initTags = [] }) => {
                 <h1>Create Post</h1>
                 <form onSubmit={createPostHandler} className={styles.form}>
                     <HeadSection
+                        image={imgHolder.file}
                         setImgHolder={setImgHolder}
                         dispatch={dispatch}
                         fieldVal={fieldsVal.title}
                     />
-                    <Editor dispatch={dispatch} value={fieldsVal.content.delta} savestatus={savestatus} />
+                    <Editor dispatch={dispatch} value={fieldsVal.content.content.delta} savestatus={savestatus} />
                     <OtherInp selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
                     <Advanced
                         dispatch={dispatch}

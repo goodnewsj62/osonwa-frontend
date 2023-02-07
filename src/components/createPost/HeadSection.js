@@ -1,21 +1,15 @@
 import { memo, useState } from "react";
-import { useRef } from "react";
 import { IoMdAdd } from "react-icons/io";
 import styles from "./styles/header.module.css";
 import style from "./styles/general.module.css";
 
-const HeadSection = ({ dispatch, fieldVal, setImgHolder }) => {
-    const [showImg, setShowImg] = useState(false);
-    const imgRef = useRef();
+const HeadSection = ({ dispatch, fieldVal, setImgHolder, image }) => {
+    const [showImg, setShowImg] = useState(image?  true: false);
 
     const fileHandler = (event) => {
-        const image = URL.createObjectURL(event.target.files[0]);
-        imgRef.current.src = image;
-
-        setShowImg(image ? true : false);
+        setShowImg(true);
         setImgHolder({file:event.target.files[0]})
     };
-
 
     const validateTitle = (event) => {
         const title =  event.target.value;
@@ -31,6 +25,8 @@ const HeadSection = ({ dispatch, fieldVal, setImgHolder }) => {
         dispatch({ type: "title", payload: message });
     }
 
+    const imgSrc =  image? URL.createObjectURL(image) : "";
+
     return (
         <section className={styles.container}>
             <div className={styles.title}>
@@ -41,7 +37,7 @@ const HeadSection = ({ dispatch, fieldVal, setImgHolder }) => {
                 </div>
             </div>
             <div className={styles.file__area}>
-                <img ref={imgRef} style={{ display: showImg ? "block" : "none" }} src="" alt="cover" />
+                <img src={imgSrc} style={{ display: showImg ? "block" : "none" }} alt="cover" />
                 <div className={styles.file__text}>
                     <span>
                         <IoMdAdd size={33} />
