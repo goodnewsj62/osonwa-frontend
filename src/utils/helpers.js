@@ -135,4 +135,10 @@ export function setStandardError(setErrorInfo, err) {
 };
 
 
+export function objectIsEmpty(object_) {
+    return (
+        Object.keys(object_).length < 1
+    )
+}
+
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

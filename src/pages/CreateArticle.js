@@ -4,7 +4,8 @@ import HeadSection from "components/createPost/HeadSection";
 import OtherInp from "components/createPost/OtherInputs";
 import Main from "components/others/MainWrapper";
 import useAuthAxios from "hooks/authAxios";
-import { useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/create.module.css";
 
 const ds = () => ({ isValid: true, content: "", error: "" });
@@ -33,11 +34,15 @@ const CreateArticle = (props) => {
     const [savestatus, setSavestatus] = useState("clear");
     const [postResponseInfo, setPostResponseInfo] = useState({});
     const [imgHasChanged, setImgHasChanged] = useState(false);
+    const navigate = useNavigate();
     const axios_ = useAuthAxios();
 
 
     axios_.defaults.headers.common["Content-Type"] = "multipart/form-data";
-    const isValid = () => fieldsVal.title.isValid && fieldsVal.content.isValid;
+    const isValid = useCallback(() => {
+        return fieldsVal.title.isValid && fieldsVal.title.content && fieldsVal.content.isValid && fieldsVal.content.content.text;
+    }, [fieldsVal.title, fieldsVal.content])
+
 
 
     useEffect(() => {
@@ -60,12 +65,16 @@ const CreateArticle = (props) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (isValid()) patchPost();
+            if (isValid()) {
+                patchPost().then((resp) => {
+                    tagPostWrapper(resp);
+                });
+            };
         }, 120 * 1000);
 
 
         return () => clearInterval(interval);
-    }, []);
+    }, [isValid]);
 
     //overtime check for changes in content
     // if changes are available with a title and no saved post_id 
@@ -98,6 +107,7 @@ const CreateArticle = (props) => {
                 fData.append("text_content", writeupText);
                 continue;
             }
+
             if (fieldsVal[key].content) fData.append(key, fieldsVal[key].content);
         }
 
@@ -120,8 +130,9 @@ const CreateArticle = (props) => {
     }
 
     const patchPost = async () => {
+
         try {
-            const url = ``;
+            const url = `/blog/post/${postResponseInfo.slug_title}/${postResponseInfo.post_id}/`;
             const data = constructData();
             const resp = await axios_.patch(url, data);
             setPostResponseInfo(resp.data.data);
@@ -136,7 +147,7 @@ const CreateArticle = (props) => {
 
     const createPost = async () => {
         try {
-            const url = "";
+            const url = "/blog/post/";
             const data = constructData();
             const resp = await axios_.post(url, data);
             setPostResponseInfo(resp.data.data);
@@ -148,16 +159,16 @@ const CreateArticle = (props) => {
         }
     }
 
-    const postTags = async () => {
+    const postTags = async (postData) => {
         try {
-            const url = ``;
-            const resp = await axios_.post(url, selectedTags, {
-                headers: {
-                    "Content-type": "application/json"
-                }
+            const url = `/blog/post/add-tag/${postData.slug_title}/${postData.post_id}/`;
+            const data = { "tags": selectedTags };
+            const resp = await axios_.patch(url, data, {
+                "Content-type": "application/json",
+                // "Authorization": "Bearer " + authState.access,
             });
             return resp;
-        } catch (error) { }
+        } catch (error) { return error }
     }
 
     function postOrPatch() {
@@ -168,10 +179,26 @@ const CreateArticle = (props) => {
         }
     }
 
+    function tagPostWrapper(resp) {
+        if ("status" in resp && [201, 200].indexOf(resp.status) !== -1) {
+            const respData = resp.data.data;
+            postTags(respData).then((resp) => {
+                navigate(`/article/${respData.slug_title}-${respData.post_id}`);
+            });
+        }
+
+        setErrormessage({ status: true, message: "an error occured, try again" });
+    }
+
     const createPostHandler = (event) => {
-        postOrPatch();
-        postTags();
+        event.preventDefault();
+        postOrPatch().then((resp) => {
+            tagPostWrapper(resp);
+        });
+
+
         setImgHasChanged(false);
+        setErrormessage({ message: "oops an error occured", status: true });
     };
 
 

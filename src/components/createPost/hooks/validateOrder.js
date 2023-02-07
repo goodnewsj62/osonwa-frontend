@@ -1,31 +1,27 @@
-import useAuthAxios from "hooks/authAxios";
 import { useCallback, useEffect } from "react";
 
 
 
-const useValidateOrder = (orderNo, dispatch) => {
-    const axios_ = useAuthAxios();
+const useValidateOrder = (orderNo, dispatch, order_array) => {
 
-    const validateOrderNum = useCallback(async () => {
-        try {
-            const url = ``;
-            const resp = axios_.get(url);
-            let message;
+    const validateOrderNum = useCallback(() => {
+        let message;
 
-            if (resp.data.data.status && orderNo > 0) {
-                message = { isValid: true, error: "" };
-                dispatch({ type: "order", payload: message });
-                return
-            }
-
-            message = { isValid: true, error: "another post with this number exists" };
+        if (order_array.indexOf(orderNo) === -1 && orderNo > 0) {
+            message = { isValid: true, error: "" };
             dispatch({ type: "order", payload: message });
-
-        } catch (err) {
-            const message = { isValid: false, error: "" };
+        } else if (order_array.length < 1) {
+            message = { isValid: false, error: "" };
             dispatch({ type: "order", payload: message });
         }
-    }, [orderNo, dispatch, axios_])
+        else if (order_array.indexOf(orderNo) !== -1) {
+            message = { isValid: false, error: "another post with this number exists" };
+            dispatch({ type: "order", payload: message });
+        }
+
+
+    }, [orderNo, dispatch, order_array])
+
 
     useEffect(() => {
         validateOrderNum()

@@ -5,7 +5,7 @@ import { baseAxiosInstance } from "utils/requests";
 
 
 
-const useFetchTags = (inputValue, url_) => {
+const useFetchTags = (inputValue, url_, query = "") => {
     const [fetchedTags, setFetchedTags] = useState([]);
     const [isLoading, setIsloading] = useState(true);
     const authState = useSelector((states) => states.authState);
@@ -13,13 +13,14 @@ const useFetchTags = (inputValue, url_) => {
 
     const fetchMatchedTags = useCallback(async () => {
         try {
-            const url = `${url_}${inputValue}`;
+            const url = query ? (url_ + query) : `${url_}${inputValue}`;
+
             const resp = await baseAxiosInstance.get(url)
             setFetchedTags(resp.data.data);
         } catch (err) { }
 
         setIsloading(false);
-    }, [inputValue, url_])
+    }, [inputValue, url_, query])
 
     useEffect(() => {
         setIsloading(true);

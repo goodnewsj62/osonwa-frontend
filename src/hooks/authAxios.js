@@ -6,7 +6,7 @@ import { baseAxiosInstance } from "utils/requests";
 const useAuthAxios = () => {
     const authState = useSelector((states) => states.authState);
 
-    baseAxiosInstance.defaults.headers.common["Authorization"] = authState.access;
+    baseAxiosInstance.defaults.headers.common["Authorization"] = "Bearer " + authState.access;
 
     return baseAxiosInstance;
 };

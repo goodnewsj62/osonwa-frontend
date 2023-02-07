@@ -1,12 +1,17 @@
+import { useMemo } from "react";
 import { useState } from "react";
+import { objectIsEmpty } from "utils/helpers";
 import useValidateOrder from "./hooks/validateOrder";
 import styles from "./styles/advanced.module.css";
 
 
 
-export default function BundleOrder({dispatch, orderVal}){
+export default function BundleOrder({dispatch, orderVal, selectedBundle}){
     const [orderNo, setOrderNo] =  useState(0);
-    useValidateOrder(orderNo,dispatch)
+    const order_array = useMemo(()=>{
+        return objectIsEmpty(selectedBundle)? [] : selectedBundle.taken_order_no;
+    },[selectedBundle]);
+    useValidateOrder(orderNo,dispatch, order_array)
     
 
     const changeHandler =  (event)=>{
@@ -29,7 +34,12 @@ export default function BundleOrder({dispatch, orderVal}){
     const value = orderNo? orderNo : "";
     return(
         <div className={styles.num__input}>
-            <input type="text" value={value} onChange={changeHandler} placeholder="enter order number " id="" />
+            <input type="text" value={value} 
+                onChange={changeHandler} 
+                placeholder="enter order number"
+                id=""
+                disabled={objectIsEmpty(selectedBundle)? true: false}
+                />
             <div className={styles.error}>
                 <span>{orderVal.error}</span>
             </div>
