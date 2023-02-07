@@ -2,6 +2,7 @@ import Advanced from "components/createPost/AdvacedSection";
 import Editor from "components/createPost/Editor";
 import HeadSection from "components/createPost/HeadSection";
 import OtherInp from "components/createPost/OtherInputs";
+import { MessagePopup } from "components/others";
 import Main from "components/others/MainWrapper";
 import useAuthAxios from "hooks/authAxios";
 import { useCallback, useEffect, useReducer, useState } from "react";
@@ -12,7 +13,7 @@ const ds = () => ({ isValid: true, content: "", error: "" });
 const initialState = {
     title: ds(),
     content: { ...ds(), content: { html: "", delta: {}, text: "" } },
-    bundle: ds(),
+    bundle: { ...ds(), content: {} },
     order: { ...ds(), content: 0 }
 };
 
@@ -26,10 +27,10 @@ const reducer = (state, action) => {
 };
 
 
-const CreateArticle = (props) => {
-    const [fieldsVal, dispatch] = useReducer(reducer, initialState);
+const CreateArticle = ({ initState = initialState, initTags = [] }) => {
+    const [fieldsVal, dispatch] = useReducer(reducer, initState);
     const [imgHolder, setImgHolder] = useState({});
-    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState(initTags);
     const [errormessage, setErrormessage] = useState({ message: "", status: false });
     const [savestatus, setSavestatus] = useState("clear");
     const [postResponseInfo, setPostResponseInfo] = useState({});
@@ -66,7 +67,7 @@ const CreateArticle = (props) => {
     useEffect(() => {
         const interval = setInterval(() => {
             if (isValid()) {
-                patchPost().then((resp) => {
+                postOrPatch().then((resp) => {
                     tagPostWrapper(resp);
                 });
             };
@@ -105,6 +106,9 @@ const CreateArticle = (props) => {
                 const writeupText = fieldsVal[key].content.text;
                 fData.append("content", JSON.stringify(writeupFormats));
                 fData.append("text_content", writeupText);
+                continue;
+            } else if (key === "bundle") {
+                fData.append(key, fieldsVal[key].content.id);
                 continue;
             }
 
@@ -165,13 +169,13 @@ const CreateArticle = (props) => {
             const data = { "tags": selectedTags };
             const resp = await axios_.patch(url, data, {
                 "Content-type": "application/json",
-                // "Authorization": "Bearer " + authState.access,
             });
             return resp;
         } catch (error) { return error }
     }
 
     function postOrPatch() {
+        setSavestatus("processing")
         if (postResponseInfo.post_id) {
             return patchPost();
         } else {
@@ -182,26 +186,28 @@ const CreateArticle = (props) => {
     function tagPostWrapper(resp) {
         if ("status" in resp && [201, 200].indexOf(resp.status) !== -1) {
             const respData = resp.data.data;
-            postTags(respData).then((resp) => {
-                navigate(`/article/${respData.slug_title}-${respData.post_id}`);
-            });
+            return postTags(respData)
         }
 
         setErrormessage({ status: true, message: "an error occured, try again" });
+        return Promise.reject();
     }
 
-    const createPostHandler = (event) => {
+    const createPostHandler = async (event) => {
         event.preventDefault();
-        postOrPatch().then((resp) => {
-            tagPostWrapper(resp);
-        });
 
-
-        setImgHasChanged(false);
-        setErrormessage({ message: "oops an error occured", status: true });
+        try {
+            const response = await postOrPatch();
+            const resp = await tagPostWrapper(response);
+            const respData = resp.data.data;
+            navigate(`/article/${respData.slug_title}-${respData.post_id}`);
+            return resp
+        } catch (err) {
+            setImgHasChanged(false);
+            setErrormessage({ message: "oops an error occured", status: true });
+        }
     };
-
-
+    console.log(fieldsVal.content)
 
     return (
         <Main>
@@ -217,7 +223,7 @@ const CreateArticle = (props) => {
                     <OtherInp selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
                     <Advanced
                         dispatch={dispatch}
-                        fieldVals={{ orderVal: fieldsVal.order }}
+                        fieldVals={{ orderVal: fieldsVal.order, bundle: fieldsVal.bundle }}
                     />
                     <div className={styles.submit}>
                         <button type="submit" disabled={isValid() ? false : true}>
@@ -226,6 +232,7 @@ const CreateArticle = (props) => {
                     </div>
                 </form>
             </div>
+            {errormessage.status && <MessagePopup message={errormessage.message} />}
         </Main>
     )
 };

@@ -12,17 +12,16 @@ import styles from "./styles/advanced.module.css";
 
 const BundleOptions = ({ dispatch, fieldVals }) => {
     const [showhints, setShowhints] = useState(false);
-    const [selectedBundle, setSelectedBundle] = useState({});
     const [inputValue, setInputValue] = useState("");
     const axiosInstance = useAuthAxios();
+    const selectedBundle = fieldVals.bundle.content;
 
     const [fetchedBundles, isLoading] = useFetchTags(inputValue, "/blog/bundle/search/", `?topic=${inputValue}`);
     useHideDropdownOnClickOustside("#bundle_dropdown", setShowhints);
 
     function setHandler(event) {
         const [selected] = fetchedBundles.filter((item) => item.id === +event.target.getAttribute("data-id"));
-        setSelectedBundle(selected);
-        dispatch({ type: "bundle", payload: { content: selected.id } });
+        dispatch({ type: "bundle", payload: { content: selected } });
         setShowhints(false);
     }
 
@@ -35,8 +34,7 @@ const BundleOptions = ({ dispatch, fieldVals }) => {
     });
 
     const removeBundle = (event) => {
-        setSelectedBundle({});
-        dispatch({ type: "bundle", payload: 0 });
+        dispatch({ type: "bundle", payload: { content: {} } });
     };
 
     const createAndAdd = async () => {
@@ -44,7 +42,7 @@ const BundleOptions = ({ dispatch, fieldVals }) => {
 
         try {
             const resp = await axiosInstance.post("/blog/bundle/", { "topic": inputValue });
-            setSelectedBundle(resp.data.data);
+            dispatch({ type: "bundle", payload: { content: resp.data.data } });
         } catch (err) { }
     };
 
