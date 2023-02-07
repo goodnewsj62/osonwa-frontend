@@ -33,6 +33,7 @@ function AuthCard({ hideHandler, next }) {
             } else {
                 const next_location = next ? { "next": next } : {};
                 authenticateUserAndRedirect(response.data.data, dispatch, navigate, next_location);
+                hideHandler(HTMLElement);
             }
 
         } catch (err) {

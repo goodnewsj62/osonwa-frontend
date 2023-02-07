@@ -141,4 +141,12 @@ export function objectIsEmpty(object_) {
     )
 }
 
+export function loginRequiredRedirect(url, authState, navigate, setAuthPopup, options = {}) {
+    if (authState) {
+        navigate(url, { ...options });
+    } else {
+        setAuthPopup(true);
+    }
+}
+
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };
