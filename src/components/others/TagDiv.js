@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./styles/cardTag.module.css";
 
-const TagDiv = (props) => {
+const TagDiv = ({ tags, tagLink }) => {
     const fetchedTags = (
         <>
             <div className={styles.tag}>

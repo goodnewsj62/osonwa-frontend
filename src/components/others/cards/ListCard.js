@@ -6,28 +6,53 @@ import styles from "./styles/listcard.module.css";
 
 
 const ListCard = (props) => {
+    const {
+        detailUrl,
+        imgSrc,
+        dpSrc,
+        publisher,
+        publisherUrl,
+        date,
+        title,
+        content,
+        tagsInfo,
+        likeInfo,
+        commentInfo,
+        shareUrl } = props
+
+    const formatDate = () => {
+
+    };
+    const defaultImage = () => {
+
+    };
+
+    const trimCharsTo = (title, max_) => {
+
+    };
+
     return (
         <div className={styles.card__container}>
             <section className={styles.header}>
-                <Link to="#">
-                    <img src={dummy} alt="publisher" />
-                    <p>Lorem ipsum dolor</p>
-                    <p><span>.</span>jun 13 2022</p>
+                <Link to={`/${publisherUrl}`}>
+                    <img src={dpSrc} onError={defaultImage} alt="publisher" />
+                    <p>{publisher}</p>
+                    <p><span>.</span>jun 13 2022 {formatDate(date)}</p>
                 </Link>
             </section>
             <section className={styles.body}>
                 {/* for p tag max 30 use js substring or split then add... if remaining text */}
-                <Link to="#">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, blanditiis.</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos a laudantium fugiat rerum quibusdam, blanditiis at hic excepturi quas in, amet sed odit nam, consectetur officiis? Ullam et excepturi ducimus?</p>
+                <Link to={`/${detailUrl}`}>
+                    <h2>{trimCharsTo(title, 70)}</h2>
+                    <p>{trimCharsTo(content, 180)}</p>
                 </Link>
             </section>
             <aside className={styles.featured__image}>
-                <img src={dummy} alt="featured" />
+                <img src={imgSrc} onError={defaultImage} alt="featured" />
             </aside>
             <section className={styles.footer}>
-                <TagDiv />
-                <ListCardAction />
+                <TagDiv tagsInfo={tagsInfo} />
+                <ListCardAction likeInfo={likeInfo} shareUrl={shareUrl} commentInfo={commentInfo} />
             </section>
         </div>
     )
