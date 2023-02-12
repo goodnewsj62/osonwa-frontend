@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import dummy from "static/images/test_img.jpg";
 import TagDiv from "../TagDiv";
 import ListCardAction from "../Actions";
 import styles from "./styles/listcard.module.css";
 
 
-const ListCard = (props) => {
+const ListCard = ({ info }) => {
     const {
         detailUrl,
         imgSrc,
@@ -18,17 +17,21 @@ const ListCard = (props) => {
         tagsInfo,
         likeInfo,
         commentInfo,
-        shareUrl } = props
+        starInfo,
+        shareUrl } = info;
 
-    const formatDate = () => {
-
+    const formatDate = (isoString) => {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const date = new Date(isoString);
+        return `${months[date.getMonth()]} ${date.getDay() + 1} ${date.getFullYear()}`
     };
-    const defaultImage = () => {
-
+    const defaultImage = (event) => {
+        // event.target.src =  image
     };
 
-    const trimCharsTo = (title, max_) => {
-
+    const trimCharsTo = (string_, max_) => {
+        if (string_.length >= max_) return string_.substring(0, max_) + '...'
+        return string_
     };
 
     return (
@@ -37,7 +40,7 @@ const ListCard = (props) => {
                 <Link to={`/${publisherUrl}`}>
                     <img src={dpSrc} onError={defaultImage} alt="publisher" />
                     <p>{publisher}</p>
-                    <p><span>.</span>jun 13 2022 {formatDate(date)}</p>
+                    <p><span>.</span>{formatDate(date)}</p>
                 </Link>
             </section>
             <section className={styles.body}>
@@ -52,7 +55,7 @@ const ListCard = (props) => {
             </aside>
             <section className={styles.footer}>
                 <TagDiv tagsInfo={tagsInfo} />
-                <ListCardAction likeInfo={likeInfo} shareUrl={shareUrl} commentInfo={commentInfo} />
+                <ListCardAction likeInfo={likeInfo} starInfo={starInfo} shareUrl={shareUrl} commentInfo={commentInfo} />
             </section>
         </div>
     )

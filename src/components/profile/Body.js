@@ -7,15 +7,18 @@ import useAuthAxios from "hooks/authAxios";
 
 
 const ProfileBody = ({ state }) => {
-    const [myposts, setMyposts] = useState({ isLoading: true, posts: [] });
+    const [myposts, setMyposts] = useState({ isLoading: true, others: {}, posts: [] });
+
     const [mycomments, setMycomments] = useState({ isLoading: true, comments: [] });
     const axios_ = useAuthAxios();
 
 
     const fetchposts = useCallback(async () => {
         try {
-            const resp = axios_.get("/blog/post/", { Headers: { "Content-Type": "application/json" } });
-            setMyposts({ isLoading: false, posts: resp.data.data.results });
+            const resp = await axios_.get("/blog/post/", { Headers: { "Content-Type": "application/json" } });
+            const { results, ...others } = resp.data.data;
+            console.log(resp.data.data.results)
+            setMyposts({ isLoading: false, other: others, posts: results });
         } catch (error) {
             setMyposts((state) => ({ ...state, isLoading: false }));
         }

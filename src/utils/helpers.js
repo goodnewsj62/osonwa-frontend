@@ -149,4 +149,21 @@ export function loginRequiredRedirect(url, authState, navigate, setAuthPopup, op
     }
 }
 
+export const toggleAction = async (axios_, url, type, setStatus) => {
+    try {
+        const resp = await axios_.patch(url, { "type": type }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (resp.data.message.message === "liked") setStatus(true);
+        else setStatus(false);
+
+        return resp
+
+    } catch (err) { }
+};
+
+
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };
