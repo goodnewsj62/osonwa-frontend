@@ -149,21 +149,29 @@ export function loginRequiredRedirect(url, authState, navigate, setAuthPopup, op
     }
 }
 
-export const toggleAction = async (axios_, url, type, setStatus) => {
+export const toggleAction = async (axios_, url, type, rejectHandler) => {
     try {
         const resp = await axios_.patch(url, { "type": type }, {
             headers: {
                 "Content-Type": "application/json"
             }
         });
-
-        if (resp.data.message.message === "liked") setStatus(true);
-        else setStatus(false);
-
         return resp
 
-    } catch (err) { }
+    } catch (err) {
+        rejectHandler(err.response);
+        return err;
+    }
 };
 
+
+export function shortenCount(count) {
+    if (count > 999 && count < 1000000) {
+        return (count / 1000).toFixed(1) + "K";
+    } else if (count > 99999) {
+        return (count / 1000000).toFixed(1) + "M";
+    }
+    return count;
+}
 
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

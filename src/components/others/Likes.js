@@ -1,20 +1,55 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { toggleAction } from "utils/helpers";
+import { shortenCount, toggleAction } from "utils/helpers";
 import styles from "./styles/actioncomp.module.css";
 
 
 
 
 const Likes = ({ likeInfo: { count, type, likeUrl, is_liked } }) => {
+    const [likeCount, setLikeCount] = useState(count);
     const [likeStatus, setLikeStatus] = useState(is_liked);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
 
+    useEffect(() => {
 
-    const likeOrUnlike = (event) => toggleAction(axios_, likeUrl, type, setLikeStatus);
+    }, [likeStatus])
+
+    function rejectHandler(value) {
+        /* setLikeStatusAndCount has made like status change for speed reasons
+                so we invert the logic here to reset to previous state
+                since request failed
+            */
+        if (likeStatus) {
+            setLikeStatus(false);
+            setLikeCount((count) => (count - 1));
+        } else {
+            setLikeStatus(true);
+            setLikeCount((count) => (count + 1));
+        }
+    }
+
+    function setLikeStatusAndCount() {
+        if (!likeStatus) {
+            setLikeStatus(true);
+            setLikeCount((count) => (count + 1));
+        }
+        else {
+            setLikeStatus(false);
+            setLikeCount((count) => (count - 1));
+        }
+    }
+
+
+    const likeOrUnlike = (event) => {
+        setLikeStatusAndCount()
+        toggleAction(axios_, likeUrl, type, rejectHandler)
+    };
+
+    const formatCount = (count) => shortenCount(count);
 
     return (
         <div onClick={likeOrUnlike} className={styles.likes}>
@@ -23,7 +58,7 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked } }) => {
                 {likeStatus && <AiFillHeart fill="#EE527F" size={iconSize} />}
             </div>
             <div className={`${styles.count} cnt`}>
-                {count}
+                {formatCount(likeCount)}
             </div>
         </div>
     );

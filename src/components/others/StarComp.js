@@ -11,12 +11,35 @@ const StarComp = ({ starInfo: { starUrl, type, saved } }) => {
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
 
-    const saveOrUnsave = (event) => toggleAction(axios_, starUrl, type, setIsSaved);
+    const rejectHandler = (value) => {
+        /* saveLogic has made saved status change for speed reasons
+                so we invert the logic here to reset to previous state
+                since request failed
+            */
+        if (isSaved) {
+            setIsSaved(false);
+        } else {
+            setIsSaved(true);
+        }
+
+    }
+
+    const saveLogic = () => {
+        if (!isSaved) {
+            setIsSaved(true)
+        } else {
+            setIsSaved(false);
+        }
+    }
+    const saveOrUnsave = (event) => {
+        saveLogic();
+        toggleAction(axios_, starUrl, type, rejectHandler)
+    };
     return (
         <div className={styles.star}>
             <div onClick={saveOrUnsave} className={styles.icon}>
                 {!isSaved && <AiOutlineStar size={iconSize} />}
-                {isSaved && <AiFillStar fill="#fcda69" size={iconSize} />}
+                {isSaved && <AiFillStar fill="#faca2d" size={iconSize} />}
             </div>
         </div>
     );

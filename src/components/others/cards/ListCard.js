@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import TagDiv from "../TagDiv";
 import ListCardAction from "../Actions";
 import styles from "./styles/listcard.module.css";
+import image from "static/images/test_img.jpg";
 
 
 const ListCard = ({ info }) => {
@@ -26,7 +27,7 @@ const ListCard = ({ info }) => {
         return `${months[date.getMonth()]} ${date.getDay() + 1} ${date.getFullYear()}`
     };
     const defaultImage = (event) => {
-        // event.target.src =  image
+        event.target.src = image;
     };
 
     const trimCharsTo = (string_, max_) => {
@@ -34,11 +35,16 @@ const ListCard = ({ info }) => {
         return string_
     };
 
+    const imageOrDefault = (img) => {
+        if (!img) return image;
+        return img;
+    }
+
     return (
         <div className={styles.card__container}>
             <section className={styles.header}>
                 <Link to={`/${publisherUrl}`}>
-                    <img src={dpSrc} onError={defaultImage} alt="publisher" />
+                    <img src={imageOrDefault(dpSrc)} onError={defaultImage} alt="publisher" />
                     <p>{publisher}</p>
                     <p><span>.</span>{formatDate(date)}</p>
                 </Link>
@@ -51,7 +57,7 @@ const ListCard = ({ info }) => {
                 </Link>
             </section>
             <aside className={styles.featured__image}>
-                <img src={imgSrc} onError={defaultImage} alt="featured" />
+                <img src={imageOrDefault(imgSrc)} onError={defaultImage} alt="featured" />
             </aside>
             <section className={styles.footer}>
                 <TagDiv tagsInfo={tagsInfo} />
