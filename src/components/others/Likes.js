@@ -1,6 +1,6 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
-import { useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { shortenCount, toggleAction } from "utils/helpers";
 import styles from "./styles/actioncomp.module.css";
@@ -64,4 +64,4 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked } }) => {
     );
 };
 
-export default Likes;
+export default memo(Likes);

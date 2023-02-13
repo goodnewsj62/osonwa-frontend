@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { RiShareForwardFill } from "react-icons/ri";
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import CommentComp from "./CommentComp";
@@ -42,4 +42,4 @@ const ListCardAction = ({ likeInfo, commentInfo, shareUrl, starInfo }) => {
 };
 
 
-export default ListCardAction;
+export default memo(ListCardAction);

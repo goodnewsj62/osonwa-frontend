@@ -3,6 +3,7 @@ import TagDiv from "../TagDiv";
 import ListCardAction from "../Actions";
 import styles from "./styles/listcard.module.css";
 import image from "static/images/test_img.jpg";
+import { memo } from "react";
 
 
 const ListCard = ({ info }) => {
@@ -21,6 +22,7 @@ const ListCard = ({ info }) => {
         starInfo,
         shareUrl } = info;
 
+
     const formatDate = (isoString) => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const date = new Date(isoString);
@@ -36,8 +38,10 @@ const ListCard = ({ info }) => {
     };
 
     const imageOrDefault = (img) => {
-
         if (!img) return image;
+
+        if (img.startsWith("http")) return img;
+
         return process.env.REACT_APP_BACKEND_URL + img;
     }
 
@@ -68,4 +72,4 @@ const ListCard = ({ info }) => {
     )
 };
 
-export default ListCard;
+export default memo(ListCard);

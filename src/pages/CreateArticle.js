@@ -68,7 +68,6 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
 
     useEffect(() => {
         const timeout = setTimeout(() => setErrormessage({ message: "", status: false }), 5000);
-
         return () => clearTimeout(timeout);
     }, [errormessage.status]);
 
@@ -80,7 +79,7 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
                         tagPostWrapper(resp);
                     });
                 };
-            }, (10 * 1000));
+            }, (80 * 1000));
 
         return () => clearInterval(interval);
     }, []);
