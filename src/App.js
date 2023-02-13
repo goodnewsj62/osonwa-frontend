@@ -39,23 +39,20 @@ function App(props) {
         if (token) {
             const jwtToken = JSON.parse(token);
             dispatch(refreshToken(jwtToken.refresh))
-            // .unwrap()
-            // .then((resp) => {
-            //     setLoaderStatus(false);
-            // }).catch((err) => {
-            //     setLoaderStatus(false);
-            // })
         }
 
         dispatch(fetchAllInterest());
-        setLoaderStatus(false);
     }, [dispatch]);
 
 
     useEffect(() => {
         if (authStatus) {
             const accessToken = authState.access;
-            dispatch(fetchProfileInfo({ accessToken: accessToken }));
+            dispatch(fetchProfileInfo({ accessToken: accessToken }))
+                .unwrap()
+                .then((resp) => setLoaderStatus(false));
+        } else {
+            setLoaderStatus(false);
         }
     }, [authStatus, authState, dispatch,]);
 

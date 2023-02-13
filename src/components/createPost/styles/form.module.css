@@ -7,3 +7,42 @@
 .editor {
   height: 100%;
 }
+
+.saved svg{
+    fill: green;
+}
+
+.saved, .saving{
+  padding-top: 0.25rem;
+  padding-right: 0.2rem;
+}
+
+
+.saving svg{
+  fill: var(--comp-one);
+  animation: rotate360 1s ease-in 0s infinite forwards;
+}
+
+@keyframes rotate360 {
+  from{
+    transform: rotate(0deg);
+  }to{
+    transform: rotate(360deg);
+  }
+}
+
+.save_status{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save_status i{
+    color: var(--fade-text);
+    padding: 0  0.1rem;
+}
+
+.save_status > div{
+  display: flex;
+  align-items: center;
+}

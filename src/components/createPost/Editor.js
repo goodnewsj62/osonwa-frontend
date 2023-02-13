@@ -3,14 +3,15 @@
 import { memo } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { determine_status_text, getStatusLoader } from './helpers/editorHelpers';
 import styles from "./styles/form.module.css";
 
 
-const Editor = ({ dispatch, value }) => {
+const Editor = ({ dispatch, value,savestatus }) => {
 
     const modules = {
         toolbar: [
-            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ header: '1' }, { header: '2' }],
             [{ size: [] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [
@@ -36,8 +37,18 @@ const Editor = ({ dispatch, value }) => {
         dispatch({ type: "content", payload: { content: values } });
     };
 
+    const status_text =  determine_status_text(savestatus)
+    const status_loader =  getStatusLoader(savestatus)
+
+
     return (
         <section id="quill__container" className={styles.editor__container}>
+            <div className={styles.save_status}>
+                <div>
+                    <i>{status_text}</i>
+                    {status_loader}
+                </div>
+            </div>
             <div className={styles.editor} id="quill__editor">
                 <script>
                     {

@@ -5,7 +5,7 @@ import OtherInp from "components/createPost/OtherInputs";
 import { MessagePopup } from "components/others";
 import Main from "components/others/MainWrapper";
 import useAuthAxios from "hooks/authAxios";
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles/create.module.css";
 
@@ -40,18 +40,26 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
 
 
     axios_.defaults.headers.common["Content-Type"] = "multipart/form-data";
+
     const isValid = useCallback(() => {
-        return fieldsVal.title.isValid && fieldsVal.title.content && fieldsVal.content.isValid && fieldsVal.content.content.text;
-    }, [fieldsVal.title, fieldsVal.content])
+        if (fieldsVal.title.isValid && fieldsVal.title.content && fieldsVal.content.isValid && fieldsVal.content.content.text) return true;
+        return false;
+    }, [fieldsVal.title, fieldsVal.content]);
 
+    const persistentValidState = useRef(isValid());
+    const fieldsValRef = useRef(fieldsVal);
+    const postRespRef = useRef(postResponseInfo);
+    const selectedTagsRef = useRef(selectedTags);
+    const imgHolderRef = useRef(imgHolder);
+    const imgHasChangedRef = useRef(imgHasChanged);
 
+    useEffect(() => { persistentValidState.current = isValid() }, [isValid]);
+    useEffect(() => { fieldsValRef.current = fieldsVal }, [fieldsVal]);
+    useEffect(() => { postRespRef.current = postResponseInfo }, [postResponseInfo]);
+    useEffect(() => { selectedTagsRef.current = selectedTags }, [selectedTags]);
+    useEffect(() => { imgHasChangedRef.current = imgHasChanged }, [imgHasChanged]);
+    useEffect(() => { imgHolderRef.current = imgHolder }, [imgHolder]);
 
-    useEffect(() => {
-        // const beforeunloadHandler = (event) => { event.preventDefault(); return event.rerurnValue = "you may have changes that have not been stored" };
-        // window.addEventListener("beforeunload", beforeunloadHandler);
-
-        // return () => window.removeEventListener("beforeunload", beforeunloadHandler);
-    }, []);
 
     useEffect(() => {
         setImgHasChanged(true);
@@ -65,18 +73,17 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
     }, [errormessage.status]);
 
     useEffect(() => {
-
-        const interval = setInterval(() => {
-            if (isValid()) {
-                postOrPatch().then((resp) => {
-                    tagPostWrapper(resp);
-                });
-            };
-        }, (120 * 1000));
-
+        const interval = setInterval(
+            () => {
+                if (persistentValidState.current) {
+                    postOrPatch().then((resp) => {
+                        tagPostWrapper(resp);
+                    });
+                };
+            }, (10 * 1000));
 
         return () => clearInterval(interval);
-    }, [isValid]);
+    }, []);
 
     //overtime check for changes in content
     // if changes are available with a title and no saved post_id 
@@ -92,13 +99,13 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
 
 
 
-    function appendFileIfChanged(fData) {
+    function appendFileIfChanged(fData, imgHolder, imgHasChanged) {
         if (imgHolder.file && imgHasChanged) fData.append("cover_image", imgHolder.file); //TODO: REFACTOR
 
         return fData;
     }
 
-    function constructData() {
+    function constructData(fieldsVal, imgHolder, imgHasChanged) {
         const fData = new FormData();
 
         for (let key in fieldsVal) {
@@ -118,8 +125,7 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
 
             if (fieldsVal[key].content) fData.append(key, fieldsVal[key].content);
         }
-
-        return appendFileIfChanged(fData);
+        return appendFileIfChanged(fData, imgHolder, imgHasChanged);
     }
 
     function createErrorMessage(error) {
@@ -137,14 +143,13 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
         setErrormessage({ message: message, status: true });
     }
 
-    const patchPost = async () => {
-
+    const patchPost = async (postInfo) => {
         try {
-            const url = `/blog/post/${postResponseInfo.slug_title}/${postResponseInfo.post_id}/`;
-            const data = constructData();
+            const url = `/blog/post/${postInfo.slug_title}/${postInfo.post_id}/`;
+            const data = constructData(fieldsValRef.current, imgHolderRef.current, imgHasChangedRef.current);
             const resp = await axios_.patch(url, data);
             setPostResponseInfo(resp.data.data);
-            setSavestatus("success");
+            setSavestatus("saved");
             return resp
         } catch (error) {
             //catch should prompt error message
@@ -156,10 +161,10 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
     const createPost = async () => {
         try {
             const url = "/blog/post/";
-            const data = constructData();
+            const data = constructData(fieldsValRef.current, imgHolderRef.current, imgHasChangedRef.current);
             const resp = await axios_.post(url, data);
             setPostResponseInfo(resp.data.data);
-            setSavestatus("success");
+            setSavestatus("saved");
             return resp
         } catch (error) {
             createErrorMessage(error);
@@ -170,7 +175,7 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
     const postTags = async (postData) => {
         try {
             const url = `/blog/post/add-tag/${postData.slug_title}/${postData.post_id}/`;
-            const data = { "tags": selectedTags };
+            const data = { "tags": selectedTagsRef.current };
             const resp = await axios_.patch(url, data, {
                 "Content-type": "application/json",
             });
@@ -178,12 +183,14 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
         } catch (error) { return error }
     }
 
-    function postOrPatch() {
-        setSavestatus("processing")
-        if (postResponseInfo.post_id) {
-            return patchPost();
+    async function postOrPatch() {
+        setSavestatus("saving")
+        if (postRespRef.current.post_id) {
+            console.log("infoo")
+            return await patchPost(postRespRef.current);
         } else {
-            return createPost();
+            console.log("soso")
+            return await createPost();
         }
     }
 
@@ -192,14 +199,12 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
             const respData = resp.data.data;
             return postTags(respData)
         }
-
         setErrormessage({ status: true, message: "an error occured, try again" });
         return Promise.reject();
     }
 
     const createPostHandler = async (event) => {
         event.preventDefault();
-
         try {
             const response = await postOrPatch();
             const resp = await tagPostWrapper(response);
