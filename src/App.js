@@ -53,7 +53,6 @@ function App(props) {
 
 
     useEffect(() => {
-
         if (authStatus) {
             const accessToken = authState.access;
             dispatch(fetchProfileInfo({ accessToken: accessToken }));

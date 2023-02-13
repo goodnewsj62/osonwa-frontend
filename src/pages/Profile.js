@@ -37,7 +37,7 @@ const Profile = () => {
         if (isMyAccount) {
             setProfileSate(profileStore);
         } else {
-            baseAxiosInstance.get(`auth/profile/${usernameOnUrl}/`)
+            baseAxiosInstance.get(`/auth/profile/${usernameOnUrl}/`)
                 .then((resp) => {
                     const data = resp.data.data;
                     setProfileSate({ userInfo: data, interests: data.interests, state: true });
@@ -50,11 +50,11 @@ const Profile = () => {
                             setErrorMessage({ state: true, message: "Oops an error occured at our end" });
                         } else if (errorResp.status === 404) {
                             setErrorMessage({ state: true, message: "This account does not exists" });
-                        } else if (err.request) {
+                        }
+                        else if (err.request) {
                             setErrorMessage({ state: true, message: "Request failed. Please check your internet connection." });
                         }
                     }
-
                 });
         }
         setIsLoading(false);
@@ -65,7 +65,7 @@ const Profile = () => {
         <>
             <ProfileHeader profileInfo={profileInfo} interests={profileState.interests} isMyAccount={isMyAccount} />
             <NavSwitch handler={handler} subjects={switchStates} />
-            <ProfileBody state={switchState} />
+            <ProfileBody state={switchState} username={usernameOnUrl} />
             {isLoading && <SpreadLoader />}
         </>
     );

@@ -24,7 +24,7 @@ const ListCard = ({ info }) => {
     const formatDate = (isoString) => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const date = new Date(isoString);
-        return `${months[date.getMonth()]} ${date.getDay() + 1} ${date.getFullYear()}`
+        return `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
     };
     const defaultImage = (event) => {
         event.target.src = image;
@@ -36,8 +36,9 @@ const ListCard = ({ info }) => {
     };
 
     const imageOrDefault = (img) => {
+
         if (!img) return image;
-        return img;
+        return process.env.REACT_APP_BACKEND_URL + img;
     }
 
     return (

@@ -203,12 +203,13 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
         try {
             const response = await postOrPatch();
             const resp = await tagPostWrapper(response);
-            const respData = resp.data.data;
+            const respData = response.data.data;
             navigate(`/article/${respData.slug_title}-${respData.post_id}`);
-            return resp
+            return resp;
         } catch (err) {
             setImgHasChanged(false);
             setErrormessage({ message: "oops an error occured", status: true });
+            return err;
         }
     };
 

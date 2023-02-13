@@ -5,8 +5,12 @@ import { baseAxiosInstance } from "utils/requests";
 
 const fetchProfileInfo = createAsyncThunk("profileSlice/fetchProfileInfo", async ({ username, accessToken }, ThunkApi) => {
     try {
-        const url = username ? `/auth/profile/${username}/` : "/auth/profile/";
-        const headers = { "Authorization": "Bearer " + accessToken, "Content-Type": "application/json" };
+        let url = `/auth/profile/${username}/`;
+        const headers = { "Content-Type": "application/json" };
+        if (!username) {
+            url = "/auth/profile/";
+            headers["Authorization"] = "Bearer " + accessToken;
+        }
         const response = await baseAxiosInstance({ url, method: "get", headers: headers });
         return response.data.data;
 
