@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 import { Articles, Home, Layout } from "./pages";
@@ -17,7 +17,7 @@ import Liked from "pages/Liked";
 import Profile from "pages/Profile";
 import EmailSent from "pages/EmailSent";
 import ForgotPassword from "pages/ForgotPassword";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { refreshToken } from "store/authSlice";
 import { SpreadLoader } from "components/others";
 import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
@@ -30,31 +30,30 @@ import CreateArticle from "pages/CreateArticle";
 
 function App(props) {
     const dispatch = useDispatch();
-    const authStatus = useSelector((states) => states.authState.state);
-    const authState = useSelector((states) => states.authState);
     const [loaderStatus, setLoaderStatus] = useState(true);
+
+
+
+    const getAuthTokenAndProfile = useCallback(async (jwtToken) => {
+        try {
+            const authResult = await dispatch(refreshToken(jwtToken.refresh)).unwrap();
+            await dispatch(fetchProfileInfo({ accessToken: authResult.access })).unwrap();
+            return setTimeout(() => { setLoaderStatus(false) }, 0)
+        } catch (err) {
+            return setTimeout(() => { setLoaderStatus(false) }, 0)
+        }
+    }, [dispatch]);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+
         if (token) {
-            const jwtToken = JSON.parse(token);
-            dispatch(refreshToken(jwtToken.refresh))
+            getAuthTokenAndProfile(JSON.parse(token));
         }
 
         dispatch(fetchAllInterest());
-    }, [dispatch]);
+    }, [dispatch, getAuthTokenAndProfile]);
 
-
-    useEffect(() => {
-        if (authStatus) {
-            const accessToken = authState.access;
-            dispatch(fetchProfileInfo({ accessToken: accessToken }))
-                .unwrap()
-                .then((resp) => setLoaderStatus(false));
-        } else {
-            setLoaderStatus(false);
-        }
-    }, [authStatus, authState, dispatch,]);
 
     //TODO: two useState protect with memo
     const WrappedLayout = <IconSize element={<Layout />} />

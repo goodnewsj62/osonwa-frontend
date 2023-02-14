@@ -7,24 +7,28 @@ import { determine_status_text, getStatusLoader } from './helpers/editorHelpers'
 import styles from "./styles/form.module.css";
 
 
-const Editor = ({ dispatch, value,savestatus }) => {
+
+
+const Editor = ({ dispatch, value, savestatus }) => {
 
     const modules = {
-        toolbar: [
-            [{ header: '1' }, { header: '2' }],
-            [{ size: [] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [
-                { list: 'ordered' },
-                { list: 'bullet' },
-                { indent: '-1' },
-                { indent: '+1' },
-            ],
-            ['link', 'image', 'code-block'],
-            [{ 'script': 'sub' }, { 'script': 'super' }],
+        toolbar: {
+            container: [
+                [{ header: '1' }, { header: '2' }],
+                [{ size: [] }],
+                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                [
+                    { list: 'ordered' },
+                    { list: 'bullet' },
+                    { indent: '-1' },
+                    { indent: '+1' },
+                ],
+                ['link', 'image', 'code-block'],
+                [{ 'script': 'sub' }, { 'script': 'super' }],
 
-            ['clean'],
-        ],
+                ['clean'],
+            ],
+        },
         syntax: true,
         clipboard: {
             // toggle to add extra line breaks when pasting HTML:
@@ -37,8 +41,21 @@ const Editor = ({ dispatch, value,savestatus }) => {
         dispatch({ type: "content", payload: { content: values } });
     };
 
-    const status_text =  determine_status_text(savestatus)
-    const status_loader =  getStatusLoader(savestatus)
+    const status_text = determine_status_text(savestatus);
+    const status_loader = getStatusLoader(savestatus);
+
+
+    // useEffect(() => {
+    //     const element = document.querySelector(".ql-image");
+    //     /* 
+    //         create input file, 
+    //         change handler attached 
+    //         after click save and insert url to image
+    //         as inline
+    //      */
+    // }, [])
+
+
 
 
     return (

@@ -47,6 +47,7 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
     }, [fieldsVal.title, fieldsVal.content]);
 
     const persistentValidState = useRef(isValid());
+    //TODO: turn all to a single object
     const fieldsValRef = useRef(fieldsVal);
     const postRespRef = useRef(postResponseInfo);
     const selectedTagsRef = useRef(selectedTags);

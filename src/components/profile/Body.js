@@ -13,6 +13,20 @@ const ProfileBody = ({ state, username }) => {
     const authState = useSelector((states) => states.authState);
 
 
+    useEffect(() => {
+        const scrollHandler = (event) => {
+            const targetElement = document.body;
+            const totalheight = targetElement.clientHeight + targetElement.scrollTop
+            console.log("here", totalheight, targetElement.scrollHeight)
+            if (totalheight >= targetElement.scrollHeight) {
+                console.log("workde")
+            }
+        };
+        //evaluate if we at the page end
+        // fetch data from url if condition is met
+        // set state 
+        window.addEventListener("scroll", scrollHandler)
+    }, []);
 
 
     const fetchposts = useCallback(async (headers) => {

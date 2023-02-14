@@ -36,11 +36,13 @@ const Profile = () => {
     useEffect(() => {
         if (isMyAccount) {
             setProfileSate(profileStore);
+            setIsLoading(false);
         } else {
             baseAxiosInstance.get(`/auth/profile/${usernameOnUrl}/`)
                 .then((resp) => {
                     const data = resp.data.data;
                     setProfileSate({ userInfo: data, interests: data.interests, state: true });
+                    setIsLoading(false);
                 }).catch((err) => {
                     const errorResp = err.response;
                     if (profileStore.status) {
@@ -55,9 +57,9 @@ const Profile = () => {
                             setErrorMessage({ state: true, message: "Request failed. Please check your internet connection." });
                         }
                     }
+                    setIsLoading(false);
                 });
         }
-        setIsLoading(false);
     }, [profileStore, usernameOnUrl, isMyAccount, navigate]);
 
 
