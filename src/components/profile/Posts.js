@@ -1,11 +1,10 @@
 import { SpreadLoader } from "components/others";
 import ListCard from "components/others/cards/ListCard";
-import { useLocation } from "react-router-dom";
 import EmptyContentMessage from "./Message";
 
 
 
-export default function Posts({ posts, isLoading }) {
+export default function Posts({ posts, isLoading, isFetchingNext }) {
 
     const fetchedPosts = posts.map((item) => {
         const info = {
@@ -26,13 +25,14 @@ export default function Posts({ posts, isLoading }) {
         return <ListCard info={info} key={item.id} />
     });
 
-    const displayBool = fetchedPosts.length !== 0 && !isLoading;
+    const displaySection = fetchedPosts.length !== 0 && !isLoading;
+    const displayMessage = fetchedPosts.length === 0 && !isLoading;
 
     return (
         <>
-            {displayBool && <section className={``}>{fetchedPosts}</section>}
-            {isLoading && <SpreadLoader />}
-            {!displayBool && <EmptyContentMessage message={"You've not posted any articles yet."} />}
+            {displaySection && <section className={``}>{fetchedPosts}</section>}
+            {(isLoading || isFetchingNext) && <div style={{ margin: "10px 0", padding: "1rem 0" }}> <SpreadLoader /></div>}
+            {displayMessage && <EmptyContentMessage message={"You've not posted any articles yet."} />}
         </>
     );
 };

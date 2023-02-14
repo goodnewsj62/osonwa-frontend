@@ -38,9 +38,9 @@ function App(props) {
         try {
             const authResult = await dispatch(refreshToken(jwtToken.refresh)).unwrap();
             await dispatch(fetchProfileInfo({ accessToken: authResult.access })).unwrap();
-            return setTimeout(() => { setLoaderStatus(false) }, 0)
+            return setTimeout(() => { setLoaderStatus(false) }, 0);
         } catch (err) {
-            return setTimeout(() => { setLoaderStatus(false) }, 0)
+            return setTimeout(() => { setLoaderStatus(false) }, 0);
         }
     }, [dispatch]);
 
@@ -49,6 +49,8 @@ function App(props) {
 
         if (token) {
             getAuthTokenAndProfile(JSON.parse(token));
+        } else {
+            setLoaderStatus(false);
         }
 
         dispatch(fetchAllInterest());
