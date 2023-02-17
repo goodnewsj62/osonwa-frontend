@@ -8,7 +8,7 @@ import styles from "./styles/actioncomp.module.css";
 
 
 
-const Likes = ({ likeInfo: { count, type, likeUrl, is_liked } }) => {
+const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message }) => {
     const [likeCount, setLikeCount] = useState(count);
     const [likeStatus, setLikeStatus] = useState(is_liked);
     const iconSize = useContext(DefaultIconSize);
@@ -47,6 +47,11 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked } }) => {
     const likeOrUnlike = (event) => {
         setLikeStatusAndCount()
         toggleAction(axios_, likeUrl, type, rejectHandler)
+            .then((resp) => {
+                if (resp.status === 200 && message) {
+                    message(likeStatus ? "like" : "unlike")
+                }
+            });
     };
 
     const formatCount = (count) => shortenCount(count);

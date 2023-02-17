@@ -20,7 +20,9 @@ const ListCard = ({ info }) => {
         likeInfo,
         commentInfo,
         starInfo,
-        shareUrl } = info;
+        shareUrl,
+        messageCallback
+    } = info;
 
 
     const formatDate = (isoString) => {
@@ -66,7 +68,7 @@ const ListCard = ({ info }) => {
             </aside>
             <section className={styles.footer}>
                 <TagDiv tagsInfo={tagsInfo} />
-                <ListCardAction likeInfo={likeInfo} starInfo={starInfo} shareUrl={shareUrl} commentInfo={commentInfo} />
+                <ListCardAction likeInfo={likeInfo} starInfo={starInfo} shareUrl={shareUrl} commentInfo={commentInfo} messenger={messageCallback} />
             </section>
         </div>
     )
