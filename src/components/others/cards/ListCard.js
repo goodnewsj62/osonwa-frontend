@@ -74,7 +74,11 @@ const ListCard = ({ info }) => {
             </aside>
             <section className={styles.footer}>
                 <TagDiv tagsInfo={tagsInfo} />
-                <ListCardAction likeInfo={likeInfo} starInfo={starInfo} shareUrl={shareUrl} commentInfo={commentInfo} messenger={messageCallback} />
+                <ListCardAction likeInfo={likeInfo}
+                    starInfo={starInfo}
+                    shareUrl={shareUrl}
+                    commentInfo={commentInfo}
+                    messenger={messageCallback} postID={postID} />
             </section>
         </div>
     )

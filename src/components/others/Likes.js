@@ -1,6 +1,6 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { shortenCount, toggleAction } from "utils/helpers";
 import styles from "./styles/actioncomp.module.css";
@@ -8,15 +8,11 @@ import styles from "./styles/actioncomp.module.css";
 
 
 
-const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message }) => {
+const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message, postID }) => {
     const [likeCount, setLikeCount] = useState(count);
     const [likeStatus, setLikeStatus] = useState(is_liked);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
-
-    useEffect(() => {
-
-    }, [likeStatus])
 
     function rejectHandler(value) {
         /* setLikeStatusAndCount has made like status change for speed reasons
@@ -49,7 +45,7 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message }) => {
         toggleAction(axios_, likeUrl, type, rejectHandler)
             .then((resp) => {
                 if (resp.status === 200 && message) {
-                    message(likeStatus ? "like" : "unlike")
+                    message(resp.data.message.startsWith("like") ? "like" : "unlike", postID);
                 }
             });
     };

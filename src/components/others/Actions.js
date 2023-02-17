@@ -10,7 +10,7 @@ import MessagePopupModal from "./MessagePopupModal";
 
 
 
-const ListCardAction = ({ likeInfo, commentInfo, shareUrl, starInfo, messenger }) => {
+const ListCardAction = ({ likeInfo, commentInfo, shareUrl, starInfo, messenger, postID }) => {
     const [message, setMessage] = useState({ status: false, message: "", category: "" });
     const iconSize = useContext(DefaultIconSize);
 
@@ -31,11 +31,11 @@ const ListCardAction = ({ likeInfo, commentInfo, shareUrl, starInfo, messenger }
     return (
         <div className={styles.enclosement}>
             <CommentComp commentInfo={commentInfo} />
-            <Likes likeInfo={likeInfo} message={messenger} />
+            <Likes likeInfo={likeInfo} message={messenger} postID={postID} />
             <div onClick={shareHandler}>
                 <RiShareForwardFill size={iconSize} />
             </div>
-            <StarComp starInfo={starInfo} message={messenger} />
+            <StarComp starInfo={starInfo} message={messenger} postID={postID} />
             {message.status && <MessagePopupModal message={message.message} category={message.category} />}
         </div>
     );

@@ -6,7 +6,7 @@ import { toggleAction } from "utils/helpers";
 import styles from "./styles/actioncomp.module.css";
 
 
-const StarComp = ({ starInfo: { starUrl, type, saved }, message }) => {
+const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
     const [isSaved, setIsSaved] = useState(saved);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
@@ -36,7 +36,7 @@ const StarComp = ({ starInfo: { starUrl, type, saved }, message }) => {
         toggleAction(axios_, starUrl, type, rejectHandler)
             .then((resp) => {
                 if (resp.status === 200 && message) {
-                    message(isSaved ? "save" : "unsave");
+                    message(isSaved ? "save" : "unsave", postID);
                 }
             });
     };

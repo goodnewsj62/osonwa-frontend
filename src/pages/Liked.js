@@ -50,13 +50,35 @@ const Liked = () => {
 
 
 
+    const messageHandler = useCallback((type) => {
+        const stateSetters = {
+            news: setFetchedNews,
+            article: setFetchedArticles,
+        }
+
+        const setter = stateSetters[type];
+
+        return (value, id_) => {
+            if (value === "unlike") {
+                setter((state) => {
+                    return {
+                        ...state,
+                        posts: state.posts.filter((item) => item.content_object.id !== id_)
+                    }
+                });
+            }
+        }
+    }, []);
+
     const articles = fetchedArticles.posts.map((item) => {
-        const info = articlePostListAdapter(item.content_object)
+        const info = articlePostListAdapter(item.content_object);
+        info["messageCallback"] = messageHandler("article");
         return <ListCard info={info} key={item.id} />
     });
 
     const news = fetchedNews.posts.map((item) => {
-        const info = newsListAdapter(item.content_object)
+        const info = newsListAdapter(item.content_object);
+        info["messageCallback"] = messageHandler("news");
         return <ListCard info={info} key={item.id} />
     });
 
