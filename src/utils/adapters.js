@@ -9,6 +9,7 @@ export const newsListAdapter = (item) => {
 
 
     return {
+        postID: item.id,
         detailUrl: detail_url,
         imgSrc: item.image,
         dpSrc: item.pub_image,
@@ -36,6 +37,7 @@ export const articlePostListAdapter = (item) => {
 
 
     return {
+        postID: item.id,
         detailUrl: detail_url,
         imgSrc: item.image,
         dpSrc: item.pub_image,

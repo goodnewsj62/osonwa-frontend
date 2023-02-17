@@ -41,7 +41,13 @@ const ProfileBody = ({ state, username }) => {
 
     return (
         <section id="posts" className={`${extstyles.container} ${styles.container}`}>
-            {state === "posts" && <Posts posts={myposts.posts} isLoading={myposts.isLoading} isFetchingNext={isLoadingNextPosts} />}
+            {state === "posts" &&
+                <Posts posts={myposts.posts}
+                    setPosts={setMyposts}
+                    isLoading={myposts.isLoading}
+                    isFetchingNext={isLoadingNextPosts}
+                />
+            }
             {state === "comments" && <MyComments />}
         </section>
     );

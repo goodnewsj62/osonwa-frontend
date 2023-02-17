@@ -14,6 +14,7 @@
     ;
 
     border-radius: 8px;
+    position: relative;
 }
 
 
@@ -24,24 +25,25 @@
 
 .header{
     grid-area: head;
-    
+    display: flex;
+    align-items: center;
 }
 
 
-.body a, .header a{
+.body  a, .header  a{
     text-decoration: none;
     color: inherit;
 }
 
 
-.header a{
+.header > a{
     display: flex;
     /* width: 30%; */
     align-items: center;
 }
 
 
-.header a * {
+.header > a * {
     margin-right: 8px;
 }
 

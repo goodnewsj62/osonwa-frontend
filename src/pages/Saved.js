@@ -12,7 +12,6 @@ import { genFetchPost } from "utils/helpers";
 import useScrollState from "./hooks/scrollState";
 
 
-import cardStyles from "./styles/articles.module.css";
 import styles from "./styles/fav.module.css";
 
 

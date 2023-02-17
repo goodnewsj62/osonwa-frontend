@@ -4,6 +4,7 @@ import ListCardAction from "../Actions";
 import styles from "./styles/listcard.module.css";
 import image from "static/images/test_img.jpg";
 import { memo } from "react";
+import OwnerOptions from "../OwnerOptions";
 
 
 const ListCard = ({ info }) => {
@@ -21,7 +22,10 @@ const ListCard = ({ info }) => {
         commentInfo,
         starInfo,
         shareUrl,
-        messageCallback
+        messageCallback,
+        editUrl,
+        postID,
+        showOptions
     } = info;
 
 
@@ -55,6 +59,8 @@ const ListCard = ({ info }) => {
                     <p>{publisher}</p>
                     <p><span>.</span>{formatDate(date)}</p>
                 </Link>
+                {showOptions && <OwnerOptions editUrl={editUrl} postID={postID} message={messageCallback} />}
+
             </section>
             <section className={styles.body}>
                 {/* for p tag max 30 use js substring or split then add... if remaining text */}

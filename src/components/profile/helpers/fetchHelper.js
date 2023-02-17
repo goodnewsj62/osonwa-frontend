@@ -42,3 +42,12 @@ export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts, isSelec
     }, [myposts.others, fetchNextPage, setIsLoadingNextPosts, isSelected]);
 };
 
+
+
+export async function deletePost(id_, url, axios_, callback) {
+    try {
+        const resp = await axios_.delete(url);
+        callback(id_);
+        return resp
+    } catch (err) { console.log(err.response); return err; }
+}
