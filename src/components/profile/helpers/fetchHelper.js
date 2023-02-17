@@ -1,9 +1,19 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { baseAxiosInstance } from "utils/requests";
 
-export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts) => {
+/* 
+    fetchNextPage fetches the next page and appends results 
+    to previous result 
+
+    while other function checks if there is a next 
+    page and if the  link of the next page has not already 
+    been visted to aviod duplicate results
+*/
+
+export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts, isSelected) => {
     const authState = useSelector((states) => states.authState);
+    const previousUrl = useRef();
 
     const fetchNextPage = useCallback(async (url) => {
         try {
@@ -21,11 +31,14 @@ export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts) => {
 
 
     return useCallback(() => {
+        const nextUrl = myposts.others.next;
         const hasNext = Object.keys(myposts.others).indexOf("next") !== -1;
-        if (hasNext && myposts.others.next) {
+        const isNewLink = previousUrl.current !== nextUrl;
+        if (hasNext && isNewLink && nextUrl && isSelected()) {
+            previousUrl.current = nextUrl;
             setIsLoadingNextPosts(true);
-            fetchNextPage(myposts.others.next);
+            fetchNextPage(nextUrl);
         }
-    }, [myposts.others, fetchNextPage, setIsLoadingNextPosts]);
+    }, [myposts.others, fetchNextPage, setIsLoadingNextPosts, isSelected]);
 };
 

@@ -1,0 +1,6 @@
+.articles{
+    display: grid;
+    row-gap: 1rem;
+    padding: 1rem;
+}
+.loader { margin: 10px 0; padding: 1rem 0; }

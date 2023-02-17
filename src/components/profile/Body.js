@@ -16,7 +16,8 @@ const ProfileBody = ({ state, username }) => {
     const [isLoadingNextComments, setIsLoadingNextComments] = useState(false);
     const authState = useSelector((states) => states.authState);
 
-    const fetchPage = useFetchPage(myposts, setMyposts, setIsLoadingNextPosts);
+    const postIsSelected = useCallback(() => state === "posts", [state]);
+    const fetchPage = useFetchPage(myposts, setMyposts, setIsLoadingNextPosts, postIsSelected);
     useScrollState(fetchPage);
 
 

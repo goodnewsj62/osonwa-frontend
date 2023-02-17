@@ -2,43 +2,51 @@ import ListCard from "components/others/cards/ListCard";
 import Main from "components/others/MainWrapper";
 import SearchLiked from "components/others/SearchLike";
 import ToggleContents from "components/others/ToggleContent";
+import RenderListView from "components/others/RenderList";
+import { useFetchPage } from "components/profile/helpers/fetchHelper";
 import useAuthAxios from "hooks/authAxios";
 import { useCallback, useEffect, useState } from "react";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { articlePostListAdapter, newsListAdapter } from "utils/adapters";
+import useScrollState from "pages/hooks/scrollState";
 
-
-import cardStyles from "./styles/articles.module.css";
 import styles from "./styles/fav.module.css";
+import { genFetchPost } from "utils/helpers";
 
 const Liked = () => {
+    const [selected, setSelected] = useState("");
     const [fetchedArticles, setFetchedArticles] = useState({ isLoading: true, others: {}, posts: [] });
     const [fetchedNews, setFetchedNews] = useState({ isLoading: true, others: {}, posts: [] });
+    const [isLoadingNews, setIsLoadingNews] = useState(false);
+    const [isLoadingArticle, setIsLoadingArticle] = useState(false);
+
+
+
     const userInfo = useSelector((states) => states.profileState.userInfo)
     const axios_ = useAuthAxios();
 
 
-    const fetchPost = useCallback(async (type) => {
-        try {
-            const url = `/liked/${userInfo.id}/?type=${type}`;
-            const resp = await axios_.get(url);
-            const { results, ...others } = resp.data.data;
+    const newsSelected = useCallback(() => selected === "news", [selected]);
+    const fetchNewsNextPage = useFetchPage(fetchedNews, setFetchedNews, setIsLoadingNews, newsSelected);
+    useScrollState(fetchNewsNextPage);
 
-            if (type === "article") setFetchedArticles({ isLoading: false, others: others, posts: results });
-            else setFetchedNews({ isLoading: false, others: others, posts: results });
 
-            return resp;
-        } catch (err) {
-            if (type === "article") setFetchedArticles((state) => ({ ...state, isLoading: false }));
-            else setFetchedNews((state) => ({ ...state, isLoading: false }));
-        }
+    const articleSelected = useCallback(() => selected === "articles", [selected]);
+    const fetchArticleNextPage = useFetchPage(fetchedArticles, setFetchedArticles, setIsLoadingArticle, articleSelected);
+    useScrollState(fetchArticleNextPage);
 
-    }, [axios_, userInfo.id]);
+
+    const fetchPost = useCallback(genFetchPost, []);
 
     useEffect(() => {
-        Promise.all([fetchPost("article"), fetchPost("news")]);
-    }, [fetchPost]);
+        const articlesURL = `/liked/${userInfo.id}/?type=article`;
+        const newsURL = `/liked/${userInfo.id}/?type=news`;
+        Promise.all([
+            fetchPost(articlesURL, setFetchedArticles, axios_),
+            fetchPost(newsURL, setFetchedNews, axios_)
+        ]);
+    }, [fetchPost, userInfo.id, axios_]);
 
 
 
@@ -52,13 +60,18 @@ const Liked = () => {
         return <ListCard info={info} key={item.id} />
     });
 
-    const likedArticles = <section aria-label="liked article" className={cardStyles.articles}>{articles}</section>;
-    const likedNews = <section aria-label="liked news" className={cardStyles.articles}>{news}</section>;
+    //add loading component
+    const likedArticles = <RenderListView posts={articles} isLoading={fetchedArticles.isLoading}
+        isFetchingNext={isLoadingArticle}
+        message={"Seems you have not liked any post yet"} />;
+    const likedNews = <RenderListView posts={news} isLoading={fetchedNews.isLoading}
+        isFetchingNext={isLoadingNews}
+        message={"Seems you have not liked any post yet"} />;
 
     const contentNames = useMemo(() => ["news", "articles"], []);
     const components = [likedNews, likedArticles];
 
-    const onScreen = () => { };
+    const onScreen = (value) => setSelected(value);
 
 
     return (

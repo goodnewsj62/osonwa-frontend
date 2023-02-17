@@ -174,4 +174,18 @@ export function shortenCount(count) {
     return count;
 }
 
+
+
+export const genFetchPost = async (url, setState, axios_) => {
+    try {
+        const resp = await axios_.get(url);
+        const { results, ...others } = resp.data.data;
+        setState({ isLoading: false, others: others, posts: results });
+        return resp;
+    } catch (err) {
+        setState((state) => ({ ...state, isLoading: false }));
+        return err;
+    }
+};
+
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

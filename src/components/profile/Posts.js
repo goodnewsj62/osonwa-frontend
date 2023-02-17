@@ -1,6 +1,5 @@
-import { SpreadLoader } from "components/others";
 import ListCard from "components/others/cards/ListCard";
-import EmptyContentMessage from "./Message";
+import RenderListView from "components/others/RenderList";
 
 
 
@@ -25,14 +24,6 @@ export default function Posts({ posts, isLoading, isFetchingNext }) {
         return <ListCard info={info} key={item.id} />
     });
 
-    const displaySection = fetchedPosts.length !== 0 && !isLoading;
-    const displayMessage = fetchedPosts.length === 0 && !isLoading;
 
-    return (
-        <>
-            {displaySection && <section className={``}>{fetchedPosts}</section>}
-            {(isLoading || isFetchingNext) && <div style={{ margin: "10px 0", padding: "1rem 0" }}> <SpreadLoader /></div>}
-            {displayMessage && <EmptyContentMessage message={"You've not posted any articles yet."} />}
-        </>
-    );
+    return <RenderListView posts={fetchedPosts} isLoading={isLoading} isFetchingNext={isFetchingNext} message={"You've not posted any articles yet."} classes={"_"} />;
 };
