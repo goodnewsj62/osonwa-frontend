@@ -43,11 +43,10 @@ export const getAppropriateComponentArray = (newsSearchInp, articleSearchInput, 
     const [savedArticlesSearchComp, savedNewsSearchComp] = searchResultsComp;
     if (newsSearchInp.trim().length !== 0 && selected === "news" && articleSearchInput.trim().length === 0) {
         return [savedNewsSearchComp, savedArticle]; //newsSearchedFor | normal article;
-    } else if (articleSearchInput.trim().length !== 0 && selected === "article" && newsSearchInp.trim().length === 0) {
+    } else if (articleSearchInput.trim().length !== 0 && selected === "articles" && newsSearchInp.trim().length === 0) {
         return [savedNews, savedArticlesSearchComp];
     } else if (articleSearchInput.trim().length !== 0 && newsSearchInp.trim().length !== 0) {
         return [savedNewsSearchComp, savedArticlesSearchComp];
     }
     return components;
-
 };

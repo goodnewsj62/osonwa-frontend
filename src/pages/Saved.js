@@ -1,13 +1,11 @@
-import ListCard from "components/others/cards/ListCard";
 import Main from "components/others/MainWrapper";
-import SearchSaved from "components/others/SavedSearch";
+import SearchReactions from "components/others/SearchReaction";
 import ToggleContents from "components/others/ToggleContent";
 import RenderListView from "components/others/RenderList";
 import { useFetchPage } from "components/profile/helpers/fetchHelper";
 import useAuthAxios from "hooks/authAxios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { articlePostListAdapter, newsListAdapter } from "utils/adapters";
 import { genFetchPost } from "utils/helpers";
 import useScrollState from "./hooks/scrollState";
 
@@ -36,12 +34,12 @@ const Saved = () => {
     const axios_ = useAuthAxios();
 
 
-    const newsSelected = useCallback(() => selected === "news", [selected]);
+    const newsSelected = useCallback(() => selected === "news" && searchTextNews.length === 0, [selected, searchTextNews]);
     const fetchNewsNextPage = useFetchPage(fetchedNews, setFetchedNews, setIsLoadingNews, newsSelected);
     useScrollState(fetchNewsNextPage);
 
 
-    const articleSelected = useCallback(() => selected === "articles", [selected]);
+    const articleSelected = useCallback(() => selected === "articles" && searchTextPost.length === 0, [selected, searchTextPost]);
     const fetchArticleNextPage = useFetchPage(fetchedArticles, setFetchedArticles, setIsLoadingArticle, articleSelected);
     useScrollState(fetchArticleNextPage);
 
@@ -90,7 +88,6 @@ const Saved = () => {
 
     const onScreen = (value) => setSelected(value);
 
-
     return (
         <Main>
             <div className={styles.container}>
@@ -104,14 +101,19 @@ const Saved = () => {
                 <section className={styles.aside}>
                     <h1>Saved</h1>
                     <div className={styles.search__div}>
-                        <SearchSaved
+                        <SearchReactions
+                            newsSearchResult={searchResultsNews}
+                            articleSearchResult={searchResultsPost}
                             setResultNews={setSearchResultsNews}
                             setResultsPost={setSearchResultsPost}
                             setNewsValue={setSearchTextNews}
                             setPostValue={setSearchTextPost}
+                            setIsLoadingNews={setIsLoadingNews}
+                            setIsLoadingArticle={setIsLoadingArticle}
                             newsValue={searchTextNews}
                             postValue={searchTextPost}
                             selected={selected}
+                            urlBase={"/search/saved/"}
                         />
                     </div>
                 </section>
