@@ -1,18 +1,18 @@
-import {Link} from "react-router-dom";
-import CommentComp  from "../CommentComp";
-import  Likes  from "../Likes";
+import { Link } from "react-router-dom";
+import CommentComp from "../CommentComp";
+import Likes from "../Likes";
 
 import styles from "./styles/comment.module.css";
 
 
-const CommentCard =  ({params})=>{
-    const {text,
-            link,
-            likeCount,
-            commentCount, 
-            profileUrl,
-            imageSrc,
-            username, date} =  params;
+const CommentCard = ({ params }) => {
+    const { text,
+        link,
+        likeCount,
+        commentCount,
+        profileUrl,
+        imageSrc,
+        username, date } = params;
 
     return (
         <div className={styles.container}>
@@ -35,9 +35,9 @@ const CommentCard =  ({params})=>{
                         </Link>
                     </p>
                     <div className={styles.reactions}>
-                        <Likes />
+                        <Likes likeInfo={{}} />
                         <span>
-                            <CommentComp />
+                            <CommentComp commentInfo={{}} />
                         </span>
                     </div>
                 </div>

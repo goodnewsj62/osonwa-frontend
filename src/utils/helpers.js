@@ -1,5 +1,7 @@
 import { saveAuthToken } from "store/authSlice";
 import { baseAxiosInstance } from "./requests";
+import image from "static/images/test_img.jpg";
+
 
 function parseJwt(token = "") {
     var base64Url = token.split('.')[1];
@@ -187,5 +189,31 @@ export const genFetchPost = async (url, setState, axios_) => {
         return err;
     }
 };
+
+
+
+export const formatDate = (isoString) => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const date = new Date(isoString);
+    return `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
+};
+
+
+export const trimCharsTo = (string_, max_) => {
+    if (string_.length >= max_) return string_.substring(0, max_) + '...'
+    return string_
+};
+
+export const imageOrDefault = (img) => {
+    if (!img) return image;
+
+    if (img.startsWith("http")) return img;
+
+    return process.env.REACT_APP_BACKEND_URL + img;
+}
+
+export const imgErrorHandler = (event) => {
+    event.target.src = image;
+}
 
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };

@@ -3,40 +3,40 @@ import { BsFacebook } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 
-import img from "static/images/test_img.jpg";
+import { imageOrDefault, imgErrorHandler } from "utils/helpers";
 import RelatedArticles from "./RelatedArticles";
 import styles from "./styles/artaside.module.css";
 
-const ArticleAside = (props) => {
-    const bio =  true;
-    const twitter_url =  true;
-    const linkedin_url =true;
-    const facebook_url =  true;
-    const iconSize =  18;
+const ArticleAside = ({ post }) => {
+    const bio = post.author.profile.bio;
+    const twitter_url = post.author.profile.twitter_url;
+    const linkedin_url = post.author.profile.linkedin_url;
+    const facebook_url = post.author.profile.facebook_url;
+    const iconSize = 18;
 
     return (
         <div className={styles.aside__content}>
             <section className={styles.profile__info} >
-                <Link to="">
+                <Link to={`/${post.author.username}`}>
                     <div className={styles.profile}>
-                        <img src={img} alt="creator" />
-                        <span>Lorem, ipsum dolor.</span>
+                        <img src={imageOrDefault(post.author.profile.image)} onError={imgErrorHandler} alt="creator" />
+                        <span>{post.author.first_name + " " + post.author.last_name}</span>
                     </div>
                 </Link>
                 {
-                    bio && 
+                    bio &&
                     <div className={styles.bio}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quia qui non quo nobis impedit?
+                        {bio}
                     </div>
                 }
                 <div className={styles.socials}>
-                    {twitter_url && <a href="#">  <AiOutlineTwitter size={iconSize} /></a>}
-                    {linkedin_url && <a href="#"> <AiFillLinkedin size={iconSize} /></a>}
-                    {facebook_url && <a href="#"> <BsFacebook size={iconSize} /></a>}
-                </div> 
+                    {twitter_url && <a href={twitter_url}>  <AiOutlineTwitter size={iconSize} /></a>}
+                    {linkedin_url && <a href={linkedin_url}> <AiFillLinkedin size={iconSize} /></a>}
+                    {facebook_url && <a href={facebook_url}> <BsFacebook size={iconSize} /></a>}
+                </div>
             </section>
             <div className={styles.related__content}>
-                <RelatedArticles />
+                <RelatedArticles post={post} />
             </div>
         </div>
     )

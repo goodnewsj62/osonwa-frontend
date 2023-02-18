@@ -1,21 +1,23 @@
 import { Link } from "react-router-dom";
-import img from "static/images/test_img.jpg";
+import { formatDate, imageOrDefault, imgErrorHandler } from "utils/helpers";
 import styles from "./styles/articlehead.module.css";
 
-const DetailHeader = (props) => {
+const DetailHeader = ({ post }) => {
+    const profileUrl = `/${post.author.username}`;
+
     return (
         <div className={styles.article__header}>
-            <Link to="" >
-                <img src={img} alt="creator" />
+            <Link to={profileUrl} >
+                <img src={imageOrDefault(post.author.profile.image)} onError={imgErrorHandler} alt="creator" />
             </Link>
             <div className={styles.title}>
-                <Link to="">
+                <Link to={profileUrl}>
                     <strong>
-                        Lorem ipsum dolor sit.
+                        {post.author.first_name + " " + post.author.last_name}
                     </strong>
                 </Link>
                 <div>
-                    sep 5 . 2022
+                    {formatDate(post.date_updated)}
                 </div>
             </div>
         </div>

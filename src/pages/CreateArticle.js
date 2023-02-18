@@ -209,7 +209,7 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
             const response = await postOrPatch();
             const resp = await tagPostWrapper(response);
             const respData = response.data.data;
-            navigate(`/article/${respData.slug_title}-${respData.post_id}`);
+            navigate(`/article/${respData.slug_title}/${respData.post_id}`);
             return resp;
         } catch (err) {
             setImgHasChanged(false);

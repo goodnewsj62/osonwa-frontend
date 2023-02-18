@@ -5,6 +5,7 @@ import styles from "./styles/listcard.module.css";
 import image from "static/images/test_img.jpg";
 import { memo } from "react";
 import OwnerOptions from "../OwnerOptions";
+import { formatDate, imageOrDefault, trimCharsTo } from "utils/helpers";
 
 
 const ListCard = ({ info }) => {
@@ -29,27 +30,10 @@ const ListCard = ({ info }) => {
     } = info;
 
 
-    const formatDate = (isoString) => {
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const date = new Date(isoString);
-        return `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
-    };
     const defaultImage = (event) => {
         event.target.src = image;
     };
 
-    const trimCharsTo = (string_, max_) => {
-        if (string_.length >= max_) return string_.substring(0, max_) + '...'
-        return string_
-    };
-
-    const imageOrDefault = (img) => {
-        if (!img) return image;
-
-        if (img.startsWith("http")) return img;
-
-        return process.env.REACT_APP_BACKEND_URL + img;
-    }
 
     return (
         <div className={styles.card__container}>

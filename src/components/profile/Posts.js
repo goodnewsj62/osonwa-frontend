@@ -33,9 +33,9 @@ export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
         const info = {
             postID: item.id,
             showOptions: true,
-            editUrl: `edit/${item.slug_title}-${item.post_id}`,
+            editUrl: `edit/${item.slug_title}/${item.post_id}`,
             messageCallback: messageCallback,
-            detailUrl: `article/${item.slug_title}-${item.post_id}`,
+            detailUrl: `article/${item.slug_title}/${item.post_id}`,
             imgSrc: item.cover_image,
             dpSrc: item.author.profile.image,
             publisherUrl: `${item.author.username}`,
@@ -47,7 +47,7 @@ export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
             likeInfo: { count: item.likes, type: "post", likeUrl: `/liked/${item.id}/`, is_liked: item.is_liked },
             starInfo: { starUrl: `/saved/${item.id}/`, type: "post", saved: item.is_saved },
             commentInfo: {},
-            shareUrl: process.env.REACT_APP_DOMAIN + `/article/${item.slug_title}-${item.post_id}`,
+            shareUrl: process.env.REACT_APP_DOMAIN + `/article/${item.slug_title}/${item.post_id}`,
         }
         return <ListCard info={info} key={item.id} />
     });
