@@ -70,7 +70,7 @@ const Saved = () => {
         message={"Seems you have not liked any post yet"} />;
     const savedArticlesSearch = <RenderListView posts={searchedPosts} isLoading={searchResultsPost.isLoading}
         isFetchingNext={isLoadingArticle}
-        message={"Seems you have not liked any post yet"} />;
+        message={"Opps! No posts found"} />;
 
 
     const savedNews = <RenderListView posts={news} isLoading={fetchedNews.isLoading}
@@ -78,7 +78,7 @@ const Saved = () => {
         message={"Seems you have not liked any post yet"} />;
     const savedNewsSearch = <RenderListView posts={searchedNews} isLoading={searchResultsNews.isLoading}
         isFetchingNext={isLoadingNews}
-        message={"Seems you have not liked any post yet"} />;
+        message={"Opps! No posts found"} />;
 
     const contentNames = useMemo(() => ["news", "articles"], []);
     const components = getAppropriateComponentArray(
