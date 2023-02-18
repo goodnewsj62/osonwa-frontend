@@ -1,13 +1,17 @@
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import SearchForm from "./SearchForm";
 
 
 
-const SearchSaved = () => {
-    const [inpContent, setInpContent] = useState("");
+const SearchSaved = ({ setResultNews,
+    setResultsPost,
+    setNewsValue,
+    setPostValue,
+    newsValue,
+    postValue,
+    selected }) => {
 
     const searchChangeHandler = (event) => {
-        setInpContent(event.target.value)
     };
 
     const searchSubmitHandler = (event) => {
@@ -21,4 +25,4 @@ const SearchSaved = () => {
 };
 
 
-export default SearchSaved;
+export default memo(SearchSaved);

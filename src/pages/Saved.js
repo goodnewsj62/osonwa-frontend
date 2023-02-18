@@ -13,17 +13,23 @@ import useScrollState from "./hooks/scrollState";
 
 
 import styles from "./styles/fav.module.css";
+import { createNewsCardList, createPostsCardList, getAppropriateComponentArray, removePost } from "./helpers/likeSaveHelper";
 
 
 
 
 
 const Saved = () => {
-    const [selected, setSelected] = useState("");
+    const [selected, setSelected] = useState("news");
     const [fetchedArticles, setFetchedArticles] = useState({ isLoading: true, others: {}, posts: [] });
     const [fetchedNews, setFetchedNews] = useState({ isLoading: true, others: {}, posts: [] });
+    const [searchResultsNews, setSearchResultsNews] = useState({ isLoading: true, others: {}, posts: [] });
+    const [searchTextNews, setSearchTextNews] = useState("");
+    const [searchResultsPost, setSearchResultsPost] = useState({ isLoading: true, others: {}, posts: [] });
+    const [searchTextPost, setSearchTextPost] = useState("");
     const [isLoadingNews, setIsLoadingNews] = useState(false);
     const [isLoadingArticle, setIsLoadingArticle] = useState(false);
+
 
 
     const userInfo = useSelector((states) => states.profileState.userInfo)
@@ -51,25 +57,36 @@ const Saved = () => {
         ]);
     }, [fetchPost, userInfo.id, axios_]);
 
-    const articles = fetchedArticles.posts.map((item) => {
-        const info = articlePostListAdapter(item.content_object)
-        return <ListCard info={info} key={item.id} />
-    });
+    const messageHandler = useCallback(removePost, []);
 
-    const news = fetchedNews.posts.map((item) => {
-        const info = newsListAdapter(item.content_object)
-        return <ListCard info={info} key={item.id} />
-    });
+    //repeating logic
+    const articles = createPostsCardList(fetchedArticles.posts, messageHandler, setFetchedNews, setFetchedArticles);
+    const searchedPosts = createPostsCardList(searchResultsPost.posts, messageHandler, setSearchResultsNews, setSearchResultsPost);
+
+    const news = createNewsCardList(fetchedNews.posts, setFetchedNews, setFetchedArticles);
+    const searchedNews = createNewsCardList(searchResultsNews.posts, messageHandler, setSearchResultsNews, setSearchResultsPost);
+
 
     const savedArticles = <RenderListView posts={articles} isLoading={fetchedArticles.isLoading}
         isFetchingNext={isLoadingArticle}
         message={"Seems you have not liked any post yet"} />;
+    const savedArticlesSearch = <RenderListView posts={searchedPosts} isLoading={searchResultsPost.isLoading}
+        isFetchingNext={isLoadingArticle}
+        message={"Seems you have not liked any post yet"} />;
+
+
     const savedNews = <RenderListView posts={news} isLoading={fetchedNews.isLoading}
+        isFetchingNext={isLoadingNews}
+        message={"Seems you have not liked any post yet"} />;
+    const savedNewsSearch = <RenderListView posts={searchedNews} isLoading={searchResultsNews.isLoading}
         isFetchingNext={isLoadingNews}
         message={"Seems you have not liked any post yet"} />;
 
     const contentNames = useMemo(() => ["news", "articles"], []);
-    const components = [savedNews, savedArticles]
+    const components = getAppropriateComponentArray(
+        searchTextNews, searchTextPost, selected,
+        [savedNews, savedArticles],
+        [savedArticlesSearch, savedNewsSearch]);
 
     const onScreen = (value) => setSelected(value);
 
@@ -87,7 +104,15 @@ const Saved = () => {
                 <section className={styles.aside}>
                     <h1>Saved</h1>
                     <div className={styles.search__div}>
-                        <SearchSaved />
+                        <SearchSaved
+                            setResultNews={setSearchResultsNews}
+                            setResultsPost={setSearchResultsPost}
+                            setNewsValue={setSearchTextNews}
+                            setPostValue={setSearchTextPost}
+                            newsValue={searchTextNews}
+                            postValue={searchTextPost}
+                            selected={selected}
+                        />
                     </div>
                 </section>
             </div>

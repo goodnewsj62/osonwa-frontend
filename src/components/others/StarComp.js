@@ -36,7 +36,7 @@ const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
         toggleAction(axios_, starUrl, type, rejectHandler)
             .then((resp) => {
                 if (resp.status === 200 && message) {
-                    message(isSaved ? "save" : "unsave", postID);
+                    message(resp.data.message.startsWith("save") ? "save" : "unsave", postID);
                 }
             });
     };
