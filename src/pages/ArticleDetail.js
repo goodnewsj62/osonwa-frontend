@@ -22,6 +22,7 @@ import { SpreadLoader } from "components/others";
 import { useSelector } from "react-redux";
 import useAuthAxios from "hooks/authAxios";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import StarComp from "components/others/StarComp";
 
 
 
@@ -112,7 +113,7 @@ const ArticleDetail = (props) => {
                                 </div>
 
                                 <span className={styles.share}><Share /></span>
-                                <span className={styles.star}><Star /></span>
+                                <span className={styles.star}><StarComp starInfo={{ starUrl: `/saved/${post.id}/`, type: "post", saved: post.is_saved }} /></span>
 
                             </div>
                             <Comments />
