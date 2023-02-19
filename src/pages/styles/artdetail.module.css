@@ -85,6 +85,11 @@
     margin:5px 0 ;
 }
 
+.wrapper__div pre{
+    width: 100%;
+    overflow-x: auto;
+}
+
 .interaction{
     display: flex;
     align-items: center;
