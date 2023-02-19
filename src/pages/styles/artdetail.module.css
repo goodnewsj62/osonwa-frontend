@@ -71,11 +71,18 @@
 
 .main__content{
     padding: 0rem 0.7rem;
+    overflow-x:hidden ;
 }
 
 
 .write__up{
+    width: 100%;
     margin-bottom: 1rem;
+}
+
+
+.write__up :is(pre, h1, h2, h3, h4, h5, h6){
+    margin:5px 0 ;
 }
 
 .interaction{

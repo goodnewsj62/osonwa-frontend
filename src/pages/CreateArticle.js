@@ -186,10 +186,8 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
     async function postOrPatch() {
         setSavestatus("saving")
         if (postRespRef.current.post_id) {
-            console.log("infoo")
             return await patchPost(postRespRef.current);
         } else {
-            console.log("soso")
             return await createPost();
         }
     }

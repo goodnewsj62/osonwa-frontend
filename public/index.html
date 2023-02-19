@@ -28,7 +28,7 @@
   <title>Osonwa - An aggregate tech news platform</title>
   <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
-<script defer src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script  src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </head>
 
 <!-- Open Graph / Facebook -->
@@ -84,6 +84,13 @@
             });
         };
 
+    </script>
+    <script >
+          window.hljs.configure({   // optionally configure hljs
+              languages: ['javascript', 'ruby', 'python', "java", 'sql',
+                  'yml', 'php', 'json', 'bash', 'css',
+                  'html', 'c#', 'c++']
+          });
     </script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>

@@ -2,7 +2,7 @@ import { useFetchPage } from "components/profile/helpers/fetchHelper";
 import useAuthAxios from "hooks/authAxios";
 import useScrollState from "pages/hooks/scrollState";
 import { memo, useCallback, useEffect, useMemo } from "react";
-import { genFetchPost } from "utils/helpers";
+import { deBounce, genFetchPost } from "utils/helpers";
 import SearchForm from "./SearchForm";
 
 
@@ -36,12 +36,14 @@ const SearchReactions = ({
 
 
     useEffect(() => {
+        const fetct_ = deBounce(fetchPost, 1500)
+
         if (selected === "news") {
             const url = urlBase + `?type=news&q=${newsValue}`;
-            fetchPost(url, setResultNews, axios_);
+            fetct_(url, setResultNews, axios_);
         } else {
             const url = urlBase + `?type=article&q=${postValue}`;
-            fetchPost(url, setResultsPost, axios_);
+            fetct_(url, setResultsPost, axios_);
         }
     }, [fetchPost,
         axios_,

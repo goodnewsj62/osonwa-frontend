@@ -2,7 +2,6 @@
     width: 100%;
 }
 
-
 .img__div img{
     width: 100%;
     height: 260px;
@@ -10,9 +9,8 @@
     object-fit: cover;
 }
 
-
 .title__div{
-    padding: 2.2rem 0;
+    padding: 1rem 0;
 }
 
 
@@ -23,6 +21,7 @@
 }
 .title__div h1{
     line-height: 1.28;
+    font-size: 2rem;
 }
 @media screen and (min-width: 1000px) {
     .img__div img{

@@ -67,15 +67,6 @@ const Editor = ({ dispatch, value, savestatus }) => {
                 </div>
             </div>
             <div className={styles.editor} id="quill__editor">
-                <script>
-                    {
-                        window.hljs.configure({   // optionally configure hljs
-                            languages: ['javascript', 'ruby', 'python', "java", 'sql',
-                                'yml', 'php', 'json', 'bash', 'css',
-                                'html', 'c#', 'c++']
-                        })
-                    }
-                </script>
                 <ReactQuill
                     placeholder="post content..."
                     theme="snow"
