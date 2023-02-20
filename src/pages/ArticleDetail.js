@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GoTriangleLeft } from "react-icons/go";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useRef, useContext, useMemo, useEffect, useCallback } from "react";
@@ -11,31 +11,24 @@ import CommentComp from "components/others/CommentComp";
 import Likes from "components/others/Likes";
 import Comments from "components/others/Comments";
 import Share from "components/others/Share";
-import Star from "components/others/Star";
 
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import useObserver from "./hooks/posObserver";
 import { hideLikeCommentBar } from "./helpers/articleHelpers";
 import styles from "./styles/artdetail.module.css";
-import { baseAxiosInstance } from "utils/requests";
 import { SpreadLoader } from "components/others";
 import { useSelector } from "react-redux";
-import useAuthAxios from "hooks/authAxios";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import StarComp from "components/others/StarComp";
+import useFetchDetail from "./hooks/fetchDetail";
 
 
 
 const ArticleDetail = (props) => {
     const [barVisible, setBarVisible] = useState(false);
-    const [post, setPost] = useState({});
-    const [isLoading, setIsloading] = useState(true);
-    const [notFound, setNotFound] = useState(false);
-
-
-    const { id, slug } = useParams();
     const authState = useSelector((states) => states.authState);
-    const axios_ = useAuthAxios();
+
+    const [post, isLoading, notFound] = useFetchDetail()
 
     const iconSize = useContext(DefaultIconSize);
     const contentRef = useRef();
@@ -49,35 +42,9 @@ const ArticleDetail = (props) => {
 
     useObserver(observerOptions, observerLogic, contentRef, canObserver);
 
-
-
     const toggleAside = (event) => {
         setBarVisible((state) => !state);
     };
-
-    useEffect(() => {
-        const fetchPost = async (axiosInstance) => {
-            try {
-                const resp = await axiosInstance.get(`/blog/post/${slug}/${id}`);
-                setPost(resp.data.data);
-                setIsloading(false);
-                return resp
-            } catch (err) {
-                if (err.response.status === 404) {
-                    setIsloading(false);
-                    setNotFound(true);
-                }
-                return err;
-            }
-        }
-
-        if (authState.state) {
-            fetchPost(axios_);
-        } else {
-            fetchPost(baseAxiosInstance)
-        }
-
-    }, [id, setIsloading, slug, setPost, setNotFound, authState, axios_]);
 
     useEffect(() => {
         if (post.id) {
@@ -99,7 +66,7 @@ const ArticleDetail = (props) => {
                 !isLoading && !notFound &&
                 <div ref={sectionElement} className={styles.wrapper__div}>
                     <section aria-label="main content" className={styles.main__content}>
-                        <DetailHeader post={post} />
+                        <DetailHeader authState={authState} post={post} />
                         <ImgTitle post={post} />
                         <div ref={contRef} id="content__writeUp" className={styles.write__up} dangerouslySetInnerHTML={{ __html: quillInstance.convert() }} >
                         </div>
@@ -127,7 +94,7 @@ const ArticleDetail = (props) => {
                         <Likes likeInfo={{ count: post.likes, type: "post", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />
                     </div>
                     <div onClick={toggleAside} className={styles.aside__toggle}>
-                        <GoTriangleLeft size={23} />
+                        {post.bundle && <GoTriangleLeft size={23} />}
                     </div>
                     <aside className={asideClasses}>
                         <span onClick={toggleAside}>

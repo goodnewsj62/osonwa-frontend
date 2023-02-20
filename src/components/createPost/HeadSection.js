@@ -4,20 +4,20 @@ import styles from "./styles/header.module.css";
 import style from "./styles/general.module.css";
 
 const HeadSection = ({ dispatch, fieldVal, setImgHolder, image }) => {
-    const [showImg, setShowImg] = useState(image?  true: false);
+    const [showImg, setShowImg] = useState(image ? true : false);
 
     const fileHandler = (event) => {
         setShowImg(true);
-        setImgHolder({file:event.target.files[0]})
+        setImgHolder({ file: event.target.files[0] })
     };
 
     const validateTitle = (event) => {
-        const title =  event.target.value;
+        const title = event.target.value;
         const trimmedTitle = title.trim();
         let message = { isValid: true, error: "", content: title };
 
         if (!title) {
-            message = { isValid: false,content: title, error: "this field is required" };
+            message = { isValid: false, content: title, error: "this field is required" };
         } else if (trimmedTitle.length < 4) {
             message = { isValid: false, content: title, error: "the title must me more than 3 characters long" }
         }
@@ -25,7 +25,7 @@ const HeadSection = ({ dispatch, fieldVal, setImgHolder, image }) => {
         dispatch({ type: "title", payload: message });
     }
 
-    const imgSrc =  image? URL.createObjectURL(image) : "";
+    const imgSrc = image && typeof image !== "string" ? URL.createObjectURL(image) : (image || "");
 
     return (
         <section className={styles.container}>

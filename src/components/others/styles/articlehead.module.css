@@ -21,6 +21,27 @@
 }
 
 
+.lnk__button{
+    margin-left: auto;
+    display: flex !important;
+    align-items: center;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: var(--base-color);
+    color: #000;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.lnk__button i{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    padding-bottom: 4px;
+}
+
+
 .title{
     margin-left: 1rem;
 }

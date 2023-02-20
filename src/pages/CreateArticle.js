@@ -27,13 +27,13 @@ const reducer = (state, action) => {
 };
 
 
-const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {} }) => {
+const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {}, post = {} }) => {
     const [fieldsVal, dispatch] = useReducer(reducer, initState);
     const [imgHolder, setImgHolder] = useState(defaultImg);
     const [selectedTags, setSelectedTags] = useState(initTags);
     const [errormessage, setErrormessage] = useState({ message: "", status: false });
     const [savestatus, setSavestatus] = useState("clear");
-    const [postResponseInfo, setPostResponseInfo] = useState({});
+    const [postResponseInfo, setPostResponseInfo] = useState(post);
     const [imgHasChanged, setImgHasChanged] = useState(false);
     const navigate = useNavigate();
     const axios_ = useAuthAxios();
@@ -100,7 +100,7 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
 
 
     function appendFileIfChanged(fData, imgHolder, imgHasChanged) {
-        if (imgHolder.file && imgHasChanged) fData.append("cover_image", imgHolder.file); //TODO: REFACTOR
+        if (imgHolder.file && imgHolder.file instanceof File && imgHasChanged) fData.append("cover_image", imgHolder.file); //TODO: REFACTOR
 
         return fData;
     }
@@ -152,7 +152,6 @@ const CreateArticle = ({ initState = initialState, initTags = [], defaultImg = {
             setSavestatus("saved");
             return resp
         } catch (error) {
-            //catch should prompt error message
             createErrorMessage(error);
             return error
         }

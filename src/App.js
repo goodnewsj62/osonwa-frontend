@@ -26,6 +26,7 @@ import { fetchAllInterest } from "store/interestsSlice";
 import { fetchProfileInfo } from "store/profileSlice";
 import ChangePassword from "pages/PasswordChange";
 import CreateArticle from "pages/CreateArticle";
+import EditPost from "pages/EditPost";
 
 
 function App(props) {
@@ -82,6 +83,7 @@ function App(props) {
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/change-password/:token" element={<ChangePassword />} />
                         <Route path="/create-post" element={<LoginRequired ><CreateArticle /></LoginRequired>} />
+                        <Route path="/edit/:slug/:id" element={<LoginRequired ><EditPost /></LoginRequired>} />
                     </Route>
                     <Route path="/login" element={<UnAuthenticatedOnly ><Login /></UnAuthenticatedOnly>} />
                     <Route path="/signup" element={<UnAuthenticatedOnly ><SignUp /></UnAuthenticatedOnly>} />

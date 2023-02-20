@@ -64,4 +64,19 @@ const baseAxiosInstance = axios.create({
 });
 
 
+export const fetchPost = async (axiosInstance, url, setPost, setIsloading, setNotFound) => {
+    try {
+        const resp = await axiosInstance.get(url);
+        setPost(resp.data.data);
+        setIsloading(false);
+        return resp
+    } catch (err) {
+        if (err.response.status === 404) {
+            setNotFound(true);
+        }
+        setIsloading(false);
+        return err;
+    }
+}
+
 export { useAxios, baseAxiosInstance };

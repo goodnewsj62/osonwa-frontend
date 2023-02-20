@@ -36,7 +36,7 @@ const ArticleAside = ({ post }) => {
                 </div>
             </section>
             <div className={styles.related__content}>
-                <RelatedArticles post={post} />
+                {post.bundle && <RelatedArticles post={post} />}
             </div>
         </div>
     )

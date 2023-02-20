@@ -85,9 +85,14 @@
     margin:5px 0 ;
 }
 
-.wrapper__div pre{
+.write__up pre{
     width: 100%;
     overflow-x: auto;
+}
+.write__up img{
+    width: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .interaction{

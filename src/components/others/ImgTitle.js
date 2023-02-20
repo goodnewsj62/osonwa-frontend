@@ -10,9 +10,12 @@ const ImgTitle = ({ post }) => {
             <img src={imageOrDefault(post.cover_image)} onError={imgErrorHandler} alt="featured img" />
             <div className={styles.title__div}>
                 <h1>{post.title}</h1>
-                <p className={styles.mobile__warning}>
-                    click the arrow at the right to see the list of content
-                </p>
+                {
+                    post.bundle &&
+                    <p className={styles.mobile__warning}>
+                        click the arrow at the right to see the list of content
+                    </p>
+                }
             </div>
         </div>
     );
