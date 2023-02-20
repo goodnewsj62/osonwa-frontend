@@ -21,6 +21,9 @@ import { useSelector } from "react-redux";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import StarComp from "components/others/StarComp";
 import useFetchDetail from "./hooks/fetchDetail";
+import img404 from "static/images/p404.svg";
+import ErrorPage from "./ErrorPage";
+
 
 
 
@@ -105,7 +108,7 @@ const ArticleDetail = (props) => {
                 </div>
             }
             {isLoading && <span className="loader"><SpreadLoader /></span>}
-            {/* {notFound && <Page404 />} */}
+            {notFound && <ErrorPage image={img404} message={"Page not found"} statusCode={404} />}
         </Main>
     );
 };

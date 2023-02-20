@@ -3,7 +3,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import CreateArticle from "./CreateArticle";
+import ErrorPage from "./ErrorPage";
 import useFetchDetail from "./hooks/fetchDetail";
+import img404 from "static/images/p404.svg";
+import img403 from "static/images/p403.svg";
+
 
 
 
@@ -33,8 +37,8 @@ const EditPost =  ()=>{
                 !isLoading && !notFound && isAuthorized &&
                 <CreateArticle initState={initState} initTags={post.tags} defaultImg={{file:post.cover_image}} post={post}  />
             }
-            {/* {!isAuthorized && <Page403 />} */}
-            {/* {!notFound && <Page404 />} */}
+            {!isAuthorized && <ErrorPage image={img403} message={"You are not authorized to edit this post"} statusCode={403} />}
+            {notFound && <ErrorPage image={img404} message={"Page not found"} statusCode={404} />}
             {isLoading && <span className="loader"><SpreadLoader /></span>}
         </>
     )
