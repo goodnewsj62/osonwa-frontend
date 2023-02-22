@@ -1,8 +1,10 @@
 import style from "./styles/slide.module.css";
 import image from "static/images/test_img.jpg";
 import { useEffect, useMemo, useRef } from "react";
+import { imageOrDefault } from "utils/helpers";
+import { Link } from "react-router-dom";
 
-function Slide(props) {
+function Slide({ styles, item }) {
     const textAreaRef = useRef();
     const healineRef = useRef();
 
@@ -24,17 +26,23 @@ function Slide(props) {
         textArea.observe(healineRef.current);
     }, [textAreaOptions]);
 
+    const errorHandler = (event) => {
+        event.target.src = image;
+    }
+
     return (
-        <div style={props.styles} className={style.slide__container}>
+        <div style={styles} className={style.slide__container}>
             <div className={style.img__wrapper}>
-                <img src={image} alt="caruosel" />
+                <img src={imageOrDefault(item.image)} onError={errorHandler} alt="caruosel" />
             </div>
             <div className={style.text__div}>
                 <div className={`${style.info__area}`} ref={textAreaRef}>
                     <div className={`info__area__wrapper`}>
-                        <h1 ref={healineRef} id="headline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, doloribus cum nihil quas laudantium quia?</h1>
+                        <h1 ref={healineRef} id="headline">{item.title}</h1>
                         <span>
-                            {props.test}
+                            <Link to={`aggregate/${item.slug_title}/${item.id}/`}>
+                                detail
+                            </Link>
                         </span>
                     </div>
                 </div>

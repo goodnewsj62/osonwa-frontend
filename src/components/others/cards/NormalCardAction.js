@@ -1,36 +1,27 @@
 
-import { AiFillHeart } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import { RiShareForwardFill } from "react-icons/ri";
-import { BiMessageSquareDetail } from "react-icons/bi";
 
 import style from "./styles/NormalCardAction.module.css";
+import CommentComp from "../CommentComp";
+import Likes from "../Likes";
+import { formatDateText } from "utils/helpers";
 
 
 
-function NormalCardAction({ iconSize }) {
+function NormalCardAction({ iconSize, post }) {
     return (
         <div className={style.user__actions}>
             <div className={style.pub__date}>
                 <BsDot className={style.bs__dot} size={30} />
-                <span id="pub__date" >30 mins ago</span>
+                <span id="pub__date" >{formatDateText(post.date_published)}</span>
             </div>
             <ul>
                 <li>
-                    <div>
-                        <BiMessageSquareDetail size={iconSize} />
-                    </div>
-                    <div>
-                        800
-                    </div>
+                    <CommentComp commentInfo={{}} />
                 </li>
                 <li>
-                    <div>
-                        <AiFillHeart size={iconSize} />
-                    </div>
-                    <div>
-                        300
-                    </div>
+                    <Likes likeInfo={{ count: post.likes, type: "news", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />
                 </li>
                 <li>
                     <div>

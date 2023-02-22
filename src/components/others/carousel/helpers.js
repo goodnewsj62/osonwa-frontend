@@ -71,13 +71,13 @@ export function setSlides() {
             const newLeft = +beforeMidStyle.left.replace("%", "") + 100;
             const zIndex = newLeft === -100 ? "15" : "initial";
             beforeMidStyle = { ...beforeMidStyle, left: (newLeft + "%"), zIndex: zIndex };
-            return <Slide styles={beforeMidStyle} test={item} />
+            return <Slide styles={beforeMidStyle} item={item} key={item.id} />
         } else if (index === midPoint) {
-            return <Slide styles={{ top: "0%", left: "0%", zIndex: "20" }} test={item} />
+            return <Slide styles={{ top: "0%", left: "0%", zIndex: "20" }} item={item} key={item.id} />
         } else {
             const newLeft = +afterMidStyle.left.replace("%", "") + 100;
             afterMidStyle = { ...afterMidStyle, left: (newLeft + "%"), zIndex: "initial" }
-            return <Slide styles={afterMidStyle} test={item} />
+            return <Slide styles={afterMidStyle} item={item} key={item.id} />
         }
     };
 };

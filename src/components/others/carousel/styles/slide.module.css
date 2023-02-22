@@ -91,6 +91,10 @@
     padding: 0 0.5rem;
 }
 
+.text__div span a{
+    color: inherit;
+}
+
 .text__div span:hover{
     font-weight: bold;
 }

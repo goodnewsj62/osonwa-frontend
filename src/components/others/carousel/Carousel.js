@@ -3,7 +3,8 @@ import styles from "./styles/carousel.module.css";
 import "../styles/generals.css";
 import { forwardDebounce } from "utils/helpers";
 import { setSlides, shifLeft, shiftRight } from "./helpers";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { baseAxiosInstance } from "utils/requests";
 
 
 
@@ -13,11 +14,33 @@ import { useEffect, useMemo, useRef } from "react";
 
 function Carousel(props) {
     const size = 40;
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     const sliderRef = useRef();
-    const slides = ["one", "two", "three"].map(setSlides());
     const intersectionOptions = useMemo(() => { return { root: sliderRef.current, threshold: 0, rootMargin: "0% 5% 0% 0%" } }, []);
     const clickState = useMemo(() => { return { state: false } }, []);
 
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resp = await baseAxiosInstance.get("/top-news/");
+                setData(resp.data.data);
+                setIsLoading(false);
+            } catch (err) {
+                setIsLoading(false)
+                return err;
+            }
+        }
+
+        fetchData();
+    }, []);
+
+
+    //scroller
     useEffect(() => {
         let scrollFrame;
         function scrollAnime(prevTime) {
@@ -41,6 +64,7 @@ function Carousel(props) {
         return () => cancelAnimationFrame(scrollFrame);
     }, [clickState]);
 
+    //observer
     useEffect(() => {
         const observer = new IntersectionObserver(textDivSlideIn, intersectionOptions);
         Array.from(sliderRef.current.children).forEach(
@@ -49,7 +73,7 @@ function Carousel(props) {
                 observer.observe(watchElement);
             }
         );
-    }, [intersectionOptions]);
+    }, [intersectionOptions, isLoading]);
 
 
     const textDivSlideIn = (entries, observer) => {
@@ -76,8 +100,11 @@ function Carousel(props) {
         }
     };
 
-    const moveOneStepRight = forwardDebounce(() => { moveOneStep("right"); clickState.state = true; }, 500)
-    const moveOneStepLeft = forwardDebounce(() => { moveOneStep("left"); clickState.state = true; }, 500)
+    const moveOneStepRight = forwardDebounce(() => { moveOneStep("right"); clickState.state = true; }, 500);
+    const moveOneStepLeft = forwardDebounce(() => { moveOneStep("left"); clickState.state = true; }, 500);
+
+
+    const slides = data.map(setSlides());
 
     return (
         <section aria-labelledby="headline" className={styles.show__case}>

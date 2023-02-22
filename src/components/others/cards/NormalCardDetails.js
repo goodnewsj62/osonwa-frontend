@@ -1,21 +1,27 @@
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { RiShareForwardFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 import myimage from "static/images/test_image.png";
+import { imageOrDefault, trimCharsTo } from "utils/helpers";
+import StarComp from "../StarComp";
 import style from "./styles/NormalCardDetails.module.css";
 
 
-const NormalCardDetails = ({ iconSize, ...others }) => {
+const NormalCardDetails = ({ iconSize, post }) => {
+    const errorHandler = (event) => {
+        return event.target.src = myimage;
+    }
+
     return (
         <div className={style.feed__details}>
             <div className={style.site__from}>
-                <div>
-                    <img src={myimage} alt="site logo" />
+                <div className={style.pub__image}>
+                    <img src={imageOrDefault(post.pub_image)} onError={errorHandler} alt="site logo" />
                 </div>
-                <h5>One direction news</h5>
+                <h5>{post.publisher}</h5>
                 <div className={style.small__mobstar}>
-                    <AiOutlineStar size={iconSize} />
+                    <StarComp starInfo={{ starUrl: `/saved/${post.id}/`, type: "news", saved: post.is_saved }} />
                 </div>
                 <BiDotsVerticalRounded className={style.card__menu} id="card__menu" size={23} />
                 <ul>
@@ -27,9 +33,13 @@ const NormalCardDetails = ({ iconSize, ...others }) => {
             </div>
             <div className={style.heading}>
                 <h4 aria-label="title">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate id quaerat fuga cum voluptates animi.
+                    {trimCharsTo(post.title, 120)}
                 </h4>
-                <p>Read more</p>
+                <p>
+                    <Link to={`aggregate/${post.slug_title}/${post.id}/`}>
+                        see more
+                    </Link>
+                </p>
             </div>
         </div>
     );

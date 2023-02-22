@@ -178,14 +178,16 @@ export function shortenCount(count) {
 
 
 
-export const genFetchPost = async (url, setState, axios_) => {
+export const genFetchPost = async (url, setState, axios_, callable = () => undefined) => {
     try {
         const resp = await axios_.get(url);
         const { results, ...others } = resp.data.data;
         setState({ isLoading: false, others: others, posts: results });
+        callable(resp.data.data, "success");
         return resp;
     } catch (err) {
         setState((state) => ({ ...state, isLoading: false }));
+        callable(err.response, "error")
         return err;
     }
 };
@@ -196,6 +198,30 @@ export const formatDate = (isoString) => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const date = new Date(isoString);
     return `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
+};
+export const formatDateText = (isoString) => {
+
+    const milldiff = Math.abs(new Date() - new Date(isoString));
+    const mintues = Math.floor(milldiff / 60000);
+
+    console.log(Math.floor((mintues / (60 * 24 * 365))) > 0);
+
+    if ((mintues / (60 * 24 * 365)) > 0) {
+        const yrs = Math.floor((mintues / (60 * 24 * 365)));
+        return yrs + yrs > 1 ? "yrs ago" : "yr ago";
+    } else if ((mintues / (60 * 24 * 30) > 0)) {
+        const mnt = Math.floor((mintues / (60 * 24 * 30)));
+        return mnt + mnt > 1 ? "months ago" : "month ago";
+    } else if ((mintues / (60 * 24) > 0)) {
+        const days = Math.floor((mintues / (60 * 24)));
+        return days + days > 1 ? "days ago" : "day ago";
+    }
+    else if ((mintues / 60 > 0)) {
+        const hrs = Math.floor((mintues / 60));
+        return hrs + hrs > 1 ? "hrs ago" : "hr ago";
+    } else {
+        return mintues + mintues > 1 ? "mins ago" : "min ago";
+    }
 };
 
 

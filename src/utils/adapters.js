@@ -2,7 +2,7 @@
 
 export const newsListAdapter = (item) => {
     const publisher_url = `source/news/${item.publisher}`;
-    const detail_url = `aggregate/${item.slug_title}/${item.post_id}`
+    const detail_url = `aggregate/${item.slug_title}/${item.id}`
     const tagsInfo = { tags: item.tags, tagLink: "/news/tags/" };
     const likeInfo = { count: item.likes, type: "news", likeUrl: `/liked/${item.id}/`, is_liked: item.is_liked };
     const starInfo = { starUrl: `/saved/${item.id}/`, type: "news", saved: item.is_saved };

@@ -1,10 +1,14 @@
-import { Carousel, NormalCard } from "components/others";
+import { Carousel, NormalCard, SpreadLoader } from "components/others";
 import AuthPopupModal from "components/others/AuthPopupModal";
 import TagSlide from "components/others/carousel/TagsSlide";
 import Main from "components/others/MainWrapper";
 import MessagePopupModal from "components/others/MessagePopupModal";
+import useAuthAxios from "hooks/authAxios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { genFetchPost } from "utils/helpers";
+import { baseAxiosInstance } from "utils/requests";
 import styles from "./styles/news.module.css";
 
 function Feed(props) {
@@ -49,16 +53,39 @@ function Feed(props) {
     );
 };
 
-function MainCards(props) {
+function MainCards({ setMessage, setAuthCardState }) {
+
+    const axios_ = useAuthAxios();
+    const authState = useSelector((states) => states.authState);
+    const [fetchedFeed, setFetchedFeed] = useState({ isLoading: false, others: {}, posts: [] });
+    const [isLoading, setIsloading] = useState(true);
+
+
+
+    useEffect(() => {
+        const fetchPost_ = genFetchPost
+        const url = "/news/"
+        if (authState.state) {
+            fetchPost_(url, setFetchedFeed, axios_, () => setIsloading(false));
+        } else {
+            fetchPost_(url, setFetchedFeed, baseAxiosInstance, () => setIsloading(false));
+        }
+    }, [authState, axios_]);
+
+
+    const newsCards = fetchedFeed.posts.map((item) => {
+        return <NormalCard key={item.key} post={item} />
+    });
+
     return (
         <section aria-label="news" className={`news ${styles.main__content}`}>
             <h4>News feed</h4>
-            <div className={`main__grid ${styles.cards}`}>
-                <NormalCard />
-                <NormalCard />
-                <NormalCard />
-                <NormalCard />
-            </div>
+            {!isLoading && fetchedFeed.posts.length &&
+                <div className={`main__grid ${styles.cards}`}>
+                    {newsCards}
+                </div>
+            }
+            {isLoading && <span className="loader"> <SpreadLoader /></span>}
         </section>
     )
 }
