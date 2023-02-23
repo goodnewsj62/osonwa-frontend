@@ -25,14 +25,14 @@ export const removePost = (type, setFetchedNews, setFetchedArticles) => {
 export const createPostsCardList = (posts, messageHandler, setFetchedNews, setFetchedArticles) => {
     return posts.map((item) => {
         const info = articlePostListAdapter(item.content_object);
-        info["messageCallback"] = messageHandler("article", setFetchedNews, setFetchedArticles);
+        if (messageHandler) info["messageCallback"] = messageHandler("article", setFetchedNews, setFetchedArticles);
         return <ListCard info={info} key={item.id} />;
     });
 };
 export const createNewsCardList = (posts, messageHandler, setFetchedNews, setFetchedArticles) => {
     return posts.map((item) => {
         const info = newsListAdapter(item.content_object);
-        info["messageCallback"] = messageHandler("news", setFetchedNews, setFetchedArticles);
+        if (messageHandler) info["messageCallback"] = messageHandler("news", setFetchedNews, setFetchedArticles);
         return <ListCard info={info} key={item.id} />;
     });
 };

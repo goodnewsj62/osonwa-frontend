@@ -2,12 +2,16 @@ import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
 import { useContext, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { toggleAction } from "utils/helpers";
+import AuthPopupModal from "./AuthPopupModal";
 import styles from "./styles/actioncomp.module.css";
 
 
 const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
     const [isSaved, setIsSaved] = useState(saved);
+    const [popUp, setPopUp] = useState(false);
+    const authState = useSelector((states) => states.authState.state);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
 
@@ -32,6 +36,11 @@ const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
         }
     }
     const saveOrUnsave = (event) => {
+        if (!authState) {
+            setPopUp(true);
+            return;
+        }
+
         saveLogic();
         toggleAction(axios_, starUrl, type, rejectHandler)
             .then((resp) => {
@@ -41,12 +50,15 @@ const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
             });
     };
     return (
-        <div className={styles.star}>
-            <div onClick={saveOrUnsave} className={styles.icon}>
-                {!isSaved && <AiOutlineStar size={iconSize} />}
-                {isSaved && <AiFillStar fill="#faca2d" size={iconSize} />}
+        <>
+            <div className={styles.star}>
+                <div onClick={saveOrUnsave} className={styles.icon}>
+                    {!isSaved && <AiOutlineStar size={iconSize} />}
+                    {isSaved && <AiFillStar fill="#faca2d" size={iconSize} />}
+                </div>
             </div>
-        </div>
+            {popUp && <AuthPopupModal hideHandler={() => setPopUp(false)} />}
+        </>
     );
 };
 

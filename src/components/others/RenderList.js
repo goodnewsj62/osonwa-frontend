@@ -6,12 +6,12 @@ import cardStyles from "./styles/lists.module.css";
 
 
 
-const RenderListView =  ({posts, isLoading, isFetchingNext, message,classes})=>{
-    const showCards =  posts.length !== 0 && !isLoading;
-    const showMessage =  posts.length === 0 && !isLoading;
+const RenderListView = ({ posts, isLoading, isFetchingNext, message, classes }) => {
+    const showCards = posts.length !== 0 && !isLoading;
+    const showMessage = posts.length === 0 && !isLoading;
     return (
         <>
-            {showCards && <section aria-label="liked article" className={classes?classes: cardStyles.articles}>{posts}</section>}
+            {showCards && <section aria-label="liked article" className={`${cardStyles.articles} ${classes ? classes : ""}`}>{posts}</section>}
             {(isLoading || isFetchingNext) && <div className={cardStyles.loader}><SpreadLoader /></div>}
             {showMessage && <EmptyContentMessage message={message} />}
         </>

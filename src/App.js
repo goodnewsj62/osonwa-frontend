@@ -27,6 +27,7 @@ import { fetchProfileInfo } from "store/profileSlice";
 import ChangePassword from "pages/PasswordChange";
 import CreateArticle from "pages/CreateArticle";
 import EditPost from "pages/EditPost";
+import Fresh from "pages/Fresh";
 
 
 function App(props) {
@@ -75,7 +76,7 @@ function App(props) {
                         <Route path="/article/:slug/:id" element={<ArticleDetail />} />
                         <Route path="/aggregate/:slug/:id" element={<FeedDetail />} />
                         <Route path="/trending" element={<Trending />} />
-                        <Route path="/fresh" element={<Trending />} />
+                        <Route path="/fresh" element={<Fresh />} />
                         <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
                         <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
                         <Route path="/:username" element={<Profile />} />

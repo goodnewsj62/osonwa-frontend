@@ -2,7 +2,9 @@ import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
 import { memo, useContext, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { shortenCount, toggleAction } from "utils/helpers";
+import AuthPopupModal from "./AuthPopupModal";
 import styles from "./styles/actioncomp.module.css";
 
 
@@ -11,6 +13,8 @@ import styles from "./styles/actioncomp.module.css";
 const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message, postID }) => {
     const [likeCount, setLikeCount] = useState(count);
     const [likeStatus, setLikeStatus] = useState(is_liked);
+    const authState = useSelector((states) => states.authState.state);
+    const [popUp, setPopUp] = useState(false);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
 
@@ -41,6 +45,11 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message, postID }
 
 
     const likeOrUnlike = (event) => {
+        if (!authState) {
+            setPopUp(true);
+            return;
+        }
+
         setLikeStatusAndCount()
         toggleAction(axios_, likeUrl, type, rejectHandler)
             .then((resp) => {
@@ -53,15 +62,18 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message, postID }
     const formatCount = (count) => shortenCount(count);
 
     return (
-        <div onClick={likeOrUnlike} className={styles.likes}>
-            <div className={styles.icon}>
-                {!likeStatus && <AiOutlineHeart size={iconSize} />}
-                {likeStatus && <AiFillHeart fill="#EE527F" size={iconSize} />}
+        <>
+            <div onClick={likeOrUnlike} className={styles.likes}>
+                <div className={styles.icon}>
+                    {!likeStatus && <AiOutlineHeart size={iconSize} />}
+                    {likeStatus && <AiFillHeart fill="#EE527F" size={iconSize} />}
+                </div>
+                <div className={`${styles.count} cnt`}>
+                    {formatCount(likeCount)}
+                </div>
             </div>
-            <div className={`${styles.count} cnt`}>
-                {formatCount(likeCount)}
-            </div>
-        </div>
+            {popUp && <AuthPopupModal hideHandler={() => setPopUp(false)} />}
+        </>
     );
 };
 
