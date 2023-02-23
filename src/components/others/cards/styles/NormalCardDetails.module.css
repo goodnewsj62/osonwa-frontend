@@ -7,6 +7,9 @@
     margin-left: 10px;
     color: #6c757d;
 }
+.site__from h5 > a, .heading h4 >a{
+    color: inherit;
+}
 .site__from .card__menu{
     display: none;
     margin-left: auto;
@@ -40,14 +43,15 @@
 
 .feed__details{
     grid-column: 1 / span 3;
-    grid-row:1/ span 3;
+    grid-row:1 / span 3;
     padding: 0 0.2rem  0 1rem;
 }
 
 
-/* .heading h4{
+.heading h4{
+    margin-bottom: 10px;
 }
- */
+
 
 .small__mobstar{
     position: absolute;
@@ -57,14 +61,14 @@
 
 }
 
-@supports (-webkit-line-clamp: 2){
+/* @supports (-webkit-line-clamp: 2){
     .heading h4{
         display: -webkit-box;
         white-space: initial;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
-}
+} */
 
 .heading p{
     color: #1e90ff;

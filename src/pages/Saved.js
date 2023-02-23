@@ -61,7 +61,7 @@ const Saved = () => {
     const articles = createPostsCardList(fetchedArticles.posts, messageHandler, setFetchedNews, setFetchedArticles);
     const searchedPosts = createPostsCardList(searchResultsPost.posts, messageHandler, setSearchResultsNews, setSearchResultsPost);
 
-    const news = createNewsCardList(fetchedNews.posts, setFetchedNews, setFetchedArticles);
+    const news = createNewsCardList(fetchedNews.posts, messageHandler, setFetchedNews, setFetchedArticles);
     const searchedNews = createNewsCardList(searchResultsNews.posts, messageHandler, setSearchResultsNews, setSearchResultsPost);
 
 

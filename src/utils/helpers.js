@@ -115,6 +115,7 @@ function extractErrorMessages(message, fields, setFieldError, genError) {
     }
 }
 
+
 export function axiosFormErrorHandler(error, fields, handleFieldError, handleGeneralError) {
     const dataInfo = error.response.data;
     if (dataInfo) {
@@ -199,26 +200,36 @@ export const formatDate = (isoString) => {
     const date = new Date(isoString);
     return `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
 };
+
+
+
 export const formatDateText = (isoString) => {
 
     const milldiff = Math.abs(new Date() - new Date(isoString));
     const mintues = Math.floor(milldiff / 60000);
 
-    console.log(Math.floor((mintues / (60 * 24 * 365))) > 0);
+    const f_ = Math.floor
+    let num;
+    let durationText;
+    const joinWithSpace = () => num + " " + durationText;
 
-    if ((mintues / (60 * 24 * 365)) > 0) {
-        const yrs = Math.floor((mintues / (60 * 24 * 365)));
-        return yrs + yrs > 1 ? "yrs ago" : "yr ago";
-    } else if ((mintues / (60 * 24 * 30) > 0)) {
-        const mnt = Math.floor((mintues / (60 * 24 * 30)));
-        return mnt + mnt > 1 ? "months ago" : "month ago";
-    } else if ((mintues / (60 * 24) > 0)) {
-        const days = Math.floor((mintues / (60 * 24)));
-        return days + days > 1 ? "days ago" : "day ago";
+    if (f_(mintues / (60 * 24 * 365)) > 0) {
+        num = Math.floor((mintues / (60 * 24 * 365)));
+        durationText = num > 1 ? "yrs ago" : "yr ago";
+        return joinWithSpace();
+    } else if (f_(mintues / (60 * 24 * 30)) > 0) {
+        num = Math.floor((mintues / (60 * 24 * 30)));
+        durationText = num > 1 ? "months ago" : "month ago";
+        return joinWithSpace()
+    } else if (f_(mintues / (60 * 24)) > 0) {
+        num = Math.floor((mintues / (60 * 24)));
+        durationText = num > 1 ? " days ago" : "day ago"
+        return joinWithSpace();
     }
-    else if ((mintues / 60 > 0)) {
-        const hrs = Math.floor((mintues / 60));
-        return hrs + hrs > 1 ? "hrs ago" : "hr ago";
+    else if (f_(mintues / 60) > 0) {
+        num = Math.floor((mintues / 60));
+        durationText = num > 1 ? "hrs ago" : "hr ago";
+        return joinWithSpace();
     } else {
         return mintues + mintues > 1 ? "mins ago" : "min ago";
     }

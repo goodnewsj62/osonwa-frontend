@@ -9,7 +9,7 @@
     display: none;
 }
 
-.main__content h4{
+.main__content >h4{
     padding-left: 1rem;
     margin: 0.5rem 0;
 }
@@ -59,7 +59,7 @@
         grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
         padding: 0 1rem;
     }
-    .main__content h4{
+    .main__content > h4{
         padding-left: 1rem;
     }
 }

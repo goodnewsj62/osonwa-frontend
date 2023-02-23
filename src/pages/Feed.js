@@ -3,12 +3,14 @@ import AuthPopupModal from "components/others/AuthPopupModal";
 import TagSlide from "components/others/carousel/TagsSlide";
 import Main from "components/others/MainWrapper";
 import MessagePopupModal from "components/others/MessagePopupModal";
+import { useFetchPage } from "components/profile/helpers/fetchHelper";
 import useAuthAxios from "hooks/authAxios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { genFetchPost } from "utils/helpers";
 import { baseAxiosInstance } from "utils/requests";
+import useScrollState from "./hooks/scrollState";
 import styles from "./styles/news.module.css";
 
 function Feed(props) {
@@ -60,11 +62,13 @@ function MainCards({ setMessage, setAuthCardState }) {
     const [fetchedFeed, setFetchedFeed] = useState({ isLoading: false, others: {}, posts: [] });
     const [isLoading, setIsloading] = useState(true);
 
-
+    const fetchNewsNextPage = useFetchPage(fetchedFeed, setFetchedFeed, setIsloading);
+    useScrollState(fetchNewsNextPage);
 
     useEffect(() => {
         const fetchPost_ = genFetchPost
         const url = "/news/"
+
         if (authState.state) {
             fetchPost_(url, setFetchedFeed, axios_, () => setIsloading(false));
         } else {
@@ -74,13 +78,13 @@ function MainCards({ setMessage, setAuthCardState }) {
 
 
     const newsCards = fetchedFeed.posts.map((item) => {
-        return <NormalCard key={item.key} post={item} />
+        return <NormalCard key={item.id} post={item} />
     });
 
     return (
         <section aria-label="news" className={`news ${styles.main__content}`}>
             <h4>News feed</h4>
-            {!isLoading && fetchedFeed.posts.length &&
+            {!fetchedFeed.isLoading && fetchedFeed.posts.length !== 0 &&
                 <div className={`main__grid ${styles.cards}`}>
                     {newsCards}
                 </div>

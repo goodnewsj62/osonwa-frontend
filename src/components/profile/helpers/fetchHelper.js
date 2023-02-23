@@ -11,7 +11,7 @@ import { baseAxiosInstance } from "utils/requests";
     been visted to aviod duplicate results
 */
 
-export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts, isSelected) => {
+export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts, validator) => {
     const authState = useSelector((states) => states.authState);
     const previousUrl = useRef();
 
@@ -32,14 +32,16 @@ export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts, isSelec
 
     return useCallback(() => {
         const nextUrl = myposts.others.next;
+        console.log(nextUrl)
         const hasNext = Object.keys(myposts.others).indexOf("next") !== -1;
         const isNewLink = previousUrl.current !== nextUrl;
-        if (hasNext && isNewLink && nextUrl && isSelected()) {
+        const isValid = validator ? validator() : true;
+        if (hasNext && isNewLink && nextUrl && isValid) {
             previousUrl.current = nextUrl;
             setIsLoadingNextPosts(true);
             fetchNextPage(nextUrl);
         }
-    }, [myposts.others, fetchNextPage, setIsLoadingNextPosts, isSelected]);
+    }, [myposts.others, fetchNextPage, setIsLoadingNextPosts, validator]);
 };
 
 

@@ -2,7 +2,7 @@
     width: 100%;
     display:grid;
     grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(4,40px);
+    grid-template-rows: repeat(4,1fr);
     position: relative;
     margin-top: 1rem;
     color: var(--mode-write-color);
@@ -44,6 +44,7 @@
         padding: 0;
         border-radius: 8px;
         transition: box-shadow 0.4s, border 0.1s;
+        margin: 0;
     }
 
     
@@ -52,7 +53,7 @@
     }
 
     .normal__card:hover{
-        border: 2px solid var(--base-color);
+        border: 1px solid var(--base-color);
         box-shadow: 0px 2px 8px 2px rgba(0,0,0,0.15);
     }
 }

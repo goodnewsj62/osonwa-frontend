@@ -40,16 +40,17 @@ const Liked = () => {
     useScrollState(fetchArticleNextPage);
 
 
-    const fetchPost = useCallback(genFetchPost, []);
+    // const fetchPost = useCallback(genFetchPost, []);
 
     useEffect(() => {
         const articlesURL = `/liked/${userInfo.id}/?type=article`;
         const newsURL = `/liked/${userInfo.id}/?type=news`;
         Promise.all([
-            fetchPost(articlesURL, setFetchedArticles, axios_),
-            fetchPost(newsURL, setFetchedNews, axios_)
+            genFetchPost(articlesURL, setFetchedArticles, axios_),
+            genFetchPost(newsURL, setFetchedNews, axios_)
         ]);
-    }, [fetchPost, userInfo.id, axios_]);
+    }, [userInfo.id, axios_]);
+
 
 
 
@@ -76,8 +77,7 @@ const Liked = () => {
     const articles = createPostsCardList(fetchedArticles.posts, messageHandler, setFetchedNews, setFetchedArticles);
     const searchedPosts = createPostsCardList(searchResultsPost.posts, messageHandler, setSearchResultsNews, setSearchResultsPost);
 
-
-    const news = createNewsCardList(fetchedNews.posts, setFetchedNews, setFetchedArticles);
+    const news = createNewsCardList(fetchedNews.posts, messageHandler, setFetchedNews, setFetchedArticles);
     const searchedNews = createNewsCardList(searchResultsNews.posts, messageHandler, setSearchResultsNews, setSearchResultsPost);
 
 
