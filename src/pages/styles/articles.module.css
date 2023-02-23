@@ -38,6 +38,12 @@
     }
 }
 
+.list__grid{
+    display: grid;
+    row-gap: 1rem;
+    padding: 1rem;
+}
+
 @media screen and (min-width:1200px) {
     .pad_sides_5{
         padding-left: 5rem !important;
