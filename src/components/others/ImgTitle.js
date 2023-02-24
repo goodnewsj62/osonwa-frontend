@@ -2,12 +2,12 @@ import { imageOrDefault, imgErrorHandler } from "utils/helpers";
 import styles from "./styles/imgTitle.module.css";
 
 
-const ImgTitle = ({ post }) => {
-
+const ImgTitle = ({ post, type }) => {
+    const img = ["article", "news"].indexOf(type) !== -1 ? post.image : post.cover_image;
 
     return (
         <div className={styles.img__div}>
-            <img src={imageOrDefault(post.cover_image)} onError={imgErrorHandler} alt="featured img" />
+            <img src={imageOrDefault(img)} onError={imgErrorHandler} alt="featured img" />
             <div className={styles.title__div}>
                 <h1>{post.title}</h1>
                 {

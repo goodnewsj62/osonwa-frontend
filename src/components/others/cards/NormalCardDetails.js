@@ -23,10 +23,10 @@ const NormalCardDetails = ({ iconSize, post }) => {
         return () => clearTimeout(timeout);
     }, [message.status]);
 
-    const detailUrl = `aggregate/${post.slug_title}/${post.id}/`;
+    const detailUrl = `/aggregate/news/${post.slug_title}/${post.id}/`;
     const toggleModal = (event) => setModalState((state) => !state);
     const copyUrl = (event) => {
-        window.navigator.clipboard.writeText(detailUrl);
+        window.navigator.clipboard.writeText(process.env.REACT_APP_DOMAIN + detailUrl);
         setMessage({ message: "link copied", status: true });
         setTimeout(() => setModalState(false), 0)
     };
@@ -37,12 +37,12 @@ const NormalCardDetails = ({ iconSize, post }) => {
             <div className={style.feed__details}>
                 <div className={style.site__from}>
                     <div className={style.pub__image}>
-                        <Link to={`source/news/${post.publisher}`} >
+                        <Link to={`/source/news/${post.publisher}`} >
                             <img src={imageOrDefault(post.pub_image)} onError={errorHandler} alt="site logo" />
                         </Link>
                     </div>
                     <h5>
-                        <Link to={`source/news/${post.publisher}`}>
+                        <Link to={`/source/news/${post.publisher}`}>
                             {post.publisher}
                         </Link>
                     </h5>

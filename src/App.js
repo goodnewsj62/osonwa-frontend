@@ -74,7 +74,7 @@ function App(props) {
                         {/* <Route element={<LoginRequired />}> */}
                         {/*  profile, create post */}
                         <Route path="/article/:slug/:id" element={<ArticleDetail />} />
-                        <Route path="/aggregate/:slug/:id" element={<FeedDetail />} />
+                        <Route path="/aggregate/:type/:slug/:id" element={<FeedDetail />} />
                         <Route path="/trending" element={<Trending />} />
                         <Route path="/fresh" element={<Fresh />} />
                         <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />

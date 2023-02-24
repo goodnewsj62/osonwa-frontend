@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { GoTriangleLeft } from "react-icons/go";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useRef, useContext, useMemo, useEffect, useCallback } from "react";
@@ -61,6 +60,7 @@ const ArticleDetail = (props) => {
 
     const asideClasses = barVisible ? `${styles.aside} ${styles.show__aside}` : `${styles.aside}`
     const quillInstance = new QuillDeltaToHtmlConverter(post.content ? post.content.ops : [])
+    const commentInfo = { count: post.comments, detailUrl: `/article/${post.slug_title}/${post.post_id}#comments` };
 
 
     return (
@@ -70,14 +70,12 @@ const ArticleDetail = (props) => {
                 <div ref={sectionElement} className={styles.wrapper__div}>
                     <section aria-label="main content" className={styles.main__content}>
                         <DetailHeader authState={authState} post={post} />
-                        <ImgTitle post={post} />
+                        <ImgTitle post={post} type={"post"} />
                         <div ref={contRef} id="content__writeUp" className={styles.write__up} dangerouslySetInnerHTML={{ __html: quillInstance.convert() }} >
                         </div>
                         <div id="comment" ref={contentRef} className={styles.article__extras}>
                             <div className={styles.interaction}>
-                                <Link to="">
-                                    <CommentComp commentInfo={{}} />
-                                </Link>
+                                <CommentComp commentInfo={commentInfo} />
                                 <div className={styles.like}>
                                     <Likes likeInfo={{ count: post.likes, type: "post", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />
                                 </div>
@@ -92,7 +90,7 @@ const ArticleDetail = (props) => {
 
                     <div ref={watchElement} className={styles.like__comment}>
                         <a href="#comment">
-                            <CommentComp commentInfo={{}} />
+                            <CommentComp commentInfo={commentInfo} />
                         </a>
                         <Likes likeInfo={{ count: post.likes, type: "post", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />
                     </div>

@@ -40,7 +40,7 @@ function Slide({ styles, item }) {
                     <div className={`info__area__wrapper`}>
                         <h1 ref={healineRef} id="headline">{item.title}</h1>
                         <span>
-                            <Link to={`aggregate/${item.slug_title}/${item.id}/`}>
+                            <Link to={`/aggregate/news/${item.slug_title}/${item.id}`}>
                                 detail
                             </Link>
                         </span>

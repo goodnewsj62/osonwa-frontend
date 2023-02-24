@@ -18,7 +18,7 @@ function NormalCardAction({ iconSize, post }) {
             </div>
             <ul>
                 <li>
-                    <CommentComp commentInfo={{}} />
+                    <CommentComp commentInfo={{ count: post.comments, detailUrl: `/aggregate/news/${post.slug_title}/${post.id}#comments` }} />
                 </li>
                 <li>
                     <Likes likeInfo={{ count: post.likes, type: "news", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />

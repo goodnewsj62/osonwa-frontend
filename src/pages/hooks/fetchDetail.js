@@ -15,7 +15,7 @@ const useFetchDetail = () => {
 
     useEffect(() => {
         const fetchPost_ = fetchPost
-        const url = `/blog/post/${slug}/${id}`
+        const url = `/blog/post/${slug}/${id}`;
 
         if (authState.state) {
             fetchPost_(axios_, url, setPost, setIsloading, setNotFound);

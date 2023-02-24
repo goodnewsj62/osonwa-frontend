@@ -34,7 +34,7 @@ const Comments = ({post, type}) => {
 
 
     return (
-        <div>
+        <div id="comments">
             <div className={styles.comment}>
                 <CommentForm id={post.id}  type={type} setComment={setComments} />
             </div>
