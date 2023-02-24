@@ -32,7 +32,6 @@ export const useFetchPage = (myposts, setMyposts, setIsLoadingNextPosts, validat
 
     return useCallback(() => {
         const nextUrl = myposts.others.next;
-        console.log(nextUrl)
         const hasNext = Object.keys(myposts.others).indexOf("next") !== -1;
         const isNewLink = previousUrl.current !== nextUrl;
         const isValid = validator ? validator() : true;

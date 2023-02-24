@@ -2,12 +2,15 @@ import ListCard from "components/others/cards/ListCard";
 import RenderListView from "components/others/RenderList";
 import useAuthAxios from "hooks/authAxios";
 import { useCallback } from "react";
+import { useSelector } from "react-redux";
 import { deletePost } from "./helpers/fetchHelper";
 
 
 
 export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
     const axios_ = useAuthAxios();
+    const profileInfo = useSelector((states) => states.profileState);
+
     const messageCallback = useCallback((action, id_) => {
         const actions = {
             delete: deletePost
@@ -29,10 +32,14 @@ export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
     }, [axios_, setPosts, posts]);
 
 
+
+
+
     const fetchedPosts = posts.map((item) => {
+        const showOptions = profileInfo.status && profileInfo.userInfo.id === item.author.id
         const info = {
             postID: item.id,
-            showOptions: true,
+            showOptions: showOptions,
             editUrl: `edit/${item.slug_title}/${item.post_id}`,
             messageCallback: messageCallback,
             detailUrl: `article/${item.slug_title}/${item.post_id}`,
@@ -48,6 +55,7 @@ export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
             starInfo: { starUrl: `/saved/${item.id}/`, type: "post", saved: item.is_saved },
             commentInfo: {},
             shareUrl: process.env.REACT_APP_DOMAIN + `/article/${item.slug_title}/${item.post_id}`,
+            type: "post"
         }
         return <ListCard info={info} key={item.id} />
     });

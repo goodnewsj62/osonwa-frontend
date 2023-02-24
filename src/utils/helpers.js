@@ -231,7 +231,9 @@ export const formatDateText = (isoString) => {
         durationText = num > 1 ? "hrs ago" : "hr ago";
         return joinWithSpace();
     } else {
-        return mintues + mintues > 1 ? "mins ago" : "min ago";
+        num = Math.floor(mintues);
+        durationText = num > 1 ? "mins ago" : "min ago";
+        return joinWithSpace();
     }
 };
 

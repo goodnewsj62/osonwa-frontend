@@ -3,6 +3,10 @@
     align-items: center;
 }
 
+.comment > a{
+    color: inherit;
+}
+
 /* .likes * , .comment *{
     margin-left: 0.5rem;
 } */

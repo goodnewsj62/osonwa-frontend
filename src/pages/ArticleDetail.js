@@ -86,7 +86,7 @@ const ArticleDetail = (props) => {
                                 <span className={styles.star}><StarComp starInfo={{ starUrl: `/saved/${post.id}/`, type: "post", saved: post.is_saved }} /></span>
 
                             </div>
-                            <Comments />
+                            <Comments post={post} type={"post"} />
                         </div>
                     </section>
 

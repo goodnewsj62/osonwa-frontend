@@ -143,31 +143,31 @@ const ProfileForm = ({ closeHandler, setMessage }) => {
                         fieldVal={userInputs.twitter_url}
                         label={"twitter_url"}
                         type={"twitter_url"}
-                        validator={urlFieldValidator}
+                        validator={urlFieldValidator("twitter")}
                     />
                     <NamedField dispatch={dispatch}
                         fieldVal={userInputs.facebook_url}
                         label={"facebook_url"}
                         type={"facebook_url"}
-                        validator={urlFieldValidator}
+                        validator={urlFieldValidator("facebook")}
                     />
                     <NamedField dispatch={dispatch}
                         fieldVal={userInputs.git_url}
-                        label={"git_url"}
+                        label={"github_url"}
                         type={"git_url"}
-                        validator={urlFieldValidator}
+                        validator={urlFieldValidator("github")}
                     />
                     <NamedField dispatch={dispatch}
                         fieldVal={userInputs.gmail_url}
                         label={"gmail_url"}
                         type={"gmail_url"}
-                        validator={urlFieldValidator}
+                        validator={urlFieldValidator("", true)}
                     />
                     <NamedField dispatch={dispatch}
                         fieldVal={userInputs.linkedin_url}
                         label={"linkedin_url"}
                         type={"linkedin_url"}
-                        validator={urlFieldValidator}
+                        validator={urlFieldValidator("linkedin")}
                     />
 
                     <button type="submit">

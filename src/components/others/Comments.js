@@ -1,24 +1,52 @@
 import CommentCard from "./cards/CommentCard";
 
 import styles from "./styles/comments.module.css";
-import image from "static/images/test_img.jpg";
+import CommentForm from "./forms/CommentForm";
+import { useEffect, useState } from "react";
+import { genFetchPost } from "utils/helpers";
+import { useFetchPage } from "components/profile/helpers/fetchHelper";
+import SpreadLoader from "./loaders/SpreadLoader";
+import useScrollState from "pages/hooks/scrollState";
+import useAuthAxios from "hooks/authAxios";
 
 
 
 
-const Comments = (props) => {
-    const comments = [1, 2, 3, 4].map((item) => {
-        const params = {
-            text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, aperiam quia accusantium dignissimos molestiae magni reiciendis illum error debitis aliquam aspernatur modi omnis ad. Esse.",
-            imageSrc: image,
-            username: "someones username",
-            date: "06 oct 2022"
-        };
-        return <CommentCard params={params} />;
+const Comments = ({post, type}) => {
+    const [comments, setComments] =  useState({ isLoading: true, others: {}, posts: [] });
+    const [isLoading, setIsLoading] = useState(true);
+    const axios_ = useAuthAxios();
+
+
+    const fetchPage = useFetchPage(comments, setComments, setIsLoading);
+    useScrollState(fetchPage);
+
+    useEffect(()=>{
+        const url  = `/comment/?type=${type}&id=${post.id}`;
+        genFetchPost(url,setComments,axios_,()=>setIsLoading(false));
+    }, [post, type, axios_]);
+
+
+
+    const commentsCard = comments.posts.map((item) => {
+        return <CommentCard comment={item} key={item.id} />;
     });
+
+
     return (
-        <div className={styles.comment__lists}>
-            {comments}
+        <div>
+            <div className={styles.comment}>
+                <CommentForm id={post.id}  type={type} setComment={setComments} />
+            </div>
+            {
+                !comments.isLoading && comments.posts.length > 0 &&
+                <div className={styles.comment__lists}>
+                    {commentsCard}
+                </div>
+            }
+            {
+                isLoading && <span className="loader"><SpreadLoader /></span>
+            }
         </div>
     );
 };
