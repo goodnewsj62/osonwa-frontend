@@ -12,8 +12,8 @@ import useAuthAxios from "hooks/authAxios";
 
 
 
-const Comments = ({post, type}) => {
-    const [comments, setComments] =  useState({ isLoading: true, others: {}, posts: [] });
+const Comments = ({ post, type }) => {
+    const [comments, setComments] = useState({ isLoading: true, others: {}, posts: [] });
     const [isLoading, setIsLoading] = useState(true);
     const axios_ = useAuthAxios();
 
@@ -21,22 +21,22 @@ const Comments = ({post, type}) => {
     const fetchPage = useFetchPage(comments, setComments, setIsLoading);
     useScrollState(fetchPage);
 
-    useEffect(()=>{
-        const url  = `/comment/?type=${type}&id=${post.id}`;
-        genFetchPost(url,setComments,axios_,()=>setIsLoading(false));
+    useEffect(() => {
+        const url = `/comment/?type=${type}&id=${post.id}`;
+        genFetchPost(url, setComments, axios_, () => setIsLoading(false));
     }, [post, type, axios_]);
 
 
 
     const commentsCard = comments.posts.map((item) => {
-        return <CommentCard comment={item} key={item.id} />;
+        return <CommentCard comment={item} key={item.id} setComments={setComments} />;
     });
 
 
     return (
         <div id="comments">
             <div className={styles.comment}>
-                <CommentForm id={post.id}  type={type} setComment={setComments} />
+                <CommentForm id={post.id} type={type} setComment={setComments} />
             </div>
             {
                 !comments.isLoading && comments.posts.length > 0 &&

@@ -26,6 +26,9 @@
     /* border-bottom: 1px solid var(--border-line); */
 }
 
+.main__block{
+    flex-grow: 1;
+}
 .container p{
     padding-top: 0.5rem ;
 
