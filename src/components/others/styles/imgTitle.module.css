@@ -21,7 +21,11 @@
 }
 .title__div h1{
     line-height: 1.28;
-    font-size: 2rem;
+}
+@media screen and (min-width: 760px) {
+    .title__div h1{
+        font-size: 2rem;
+    }
 }
 @media screen and (min-width: 1000px) {
     .img__div img{

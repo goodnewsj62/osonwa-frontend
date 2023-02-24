@@ -3,8 +3,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { RiShareForwardFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-import myimage from "static/images/test_image.png";
-import { imageOrDefault, trimCharsTo } from "utils/helpers";
+import { imageOrDefault, imgErrorHandler, trimCharsTo } from "utils/helpers";
 import StarComp from "../StarComp";
 import MessagePopup from "./MessagePopupCard";
 import style from "./styles/NormalCardDetails.module.css";
@@ -13,9 +12,6 @@ import style from "./styles/NormalCardDetails.module.css";
 const NormalCardDetails = ({ iconSize, post }) => {
     const [modalState, setModalState] = useState(false);
     const [message, setMessage] = useState({ status: false, message: "" });
-    const errorHandler = (event) => {
-        return event.target.src = myimage;
-    }
 
 
     useEffect(() => {
@@ -38,7 +34,7 @@ const NormalCardDetails = ({ iconSize, post }) => {
                 <div className={style.site__from}>
                     <div className={style.pub__image}>
                         <Link to={`/source/news/${post.publisher}`} >
-                            <img src={imageOrDefault(post.pub_image)} onError={errorHandler} alt="site logo" />
+                            <img src={imageOrDefault(post.pub_image)} onError={imgErrorHandler} alt="site logo" />
                         </Link>
                     </div>
                     <h5>

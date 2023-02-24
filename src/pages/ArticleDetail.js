@@ -94,9 +94,11 @@ const ArticleDetail = (props) => {
                         </a>
                         <Likes likeInfo={{ count: post.likes, type: "post", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />
                     </div>
-                    <div onClick={toggleAside} className={styles.aside__toggle}>
-                        {post.bundle && <GoTriangleLeft size={23} />}
-                    </div>
+                    {post.bundle &&
+                        <div onClick={toggleAside} className={styles.aside__toggle}>
+                            <GoTriangleLeft size={23} />
+                        </div>
+                    }
                     <aside className={asideClasses}>
                         <span onClick={toggleAside}>
                             <AiOutlineClose size={iconSize} />

@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import TagDiv from "../TagDiv";
 import ListCardAction from "../Actions";
 import styles from "./styles/listcard.module.css";
-import image from "static/images/test_img.jpg";
 import { memo } from "react";
 import OwnerOptions from "../OwnerOptions";
-import { formatDate, imageOrDefault, trimCharsTo } from "utils/helpers";
+import { formatDate, imageOrDefault, imgErrorHandler, trimCharsTo } from "utils/helpers";
 
 
 const ListCard = ({ info }) => {
@@ -30,16 +29,13 @@ const ListCard = ({ info }) => {
     } = info;
 
 
-    const defaultImage = (event) => {
-        event.target.src = image;
-    };
 
 
     return (
         <div className={styles.card__container}>
             <section className={styles.header}>
                 <Link to={`/${publisherUrl}`}>
-                    <img src={imageOrDefault(dpSrc)} onError={defaultImage} alt="publisher" />
+                    <img src={imageOrDefault(dpSrc)} onError={imgErrorHandler} alt="publisher" />
                     <p>{publisher}</p>
                     <p><span>.</span>{formatDate(date)}</p>
                 </Link>
@@ -54,7 +50,7 @@ const ListCard = ({ info }) => {
                 </Link>
             </section>
             <aside className={styles.featured__image}>
-                <img src={imageOrDefault(imgSrc)} onError={defaultImage} alt="featured" />
+                <img src={imageOrDefault(imgSrc)} onError={imgErrorHandler} alt="featured" />
             </aside>
             <section className={styles.footer}>
                 <TagDiv tagsInfo={tagsInfo} />

@@ -1,7 +1,6 @@
 import style from "./styles/slide.module.css";
-import image from "static/images/test_img.jpg";
 import { useEffect, useMemo, useRef } from "react";
-import { imageOrDefault } from "utils/helpers";
+import { imageOrDefault, imgErrorHandler } from "utils/helpers";
 import { Link } from "react-router-dom";
 
 function Slide({ styles, item }) {
@@ -26,14 +25,11 @@ function Slide({ styles, item }) {
         textArea.observe(healineRef.current);
     }, [textAreaOptions]);
 
-    const errorHandler = (event) => {
-        event.target.src = image;
-    }
 
     return (
         <div style={styles} className={style.slide__container}>
             <div className={style.img__wrapper}>
-                <img src={imageOrDefault(item.image)} onError={errorHandler} alt="caruosel" />
+                <img src={imageOrDefault(item.image)} onError={imgErrorHandler} alt="caruosel" />
             </div>
             <div className={style.text__div}>
                 <div className={`${style.info__area}`} ref={textAreaRef}>

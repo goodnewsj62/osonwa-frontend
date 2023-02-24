@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { formatDate, imageOrDefault } from "utils/helpers";
+import { formatDate, imageOrDefault, imgErrorHandler } from "utils/helpers";
 import CommentComp from "../CommentComp";
 import Likes from "../Likes";
-import image from "static/images/test_img.jpg";
 
 import styles from "./styles/comment.module.css";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
@@ -12,9 +11,6 @@ const CommentCard = ({ comment }) => {
 
 
     const profileUrl = `/${comment.created_by.username}`;
-    const handleError = (event) => {
-        event.target.src = image;
-    }
 
     const quillInstance = new QuillDeltaToHtmlConverter(comment.content ? comment.content.ops : [])
 
@@ -24,7 +20,7 @@ const CommentCard = ({ comment }) => {
                 <div className={styles.img__block}>
                     <Link to={profileUrl}>
                         <img src={imageOrDefault(comment.created_by.profile.image)}
-                            onError={handleError}
+                            onError={imgErrorHandler}
                             alt="profile" />
                     </Link>
                 </div>
