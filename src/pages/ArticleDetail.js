@@ -89,9 +89,7 @@ const ArticleDetail = (props) => {
                     </section>
 
                     <div ref={watchElement} className={styles.like__comment}>
-                        <a href="#comment">
-                            <CommentComp commentInfo={commentInfo} />
-                        </a>
+                        <CommentComp commentInfo={commentInfo} />
                         <Likes likeInfo={{ count: post.likes, type: "post", likeUrl: `/liked/${post.id}/`, is_liked: post.is_liked }} />
                     </div>
                     {post.bundle &&

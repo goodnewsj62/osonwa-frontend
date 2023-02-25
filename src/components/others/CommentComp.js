@@ -4,16 +4,22 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import styles from "./styles/actioncomp.module.css";
 
-const CommentComp = ({ commentInfo: { count, detailUrl } }) => {
+const CommentComp = ({ commentInfo: { count, detailUrl }, clickHandler }) => {
     const IconSize = useContext(DefaultIconSize);
 
     return (
         <div className={styles.comment}>
-            <Link to={detailUrl}>
-                <div className={styles.icon}>
+            {detailUrl ?
+                <Link to={detailUrl}>
+                    <div className={styles.icon}>
+                        <BiMessageSquareDetail size={IconSize} />
+                    </div>
+                </Link>
+                :
+                <div onClick={clickHandler} className={styles.icon}>
                     <BiMessageSquareDetail size={IconSize} />
                 </div>
-            </Link>
+            }
             <div className={`${styles.count} cnt`}>
                 {count}
             </div>

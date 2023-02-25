@@ -2,7 +2,7 @@ import CommentCard from "./cards/CommentCard";
 
 import styles from "./styles/comments.module.css";
 import CommentForm from "./forms/CommentForm";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { genFetchPost } from "utils/helpers";
 import { useFetchPage } from "components/profile/helpers/fetchHelper";
 import SpreadLoader from "./loaders/SpreadLoader";
@@ -12,7 +12,7 @@ import useAuthAxios from "hooks/authAxios";
 
 
 
-const Comments = ({ post, type }) => {
+const Comments = ({ post, type, showForm = true, setExtra = {} }) => {
     const [comments, setComments] = useState({ isLoading: true, others: {}, posts: [] });
     const [isLoading, setIsLoading] = useState(true);
     const axios_ = useAuthAxios();
@@ -27,6 +27,13 @@ const Comments = ({ post, type }) => {
     }, [post, type, axios_]);
 
 
+    useEffect(() => {
+        if (Object.keys(setExtra).length > 0) {
+            setComments((state) => ({ ...state, posts: [setExtra, ...state.posts] }));
+        }
+    }, [setExtra])
+
+
 
     const commentsCard = comments.posts.map((item) => {
         return <CommentCard comment={item} key={item.id} setComments={setComments} />;
@@ -35,9 +42,11 @@ const Comments = ({ post, type }) => {
 
     return (
         <div id="comments">
-            <div className={styles.comment}>
-                <CommentForm id={post.id} type={type} setComment={setComments} />
-            </div>
+            {showForm &&
+                <div className={styles.comment}>
+                    <CommentForm id={post.id} type={type} setComment={setComments} />
+                </div>
+            }
             {
                 !comments.isLoading && comments.posts.length > 0 &&
                 <div className={styles.comment__lists}>
@@ -52,6 +61,6 @@ const Comments = ({ post, type }) => {
 };
 
 
-export default Comments;
+export default memo(Comments);
 
 

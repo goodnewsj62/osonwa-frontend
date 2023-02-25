@@ -10,8 +10,8 @@ import styles from "./styles/comments.module.css";
 
 
 
-const CommentForm = ({ id, type, setComment }) => {
-    const [content, setContent] = useState({ text_content: "", content: { delta: {}, html: "" } });
+const CommentForm = ({ id, type, setComment, createHandler, delta = {} }) => {
+    const [content, setContent] = useState({ text_content: "", content: { delta: { ...delta }, html: "" } });
     const [errors, setError] = useState({ error: "", isValid: true });
     const [message, setMessage] = useState({ message: "", status: false, category: "" });
     const [authPopup, setauthPopUp] = useState(false);
@@ -70,13 +70,23 @@ const CommentForm = ({ id, type, setComment }) => {
         setError({ error: error, isValid: isValid });
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (!profileState.userInfo.id) {
             setauthPopUp(true);
             return;
         }
 
+        if (createHandler) {
+            createHandler(content);
+        } else {
+            uploadComment();
+        }
+    };
+
+    // const handleUserNameMentioned
+
+    async function uploadComment() {
         try {
             const data = {
                 "type": type,
@@ -92,7 +102,7 @@ const CommentForm = ({ id, type, setComment }) => {
             setMessage({ message: "oops and error occurred", status: true, category: "failure" });
             return err;
         }
-    };
+    }
 
 
     return (

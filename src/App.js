@@ -28,6 +28,7 @@ import ChangePassword from "pages/PasswordChange";
 import CreateArticle from "pages/CreateArticle";
 import EditPost from "pages/EditPost";
 import Fresh from "pages/Fresh";
+import CommentDetail from "pages/CommentDetail";
 
 
 function App(props) {
@@ -80,6 +81,7 @@ function App(props) {
                         <Route path="/saved" element={<LoginRequired ><Saved /></LoginRequired>} />
                         <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
                         <Route path="/:username" element={<Profile />} />
+                        <Route path="/comment/:id" element={<CommentDetail />} />
                         <Route path="/email/request" element={<EmailSent />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/change-password/:token" element={<ChangePassword />} />
