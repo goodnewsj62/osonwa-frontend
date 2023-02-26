@@ -64,7 +64,7 @@ const ProfileHeader = ({ profileInfo, interests, isMyAccount }) => {
                 <button className={styles.add__tag} onClick={() => setShowTags(true)} type="button">
                     <BsPlusCircleFill size={iconSize + 6} />
                 </button>
-                <TagSlide tagArray={interests} />
+                <TagSlide lnk="" tagArray={interests} />
             </div>
             {showProfileEdit && <ProfileEditPopup setShowState={setShowProfileEdit} setMessage={setMessage} />}
             {message.state && <MessagePopupModal message={message.message} category={message.type} />}

@@ -19,6 +19,8 @@ function Feed(props) {
     const authCardInitialState = location.state && "loginPopStatus" in location.state && location.state.loginPopStatus ? true : false; // incase undefined
     const [authCardState, setAuthCardState] = useState(authCardInitialState);
     const [message, setMessage] = useState({ status: false, message: "" });
+    const [tagArray, setTagArray] = useState([]);
+    const axios_ = useAuthAxios();
 
     const currentPath = useCurrentUrlPath();
 
@@ -35,8 +37,17 @@ function Feed(props) {
         }, 5000)
 
         return () => messageTimeOut;
-
     }, [location.state]);
+
+
+    useEffect(() => {
+        axios_.get("/news/tags/").then((resp) => {
+            setTagArray(
+                resp.data.data.map((item) => item.tag_name)
+            );
+        });
+    }, [axios_]);
+
 
 
     const hideAuthPopup = () => setAuthCardState((state) => !state);
@@ -48,8 +59,9 @@ function Feed(props) {
             </section>
             <section aria-label="tags" className={`${styles.main__tags}`}>
                 <TagSlide
-                    tagArray={["python", "javascript", "backend", "frontend", "machine learning", "data science", "alorithm and data structure", "3d printing", "UI/UX", "Gaming", "Blockchain"]}
+                    tagArray={tagArray}
                     small={true}
+                    lnk="/tag/news/"
                 />
             </section>
             <MainCards />

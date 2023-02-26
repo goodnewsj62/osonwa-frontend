@@ -8,7 +8,7 @@ import styles from "./styles/tags.module.css";
 import { useState } from "react";
 
 
-const TagSlide = ({ tagArray, small = false }) => {
+const TagSlide = ({ tagArray, lnk = "/", small = false }) => {
     const iconSize = useContext(DefaultIconSize);
     const [posX, setPosX] = useState(0);
     const [buttonState, setButtonState] = useState({ left: false, right: true });
@@ -17,7 +17,9 @@ const TagSlide = ({ tagArray, small = false }) => {
 
     const tagClass = small ? `${styles.tag} ${styles.small}` : `${styles.tag}`;
     const tags = tagArray.map((item) => {
-        return <div key={item} className={tagClass}><Link to="/" >{item}</Link></div>
+        return <div key={item} className={tagClass}>
+            {lnk ? <Link to={lnk + item} >{item}</Link> : <div >{item}</div>}
+        </div>
     });
 
 
