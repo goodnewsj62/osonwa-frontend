@@ -7,9 +7,10 @@ import { deletePost } from "./helpers/fetchHelper";
 
 
 
-export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
+export default function Posts({ posts, setPosts, isLoading, isFetchingNext, usernameOnURL }) {
     const axios_ = useAuthAxios();
     const profileInfo = useSelector((states) => states.profileState);
+    const isUser = profileInfo.status && profileInfo.userInfo.username === usernameOnURL;
 
     const messageCallback = useCallback((action, id_) => {
         const actions = {
@@ -29,6 +30,7 @@ export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
                 }
             ));
         };
+        return _;
     }, [axios_, setPosts, posts]);
 
 
@@ -61,5 +63,6 @@ export default function Posts({ posts, setPosts, isLoading, isFetchingNext }) {
     });
 
 
-    return <RenderListView posts={fetchedPosts} isLoading={isLoading} isFetchingNext={isFetchingNext} message={"You've not posted any articles yet."} classes={"_"} />;
+    return <RenderListView posts={fetchedPosts} isLoading={isLoading} isFetchingNext={isFetchingNext}
+        message={isUser ? "You've not posted any articles yet." : "user has no articles published yet"} classes={"_"} />;
 };

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import MyComments from "./MyComments";
 import Posts from "./Posts";
 import extstyles from "./styles/profile.module.css";
@@ -7,6 +7,8 @@ import { baseAxiosInstance } from "utils/requests";
 import { useSelector } from "react-redux";
 import useScrollState from "pages/hooks/scrollState";
 import { useFetchPage } from "./helpers/fetchHelper";
+import { genFetchPost } from "utils/helpers";
+import useAuthAxios from "hooks/authAxios";
 
 
 const ProfileBody = ({ state, username }) => {
@@ -15,10 +17,16 @@ const ProfileBody = ({ state, username }) => {
     const [isLoadingNextPosts, setIsLoadingNextPosts] = useState(false);
     const [isLoadingNextComments, setIsLoadingNextComments] = useState(false);
     const authState = useSelector((states) => states.authState);
+    const axios_ = useAuthAxios();
+
 
     const postIsSelected = useCallback(() => state === "posts", [state]);
     const fetchPage = useFetchPage(myposts, setMyposts, setIsLoadingNextPosts, postIsSelected);
     useScrollState(fetchPage);
+
+    const commetSelected = useCallback(() => state === "comments", [state]);
+    const fetchCommPage = useFetchPage(mycomments, setMycomments, setIsLoadingNextComments, commetSelected);
+    useScrollState(fetchCommPage);
 
 
     const fetchposts = useCallback(async (headers) => {
@@ -33,10 +41,16 @@ const ProfileBody = ({ state, username }) => {
 
 
     useEffect(() => {
+        const fetchComm = genFetchPost;
         let headers = { "Content-Type": "application/json" }
         headers = authState.state ? { ...headers, "Authorization": "Bearer " + authState.access } : headers;
-        fetchposts(headers);
-    }, [fetchposts, authState.state, authState.access]);
+
+        Promise.all([
+            fetchposts(headers),
+            fetchComm(`/comment/ucomments/?username=${username}`, setMycomments, axios_)
+        ]);
+
+    }, [fetchposts, authState.state, username, authState.access, axios_]);
 
 
     return (
@@ -46,9 +60,16 @@ const ProfileBody = ({ state, username }) => {
                     setPosts={setMyposts}
                     isLoading={myposts.isLoading}
                     isFetchingNext={isLoadingNextPosts}
+                    usernameOnURL={username}
                 />
             }
-            {state === "comments" && <MyComments />}
+            {state === "comments" && <MyComments
+                posts={mycomments.posts}
+                setPosts={setMycomments}
+                isLoading={MyComments.isLoading}
+                isFetchingNext={isLoadingNextComments}
+                usernameOnURL={username}
+            />}
         </section>
     );
 };

@@ -1,25 +1,22 @@
 import CommentCard from "components/others/cards/CommentCard";
-import EmptyContentMessage from "./Message";
-import image from "static/images/test_img.jpg";
+import RenderListView from "components/others/RenderList";
+import { useSelector } from "react-redux";
 
 
-export default function MyComments() {
-    const fetchedComments = [].map((item) => {
-        const params = {
-            text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, aperiam quia accusantium dignissimos molestiae magni reiciendis illum error debitis aliquam aspernatur modi omnis ad. Esse.",
-            imageSrc: image,
-            username: "someones username",
-            date: "06 oct 2022"
-        };
-        return <CommentCard params={params} />
+export default function MyComments({ posts, setPosts, isLoading, isFetchingNext, usernameOnURL }) {
+    const profileInfo = useSelector((states) => states.profileState);
+
+    const isUser = profileInfo.status && profileInfo.userInfo.username === usernameOnURL;
+
+
+
+
+    const fetchedComments = posts.map((item) => {
+        return <CommentCard comment={item} key={item.id} setComments={setPosts} />;
     });
 
-    const displayBool = fetchedComments.length !== 0;
 
-    return (
-        <>
-            {displayBool && <section className={``}>{fetchedComments}</section>}
-            {!displayBool && <EmptyContentMessage message={"You've not posted any articles yet."} />}
-        </>
-    );
+    return <RenderListView posts={fetchedComments} isLoading={isLoading} isFetchingNext={isFetchingNext}
+        message={isUser ? "You've no comments yet." : "user has no comments"} classes={"_"}
+    />;
 };
