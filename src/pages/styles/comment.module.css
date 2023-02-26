@@ -3,11 +3,19 @@
     display: flex;
     align-items: center;
     flex-flow: column;
-    padding: 1rem 0;
+    padding: 1rem 1rem;
     height: auto;
     max-height: calc(100vh - calc(210px + var(--header-height)));
     overflow-y:auto;
     position: relative;
+}
+
+.container > section{
+    width: 100%;
+}
+.wrapper{
+    width: 100%;
+    flex-basis: 100%;
 }
 
 
@@ -21,19 +29,25 @@
 
 .comment__form{
     width: 100% !important;
-    position: fixed;
     background-color: var(--current-mode);
-    bottom: 0;
     display: flex;
     justify-content: center;
 }
 
 .comment__form > form{
-    width: 67%;
+    width: 100%;
+    flex-grow: 1;
 }
 
 @media screen and (min-width:760px ) {
+    .container{
+        padding: 1rem 0;
+    }
     .container > section{
         width: 70%;
+    }
+    .comment__form > form{
+        width: 67%;
+        flex-grow: 0;
     }
 }

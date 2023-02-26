@@ -130,25 +130,22 @@ const CommentDetail = ()=>{
                 !isLoading && !notFound &&
                 <mention.Provider value={setReplyTo}>
                     <div className={styles.container}>
-                        <div className={styles.wrapper}>
-                            <section className={styles.main__comment}>
-                                <div className={styles.see_post}>
-                                    <Link to={postUrl()}>
-                                        see post
-                                    </Link>
-                                </div>
-                                <CommentCard comment={post} />
-                            </section>
+                        <section className={styles.main__comment}>
+                            <div className={styles.see_post}>
+                                <Link to={postUrl()}>
+                                    see post
+                                </Link>
+                            </div>
+                            <CommentCard comment={post} />
+                        </section>
 
-                            
-                            <section className={styles.comments}>
-                                    <Comments post={post} type={"comment"} showForm={false} setExtra={newComment}/>
-                            </section>
-                        </div>
-                        <section className={styles.comment__form}>
-                            <CommentForm createHandler={commentCreationHandler} delta={delta} />
+                        <section className={styles.comments}>
+                                <Comments post={post} type={"comment"} showForm={false} setExtra={newComment}/>                        
                         </section>
                     </div>
+                    <section className={styles.comment__form}>
+                            <CommentForm createHandler={commentCreationHandler} delta={delta} />
+                    </section>
                 </mention.Provider>
             }
             {notFound && <ErrorPage image={img404} message={"Page not found"} statusCode={404} />}
