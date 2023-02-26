@@ -1,6 +1,8 @@
 import { saveAuthToken } from "store/authSlice";
 import { baseAxiosInstance } from "./requests";
 import image from "static/images/test_img.jpg";
+import { fetchProfileInfo } from "store/profileSlice";
+import { fetchAllInterest } from "store/interestsSlice";
 
 
 function parseJwt(token = "") {
@@ -97,6 +99,8 @@ function deBounce(callback, timeout = 500) {
 
 function authenticateUserAndRedirect(data, dispatch, navigate, locationInfo) {
     dispatch(saveAuthToken(data));
+    dispatch(fetchProfileInfo({ accessToken: data.access }));
+    dispatch(fetchAllInterest());
     if (locationInfo && "next" in locationInfo) {
         navigate(`/${locationInfo.next}`);
     } else {

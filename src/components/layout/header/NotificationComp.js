@@ -1,6 +1,7 @@
 
 import AuthPopupModal from "components/others/AuthPopupModal";
 import NotificationBoard from "components/others/modal/Notification";
+import useCurrentUrlPath from "hooks/currentUrlPath";
 import { useState } from "react";
 import { FiBell } from "react-icons/fi";
 import { useSelector } from "react-redux";
@@ -14,6 +15,8 @@ export default function NotificationComp({ iconSize }) {
     const authState = useSelector((state) => state.authState.state);
 
     const modalRef = useHideOnClickedOutside(() => setIsOpen(false));
+    const currentPath = useCurrentUrlPath();
+
 
     //handle --> if the user is not authenticated
     const onClickHandler = () => {
@@ -34,7 +37,7 @@ export default function NotificationComp({ iconSize }) {
             <span> 10+</span>
             <i><FiBell size={iconSize} /></i>
             {isOpen && <NotificationBoard />}
-            {loginModal && <AuthPopupModal hideHandler={closeLoginPopup} />}
+            {loginModal && <AuthPopupModal hideHandler={closeLoginPopup} next={currentPath} />}
         </div>
     );
 };

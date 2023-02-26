@@ -130,3 +130,7 @@ body{
     display: grid;
     place-items: center;
 }
+
+.mention__anchor{
+    color: #1e90ff !important;
+}

@@ -1,5 +1,6 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
+import useCurrentUrlPath from "hooks/currentUrlPath";
 import { useContext, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -14,6 +15,9 @@ const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
     const authState = useSelector((states) => states.authState.state);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
+
+    const currentPath = useCurrentUrlPath();
+
 
     const rejectHandler = (value) => {
         /* saveLogic has made saved status change for speed reasons
@@ -57,7 +61,7 @@ const StarComp = ({ starInfo: { starUrl, type, saved }, message, postID }) => {
                     {isSaved && <AiFillStar fill="#faca2d" size={iconSize} />}
                 </div>
             </div>
-            {popUp && <AuthPopupModal hideHandler={() => setPopUp(false)} />}
+            {popUp && <AuthPopupModal hideHandler={() => setPopUp(false)} next={currentPath} />}
         </>
     );
 };

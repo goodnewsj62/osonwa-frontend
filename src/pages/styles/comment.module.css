@@ -1,0 +1,39 @@
+.container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    padding: 1rem 0;
+    height: auto;
+    max-height: calc(100vh - calc(210px + var(--header-height)));
+    overflow-y:auto;
+    position: relative;
+}
+
+
+
+.see_post{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+.comment__form{
+    width: 100% !important;
+    position: fixed;
+    background-color: var(--current-mode);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.comment__form > form{
+    width: 67%;
+}
+
+@media screen and (min-width:760px ) {
+    .container > section{
+        width: 70%;
+    }
+}

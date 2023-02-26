@@ -1,5 +1,8 @@
 import useAuthAxios from "hooks/authAxios";
-import { useEffect } from "react";
+import useCurrentUrlPath from "hooks/currentUrlPath";
+import useMessage from "hooks/messageHook";
+import { mention } from "pages/CommentDetail";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { HiPaperAirplane } from "react-icons/hi";
 import ReactQuill from "react-quill";
@@ -11,19 +14,29 @@ import styles from "./styles/comments.module.css";
 
 
 const CommentForm = ({ id, type, setComment, createHandler, delta = {} }) => {
-    const [content, setContent] = useState({ text_content: "", content: { delta: { ...delta }, html: "" } });
+    const [content, setContent] = useState({ text_content: "", content: { delta: { ops: [], ...delta }, html: "" } });
     const [errors, setError] = useState({ error: "", isValid: true });
-    const [message, setMessage] = useState({ message: "", status: false, category: "" });
     const [authPopup, setauthPopUp] = useState(false);
-    const profileState = useSelector((states) => states.profileState);
-    const axios_ = useAuthAxios();
+    const [message, setMessage] = useMessage();
 
+
+    const profileState = useSelector((states) => states.profileState);
+
+    const axios_ = useAuthAxios();
+    const setReplyTo = useContext(mention);
+    const currentPath = useCurrentUrlPath();
 
     useEffect(() => {
-        const timeout = setTimeout(() => setMessage({ message: "", status: false }), 3000);
+        if (delta && delta.ops) {
+            setContent((state) => {
+                return {
+                    ...state, content: { ...state.content, delta: { ops: [...delta.ops, ...state.content.delta.ops] } }
+                }
+            });
 
-        return () => clearTimeout(timeout);
-    }, [message.status]);
+            setReplyTo("");
+        }
+    }, [delta, setReplyTo]);
 
     const modules = {
         toolbar: {
@@ -70,7 +83,7 @@ const CommentForm = ({ id, type, setComment, createHandler, delta = {} }) => {
         setError({ error: error, isValid: isValid });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (!profileState.userInfo.id) {
             setauthPopUp(true);
@@ -78,10 +91,11 @@ const CommentForm = ({ id, type, setComment, createHandler, delta = {} }) => {
         }
 
         if (createHandler) {
-            createHandler(content);
+            await createHandler(content);
         } else {
             uploadComment();
         }
+        setContent({ text_content: "", content: { delta: { ops: [], ...delta }, html: "" } });
     };
 
     // const handleUserNameMentioned
@@ -137,7 +151,7 @@ const CommentForm = ({ id, type, setComment, createHandler, delta = {} }) => {
                     </button>
                 </div>
             </form>
-            {authPopup && <AuthPopupModal hideHandler={() => setauthPopUp(false)} />}
+            {authPopup && <AuthPopupModal hideHandler={() => setauthPopUp(false)} next={currentPath} />}
             {message.status && <MessagePopup message={message.message} category={message.category} />}
         </>
     )

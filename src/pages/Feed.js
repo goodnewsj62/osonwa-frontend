@@ -5,6 +5,7 @@ import Main from "components/others/MainWrapper";
 import MessagePopupModal from "components/others/MessagePopupModal";
 import { useFetchPage } from "components/profile/helpers/fetchHelper";
 import useAuthAxios from "hooks/authAxios";
+import useCurrentUrlPath from "hooks/currentUrlPath";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -18,6 +19,9 @@ function Feed(props) {
     const authCardInitialState = location.state && "loginPopStatus" in location.state && location.state.loginPopStatus ? true : false; // incase undefined
     const [authCardState, setAuthCardState] = useState(authCardInitialState);
     const [message, setMessage] = useState({ status: false, message: "" });
+
+    const currentPath = useCurrentUrlPath();
+
 
 
     useEffect(() => {
@@ -49,7 +53,7 @@ function Feed(props) {
                 />
             </section>
             <MainCards />
-            {authCardState && <AuthPopupModal hideHandler={hideAuthPopup} />}
+            {authCardState && <AuthPopupModal hideHandler={hideAuthPopup} next={currentPath} />}
             {message.status && <MessagePopupModal message={message.message} />}
         </Main>
     );

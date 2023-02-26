@@ -1,5 +1,6 @@
 import { DefaultIconSize } from "components/wrappers/IconSize";
 import useAuthAxios from "hooks/authAxios";
+import useCurrentUrlPath from "hooks/currentUrlPath";
 import { memo, useContext, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -17,6 +18,9 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message, postID }
     const [popUp, setPopUp] = useState(false);
     const iconSize = useContext(DefaultIconSize);
     const axios_ = useAuthAxios();
+
+    const currentPath = useCurrentUrlPath();
+
 
     function rejectHandler(value) {
         /* setLikeStatusAndCount has made like status change for speed reasons
@@ -72,7 +76,7 @@ const Likes = ({ likeInfo: { count, type, likeUrl, is_liked }, message, postID }
                     {formatCount(likeCount)}
                 </div>
             </div>
-            {popUp && <AuthPopupModal hideHandler={() => setPopUp(false)} />}
+            {popUp && <AuthPopupModal hideHandler={() => setPopUp(false)} next={currentPath} />}
         </>
     );
 };

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import useMessage from "hooks/messageHook";
 import useAuthAxios from "hooks/authAxios";
 import MessagePopup from "./MessagePopupCard";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { mention } from "pages/CommentDetail";
 
 
@@ -23,9 +23,26 @@ const CommentCard = ({ comment, setComments, classes = null }) => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const contentRef = useRef();
 
     const quillInstance = new QuillDeltaToHtmlConverter(comment.content ? comment.content.ops : []);
     const showOptions = comment.created_by.id === profileInfo.userInfo.id;
+
+    useEffect(() => {
+        if (contentRef.current) {
+            const mentions = contentRef.current.querySelectorAll("a[href='#']");
+            Array.from(mentions).forEach((element) => {
+                const found = element.innerText.trim().match(/^@/);
+                const flag = element.innerText.trim().match(/^@(http|https|ftp|ftps|wss|ws)/);
+                const username = element.innerText.trim().replace("@", "");
+                if (found && !flag) {
+                    element.classList.add("mention__anchor");
+                    element.setAttribute("href", "/" + username);
+                    element.removeAttribute("target");
+                }
+            })
+        }
+    }, [])
 
     const messageCallback = async (message, id) => {
         try {
@@ -86,11 +103,11 @@ const CommentCard = ({ comment, setComments, classes = null }) => {
                             {comment.content_type !== "comment" ?
 
                                 <Link to={`/comment/${comment.id}`}>
-                                    <div dangerouslySetInnerHTML={{ __html: quillInstance.convert() }}>
+                                    <div ref={contentRef} dangerouslySetInnerHTML={{ __html: quillInstance.convert() }}>
                                     </div>
                                 </Link>
                                 :
-                                <div dangerouslySetInnerHTML={{ __html: quillInstance.convert() }}>
+                                <div ref={contentRef} dangerouslySetInnerHTML={{ __html: quillInstance.convert() }}>
                                 </div>
                             }
                         </div>
