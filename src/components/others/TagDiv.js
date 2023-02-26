@@ -5,7 +5,7 @@ const TagDiv = ({ tagsInfo: { tags, tagLink } }) => {
     const fetchedTags = tags.map((item) => {
         return (
             <div key={item.id} className={styles.tag}>
-                <Link to="#" >
+                <Link to={tagLink + item.tag_name} >
                     {item.tag_name}
                 </Link>
             </div>

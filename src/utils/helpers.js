@@ -252,7 +252,14 @@ export const imageOrDefault = (img) => {
 
     if (img.startsWith("http")) return img;
 
-    return process.env.REACT_APP_BACKEND_URL + img;
+    const baseUrl = process.env.REACT_APP_BACKEND_URL
+
+    if (img.startsWith("/")) return baseUrl + img;
+    else if (!img.startsWith("/") && !image.startsWith("media")) return baseUrl + "/media/" + img;
+    else if (!img.startsWith("/")) return baseUrl + "/" + img;
+
+
+    return baseUrl + img;
 }
 
 export const imgErrorHandler = (event) => {

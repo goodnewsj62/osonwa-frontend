@@ -29,6 +29,7 @@ import CreateArticle from "pages/CreateArticle";
 import EditPost from "pages/EditPost";
 import Fresh from "pages/Fresh";
 import CommentDetail from "pages/CommentDetail";
+import Tags from "pages/Tags";
 
 
 function App(props) {
@@ -82,6 +83,7 @@ function App(props) {
                         <Route path="/liked" element={<LoginRequired ><Liked /></LoginRequired>} />
                         <Route path="/:username" element={<Profile />} />
                         <Route path="/comment/:id" element={<CommentDetail />} />
+                        <Route path="/tag/:type/:name" element={<Tags />} />
                         <Route path="/email/request" element={<EmailSent />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/change-password/:token" element={<ChangePassword />} />
