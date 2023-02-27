@@ -30,6 +30,7 @@ import EditPost from "pages/EditPost";
 import Fresh from "pages/Fresh";
 import CommentDetail from "pages/CommentDetail";
 import Tags from "pages/Tags";
+import Search from "pages/Search";
 
 
 function App(props) {
@@ -85,6 +86,7 @@ function App(props) {
                         <Route path="/comment/:id" element={<CommentDetail />} />
                         <Route path="/tag/:type/:name" element={<Tags />} />
                         <Route path="/email/request" element={<EmailSent />} />
+                        <Route path="/search/" element={<Search />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/change-password/:token" element={<ChangePassword />} />
                         <Route path="/create-post" element={<LoginRequired ><CreateArticle /></LoginRequired>} />

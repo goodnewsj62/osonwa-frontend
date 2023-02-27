@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/searchbar.module.css";
 
 function SearchBar({ visibilityState }) {
     const [showMobBarClass, setShowMobBarClass] = useState("")
     const { toggleMobileSearch, toggleMobSearch } = visibilityState;
+    const inpRef = useRef();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const screenWidth = window.innerWidth;
@@ -22,9 +25,12 @@ function SearchBar({ visibilityState }) {
             <button onClick={() => { toggleMobileSearch(false) }} type="button">
                 <IoIosArrowBack size={20} />
             </button>
-            <form onSubmit={(e) => { }}>
-                <input placeholder="search" type="text" name="search" id="search" />
-                <button type="submit" onClick={(e) => { }}>
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                navigate(`search/?q=${inpRef.current.value}`);
+            }}>
+                <input ref={inpRef} placeholder="search" type="text" name="search" id="search" />
+                <button type="submit">
                     <BiSearch className="search__icon" size={16} />
                 </button>
             </form>
