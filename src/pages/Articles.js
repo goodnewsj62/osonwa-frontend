@@ -47,8 +47,7 @@ function Articles(props) {
     }, [filterParams, axios_]);
 
     useEffect(() => {
-        const url = `/article/search/?q=${search.value}&type=${articleType}/`;
-        console.log(url)
+        const url = `/article/search/?q=${search.value}&type=${articleType}`;
         if (search.status) genFetchPost(url, setSearchResults, axios_)
     }, [search, filterParams, axios_, articleType]);
 
@@ -85,7 +84,6 @@ function Articles(props) {
                 aggregate: [searchComp, internalComp],
                 internal: [aggegateComp, searchComp]
             }
-            console.log(articleType)
             return showStrategy[articleType];
         } else {
             return [aggegateComp, internalComp];
