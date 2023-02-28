@@ -29,6 +29,8 @@
     left: -50px;
     background: var(--current-mode);
     box-shadow: 0 2px 10px 5px rgba(0,0,0,0.08);
+    background-color: var(--current-mode);
+    z-index: 4;
 }
 
 .panel nav li{

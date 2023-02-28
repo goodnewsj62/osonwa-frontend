@@ -30,7 +30,7 @@ const Search = () => {
     useEffect(() => {
         const match_ =  location.search.match(/q=.*\b/);
         if(!match_) return;
-        
+
         const qs =  match_[0].split("&");
         
         const searchVal =  qs.find((value)=> value.startsWith("q="));
@@ -80,6 +80,7 @@ const Search = () => {
 
     return (
         <Main>
+            <h1 style={{padding:"1rem", fontSize:"1.8rem"}}>Results for {searchValue}</h1>
             <ToggleContents stateNames={contentNames} components={components} callback={onScreen} />
         </Main>
     );
