@@ -1,16 +1,27 @@
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RiFilter2Fill } from "react-icons/ri";
 import styles from "./styles/sortpanel.module.css";
 
 const SortPanel = ({ filterParams, setFilterParams }) => {
     const [showPanel, setShowPanel] = useState(false);
+    const forYouRef = useRef();
 
 
     const toggleShow = (event) => {
         setShowPanel((state) => !state);
     };
 
+    useEffect(() => {
+        //mark for you when page is loaded 
+        if (showPanel && filterParams.indexOf("for you") !== -1) {
+            const radio = forYouRef.current.children[0];
+            const radio_hidden = forYouRef.current.children[1];
+
+            radio_hidden.checked = true;
+            radio.checked = true;
+        }
+    }, [showPanel, filterParams]);
 
     const filterBy = (event, action) => {
         const radio = event.target.children[0];
@@ -45,7 +56,7 @@ const SortPanel = ({ filterParams, setFilterParams }) => {
                 showPanel &&
                 <nav>
                     <ul>
-                        <li onClick={(e) => { filterBy(e, "for you") }}>
+                        <li ref={forYouRef} onClick={(e) => { filterBy(e, "for you") }}>
                             <input type="radio" name="filter_f" />
                             <input style={setDisplay} type="radio" name="filter_f" />
                             <div>For you</div>

@@ -31,6 +31,7 @@ import Fresh from "pages/Fresh";
 import CommentDetail from "pages/CommentDetail";
 import Tags from "pages/Tags";
 import Search from "pages/Search";
+import { fetchNotifications } from "store/notifySlice;";
 
 
 function App(props) {
@@ -43,6 +44,7 @@ function App(props) {
         try {
             const authResult = await dispatch(refreshToken(jwtToken.refresh)).unwrap();
             await dispatch(fetchProfileInfo({ accessToken: authResult.access })).unwrap();
+            await dispatch(fetchNotifications(authResult.access)).unwrap();
             return setTimeout(() => { setLoaderStatus(false) }, 0);
         } catch (err) {
             return setTimeout(() => { setLoaderStatus(false) }, 0);

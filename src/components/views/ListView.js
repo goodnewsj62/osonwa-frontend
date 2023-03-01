@@ -21,8 +21,8 @@ const ListView = ({ url }) => {
     const [selected, setSelected] = useState("news");
     const axios_ = useAuthAxios();
     const authState = useSelector((states) => states.authState);
-    const [fetchedNews, setFetchedNews] = useState({ isLoading: false, others: {}, posts: [] });
-    const [fetchedArticles, setFetchedArticles] = useState({ isLoading: false, others: {}, posts: [] });
+    const [fetchedNews, setFetchedNews] = useState({ isLoading: true, others: {}, posts: [] });
+    const [fetchedArticles, setFetchedArticles] = useState({ isLoading: true, others: {}, posts: [] });
     const [isLoadingNews, setIsLoadingNews] = useState(true);
     const [isLoadingArticles, setIsLoadingArticles] = useState(true);
 

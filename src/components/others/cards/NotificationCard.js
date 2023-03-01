@@ -1,8 +1,8 @@
 
+import { Link } from "react-router-dom";
 import styles from "./styles/notification.module.css";
-import img from "static/images/test_image.png"
 const NoticationCard = ({ data }) => {
-    const { title, date, username, imgSrc, readStatus } = data;
+    const { title, date, username, imgSrc, readStatus, to } = data;
 
     // onClick mark as read if unread and then redirect
     // image src or first letter from username
@@ -13,13 +13,17 @@ const NoticationCard = ({ data }) => {
     return (
         <div onClick={redirectHandler} className={bodyClasses}>
             <div className={styles.img__box}>
-                {img && <img src={img} alt="dp" />} {/* imgSrc */}
-                {!img && <h2> {username.slice(0, 1)}</h2>}
+                <Link to={`/${username}`}>
+                    {imgSrc && <img src={imgSrc} alt="dp" />}
+                    {!imgSrc && <h2> {username.slice(0, 1)}</h2>}
+                </Link>
             </div>
-            <div className={styles.content__box}>
-                <p><strong>{username}</strong> {title}</p>
-                <span>2h ago</span>
-            </div>
+            <Link to={to}>
+                <div className={styles.content__box}>
+                    <p><strong>{username}</strong> {title}</p>
+                    <span>{date}</span>
+                </div>
+            </Link>
         </div>
     )
 };
