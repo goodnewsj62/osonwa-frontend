@@ -26,7 +26,7 @@ const NormalCardDetails = ({ iconSize, post }) => {
         setMessage({ message: "link copied", status: true });
         setTimeout(() => setModalState(false), 0)
     };
-
+    console.log(post.pub_image)
 
     return (
         <>

@@ -31,12 +31,16 @@ import Fresh from "pages/Fresh";
 import CommentDetail from "pages/CommentDetail";
 import Tags from "pages/Tags";
 import Search from "pages/Search";
-import { fetchNotifications } from "store/notifySlice;";
+import { fetchNotifications, fetchUnRead } from "store/notifySlice;";
+import useAuthAxios from "hooks/authAxios";
+import Source from "pages/Source";
+import Treads from "pages/Treads";
 
 
 function App(props) {
     const dispatch = useDispatch();
     const [loaderStatus, setLoaderStatus] = useState(true);
+    const axios_ = useAuthAxios();
 
 
 
@@ -62,6 +66,14 @@ function App(props) {
 
         dispatch(fetchAllInterest());
     }, [dispatch, getAuthTokenAndProfile]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            dispatch(fetchUnRead(axios_))
+        }, [180 * 1000])
+
+        return () => clearInterval(interval);
+    }, [dispatch, axios_]);
 
 
     //TODO: two useState protect with memo
@@ -93,6 +105,8 @@ function App(props) {
                         <Route path="/change-password/:token" element={<ChangePassword />} />
                         <Route path="/create-post" element={<LoginRequired ><CreateArticle /></LoginRequired>} />
                         <Route path="/edit/:slug/:id" element={<LoginRequired ><EditPost /></LoginRequired>} />
+                        <Route path="/source/:type/:name" element={<Source />} />
+                        <Route path="/threads" element={<Treads />} />
                     </Route>
                     <Route path="/login" element={<UnAuthenticatedOnly ><Login /></UnAuthenticatedOnly>} />
                     <Route path="/signup" element={<UnAuthenticatedOnly ><SignUp /></UnAuthenticatedOnly>} />

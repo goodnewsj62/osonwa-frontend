@@ -1,0 +1,45 @@
+.header{
+    width: 100%;
+    display: flex;
+
+}
+
+.header > div{
+    flex-basis: 50%;
+    display: flex;
+    padding: 2rem;
+}
+
+.lnk{
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.lnk a{
+
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #1e90ff;
+    color: #1e90ff;
+    font-weight: bold;
+}
+
+.logo{
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img{
+    width: 70px;
+    height: 70px;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.logo h2{
+    text-transform: capitalize;
+}
