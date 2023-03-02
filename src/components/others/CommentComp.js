@@ -2,6 +2,7 @@ import { DefaultIconSize } from "components/wrappers/IconSize";
 import { useContext } from "react";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { shortenCount } from "utils/helpers";
 import styles from "./styles/actioncomp.module.css";
 
 const CommentComp = ({ commentInfo: { count, detailUrl }, clickHandler }) => {
@@ -21,7 +22,7 @@ const CommentComp = ({ commentInfo: { count, detailUrl }, clickHandler }) => {
                 </div>
             }
             <div className={`${styles.count} cnt`}>
-                {count}
+                {shortenCount(count)}
             </div>
         </div>
     );
