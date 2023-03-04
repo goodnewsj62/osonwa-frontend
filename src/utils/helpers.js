@@ -1,6 +1,6 @@
 import { saveAuthToken } from "store/authSlice";
 import { baseAxiosInstance } from "./requests";
-import image from "static/images/test_img.jpg";
+import image from "static/images/background.png";
 import { fetchProfileInfo } from "store/profileSlice";
 import { fetchAllInterest } from "store/interestsSlice";
 

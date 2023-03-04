@@ -4,7 +4,7 @@ import useAuthAxios from "hooks/authAxios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { articlePostListAdapter, newsListAdapter } from "utils/adapters";
-import { genFetchPost, imageOrDefault } from "utils/helpers";
+import { genFetchPost, imageOrDefault, imgErrorHandler } from "utils/helpers";
 import useScrollState from "./hooks/scrollState";
 import styles from "pages/styles/articles.module.css";
 import RenderListView from "components/others/RenderList";
@@ -52,7 +52,7 @@ const Source =  ()=>{
                 <>
                     <section className={style.header} >
                         <div className={style.logo}>
-                            <img src={imageOrDefault(results.posts[0].pub_image)} alt="source logo or default logo" />
+                            <img src={imageOrDefault(results.posts[0].pub_image)} onError={imgErrorHandler} alt="source logo or default logo" />
                             <h2>{name}</h2>
                         </div>
                         <div className={style.lnk}>

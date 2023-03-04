@@ -20,7 +20,7 @@ const Search = () => {
     const [selected, setSelected] = useState("news");
     const axios_ = useAuthAxios();
     const location =  useLocation();
-    const [results, setResult] = useState({ isLoading: false, others: {}, posts: [] });
+    const [results, setResult] = useState({ isLoading: true, others: {}, posts: [] });
     const [isLoading, setIsloading] = useState(false);
     const [searchValue,  setSearchValue] =  useState("")
 
