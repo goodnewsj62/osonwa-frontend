@@ -1,12 +1,21 @@
 import { BsCloudSun } from "react-icons/bs";
 import { IoCloudyNightOutline } from "react-icons/io5";
 import styles from "./styles/UserProfile.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { greeting } from "utils/helpers";
 
 const UserProfile = ({ showNav }) => {
     const [profileImageError, setProfileImageError] = useState(false);
     const profileInfo = useSelector((states) => states.profileState.userInfo);
+    const [period, setPeriod] = useState("");
+
+    useEffect(() => {
+        setPeriod(greeting());
+        const interval = setInterval(() => setPeriod(greeting()), 2000);
+
+        return () => clearInterval(interval);
+    }, []);
 
 
     return (
@@ -19,10 +28,10 @@ const UserProfile = ({ showNav }) => {
             <div className={styles.greeting}>
                 <h4>Hi {profileInfo.first_name}</h4>
                 <p>
-                    Good Morning!
+                    Good {period}!
                     <span></span>
-                    <BsCloudSun className="morning__sun" />
-                    <IoCloudyNightOutline className="evening_time" />
+                    {(period.toLowerCase() === "morning" || period.toLowerCase() === "afternoon") && <BsCloudSun className="morning__sun" />}
+                    {period.toLowerCase() === "evening" && <IoCloudyNightOutline className="evening_time" />}
                 </p>
             </div>
         </div>

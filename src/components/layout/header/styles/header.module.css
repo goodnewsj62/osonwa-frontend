@@ -8,15 +8,25 @@
     display: none;
 }
 
+.logo__area{
+    display: flex;
+    align-items: center;
+}
+
 .logo__area a{
     text-decoration: none;
     color: inherit;
+    display: flex;
+}
+
+.logo__area img{
+    width: 30px;
+    margin-left: 0.9rem;
 }
 
 .logo__area h2{
-    display: none;
+    margin-left: 0.12rem;
 }
-
 
 @media screen and (min-width: 800px) {
     .mobile__toggle{
@@ -29,8 +39,8 @@
         place-items: center;
         padding-left: 20px;
     }
-    .logo__area h2{
-        display: block;
+   
+    .logo__area img{
+        margin-left: 0;
     }
-    
 }

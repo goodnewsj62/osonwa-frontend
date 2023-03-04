@@ -8,7 +8,7 @@ import "./styles/header.css";
 import { useDispatch } from "react-redux";
 import sideBarActions from "store/SideBarSlice";
 import { useState } from "react";
-// import icon from "../styles/osonwapp.svg";
+import icon from "icons/logo.png";
 
 function Header() {
     const [toggleMobSearch, setToggleMobSearch] = useState(false);
@@ -34,8 +34,8 @@ function Header() {
             </div>
             <div className={styles.logo__area}>
                 <Link to="/">
-                    {/* <img src={icon} alt="logo" /> */}
-                    <h2>Osonwa.</h2>
+                    <img src={icon} alt="logo" />
+                    <h2>sonwa.</h2>
                 </Link >
             </div>
             <SearchBar visibilityState={visibilityState} />

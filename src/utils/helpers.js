@@ -266,4 +266,14 @@ export const imgErrorHandler = (event) => {
     event.target.src = image;
 }
 
+export const greeting = () => {
+    const hours = new Date().getHours();
+    if (hours < 12) {
+        return "Morning";
+    } else if (hours >= 12 && hours < 17) {
+        return "Afternoon"
+    }
+    return "Evening"
+}
+
 export { authenticateUserAndRedirect, extractErrorMessages, isExpired, setAuthBasedOnRefreshToken, parseJwt, setAuthAndStorage, forwardDebounce, deBounce };
