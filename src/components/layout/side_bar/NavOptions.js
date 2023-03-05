@@ -38,7 +38,7 @@ function NavOthers(props) {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink className={classes} to="/privacy-policy">
+                    <NavLink className={classes} to="/privacy">
                         <MdPrivacyTip size={iconSize} />
                         <span></span>
                         Privacy Policy

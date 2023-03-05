@@ -35,6 +35,14 @@ import { fetchNotifications, fetchUnRead } from "store/notifySlice;";
 import useAuthAxios from "hooks/authAxios";
 import Source from "pages/Source";
 import Treads from "pages/Treads";
+import Support from "pages/Support";
+import About from "pages/About";
+import Contact from "pages/Contact";
+import Privacy from "pages/Privacy";
+import Terms from "pages/Terms";
+import ErrorPage from "pages/ErrorPage";
+import img404 from "static/images/p404.svg";
+
 
 
 function App(props) {
@@ -107,10 +115,16 @@ function App(props) {
                         <Route path="/edit/:slug/:id" element={<LoginRequired ><EditPost /></LoginRequired>} />
                         <Route path="/source/:type/:name" element={<Source />} />
                         <Route path="/threads" element={<Treads />} />
+                        <Route path="/support" element={<Support />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/privacy" element={<Privacy />} />
+                        <Route path="/terms" element={<Terms />} />
                     </Route>
                     <Route path="/login" element={<UnAuthenticatedOnly ><Login /></UnAuthenticatedOnly>} />
                     <Route path="/signup" element={<UnAuthenticatedOnly ><SignUp /></UnAuthenticatedOnly>} />
                     <Route path="/callback/twitter" element={<OauthTwitter />} />
+                    <Route path="*" element={<ErrorPage image={img404} message={"Page not found"} statusCode={404} />} />
                 </Routes>
             </Router>
         )
