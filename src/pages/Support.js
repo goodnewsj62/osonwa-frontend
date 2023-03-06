@@ -15,6 +15,8 @@ const Support = () => {
                     <div className={styles.top}></div>
                     <div className={styles.content}>
                         You could support Osonwa by sharing links with friends and tech-savvy individuals that this platform could be of benefit to.
+                        <br></br>
+                        <br></br>
                         You could also support us with suggestions on how to improve this website by <Link to="/contact">contacting</Link> us.
                         You could help us report bugs and security issues found on this website <Link to="/contact">here</Link> also.
                     </div>

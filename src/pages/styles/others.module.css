@@ -1,0 +1,63 @@
+.container{
+    padding: 1rem;
+    line-height: 1.5;
+}
+
+.container > *{
+    margin-bottom: 2rem;
+}
+
+@media screen and (min-width:700px) {
+    .container{
+        padding: 1rem 2rem;
+    }
+}
+@media screen and (min-width:1200px) {
+    .container{
+        padding: 1rem 4rem;
+    }
+}
+
+
+.aside{
+    padding: 2rem;
+    border-radius: var(--radius-10);
+    position: relative;
+}
+
+.aside ,.main{
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 12px rgb(0 0 0 / 15%);
+}
+
+
+.aside::before{
+    content: "";
+    width: 0.5rem;
+    height: 100%;
+    position: absolute;
+    background-color: var(--comp-one);
+    top: 0;
+    left: 0;
+    border-radius: var(--radius-10) 0  0  var(--radius-10);
+}
+
+
+
+.main,.top{
+    border-radius: var(--radius-10)  var(--radius-10) 0 0;
+}
+.top ,.bottom{
+    background-color: var(--comp-one);
+}
+.top{
+    width: 100%;
+    height: 40px;
+}
+
+.bottom{
+    height: 20px;
+}
+
+.content{
+    padding: 1rem  1.5rem ;
+}

@@ -1,4 +1,5 @@
 import Main from "components/others/MainWrapper";
+import { Link } from "react-router-dom";
 import styles from "./styles/others.module.css";
 
 
@@ -12,15 +13,14 @@ const Terms = () => {
                 <div className={styles.content}>
                 <h2>Website Terms of Use</h2>
 
-<p>Version 1.0</p>
 
-<p>The osonwa website located at osonwa.com is a copyrighted work belonging to osonwa. Certain features of the Site may be subject to additional guidelines, terms, or rules, which will be posted on the Site in connection with such features.</p>
+<p>Osonwa website located at <Link to="/">osonwa.com</Link> is a copyrighted work belonging to osonwa. Certain features of the Site may be subject to additional guidelines, terms, or rules, which will be posted on the Site in connection with such features.</p>
 
 <p>All such additional terms, guidelines, and rules are incorporated by reference into these Terms.</p>
 
 <p>These Terms of Use described the legally binding terms and conditions that oversee your use of the Site. BY LOGGING INTO THE SITE, YOU ARE BEING COMPLIANT THAT THESE TERMS and you represent that you have the authority and capacity to enter into these Terms. YOU SHOULD BE AT LEAST 18 YEARS OF AGE TO ACCESS THE SITE. IF YOU DISAGREE WITH ALL OF THE PROVISION OF THESE TERMS, DO NOT LOG INTO AND/OR USE THE SITE.</p>
 
-<p>These terms require the use of arbitration Section 10.2 on an individual basis to resolve disputes and also limit the remedies available to you in the event of a dispute. These Terms of Use were created with the help of the <a href="https://www.termsofusegenerator.net">Terms Of Use Generator</a>.</p>
+<p>These terms require the use of arbitration Section 10.2 on an individual basis to resolve disputes and also limit the remedies available to you in the event of a dispute.</p>
 
 
 <h2>Access to the Site</h2>
@@ -93,7 +93,7 @@ const Terms = () => {
 
 <p>Company respects the intellectual property of others and asks that users of our Site do the same.  In connection with our Site, we have adopted and implemented a policy respecting copyright law that provides for the removal of any infringing materials and for the termination of users of our online Site who are repeated infringers of intellectual property rights, including copyrights.  If you believe that one of our users is, through the use of our Site, unlawfully infringing the copyright(s) in a work, and wish to have the allegedly infringing material removed, the following information in the form of a written notification (pursuant to 17 U.S.C. § 512(c)) must be provided to our designated Copyright Agent:</p>
 
-<ul>
+<ul style={{paddingLeft:"2rem"}}> 
     <li>your physical or electronic signature;</li>
     <li>identification of the copyrighted work(s) that you claim to have been infringed;</li>
     <li>identification of the material on our services that you claim is infringing and that you request us to remove;</li>
@@ -104,6 +104,12 @@ const Terms = () => {
 </ul>
 
 <p>Please note that, pursuant to 17 U.S.C. § 512(f), any misrepresentation of material fact in a written notification automatically subjects the complaining party to liability for any damages, costs and attorney’s fees incurred by us in connection with the written notification and allegation of copyright infringement.</p>
+
+<h2>Links</h2>
+
+<p>
+    Osonwa has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Osonwa team of the site. Use of any such linked web site is at the user's own risk.
+</p>
 
 <h2>General</h2>
 
@@ -156,8 +162,7 @@ const Terms = () => {
 
 <h2>Contact Information</h2>
 
-<p>Address: osonwa</p>
-<p>Email: goodnewsj62@gmail.com</p>
+<p>Email: <a href="mailto:contact@osonwa.com">contact@osonwa.com</a></p>
                 </div>
                 <div className={styles.bottom}></div>
             </section>

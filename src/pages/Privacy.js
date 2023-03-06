@@ -1,4 +1,5 @@
 import Main from "components/others/MainWrapper";
+import { Link } from "react-router-dom";
 import styles from "./styles/others.module.css";
 
 
@@ -7,16 +8,16 @@ const Privacy = () => {
     return (
         <Main>
             <div className={styles.container}>
-                <h1>Privacy Policy</h1>
-                <span>Last updated March 11, 2023</span>
+                <h1 style={{marginBottom: "0px"}}>Privacy Policy</h1>
+                <span style={{marginBottom:"1.5rem", display:"block"}}>Last updated March 11, 2023</span>
                 <section className={styles.main}>
                 <div className={styles.top}></div>
 
                 <div className={styles.content}>
 
-            <p>At osonwa, accessible from osonwa.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by osonwa and how we use it.</p>
+            <p>At osonwa, accessible from <Link to="/">osonwa.com</Link>, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by osonwa and how we use it.</p>
 
-            <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+            <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to <Link to="/contact">contact us</Link>.</p>
 
             <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in osonwa. This policy is not applicable to any information collected offline or via channels other than this website.</p>
 
@@ -34,7 +35,7 @@ const Privacy = () => {
 
             <p>We use the information we collect in various ways, including to:</p>
 
-            <ul>
+            <ul style={{paddingLeft:" 2rem"}}>
                 <li>Provide, operate, and maintain our website</li>
                 <li>Improve, personalize, and expand our website</li>
                 <li>Understand and analyze how you use our website</li>
@@ -42,6 +43,7 @@ const Privacy = () => {
                 <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes</li>
                 <li>Send you emails</li>
                 <li>Find and prevent fraud</li>
+                <li>personalize ads </li>
             </ul>
 
             <h2>Log Files</h2>
@@ -109,8 +111,6 @@ const Privacy = () => {
             <h2>Changes to This Privacy Policy</h2>
 
             <p>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.</p>
-
-            <p>Our Privacy Policy was created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/">TermsFeed Privacy Policy Generator</a>.</p>
 
             <h2>Contact Us</h2>
 

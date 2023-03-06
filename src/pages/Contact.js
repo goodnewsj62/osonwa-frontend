@@ -16,7 +16,7 @@ const Contact = () => {
                 <div className={styles.top}></div>
                 <div className={styles.content}>
                     <div>We did love to her from you </div>
-                    <div>Contact us via email: <a href="mailto:goodnewsj62@gmail.com" >goodnewsj62@gmail.com</a></div>
+                    <div>Contact us via email: <a href="mailto:contact@osonwa.com" >goodnewsj62@gmail.com</a></div>
                     <div>Please if you find a bug or security issue you could also report the bug <a href="https://github.com/goodnewsj62/osonwa-frontend/issues" >here</a> at out github repo</div>
                 </div>
                 <div className={styles.bottom}></div>
