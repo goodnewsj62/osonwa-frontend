@@ -20,11 +20,11 @@
     transition: 0.3s all;
     cursor: default;
     padding: 10px 8px;
-    color: initial;
+    color: var(--mode-write-color);
 }
 
 .main__nav a:hover, .main__nav a.active, .other__nav a.active,.other__nav a:hover{
     background-color: var(--highlight-grey);
-    color: #000;
+    color: var(--mode-write-color);
     border-radius: 6px;
 }

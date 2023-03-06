@@ -8,7 +8,8 @@
     --mode-write-color: #000;
     --highlight-grey: #ececec;
     --mask-bg: rgba(0,0,0,0.3);
-    --dark-mode-step-one: #fff ; /* level one raise above base color*/
+    --header-bg:var(--current-mode);
+    --sidebar-bg: #fff ; /* level one raise above base color*/
     --dark-mode-step-two: #fff ;
     --dark-mode-white:#ebe9e9;
     --white-mode-write-text:#292929;
@@ -45,20 +46,38 @@
     --advanced-option-bg:rgb(238, 237, 237);
     --advanced-option-message-bg:#000;
     --message-central-bg:#fff;
+    --raise-one:var(--netural-color);
+    --raise-two:var(--netural-color);
+    --raise-three:var(--netural-color);
+    --raise-four:var(--netural-color);
+    --search-border:2px solid rgba(0,0,0,0.5);
+    --profile-demacation-border:1px solid rgba(0,0,0,0.09);
 }
 
 [data-theme="dark"]{
-    --netural-color :#000;
+    --netural-color :#131A19;
     --netural-opposite:#ebe9e9;
-    --current-mode:#000;
+    --current-mode:#131A19;
+    --raise-one:#1C2725;
+    --raise-two:#212B2A;
+    --raise-three:#26302E;
+    --raise-four:#2B3433;
     --mode-write-color: #ebe9e9;
-    --bg-tag-move:rgba(188, 189, 190, 0.4);
-    --bg-tag-move-highlight:rgba(188, 189, 190, 0.4);
+    --header-bg:var(--raise-two);
+    --bg-tag-move:rgba(188, 189, 190, 0.9);
+    --bg-tag-move-highlight:rgba(188, 189, 190, 0.7);
     --tag-select-bg: ;
     --tag-select-btn-bg:#EFEFEF;
     --tag-select-btn-hover:#ddd;
     --tag-select-btn-highlight:#000;
     --tag-select-btn-highlight-text:#fff;
+    --sidebar-bg:var(--raise-one);
+    --highlight-grey:rgba(236, 236, 236, 0.12);
+    --search-border:2px solid rgba(255, 255, 255,0.5);
+    --profile-demacation-border:1px solid rgba(221, 221, 221, 0.15);
+    --tag-bg: rgb(86, 85, 85);
+
+
 }
 
 *{

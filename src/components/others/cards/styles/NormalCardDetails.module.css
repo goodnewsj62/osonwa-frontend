@@ -108,7 +108,7 @@
         display: block;
         position: absolute;
         list-style: none;
-        background-color: var(--current-mode);
+        background-color: var(--raise-three);
         box-shadow: 0 0 8px 3px rgba(0,0,0,0.1);
         border-radius: 3px;
         right: 0;

@@ -1,20 +1,3 @@
-header{
-    width: 100%;
-    padding: 0 1rem;
-    display: flex;
-    height: var(--header-height);
-    max-height: var(--header-height) ;
-    background-color: var(--current-mode);
-    box-shadow: 0 3px 8px 4px rgba(0,0,0,0.03),
-                0 6px 15px 6px rgba(0,0,0,0.01);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    color: var(--mode-write-color);
-}
-
-
 .header__nav{
     height: 100%;
     margin-left: auto;

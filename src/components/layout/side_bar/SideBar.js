@@ -4,17 +4,18 @@ import { VscTriangleLeft } from "react-icons/vsc";
 
 import styles from "./styles/sidebar.module.css";
 import NavOthers from "./NavOptions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import sideBarActions from "store/SideBarSlice";
 
 function SideBar({ sideBarState }) {
     const dispatch = useDispatch();
+    const currentMode = useSelector((states) => states.mode);
 
     const showBarHandler = (event) => {
         dispatch(sideBarActions.hide());
     };
 
-    const modeClass = "";
+    const modeClass = currentMode === "dark" ? styles.dark__bar : "";
     const barAnimeClasses = sideBarState ? `${styles.show__bar}` : `${styles.hide__bar}`;
     const classes = `${styles.side__bar} ${barAnimeClasses} ${modeClass}`;
 

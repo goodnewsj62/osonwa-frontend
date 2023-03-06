@@ -11,18 +11,18 @@
 }
 
 .dark__bar{
-    background-color: var(--dark-mode-step-one);
+    background-color: var(--sidebar-bg);
 }
 
 @media screen and (max-width:770px) {
     .side__bar{
-        background-color: var(--dark-mode-step-one);
+        background-color: var(--sidebar-bg);
     }
 }
 
 .wrap__up{
     margin-top: 2.5rem;
-    background-color: var(--netural-color);
+    background-color: var(--sidebar-bg);
     height: calc(100% - 2.5rem);
     overflow-y: auto;
 }

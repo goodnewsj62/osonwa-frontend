@@ -24,6 +24,9 @@
     margin-right: 8px;
     margin-left: 5px;
 }
+.search__icon{
+    fill:var(--netural-opposite);
+}
 
 .search__bar form{
     width: 90%;
@@ -37,7 +40,9 @@
     outline: none;
     padding: 0.37rem 0.7rem;
     border-radius:5px;
-    border: 2px solid rgba(0,0,0,0.5);
+    border: var(--search-border);
+    background-color: transparent;
+    color: var(--mode-write-color);
 }
 
 

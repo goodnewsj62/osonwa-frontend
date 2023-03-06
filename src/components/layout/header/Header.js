@@ -5,14 +5,16 @@ import SearchBar from "./Search_bar";
 
 import styles from "./styles/header.module.css";
 import "./styles/header.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import sideBarActions from "store/SideBarSlice";
 import { useState } from "react";
 import icon from "icons/logo.png";
+import iconfff from "icons/logofff.png";
 
 function Header() {
     const [toggleMobSearch, setToggleMobSearch] = useState(false);
     const dispatch = useDispatch();
+    const mode = useSelector((states) => states.mode);
 
     const toggleSideBarHandler = (event) => {
         dispatch(sideBarActions.toggleState());
@@ -25,7 +27,7 @@ function Header() {
     const visibilityState = { toggleMobileSearch, toggleMobSearch }
 
     return (
-        <header>
+        <header className={styles.page__header}>
             <div className={styles.mobile__toggle} id="mobile__toggle">
                 <input type="checkbox" name="" id="mob__toggle" />
                 <label onClick={toggleSideBarHandler} htmlFor="mob__toggle">
@@ -34,7 +36,7 @@ function Header() {
             </div>
             <div className={styles.logo__area}>
                 <Link to="/">
-                    <img src={icon} alt="logo" />
+                    <img src={mode === "dark" ? iconfff : icon} alt="logo" />
                     <h2>sonwa.</h2>
                 </Link >
             </div>

@@ -14,6 +14,10 @@ const modeSlice = createSlice({
                 return "light";
             }
         }
+        ,
+        setMode(state, actions) {
+            return actions.payload;
+        }
     }
 });
 

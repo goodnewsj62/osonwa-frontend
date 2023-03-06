@@ -42,6 +42,7 @@ import Privacy from "pages/Privacy";
 import Terms from "pages/Terms";
 import ErrorPage from "pages/ErrorPage";
 import img404 from "static/images/p404.svg";
+import modeSliceActions from "store/modeSlice";
 
 
 
@@ -78,10 +79,15 @@ function App(props) {
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(fetchUnRead(axios_))
-        }, [180 * 1000])
+        }, [180 * 1000]);
+
+        //current mode
+        const mode = localStorage.getItem("mode") === "dark" ? "dark" : "light";
+        dispatch(modeSliceActions.setMode(mode));
 
         return () => clearInterval(interval);
     }, [dispatch, axios_]);
+
 
 
     //TODO: two useState protect with memo

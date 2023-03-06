@@ -3,15 +3,13 @@ import { Header, SideNavBar } from "components/layout";
 import { CookiePopup } from "components/others";
 import { useEffect, useState } from "react";
 import TagPopup from "components/profile/TagPopup";
+import { useSelector } from "react-redux";
 
-
-// const storedMode = () => {
-//     return localStorage.getItem("mode") === "dark" ? "dark" : "light";
-// }
 
 
 function DefaultLayout(props) {
     const [hasAcceptedCookie, setHasAcceptedCookie] = useState(true);
+    const currentMode = useSelector((states) => states.mode)
 
 
     useEffect(() => {
@@ -23,7 +21,7 @@ function DefaultLayout(props) {
 
     const cookieState = { hasAcceptedCookie, setHasAcceptedCookie };
     return (
-        <div className="container">
+        <div className="container" data-theme={currentMode}>
             <Header />
             <SideNavBar />
             {!hasAcceptedCookie && <CookiePopup cookieState={{ ...cookieState }} />}

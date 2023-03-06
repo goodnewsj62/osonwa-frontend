@@ -31,7 +31,7 @@ function SearchBar({ visibilityState }) {
             }}>
                 <input ref={inpRef} placeholder="search" type="text" name="search" id="search" />
                 <button type="submit">
-                    <BiSearch className="search__icon" size={16} />
+                    <BiSearch className={styles.search__icon} size={16} />
                 </button>
             </form>
         </div>
