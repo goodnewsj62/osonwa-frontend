@@ -2,7 +2,8 @@
 
 .card__container{
     /* height: 250px; */
-    border: 1px solid #ddd;
+    background-color: var(--raise-two);
+    border: var(--list-card-border);
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas: 
@@ -15,6 +16,7 @@
 
     border-radius: 8px;
     position: relative;
+    color: var(--mode-write-color);
 }
 
 

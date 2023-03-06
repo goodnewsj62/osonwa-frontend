@@ -1,6 +1,8 @@
 .container{
     padding: 1rem;
     line-height: 1.5;
+    color: var(--mode-write-color);
+
 }
 
 .container > *{
@@ -19,6 +21,10 @@
 }
 
 
+.container section{
+    background-color: var(--raise-two);
+    color: var(--mode-write-color);
+}
 .aside{
     padding: 2rem;
     border-radius: var(--radius-10);

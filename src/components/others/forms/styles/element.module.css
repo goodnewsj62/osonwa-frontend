@@ -10,6 +10,7 @@
     border-radius: 5px;
     outline: 0;
     border: 1px solid var(--form-border-color);
+    background-color: transparent;
 }
 
 .field input:focus{

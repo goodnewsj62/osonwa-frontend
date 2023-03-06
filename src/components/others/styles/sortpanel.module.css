@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #000;
 }
 
 .panel__label span{
@@ -18,7 +19,6 @@
 .panel nav ul {
     list-style: none;
     padding: 0.2rem 0;
-    
 }
 
 .panel nav{
@@ -27,9 +27,8 @@
     position: absolute;
     top: 130%;
     left: -50px;
-    background: var(--current-mode);
     box-shadow: 0 2px 10px 5px rgba(0,0,0,0.08);
-    background-color: var(--current-mode);
+    background-color: var(--raise-three);
     z-index: 4;
 }
 

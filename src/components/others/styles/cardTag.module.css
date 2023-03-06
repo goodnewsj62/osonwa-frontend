@@ -8,7 +8,7 @@ label{
 
 
 .tag{
-    background-color: rgb(230, 228, 228);
+    background-color: var(--card-tag-bg);
     border-radius: 5px;
     margin: 0 8px 0 0;
 }

@@ -51,9 +51,10 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: transparent;
+    background-color: transparent !important;
     border-bottom:  0.1rem solid #c8c8c8;
     transform: border-bottom 0.2s;
+    color: var(--mode-write-color);
 }
 
 
@@ -71,6 +72,7 @@
     padding: 1.6rem 0.5rem 0.3rem 0.5rem;
     border-radius: 5px;
     border: 1px solid var(--form-border-color);
+    background-color: transparent;
 }
 
 .password__div label {
@@ -187,6 +189,8 @@
 }
 .fullerror__highlight{
     border: 2px solid rgb(249, 94, 94) !important;
+    background-color: transparent;
+    color: var(--mode-write-color);
 }
 
 

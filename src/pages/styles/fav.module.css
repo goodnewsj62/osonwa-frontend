@@ -15,10 +15,12 @@
 
 .aside h1{
     padding: 1rem;
+    color: var(--mode-write-color);
 }
 
 .main__content > h1{
     display: none;
+    color: var(--mode-write-color);
 }
 
 .aside{

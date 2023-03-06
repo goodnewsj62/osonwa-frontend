@@ -12,6 +12,7 @@
 .main__content >h4{
     padding-left: 1rem;
     margin: 0.5rem 0;
+    color: var(--mode-write-color);
 }
 
 

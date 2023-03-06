@@ -52,6 +52,8 @@
     --raise-four:var(--netural-color);
     --search-border:2px solid rgba(0,0,0,0.5);
     --profile-demacation-border:1px solid rgba(0,0,0,0.09);
+    --list-card-border:1px solid #ddd;
+    --card-tag-bg:#e6e4e4;
 }
 
 [data-theme="dark"]{
@@ -76,8 +78,11 @@
     --search-border:2px solid rgba(255, 255, 255,0.5);
     --profile-demacation-border:1px solid rgba(221, 221, 221, 0.15);
     --tag-bg: rgb(86, 85, 85);
-
-
+    --list-card-border:0;
+    --card-tag-bg:var(--raise-one);
+    --hist-background:rgba(230, 228, 228, 0.244);
+    --form-border-color: rgba(255, 255, 255,0.5);
+    --border-line: var(--form-border-color);
 }
 
 *{
