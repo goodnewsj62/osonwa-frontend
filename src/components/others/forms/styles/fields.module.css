@@ -31,6 +31,8 @@
     border: 1px solid var(--border-line) ;
     border-radius: 5px;
     outline: none;
+    background-color: transparent;
+    color: var(--mode-write-color);
 }
 .form__div > input:focus, .form__div > textarea:focus{
     border: 2px solid var(--comp-one);

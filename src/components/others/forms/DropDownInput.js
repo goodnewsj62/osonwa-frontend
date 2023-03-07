@@ -6,7 +6,7 @@ const DropDownInput = ({ suggestions, params, createAndAdd, isLoading, show }) =
     return (
         <div className={styles.field}>
             <Input params={params} />
-            <button onClick={createAndAdd} type="button">
+            <button className={styles.add} onClick={createAndAdd} type="button">
                 + add
             </button>
             {

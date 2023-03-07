@@ -31,7 +31,11 @@
 }
 .container .content__text{
     padding-top: 0.5rem ;
+    color: var(--mode-write-color);
+}
 
+.content__text > a{
+    color: inherit;
 }
 
 @media screen and (min-width: 1200px) {
@@ -62,7 +66,7 @@
 
 .header > a{
     margin-right: 0.4rem;
-
+    color: inherit;
 }
 
 .header span{

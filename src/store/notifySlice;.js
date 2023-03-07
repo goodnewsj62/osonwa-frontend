@@ -56,13 +56,13 @@ const notifySlice = createSlice({
             state.unReadCount = results.length ? results[0].read_count : 0;
         });
         builder.addCase(fetchNext.fulfilled, (state, action) => {
-            const { results, ...others } = action.payload;
+            const { results, ...others } = action.payload.data.data;
             state.result.isLoading = false;
             state.result.others = others;
             state.result.posts = [...state.result.posts, ...results];
         });
         builder.addCase(fetchUnRead.fulfilled, (state, action) => {
-            const { results, ...others } = action.payload;
+            const { results, ...others } = action.payload.data.data;
             state.result.isLoading = false;
             state.result.others = others;
             state.result.posts = [...results, ...state.result.posts];

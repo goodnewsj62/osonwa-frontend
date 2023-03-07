@@ -110,7 +110,7 @@
 .chosen_bun{
     display: flex;
     align-items: center;
-    background-color: #ddd;
+    background-color: var(--chosen-bun);
     border-radius: 5px;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;

@@ -5,6 +5,7 @@
     box-shadow: var(--profile-content-shadow);
     background-color: var(--profile-content-bg-raise);
     border: var(--profile-content-border);
+    color: var(--mode-write-color);
 }
 
 .header{

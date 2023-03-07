@@ -1,5 +1,6 @@
 .container{
     width: 100%;
+    color: var(--mode-write-color);
 }
 
 .title{
@@ -16,7 +17,8 @@
     padding: 0.5rem 1rem;
     border: 0;
     outline: none;
-
+    background-color: transparent;
+    color: var(--mode-write-color);
 }
 
 .slide__bar{

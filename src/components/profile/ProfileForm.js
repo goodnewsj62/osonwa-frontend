@@ -36,6 +36,7 @@ const ProfileForm = ({ closeHandler, setMessage }) => {
     const dispatch_ = useDispatch();
     const imgRef = useRef();
     const fileRef = useRef();
+    const currentMode = useSelector((states) => states.mode);
 
     const initialState = {
         username: { ...dS(), content: profileInfo.username },
@@ -102,7 +103,7 @@ const ProfileForm = ({ closeHandler, setMessage }) => {
     }
 
     return (
-        <form onSubmit={submitHandler} className={styles.container}>
+        <form onSubmit={submitHandler} data-theme={currentMode} className={styles.container}>
             <div className={styles.wrapper}>
                 <button type="button" onClick={closeHandler}>
                     <IoMdCloseCircle size={30} />
