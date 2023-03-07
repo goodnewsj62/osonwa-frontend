@@ -5,6 +5,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 
 import styles from "./styles/MessagePopup.module.css";
+import { useSelector } from "react-redux";
 
 
 
@@ -12,6 +13,9 @@ import styles from "./styles/MessagePopup.module.css";
 function MessagePopup({ message, link, category }) {
     const iconSize = useContext(DefaultIconSize);
     let icon = <MdCancel className={styles.icon__failure} size={iconSize} />;
+
+    const mode = useSelector((states) => states.mode);
+
     if (category === "success") {
         icon = <BsCheckCircleFill className={styles.icon__success} size={iconSize} />;
     }
@@ -26,7 +30,7 @@ function MessagePopup({ message, link, category }) {
     }
 
     return (
-        <div className={styles.message}>
+        <div className={styles.message} data-theme={mode} >
             {icon}
             <span></span>
             <p>{message}</p>

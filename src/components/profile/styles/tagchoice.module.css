@@ -8,7 +8,10 @@
     transform: translate(-50%, calc(-50%  - calc(var(--header-height) - 30px)));
     background-color: var(--tag-select-bg);
     padding: 1rem  0.7rem ;
+    background-color: var(--raise-four);
+    color: var(--mode-write-color);
 }
+
 
 .close{
     position: absolute;
@@ -41,6 +44,7 @@
     border: 0;
     border-radius: 5px;
     background-color: var(--tag-select-btn-bg);
+    color: var(--mode-write-color);
 }
 
 .tags > button:hover{

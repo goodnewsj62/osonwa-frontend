@@ -17,7 +17,7 @@ import Liked from "pages/Liked";
 import Profile from "pages/Profile";
 import EmailSent from "pages/EmailSent";
 import ForgotPassword from "pages/ForgotPassword";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "store/authSlice";
 import { SpreadLoader } from "components/others";
 import UnAuthenticatedOnly from "components/others/UnAuthenticatedOnly";
@@ -49,6 +49,7 @@ import modeSliceActions from "store/modeSlice";
 function App(props) {
     const dispatch = useDispatch();
     const [loaderStatus, setLoaderStatus] = useState(true);
+    const authState = useSelector((states) => states.authState.state);
     const axios_ = useAuthAxios();
 
 
@@ -65,6 +66,12 @@ function App(props) {
     }, [dispatch]);
 
     useEffect(() => {
+        //current mode
+        const mode = localStorage.getItem("mode") === "dark" ? "dark" : "light";
+        dispatch(modeSliceActions.setMode(mode));
+    }, [dispatch]);
+
+    useEffect(() => {
         const token = localStorage.getItem("token");
 
         if (token) {
@@ -78,15 +85,11 @@ function App(props) {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            dispatch(fetchUnRead(axios_))
+            if (authState) dispatch(fetchUnRead(axios_))
         }, [180 * 1000]);
 
-        //current mode
-        const mode = localStorage.getItem("mode") === "dark" ? "dark" : "light";
-        dispatch(modeSliceActions.setMode(mode));
-
         return () => clearInterval(interval);
-    }, [dispatch, axios_]);
+    }, [dispatch, axios_, authState]);
 
 
 

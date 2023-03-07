@@ -7,7 +7,7 @@
     display: flex;
     left: 2%;
     bottom: 15px;
-    background-color: var(--netural-color);
+    background-color: var(--raise-three);
     align-items: center;
     box-shadow: 0 2px 12px 1px rgba(0,0,0,0.2);
     color: var(--mode-write-color);

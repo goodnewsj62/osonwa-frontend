@@ -4,7 +4,7 @@ import styles from "./styles/AuthCard.module.css";
 import rocket from "static/images/Saly-43.png";
 import { useEffect, useRef } from "react";
 import { googleInit } from "components/auth/socialComponents/helpers/googlehelper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { baseAxiosInstance } from "utils/requests";
 import { authenticateUserAndRedirect } from "utils/helpers";
@@ -13,6 +13,7 @@ function AuthCard({ hideHandler, next }) {
     const buttonRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const mode = useSelector((states) => states.mode);
 
 
     useEffect(() => {
@@ -43,7 +44,7 @@ function AuthCard({ hideHandler, next }) {
 
 
     return (
-        <div className={styles.auth__card} >
+        <div className={styles.auth__card} data-theme={mode}>
             <i onMouseDown={hideHandler} className={styles.cancel}>
                 <MdCancel size={28} />
             </i>

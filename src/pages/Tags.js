@@ -32,7 +32,6 @@ const Tags = () => {
 
     const fetchedPosts = posts.posts.map((item) => {
         const info = type === "news" ? newsListAdapter(item) : articlePostListAdapter(item);
-        console.log(item)
         return <ListCard info={info} key={item.id} />;
     });
 

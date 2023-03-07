@@ -16,6 +16,7 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
     const username = useSelector((states) => states.profileState.userInfo.username);
     const dispatch = useDispatch();
     const authState = useSelector((state) => state.authState);
+    const mode = useSelector((states) => states.mode);
 
 
 
@@ -82,7 +83,7 @@ const TagChoice = ({ setHasPickedTags, hasChoosenTags, hideHandler }) => {
     };
 
     return (
-        <div className={styles.select}>
+        <div className={styles.select} data-theme={mode} >
             <div className={styles.close} onClick={hideHandler}> <AiFillCloseCircle size={40} /></div>
             <span className={styles.heading}>Lets know your interest's</span>
             <div className={styles.tags}>

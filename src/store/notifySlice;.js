@@ -20,7 +20,7 @@ export const fetchNotifications = createAsyncThunk("user/fetchNotification", asy
 export const fetchNext = createAsyncThunk("user/fetchNext", async ({ axios_, next_url }, ThunkAPI) => {
     try {
         const resp = await axios_.get(next_url);
-        return resp;
+        return resp.data.data;
     } catch (err) {
         return err
     }
@@ -28,7 +28,7 @@ export const fetchNext = createAsyncThunk("user/fetchNext", async ({ axios_, nex
 export const fetchUnRead = createAsyncThunk("user/fetchUnRead", async (axios_, ThunkAPI) => {
     try {
         const resp = await axios_.get("/auth/notification/?unread=true");
-        return resp;
+        return resp.data.data;
     } catch (err) {
         return err
     }
@@ -56,13 +56,13 @@ const notifySlice = createSlice({
             state.unReadCount = results.length ? results[0].read_count : 0;
         });
         builder.addCase(fetchNext.fulfilled, (state, action) => {
-            const { results, ...others } = action.payload.data.data;
+            const { results, ...others } = action.payload;
             state.result.isLoading = false;
             state.result.others = others;
             state.result.posts = [...state.result.posts, ...results];
         });
         builder.addCase(fetchUnRead.fulfilled, (state, action) => {
-            const { results, ...others } = action.payload.data.data;
+            const { results, ...others } = action.payload;
             state.result.isLoading = false;
             state.result.others = others;
             state.result.posts = [...results, ...state.result.posts];

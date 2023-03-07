@@ -92,6 +92,9 @@
     --profile-content-bg-raise:var(--raise-two);
     --profile-content-shadow:0px 0px 10px 2px rgba(0,0,0,0.2) ;
     --edit-profile-raise:var(--raise-four);
+    --switch-hover-highlight:var(--highlight-grey);
+    --tag-select-btn-bg:var(--highlight-grey);
+    --tag-select-btn-hover: rgba(236, 236, 236, 0.2);
 }
 
 *{

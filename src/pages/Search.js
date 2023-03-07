@@ -19,49 +19,49 @@ import Main from "components/others/MainWrapper";
 const Search = () => {
     const [selected, setSelected] = useState("news");
     const axios_ = useAuthAxios();
-    const location =  useLocation();
+    const location = useLocation();
     const [results, setResult] = useState({ isLoading: true, others: {}, posts: [] });
     const [isLoading, setIsloading] = useState(false);
-    const [searchValue,  setSearchValue] =  useState("")
+    const [searchValue, setSearchValue] = useState("")
 
     const fetchNewsNextPage = useFetchPage(results, setResult, setIsloading);
     useScrollState(fetchNewsNextPage);
 
     useEffect(() => {
-        const match_ =  location.search.match(/q=.*\b/);
-        if(!match_) return;
+        const match_ = location.search.match(/q=.*\b/);
+        if (!match_) return;
 
-        const qs =  match_[0].split("&");
-        
-        const searchVal =  qs.find((value)=> value.startsWith("q="));
+        const qs = match_[0].split("&");
+
+        const searchVal = qs.find((value) => value.startsWith("q="));
 
         const search_ = searchVal.split("=")[1];
         setSearchValue(search_);
 
-        genFetchPost(`/search/?${searchVal}`,setResult,axios_);
+        genFetchPost(`/search/?${searchVal}`, setResult, axios_);
     }, [location, axios_, setSearchValue])
 
-    const componentArr= useCallback(()=>{
-        const news =  [];
-        const articles =  [];
+    const componentArr = useCallback(() => {
+        const news = [];
+        const articles = [];
 
-        if(results.posts.length < 1|| results.isLoading){
-            return [[],[]];
+        if (results.posts.length < 1 || results.isLoading) {
+            return [[], []];
         }
 
-        for(let i=0; i < results.posts.length;  i++){
+        for (let i = 0; i < results.posts.length; i++) {
             const post = results.posts[i];
-            if(post.m_name === "news"){
+            if (post.m_name === "news") {
                 const info = newsListAdapter(post);
                 news.push(<ListCard info={info} key={post.id} />)
-            }else{
+            } else {
                 const info = articlePostListAdapter(post);
                 articles.push(<ListCard info={info} key={post.id} />)
             }
         }
 
         return [news, articles, results.isLoading];
-    },[results]) 
+    }, [results])
 
 
 
@@ -80,7 +80,7 @@ const Search = () => {
 
     return (
         <Main>
-            <h1 style={{padding:"1rem", fontSize:"1.8rem"}}>Results for {searchValue}</h1>
+            <h1 style={{ padding: "1rem", fontSize: "1.8rem", color: "var(--mode-write-color)" }}>Results for {searchValue}</h1>
             <ToggleContents stateNames={contentNames} components={components} callback={onScreen} />
         </Main>
     );
