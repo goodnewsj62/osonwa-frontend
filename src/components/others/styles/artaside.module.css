@@ -3,6 +3,7 @@
     position: static;
     margin-top: 0px;
     color: var(--mode-write-color);
+    background-color: var(--raise-three);
 }
 
 
@@ -47,6 +48,7 @@
 
 .socials a{
     margin: 0 0.5rem;
+    color: inherit;
 }
 
 @media screen and (min-width: 1200px) {
