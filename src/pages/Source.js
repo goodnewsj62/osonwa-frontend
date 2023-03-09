@@ -42,7 +42,7 @@ const Source = () => {
 
     const mainUrl = (str) => {
         const url = new URL(str)
-        return url.href;
+        return "https://" + url.hostname;
     }
 
     return (
