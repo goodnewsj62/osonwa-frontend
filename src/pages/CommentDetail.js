@@ -74,10 +74,11 @@ const CommentDetail = () => {
 
 
     const commentCreationHandler = async (content) => {
+        const content_types = ["post", "news", "article", "newsfeed", "articlefeed"]
         if (post.content_type === "comment" && post.content_object.content_type !== "comment") {
             const id = post.content_object.id;
             return await postComment(id, content);
-        } else if (["news", "article", "post"].indexOf(post.content_type) !== -1) {
+        } else if (content_types.indexOf(post.content_type) !== -1) {
             const id = post.id;
             return await postComment(id, content);
         }

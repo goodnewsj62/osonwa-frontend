@@ -35,7 +35,10 @@
 }
 
 .content__text > a{
-    color: inherit;
+    color: var(--mode-write-color);
+}
+.content__text  *{
+    color: var(--mode-write-color);
 }
 
 @media screen and (min-width: 1200px) {

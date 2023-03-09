@@ -41,6 +41,6 @@
 
 
 .highlight{
-    background-color:#fcf3c9 ;
+    background-color:var(--notify-highlight) ;
     color: #000 !important;
 }

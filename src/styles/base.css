@@ -56,6 +56,7 @@
     --card-tag-bg:#e6e4e4;
     --suggested-color:#d2d0d0;
     --chosen-bun:#ddd;
+    --notify-highlight:#fcf3c9;
 }
 
 [data-theme="dark"]{
@@ -95,6 +96,7 @@
     --switch-hover-highlight:var(--highlight-grey);
     --tag-select-btn-bg:var(--highlight-grey);
     --tag-select-btn-hover: rgba(236, 236, 236, 0.2);
+    --notify-highlight:#fcf3c97b;
 }
 
 *{

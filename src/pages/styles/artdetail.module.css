@@ -5,6 +5,7 @@
     height: 100%;
     position: relative;
     line-height: 1.5;
+    color: var(--mode-write-color);
 }
 .aside{
     position: fixed;
@@ -29,7 +30,7 @@
     justify-content: space-evenly;
     border-radius: 30px;
     padding: 0.3rem;
-    background-color: var(--netural-color);
+    background-color: var(--raise-two);
     border: 1px solid var(--border-line);
     box-shadow: -2px 4px 10px 2px var(--aside-shadow);
 }
@@ -69,6 +70,10 @@
 }
 
 
+.aside__toggle svg{
+    fill: #000;
+}
+
 .main__content{
     padding: 0rem 0.7rem;
     overflow-x:hidden ;
@@ -78,11 +83,12 @@
 .write__up{
     width: 100%;
     margin-bottom: 1rem;
+    color: var(--mode-write-color);
 }
 
 
 .write__up :is(pre, h1, h2, h3, h4, h5, h6){
-    margin:5px 0 ;
+    margin:5px 0;
 }
 
 .write__up pre{

@@ -8,6 +8,7 @@
     max-height: calc(100vh - calc(210px + var(--header-height)));
     overflow-y:auto;
     position: relative;
+    color: var(--mode-write-color);
 }
 
 .container > section{

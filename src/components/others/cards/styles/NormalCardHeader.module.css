@@ -55,8 +55,8 @@
 
 @media screen and (min-width:770px) {
     .card__img{
-        grid-column: unset;
-        grid-row: unset;
+        grid-column: img;
+        grid-row: img;
         grid-area: img;
         padding-left: 0rem;
     }

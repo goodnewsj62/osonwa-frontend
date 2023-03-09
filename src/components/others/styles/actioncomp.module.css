@@ -1,10 +1,11 @@
 .enclosement,.likes,.comment, .icon,.count{
     display: flex;
     align-items: center;
+    color: var(--mode-write-color);
 }
 
 .comment > a{
-    color: inherit;
+    color: var(--mode-write-color);
 }
 
 /* .likes * , .comment *{

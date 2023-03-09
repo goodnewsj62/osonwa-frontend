@@ -10,7 +10,7 @@ import styles from "./styles/relatedArt.module.css";
 const RelatedArticles = ({ post }) => {
     const [data, setData] = useState({ posts: [], topic: "" });
     const [isLoading, setIsloading] = useState(true);
-    const classFunc = (state) => state.isActive ? `${styles.nav__highlight}` : "";
+    const classFunc = (state) => state.isActive ? `${styles.nav__highlight} ` : "";
 
     useEffect(() => {
         const getBundle = async (bundleID) => {
@@ -42,7 +42,7 @@ const RelatedArticles = ({ post }) => {
         <>
             {
                 !isLoading &&
-                <div>
+                <div >
                     <h3>{data.topic}</h3>
                     <ul className={styles.realed__articles}>
                         {articles}

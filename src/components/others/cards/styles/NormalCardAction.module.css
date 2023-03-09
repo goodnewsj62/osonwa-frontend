@@ -42,8 +42,8 @@
 
 @media screen and (min-width:770px) {
     .user__actions{
-        grid-column: unset;
-        grid-row: unset;
+        grid-column: foot;
+        grid-row: foot;
         grid-area: foot;
         padding: 0 0.2rem;
     }

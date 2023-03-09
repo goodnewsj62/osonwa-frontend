@@ -11,28 +11,27 @@ import RenderListView from "components/others/RenderList";
 import Main from "components/others/MainWrapper";
 
 import style from "./styles/source.module.css";
-import { SpreadLoader } from "components/others";
 
 
 
 
-const Source =  ()=>{
-    const {type, name}=  useParams();
+const Source = () => {
+    const { type, name } = useParams();
     const axios_ = useAuthAxios();
     const [results, setResult] = useState({ isLoading: true, others: {}, posts: [] });
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchNewsNextPage = useFetchPage(results, setResult, setIsLoading);
     useScrollState(fetchNewsNextPage);
 
-    useEffect(()=>{
-        const url =  `/website/?type=${type}&name=${name}`;
-        genFetchPost(url,setResult,axios_);
+    useEffect(() => {
+        const url = `/website/?type=${type}&name=${name}`;
+        genFetchPost(url, setResult, axios_);
     }, [axios_, type, name]);
 
 
     const cards = results.posts.map((item) => {
-        const info =type === "news"?  newsListAdapter(item):  articlePostListAdapter(item); 
+        const info = type === "news" ? newsListAdapter(item) : articlePostListAdapter(item);
         return <ListCard info={info} key={item.id} />;
     });
 
@@ -41,11 +40,12 @@ const Source =  ()=>{
         isFetchingNext={isLoading} classes={styleClasses}
         message={"Oops no posts was retrieved"} />;
 
-    const mainUrl =  (str)=>{
-        return str.match(/^https:\/\/.+\.(com|blog|net|org|io|to)/)[0]
+    const mainUrl = (str) => {
+        const url = new URL(str)
+        return url.href;
     }
 
-    return(
+    return (
         <Main>
             {
                 results.posts.length > 0 &&
@@ -66,7 +66,6 @@ const Source =  ()=>{
                     </section>
                 </>
             }
-            {isLoading && <span className="loader"><SpreadLoader /></span>}
         </Main>
     )
 };

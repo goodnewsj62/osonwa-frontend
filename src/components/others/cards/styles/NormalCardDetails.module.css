@@ -84,8 +84,8 @@
 }
 @media screen and (min-width: 770px) {
     .feed__details{
-        grid-column: unset;
-        grid-row: unset;
+        grid-column: body;
+        grid-row: body;
         grid-area: body;
         padding: 0 0.2rem 0 0.5rem;
     }
