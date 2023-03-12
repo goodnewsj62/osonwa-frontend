@@ -28,3 +28,4 @@ test_*
 *.env
 todo.txt
 dumps.txt
+.env
